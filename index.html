@@ -3,38 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Minimalist Portfolio</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <title>Your Name | Personal Website</title>
+    
+    <!-- Typography: Inter font for clean, modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <img src="assets/images/my_profile.png" alt="Profile Picture" class="profile-pic">
-        <h1>My Name</h1>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#blog">Blog</a>
-            <a href="#learning">Learning</a>
-            <a href="#projects">Projects</a>
-            <a href="/assets/resume/my_profile.png">Resume</a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#learning">Learning</a></li>
+                <li><a href="#photography">Photography</a></li>
+                <li><a href="#poetry">Poetry</a></li>
+            </ul>
         </nav>
-        <div class="social-links">
-            <a href="https://github.com/yourusername" target="_blank">GitHub</a> |
-            <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a> |
-            <a href="https://twitter.com/yourusername" target="_blank">Twitter</a>
-        </div>
     </header>
+
     <main>
-        <section id="home" class="intro">
-            <h2>Welcome to My Portfolio</h2>
-            <p>This is a minimalist website to showcase my work, projects, and learnings.</p>
+        <section id="home" class="section">
+            <div class="home-content">
+                <h1>Your Name</h1>
+                <p class="intro">Welcome to my personal space</p>
+                
+                <div class="social-links">
+                    <a href="https://github.com/dattskoushik" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://linkedin.com/in/suchindrakoushik" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="https://instagram.com/dattskoushik" target="_blank" rel="noopener noreferrer">Instagram</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <p>Share your story here. What drives you, what you're passionate about, and what you're working on.</p>
+            </div>
+        </section>
+
+        <section id="learning" class="section">
+            <h2 class="section-title">Learning</h2>
+            <div class="learning-grid">
+                <article class="learning-post">
+                    <img src="/api/placeholder/400/300" alt="Learning Post 1" class="learning-image">
+                    <div class="learning-content">
+                        <h3>Learning Post Title</h3>
+                        <p>Brief description of your learning post...</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="photography" class="section">
+            <h2 class="section-title">Photography</h2>
+            <div class="photo-gallery">
+                <div class="photo-item">
+                    <img src="/api/placeholder/300/300" alt="Photo 1">
+                </div>
+                <div class="photo-item">
+                    <img src="/api/placeholder/300/300" alt="Photo 2">
+                </div>
+                <div class="photo-item">
+                    <img src="/api/placeholder/300/300" alt="Photo 3">
+                </div>
+            </div>
+        </section>
+
+        <section id="poetry" class="section">
+            <h2 class="section-title">Poetry</h2>
+            <article class="poetry-item">
+                <h3>Poem Title</h3>
+                <p>Your poetry content here...</p>
+                <span class="date">Date written</span>
+            </article>
         </section>
     </main>
-    <footer>
-        <p>&copy; 2024 My Name</p>
-    </footer>
-    <a href="#home" class="back-to-top">Top</a>
 </body>
 </html>
