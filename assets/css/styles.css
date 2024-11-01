@@ -55,6 +55,7 @@ body {
     display: flex;
     gap: var(--spacing-md);
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .main-nav a {
@@ -221,6 +222,26 @@ body {
 
     .section {
         margin: var(--spacing-md) 0;
+    }
+}
+
+/* Add this to your styles.css */
+.section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+@media (max-width: 768px) {
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
     }
 }
 
