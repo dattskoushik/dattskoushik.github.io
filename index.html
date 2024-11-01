@@ -6,7 +6,7 @@
     <title>Your Name | Personal Website</title>
     
     <!-- Typography: Inter font for clean, modern look -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     
     <!-- Main stylesheet -->
     <link rel="stylesheet" href="styles.css">
@@ -83,5 +83,27 @@
             </article>
         </section>
     </main>
+    <script>
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.main-nav a');
+    
+        window.addEventListener('scroll', () => {
+            let current = '';
+    
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 60) {
+                    current = section.getAttribute('id');
+                }
+            });
+    
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
