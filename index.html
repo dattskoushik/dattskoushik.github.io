@@ -3,128 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M S Suchindra Datta Koushik | Software Engineer - Backend, Data</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
+    <title>Your Portfolio</title>
+    <meta name="description" content="Personal portfolio showcasing projects, blog posts, and technical documentation">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-    <header>
-        <nav class="main-nav">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#learning">Learning</a></li>
-                <li><a href="#photography">Photography</a></li>
-                <li><a href="#poetry">Poetry</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <!-- Your content sections here -->
-        <section id="home" class="section">
-            <div class="home-content">
-                <h1>Your Name</h1>
-                <p class="intro">Welcome to my personal space</p>
-                <div class="social-links">
-                    <a href="https://github.com/dattskoushik" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a href="https://linkedin.com/in/suchindrakoushik" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                    <a href="https://instagram.com/dattskoushik" target="_blank" rel="noopener noreferrer">Instagram</a>
-                </div>
+    <!-- Navigation -->
+    <nav class="nav-menu">
+        <div class="container">
+            <a href="#" class="logo">Your Name</a>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+            </button>
+            <div class="nav-links">
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#blog" class="nav-link">Blog</a>
+                <a href="#docs" class="nav-link">Docs</a>
+                <a href="#resume" class="nav-link">Resume</a>
             </div>
-        </section>
-        <section id="about" class="section">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <img src="path/to/your-profile-image.jpg" alt="Your Name" style="width:150px; border-radius:50%; margin-bottom:var(--spacing-md);">
-                <p>I'm an enthusiastic learner and coder. Currently, I'm diving deep into Data Engineering. Check out my <a href="your-resume-link.pdf" target="_blank">resume</a>!</p>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="section">
+        <div class="container">
+            <h1>Hi, I'm Your Name</h1>
+            <p class="subtitle">Developer & Technical Writer</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn primary">View Projects</a>
+                <a href="#resume" class="btn secondary">Download Resume</a>
             </div>
-        </section>
-        <section id="learning" class="section">
-            <h2 class="section-title">Learning</h2>
-            <div class="learning-grid">
-                <article class="learning-post">
-                    <img src="/api/placeholder/400/300" alt="Learning Post 1" class="learning-image">
-                    <div class="learning-content">
-                        <h3>Learning Post Title</h3>
-                        <p>Brief description of your learning post...</p>
-                        <a href="#" class="read-more">Read More</a>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="project-filters">
+                <button onclick="filterProjects('all')" class="active">All</button>
+                <button onclick="filterProjects('web')">Web</button>
+                <button onclick="filterProjects('mobile')">Mobile</button>
+                <button onclick="filterProjects('other')">Other</button>
+            </div>
+            <div class="project-grid">
+                <!-- Project cards will be dynamically loaded -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="section">
+        <div class="container">
+            <h2>Latest Posts</h2>
+            <div class="blog-posts">
+                <!-- Blog posts will be dynamically loaded -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section id="docs" class="section">
+        <div class="container">
+            <h2>Documentation & Learning</h2>
+            <div class="docs-grid">
+                <div class="docs-category">
+                    <h3>Technical Guides</h3>
+                    <div class="docs-list">
+                        <!-- Documentation entries will be dynamically loaded -->
                     </div>
-                </article>
-            </div>
-        </section>
-        <section id="photography" class="section">
-            <h2 class="section-title">Photography</h2>
-            <div class="photo-gallery">
-                <div class="photo-item">
-                    <img src="/api/placeholder/300/300" alt="Photo 1">
                 </div>
-                <div class="photo-item">
-                    <img src="/api/placeholder/300/300" alt="Photo 2">
-                </div>
-                <div class="photo-item">
-                    <img src="/api/placeholder/300/300" alt="Photo 3">
+                <div class="docs-category">
+                    <h3>Learning Resources</h3>
+                    <div class="docs-list">
+                        <!-- Learning resources will be dynamically loaded -->
+                    </div>
                 </div>
             </div>
-        </section>
-        <section id="poetry" class="section">
-            <h2 class="section-title">Poetry</h2>
-            <article class="poetry-item">
-                <h3>Poem Title</h3>
-                <p>Your poetry content here...</p>
-                <span class="date">Date written</span>
-            </article>
-        </section>
-    </main>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="section">
+        <div class="container">
+            <h2>Resume</h2>
+            <div class="resume-container">
+                <div class="resume-header">
+                    <h3>Professional Experience</h3>
+                    <!-- Resume content will be dynamically loaded -->
+                </div>
+                <a href="resume/resume_.pdf" class="btn download-resume" download>
+                    Download PDF
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <p>&copy; 2024 Your Name. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Contact</a>
+        <div class="container">
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+                    <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
+                    <a href="https://twitter.com/yourusername" target="_blank">Twitter</a>
+                </div>
+                <p class="copyright">© 2024 Your Name. All rights reserved.</p>
             </div>
         </div>
     </footer>
-    
-    <script>
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.main-nav a');
-    
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                } else {
-                    entry.target.classList.remove('visible');
-                }
-            });
-        });
-    
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-    
-        window.addEventListener('scroll', () => {
-            let current = '';
-    
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 60) {
-                    current = section.getAttribute('id');
-                }
-            });
-    
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').includes(current)) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    </script>
-    
+
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
