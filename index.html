@@ -3,116 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Portfolio</title>
-    <meta name="description" content="Personal portfolio showcasing projects, blog posts, and technical documentation">
+    <meta name="description" content="Dattskoushik - Developer, Open Source Contributor, and Tech Enthusiast">
+    <title>Dattskoushik - Developer Portfolio</title>
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="assets/css/styles.css" as="style">
+    <link rel="preload" href="assets/js/script.js" as="script">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/css/styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+    
+    <!-- Open Graph tags for better social sharing -->
+    <meta property="og:title" content="Dattskoushik - Developer Portfolio">
+    <meta property="og:description" content="Developer, Open Source Contributor, and Tech Enthusiast">
+    <meta property="og:image" content="assets/images/my_profile.png">
+    <meta property="og:url" content="https://dattskoushik.github.io">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav-menu">
-        <div class="container">
-            <a href="#" class="logo">Your Name</a>
-            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
-                <span></span>
-            </button>
-            <div class="nav-links">
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#blog" class="nav-link">Blog</a>
-                <a href="#docs" class="nav-link">Docs</a>
-                <a href="#resume" class="nav-link">Resume</a>
-            </div>
-        </div>
-    </nav>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Hero Section -->
-    <section id="hero" class="section">
-        <div class="container">
-            <h1>Hi, I'm Your Name</h1>
-            <p class="subtitle">Developer & Technical Writer</p>
-            <div class="cta-buttons">
-                <a href="#projects" class="btn primary">View Projects</a>
-                <a href="#resume" class="btn secondary">Download Resume</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-        <div class="container">
-            <h2>Projects</h2>
-            <div class="project-filters">
-                <button onclick="filterProjects('all')" class="active">All</button>
-                <button onclick="filterProjects('web')">Web</button>
-                <button onclick="filterProjects('mobile')">Mobile</button>
-                <button onclick="filterProjects('other')">Other</button>
-            </div>
-            <div class="project-grid">
-                <!-- Project cards will be dynamically loaded -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section id="blog" class="section">
-        <div class="container">
-            <h2>Latest Posts</h2>
-            <div class="blog-posts">
-                <!-- Blog posts will be dynamically loaded -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Documentation Section -->
-    <section id="docs" class="section">
-        <div class="container">
-            <h2>Documentation & Learning</h2>
-            <div class="docs-grid">
-                <div class="docs-category">
-                    <h3>Technical Guides</h3>
-                    <div class="docs-list">
-                        <!-- Documentation entries will be dynamically loaded -->
-                    </div>
-                </div>
-                <div class="docs-category">
-                    <h3>Learning Resources</h3>
-                    <div class="docs-list">
-                        <!-- Learning resources will be dynamically loaded -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Resume Section -->
-    <section id="resume" class="section">
-        <div class="container">
-            <h2>Resume</h2>
-            <div class="resume-container">
-                <div class="resume-header">
-                    <h3>Professional Experience</h3>
-                    <!-- Resume content will be dynamically loaded -->
-                </div>
-                <a href="resume/resume_.pdf" class="btn download-resume" download>
-                    Download PDF
+    <header class="header" role="banner">
+        <nav class="nav-container" role="navigation" aria-label="Main navigation">
+            <div class="nav-content">
+                <a href="/" class="logo" aria-label="Homepage">
+                    <span class="text-accent">&lt;</span>
+                    Dattskoushik
+                    <span class="text-accent">/&gt;</span>
                 </a>
-            </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer>
+                <button class="mobile-menu-toggle" 
+                        aria-controls="primary-navigation" 
+                        aria-expanded="false"
+                        aria-label="Toggle menu">
+                    <span class="hamburger"></span>
+                </button>
+
+                <ul id="primary-navigation" class="nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="projects.html" class="nav-link">Projects</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content" role="main">
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 id="hero-title" class="hero-heading">
+                            Hello, I'm Dattskoushik
+                        </h1>
+                        <p class="hero-subtitle">
+                            Developer • Open Source Contributor • Tech Enthusiast
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="portfolio.html" class="btn btn-primary">View My Work</a>
+                            <a href="contact.html" class="btn btn-secondary">Get in Touch</a>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="assets/images/my_profile.png" 
+                             alt="Dattskoushik's profile picture"
+                             width="400"
+                             height="400"
+                             loading="eager">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-work" aria-labelledby="featured-title">
+            <div class="container">
+                <h2 id="featured-title" class="section-title">Featured Work</h2>
+                <div class="featured-grid">
+                    <!-- Featured project cards will be added here -->
+                    <article class="project-card">
+                        <img src="/api/placeholder/400/300" 
+                             alt="Project preview"
+                             width="400"
+                             height="300"
+                             loading="lazy">
+                        <div class="project-content">
+                            <h3>Project Name</h3>
+                            <p>Brief project description highlighting key features and technologies used.</p>
+                            <div class="project-links">
+                                <a href="#" class="btn btn-small">View Project</a>
+                                <a href="#" class="btn btn-small btn-outline">Source Code</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="latest-posts" aria-labelledby="blog-title">
+            <div class="container">
+                <h2 id="blog-title" class="section-title">Latest Blog Posts</h2>
+                <div class="posts-grid">
+                    <article class="post-card">
+                        <time datetime="2024-01-01" class="post-date">January 1, 2024</time>
+                        <h3 class="post-title">
+                            <a href="blog/post-1.html">Sample Blog Post Title</a>
+                        </h3>
+                        <p class="post-excerpt">
+                            Brief excerpt from the blog post that gives readers a preview of the content.
+                        </p>
+                        <a href="blog/post-1.html" class="read-more">
+                            Read More
+                            <span class="sr-only">about Sample Blog Post Title</span>
+                        </a>
+                    </article>
+                </div>
+                <div class="section-footer">
+                    <a href="blog.html" class="btn btn-secondary">View All Posts</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
-                <div class="social-links">
-                    <a href="https://github.com/yourusername" target="_blank">GitHub</a>
-                    <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
-                    <a href="https://twitter.com/yourusername" target="_blank">Twitter</a>
+                <div class="footer-branding">
+                    <h3 class="footer-title">Dattskoushik</h3>
+                    <p>Building the web, one line at a time</p>
                 </div>
-                <p class="copyright">© 2024 Your Name. All rights reserved.</p>
+                <div class="footer-social">
+                    <h4 class="sr-only">Social Links</h4>
+                    <ul class="social-links">
+                        <li>
+                            <a href="https://github.com/dattskoushik" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               aria-label="GitHub Profile">
+                                GitHub
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://linkedin.com/in/dattskoushik" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               aria-label="LinkedIn Profile">
+                                LinkedIn
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Dattskoushik. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/script.js" defer></script>
 </body>
 </html>
