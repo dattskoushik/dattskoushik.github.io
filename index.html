@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name | Personal Website</title>
-    
-    <!-- Typography: Inter font for clean, modern look -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    
-    <!-- Main stylesheet -->
-    <link rel="stylesheet" href="styles.css">
+    <title>M S Suchindra Datta Koushik | Software Engineer - Backend, Data</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -23,13 +24,12 @@
             </ul>
         </nav>
     </header>
-
     <main>
+        <!-- Your content sections here -->
         <section id="home" class="section">
             <div class="home-content">
                 <h1>Your Name</h1>
                 <p class="intro">Welcome to my personal space</p>
-                
                 <div class="social-links">
                     <a href="https://github.com/dattskoushik" target="_blank" rel="noopener noreferrer">GitHub</a>
                     <a href="https://linkedin.com/in/suchindrakoushik" target="_blank" rel="noopener noreferrer">LinkedIn</a>
@@ -37,14 +37,13 @@
                 </div>
             </div>
         </section>
-
         <section id="about" class="section">
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
-                <p>Share your story here. What drives you, what you're passionate about, and what you're working on.</p>
+                <img src="path/to/your-profile-image.jpg" alt="Your Name" style="width:150px; border-radius:50%; margin-bottom:var(--spacing-md);">
+                <p>I'm an enthusiastic learner and coder. Currently, I'm diving deep into Data Engineering. Check out my <a href="your-resume-link.pdf" target="_blank">resume</a>!</p>
             </div>
         </section>
-
         <section id="learning" class="section">
             <h2 class="section-title">Learning</h2>
             <div class="learning-grid">
@@ -58,7 +57,6 @@
                 </article>
             </div>
         </section>
-
         <section id="photography" class="section">
             <h2 class="section-title">Photography</h2>
             <div class="photo-gallery">
@@ -73,7 +71,6 @@
                 </div>
             </div>
         </section>
-
         <section id="poetry" class="section">
             <h2 class="section-title">Poetry</h2>
             <article class="poetry-item">
@@ -83,9 +80,32 @@
             </article>
         </section>
     </main>
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Your Name. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+    
     <script>
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('.main-nav a');
+    
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        });
+    
+        sections.forEach(section => {
+            observer.observe(section);
+        });
     
         window.addEventListener('scroll', () => {
             let current = '';
@@ -105,5 +125,6 @@
             });
         });
     </script>
+    
 </body>
 </html>
