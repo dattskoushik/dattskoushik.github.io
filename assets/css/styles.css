@@ -1,19 +1,36 @@
-/* Base styles */
+/* Color Variables */
 :root {
     --primary-color: #2D3748;
     --secondary-color: #4A5568;
     --accent-color: #3182CE;
     --background-color: #F7FAFC;
     --text-color: #1A202C;
+    --card-background: #ffffff;
 }
 
-/* Typography */
+.dark-theme {
+    --background-color: #1A202C;
+    --text-color: #F7FAFC;
+    --card-background: #2D3748;
+    --secondary-color: #A0AEC0;
+    --accent-color: #63B3ED;
+}
+
+/* Global Styles */
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
 }
+
+/* Utility Classes */
+.mt-4 { margin-top: 4rem; }
+.mb-4 { margin-bottom: 4rem; }
+.p-4 { padding: 4rem; }
+.center { display: flex; justify-content: center; align-items: center; }
 
 /* Navigation */
 .nav-link {
@@ -34,12 +51,25 @@ body {
     transition: width 0.3s ease-in-out;
 }
 
-.nav-link:hover::after {
+.nav-link:hover::after,
+.nav-link.active::after {
     width: 100%;
 }
 
-.nav-link.active {
-    color: var(--accent-color);
+.nav-menu {
+    display: none;
+}
+
+.nav-menu.active {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    left: 0;
+    padding: 1rem;
 }
 
 /* Sections */
@@ -55,68 +85,59 @@ body {
     transform: translateY(0);
 }
 
-/* Cards */
-.card {
-    background: white;
+/* Card Components */
+.card, .card-project, .blog-post {
+    background: var(--card-background);
+    color: var(--text-color);
     border-radius: 0.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* Blog posts */
-.blog-post {
-    margin-bottom: 2rem;
     padding: 1.5rem;
-    border-radius: 0.5rem;
-    background: white;
-    transition: transform 0.3s ease;
 }
 
-.blog-post:hover {
-    transform: translateX(10px);
+.card:hover, .blog-post:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Projects */
+/* Project Grid */
 .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
 }
 
-.project-card {
+.card-project {
     position: relative;
     overflow: hidden;
 }
 
-.project-card img {
+.card-project img {
     width: 100%;
     height: 200px;
     object-fit: cover;
 }
 
-/* Resume section */
-.resume-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-    background: white;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* Footer */
+.footer-content, .footer-branding, .footer-social {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
-/* Mobile responsiveness */
+.footer-bottom {
+    text-align: center;
+    padding: 1rem 0;
+    background: var(--primary-color);
+    color: var(--background-color);
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
     .project-grid {
         grid-template-columns: 1fr;
-    }
-    
-    .nav-menu {
-        padding: 1rem;
     }
 }
 

@@ -1,25 +1,16 @@
-// Navigation handling
 document.addEventListener('DOMContentLoaded', () => {
-    // Smooth scrolling
+    // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
+                target.scrollIntoView({ behavior: 'smooth' });
             }
         });
     });
 
     // Intersection Observer for section animations
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
     const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -29,11 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
-    }, observerOptions);
+    }, { root: null, rootMargin: '0px', threshold: 0.1 });
 
-    document.querySelectorAll('.section').forEach(section => {
-        sectionObserver.observe(section);
-    });
+    document.querySelectorAll('.section').forEach(section => sectionObserver.observe(section));
 
     // Active section highlighting
     const navObserver = new IntersectionObserver((entries) => {
@@ -48,21 +37,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         });
-    }, {
-        rootMargin: '-50% 0px -50% 0px'
-    });
+    }, { rootMargin: '-50% 0px -50% 0px' });
 
-    document.querySelectorAll('section[id]').forEach(section => {
-        navObserver.observe(section);
-    });
+    document.querySelectorAll('section[id]').forEach(section => navObserver.observe(section));
+
+    // Initialize theme from localStorage and set up theme toggle
+    initializeTheme();
+    document.querySelector('.theme-toggle').addEventListener('click', toggleTheme);
+
+    // Mobile menu handling
+    document.querySelector('.mobile-menu-toggle').addEventListener('click', toggleMobileMenu);
+
+    // Load blog posts
+    loadBlogPosts();
 });
 
-// Project filtering
+// Project filtering with animations
 function filterProjects(category) {
-    const projects = document.querySelectorAll('.project-card');
+    const projects = document.querySelectorAll('.card-project');
     projects.forEach(project => {
         const projectCategory = project.getAttribute('data-category');
-        if (category === 'all' || projectCategory === category) {
+        const isVisible = category === 'all' || projectCategory === category;
+        
+        if (isVisible) {
             project.style.display = 'block';
             setTimeout(() => project.classList.add('visible'), 10);
         } else {
@@ -72,19 +69,19 @@ function filterProjects(category) {
     });
 }
 
-// Blog post loading
+// Load blog posts from JSON file with error handling
 async function loadBlogPosts() {
     try {
         const response = await fetch('/blog/posts/index.json');
-        const posts = await response.json();
-        const blogContainer = document.querySelector('.blog-posts');
+        if (!response.ok) throw new Error('Network response was not ok');
         
-        posts.forEach(post => {
-            const postElement = createBlogPostElement(post);
-            blogContainer.appendChild(postElement);
-        });
+        const posts = await response.json();
+        const blogContainer = document.querySelector('.posts-grid');
+        
+        posts.forEach(post => blogContainer.appendChild(createBlogPostElement(post)));
     } catch (error) {
         console.error('Error loading blog posts:', error);
+        document.querySelector('.posts-grid').innerHTML = '<p>Error loading posts.</p>';
     }
 }
 
@@ -94,8 +91,7 @@ function createBlogPostElement(post) {
     article.innerHTML = `
         <div class="post-meta">
             <span class="post-date">${new Date(post.date).toLocaleDateString()}</span>
-            ${post.tags ? `<div class="post-tags">${post.tags.map(tag => 
-                `<span class="tag">${tag}</span>`).join('')}</div>` : ''}
+            ${post.tags ? `<div class="post-tags">${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>` : ''}
         </div>
         <h3 class="post-title">${post.title}</h3>
         <p class="post-excerpt">${post.excerpt}</p>
@@ -104,20 +100,20 @@ function createBlogPostElement(post) {
     return article;
 }
 
-// Mobile menu handling
+// Toggle mobile menu visibility
 function toggleMobileMenu() {
     const nav = document.querySelector('.nav-menu');
     nav.classList.toggle('active');
 }
 
-// Theme switching
+// Theme switching and saving preference
 function toggleTheme() {
     document.body.classList.toggle('dark-theme');
     const isDark = document.body.classList.contains('dark-theme');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
 }
 
-// Initialize theme from localStorage
+// Initialize theme on page load
 function initializeTheme() {
     const savedTheme = localStorage.getItem('theme') || 'light';
     if (savedTheme === 'dark') {
@@ -125,7 +121,7 @@ function initializeTheme() {
     }
 }
 
-// Helper function to animate children elements
+// Helper function to animate child elements
 function animateChildren(parent) {
     const children = parent.querySelectorAll('.animate-child');
     children.forEach((child, index) => {
