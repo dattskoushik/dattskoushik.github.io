@@ -46,6 +46,13 @@ a:hover {
 .center { display: flex; justify-content: center; align-items: center; }
 
 /* Navigation */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--background-color);
+}
+
 .nav-link {
     position: relative;
     text-decoration: none;
@@ -83,6 +90,26 @@ a:hover {
     top: 100%;
     left: 0;
     padding: 1rem;
+}
+
+.header .mobile-menu-toggle {
+    display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header .mobile-menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-links.active {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 /* Sections */
