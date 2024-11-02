@@ -12,7 +12,8 @@
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/css/styles.css">
-    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
     
@@ -22,144 +23,114 @@
     <meta property="og:image" content="assets/images/my_profile.png">
     <meta property="og:url" content="https://dattskoushik.github.io">
 </head>
-<body>
-    <!-- Skip to main content link for accessibility -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+<body class="bg-gray-50 text-gray-800">
 
-    <header class="header" role="banner">
+    <header class="header fixed w-full bg-white shadow-sm z-50" role="banner">
         <nav class="nav-container" role="navigation" aria-label="Main navigation">
-            <div class="nav-content">
-                <a href="/" class="logo" aria-label="Homepage">
-                    <span class="text-accent">&lt;</span>
-                    Dattskoushik
-                    <span class="text-accent">/&gt;</span>
-                </a>
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <a href="/" class="logo text-xl font-semibold">Dattskoushik</a>
 
-                <button class="mobile-menu-toggle" 
-                        aria-controls="primary-navigation" 
-                        aria-expanded="false"
-                        aria-label="Toggle menu">
-                    <span class="hamburger"></span>
-                </button>
+                    <button class="mobile-menu-toggle" 
+                            aria-controls="primary-navigation" 
+                            aria-expanded="false"
+                            aria-label="Toggle menu">
+                        <span class="hamburger"></span>
+                    </button>
 
-                <ul id="primary-navigation" class="nav-links">
-                    <li><a href="index.html" class="nav-link">Home</a></li>
-                    <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
-                    <li><a href="blog.html" class="nav-link">Blog</a></li>
-                    <li><a href="projects.html" class="nav-link">Projects</a></li>
-                    <li><a href="contact.html" class="nav-link">Contact</a></li>
-                </ul>
+                    <ul id="primary-navigation" class="nav-links flex items-center space-x-8">
+                        <li><a href="index.html" class="nav-link text-gray-800">Home</a></li>
+                        <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+                        <li><a href="blog.html" class="nav-link">Blog</a></li>
+                        <li><a href="projects.html" class="nav-link">Projects</a></li>
+                        <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
 
     <main id="main-content" role="main">
-        <section class="hero" aria-labelledby="hero-title">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="hero-text">
-                        <h1 id="hero-title" class="hero-heading">
-                            Hello, I'm Dattskoushik
-                        </h1>
-                        <p class="hero-subtitle">
-                            Developer • Open Source Contributor • Tech Enthusiast
-                        </p>
-                        <div class="hero-buttons">
-                            <a href="portfolio.html" class="btn btn-primary">View My Work</a>
-                            <a href="contact.html" class="btn btn-secondary">Get in Touch</a>
-                        </div>
+        <section id="home" class="hero section pt-32 pb-20">
+            <div class="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="content-section">
+                    <h1 class="text-5xl font-bold mb-6">Hello, I'm Dattskoushik</h1>
+                    <p class="text-xl text-gray-600 mb-8">Developer • Open Source Contributor • Tech Enthusiast</p>
+                    <div class="hero-buttons">
+                        <a href="portfolio.html" class="btn btn-primary">View My Work</a>
+                        <a href="contact.html" class="btn btn-secondary">Get in Touch</a>
                     </div>
-                    <div class="hero-image">
-                        <img src="assets/images/my_profile.png" 
-                             alt="Dattskoushik's profile picture"
-                             width="400"
-                             height="400"
-                             loading="eager">
-                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="assets/images/my_profile.png" 
+                         alt="Dattskoushik's profile picture"
+                         width="400"
+                         height="400"
+                         loading="eager">
                 </div>
             </div>
         </section>
 
-        <section class="featured-work" aria-labelledby="featured-title">
-            <div class="container">
-                <h2 id="featured-title" class="section-title">Featured Work</h2>
-                <div class="featured-grid">
-                    <!-- Featured project cards will be added here -->
-                    <article class="project-card">
-                        <img src="/api/placeholder/400/300" 
-                             alt="Project preview"
-                             width="400"
-                             height="300"
-                             loading="lazy">
-                        <div class="project-content">
-                            <h3>Project Name</h3>
-                            <p>Brief project description highlighting key features and technologies used.</p>
-                            <div class="project-links">
-                                <a href="#" class="btn btn-small">View Project</a>
-                                <a href="#" class="btn btn-small btn-outline">Source Code</a>
+        <section id="portfolio" class="featured-work section py-20 bg-white">
+            <div class="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="content-section">
+                    <h2 class="text-3xl font-bold mb-12">Featured Work</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="card bg-white p-6 rounded-lg shadow-md">
+                            <img src="/api/placeholder/400/250" 
+                                 alt="Project preview"
+                                 width="400"
+                                 height="250"
+                                 class="w-full h-48 object-cover rounded-lg mb-4">
+                            <h3 class="text-xl font-semibold mb-2">Project Name</h3>
+                            <p class="text-gray-600 mb-4">Brief project description highlighting key features and technologies used.</p>
+                            <div class="flex space-x-2">
+                                <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">React</span>
+                                <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Node.js</span>
                             </div>
                         </div>
-                    </article>
+                        <!-- Add more project cards as needed -->
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="latest-posts" aria-labelledby="blog-title">
-            <div class="container">
-                <h2 id="blog-title" class="section-title">Latest Blog Posts</h2>
-                <div class="posts-grid">
-                    <article class="post-card">
-                        <time datetime="2024-01-01" class="post-date">January 1, 2024</time>
-                        <h3 class="post-title">
-                            <a href="blog/post-1.html">Sample Blog Post Title</a>
-                        </h3>
-                        <p class="post-excerpt">
-                            Brief excerpt from the blog post that gives readers a preview of the content.
-                        </p>
-                        <a href="blog/post-1.html" class="read-more">
-                            Read More
-                            <span class="sr-only">about Sample Blog Post Title</span>
-                        </a>
-                    </article>
-                </div>
-                <div class="section-footer">
-                    <a href="blog.html" class="btn btn-secondary">View All Posts</a>
+        <section id="blog" class="latest-posts section py-20">
+            <div class="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="content-section">
+                    <h2 class="text-3xl font-bold mb-12">Latest Blog Posts</h2>
+                    <div class="posts-grid space-y-12">
+                        <article class="cursor-pointer">
+                            <div class="mb-4">
+                                <span class="text-sm text-gray-500">Jan 15, 2024</span>
+                                <h3 class="text-2xl font-semibold mt-2">Article Title</h3>
+                            </div>
+                            <p class="text-gray-600 mb-4">Preview of the article content goes here. This should be engaging enough to make visitors want to read more.</p>
+                            <a href="#" class="text-gray-800 font-medium hover:underline">Read more →</a>
+                        </article>
+                        <!-- Add more blog posts as needed -->
+                    </div>
+                    <div class="section-footer">
+                        <a href="blog.html" class="btn btn-secondary">View All Posts</a>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="footer" role="contentinfo">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-branding">
-                    <h3 class="footer-title">Dattskoushik</h3>
-                    <p>Building the web, one line at a time</p>
-                </div>
-                <div class="footer-social">
-                    <h4 class="sr-only">Social Links</h4>
-                    <ul class="social-links">
-                        <li>
-                            <a href="https://github.com/dattskoushik" 
-                               target="_blank" 
-                               rel="noopener noreferrer"
-                               aria-label="GitHub Profile">
-                                GitHub
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://linkedin.com/in/dattskoushik" 
-                               target="_blank" 
-                               rel="noopener noreferrer"
-                               aria-label="LinkedIn Profile">
-                                LinkedIn
-                            </a>
-                        </li>
-                    </ul>
+    <footer class="footer section py-20" role="contentinfo">
+        <div class="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="footer-content text-center">
+                <h3 class="text-xl font-semibold">Suchindra Koushik</h3>
+                <p>Building the web, one line at a time</p>
+                <div class="footer-social mt-4 space-x-6">
+                    <a href="https://github.com/dattskoushik" class="text-gray-600 hover:text-gray-800">GitHub</a>
+                    <a href="https://linkedin.com/in/dattskoushik" class="text-gray-600 hover:text-gray-800">LinkedIn</a>
+                    <a href="https://twitter.com/dattskoushik" class="text-gray-600 hover:text-gray-800">Twitter</a>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Dattskoushik. All rights reserved.</p>
+            <div class="footer-bottom mt-8 text-center">
+                <p class="text-gray-600 text-sm">&copy; 2024 Suchindra Koushik. All rights reserved.</p>
             </div>
         </div>
     </footer>
