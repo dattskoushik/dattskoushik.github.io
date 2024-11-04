@@ -105,41 +105,30 @@ a:hover {
     z-index: 50;
 }
 
-
-/* Sections */
-.section {
-    padding: 4rem 0;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+.card {
+    background: var(--card-background);
+    color: var(--text-color);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 1.5rem;
 }
 
-.section.visible {
-    opacity: 1;
-    transform: translateY(0);
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Hero Section Enhancements */
-.hero {
-    position: relative;
-    overflow: hidden;
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(49, 130, 206, 0.1), rgba(49, 130, 206, 0));
-    z-index: 0;
-}
-
-.content-section {
-    position: relative;
-    z-index: 1;
-    text-align: center;
+.card img:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
 }
 
 /* Profile Image Styling */
@@ -167,191 +156,7 @@ a:hover {
     animation: rotate 4s linear infinite;
 }
 
-/* Text Accent Color */
-.text-accent {
-    color: var(--accent-color);
-}
-
-/* Role Text Animation */
-.role-text {
-    display: inline-block;
-    position: relative;
-}
-
-.role-text::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    bottom: -4px;
-    left: 0;
-    background-color: var(--accent-color);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-}
-
-.role-text:hover::after {
-    transform: scaleX(1);
-}
-
-/* Button Enhancements */
-.btn {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.6s ease, height 0.6s ease;
-}
-
-.btn:hover::before {
-    width: 300px;
-    height: 300px;
-}
-
-/* Social Links */
-.social-links {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-}
-
-.social-link {
-    color: var(--secondary-color);
-    transition: all 0.3s ease;
-}
-
-.social-link:hover {
-    color: var(--accent-color);
-    transform: translateY(-2px);
-}
-
-.btn-primary:hover, .btn-secondary:hover {
-    opacity: 0.9;
-}
-
-/* Card Components */
-.card, .card-project, .blog-post {
-    background: var(--card-background);
-    color: var(--text-color);
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    padding: 1.5rem;
-}
-
-.card:hover, .blog-post:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
-}
-
-/* Project Grid */
-.project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.card-project {
-    position: relative;
-    overflow: hidden;
-}
-
-.card-project img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-/* Footer */
-.footer-content, .footer-branding, .footer-social {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.footer-social img {
-    height: 24px;
-    width: 24px;
-    transition: transform 0.2s ease;
-  }
-  
-  .footer-social img:hover {
-    transform: scale(1.1);
-  }
-   
-.footer-bottom {
-    text-align: center;
-    padding: 1rem 0;
-    background: var(--primary-color);
-    color: var(--background-color);
-    font-size: 0.9rem;
-}
-
-/* Responsive adjustments */
-@media (max-width: 640px) {
-    .nav-container {
-        padding: 0 0.5rem;
-    }
-    
-    .nav-content {
-        height: auto;
-        padding: 0.75rem 0;
-    }
-
-    .nav-links {
-        gap: 1rem;
-        font-size: 0.875rem;
-    }
-
-    .logo {
-        font-size: 1rem;
-        padding-right: 1rem;
-    }
-
-    .hero {
-        padding-top: 6rem;
-        padding-bottom: 4rem;
-    }
-
-    .text-3xl {
-        font-size: 1.875rem;
-    }
-
-    .hero-buttons {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .btn {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
 /* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 @keyframes rotate {
     from {
         transform: rotate(0deg);
@@ -359,8 +164,4 @@ a:hover {
     to {
         transform: rotate(360deg);
     }
-}
-
-.animate-fade-in {
-    animation: fadeIn 0.5s ease forwards;
 }
