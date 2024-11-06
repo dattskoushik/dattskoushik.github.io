@@ -13,28 +13,30 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/css/styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- Favicon -->
-    <!-- <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png"> -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
     
     <!-- Open Graph tags for better social sharing -->
     <meta property="og:title" content="Suchindra Koushik">
     <meta property="og:description" content="I create elegant data engineering solutions through code and words. Welcome to my digital garden where technology meets creativity.">
     <meta property="og:url" content="https://dattskoushik.github.io">
 </head>
-<body class="bg-gray-50 text-gray-800">
-    <nav class="fixed w-full bg-white shadow-sm z-50">
+<body class="bg-gray-50 text-gray-800 font-Lato">
+    <!-- Accessibility Improvements -->
+    <nav class="fixed w-full bg-white shadow-sm z-50" aria-label="Main Navigation">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
+            <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
-                    <a href="#home" class="text-xl font-semibold">Suchindra Koushik</a>
+                    <a href="#home" class="text-xl font-semibold" aria-label="Home">Suchindra Koushik</a>
                 </div>
-                <div class="flex items-center space-x-8">
-                    <a href="portfolio/index.html" class="nav-link">Portfolio</a>
-                    <a href="projects/index.html" class="nav-link">Projects</a>
-                    <a href="#blog" class="nav-link">Blog</a>
-                    <a href="#poetry" class="nav-link">Poetry</a>
-                    <a href="#contact" class="nav-link">Contact</a>
+                <div class="flex space-x-4">
+                    <a href="portfolio/index.html" class="nav-link" aria-label="Portfolio">Portfolio</a>
+                    <a href="projects/index.html" class="nav-link" aria-label="Projects">Projects</a>
+                    <a href="#blog" class="nav-link" aria-label="Blog">Blog</a>
+                    <a href="#poetry" class="nav-link" aria-label="Poetry">Poetry</a>
+                    <a href="#contact" class="nav-link" aria-label="Contact">Contact</a>
                 </div>
             </div>
         </div>
@@ -56,12 +58,12 @@
 
                     <!-- Main Content -->
                     <div class="text-content">
-                        <h1 class="text-3xl font-bold justify-center mb-4 animate-child">
+                        <h1 class="text-4xl font-bold justify-center mb-4 animate-child">
                             Hello, I'm <span class="text-accent">Suchindra Koushik</span>
                         </h1>
                         
                         <div class="roles text-center mb-6 animate-child">
-                            <p class="text-lg text-gray-400">
+                            <p class="text-lg text-gray-500">
                                 <span class="role-text">Developer</span>
                                 <span class="mx-2">•</span>
                                 <span class="role-text">Open Source Contributor</span>
@@ -71,7 +73,7 @@
                         </div>
 
                         <div class="description mb-8 text-center animate-child-center">
-                            <p class="text-lg leading-relaxed max-w-2xl">
+                            <p class="text-lg leading-relaxed max-w-2xl mx-auto">
                                 I am a Backend Engineer crafting elegant data engineering solutions 
                                 through code and words. Welcome to my digital garden where technology 
                                 meets creativity.
@@ -80,13 +82,13 @@
 
                         <!-- Call to Action Buttons -->
                         <div class="hero-buttons animate-child">
-                            <a href="portfolio/index.html" class="btn btn-primary mr-4 inline-flex items-center">
+                            <a href="portfolio/index.html" class="btn btn-primary mr-4 inline-flex items-center bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition duration-300">
                                 <span>Work Experience</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                                 </svg>
                             </a>
-                            <a href="projects/index.html" class="btn btn-secondary inline-flex items-center">
+                            <a href="projects/index.html" class="btn btn-secondary inline-flex items-center bg-gray-500 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-600 transition duration-300">
                                 <span>Project Portfolio</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -95,22 +97,22 @@
                         </div>
 
                         <!-- Social Links -->
-                        <div class="social-links mb-6 animate-child-center">
-                            <div class="flex justify-center space-x-6 mt-6">
-                                <a href="https://github.com/dattskoushik" class="text-gray-600 hover:text-gray-800">
+                        <!-- <div class="social-links mb-6 animate-child-center">
+                            <div class="flex justify-center space-x-6 mt-4">
+                                <a href="https://github.com/dattskoushik" class="text-gray-600 hover:text-gray-600">
                                     <img src="assets/images/github-mark.png" alt="GitHub" class="h-8 w-8">
                                 </a>
-                                <a href="https://linkedin.com/in/suchindrakoushik" class="text-gray-800 hover:text-gray-800">
+                                <a href="https://linkedin.com/in/suchindrakoushik" class="text-gray-600 hover:text-gray-600">
                                     <img src="assets/images/LI-In-Bug.png" alt="LinkedIn" class="h-8 w-8">
                                 </a>
-                                <a href="https://x.com/myselfmsdk" class="text-gray-600 hover:text-gray-800">
+                                <a href="https://x.com/myselfmsdk" class="text-gray-600 hover:text-gray-600">
                                     <img src="assets/images/logo-black.png" alt="Twitter" class="h-8 w-8">
                                 </a>
-                                <a href="mailto:suchindra.formal@outlook.com" class="block text-gray-800 hover:underline">
+                                <a href="mailto:suchindra.formal@outlook.com" class="block text-gray-600 hover:underline">
                                     <img src="assets/images/outlook.png" alt="Outlook" class="h-8 w-8">
                                 </a>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -171,7 +173,7 @@
                         </article>
                         <!-- Add more blog posts as needed -->
                     </div>
-                    <div class="section-footer">
+                    <div class="section-footer text-center mt-12">
                         <a href="blog.html" class="btn btn-secondary">View All Posts</a>
                     </div>
                 </div>
@@ -209,18 +211,18 @@
                             Whether you're interested in collaboration, have questions about my work,
                             or just want to say hello, I'd love to hear from you.
                         </p>
-                        <div class="flex justify-center space-x-4 mt-4">
-                            <a href="https://github.com/dattskoushik" class="text-gray-600 hover:text-gray-800">
-                                <img src="assets/images/github-mark.png" alt="GitHub" class="h-8 w-8">
+                        <div class="btn btn-primary mr-4 inline-flex items-center justify-center space-x-6 mt-6">
+                            <a href="https://github.com/dattskoushik" class="social-link">
+                                <img src="assets/images/github-mark.png" alt="GitHub" class="social-icon">
                             </a>
-                            <a href="https://linkedin.com/in/suchindrakoushik" class="text-gray-800 hover:text-gray-800">
-                                <img src="assets/images/LI-In-Bug.png" alt="LinkedIn" class="h-8 w-8">
+                            <a href="https://linkedin.com/in/suchindrakoushik" class="social-link">
+                                <img src="assets/images/LI-In-Bug.png" alt="LinkedIn" class="social-icon">
                             </a>
-                            <a href="https://x.com/myselfmsdk" class="text-gray-600 hover:text-gray-800">
-                                <img src="assets/images/logo-black.png" alt="Twitter" class="h-8 w-8">
+                            <a href="https://x.com/myselfmsdk" class="social-link">
+                                <img src="assets/images/logo-black.png" alt="Twitter" class="social-icon">
                             </a>
-                            <a href="mailto:suchindra.formal@outlook.com" class="block text-gray-800 hover:underline">
-                                <img src="assets/images/outlook.png" alt="Outlook" class="h-8 w-8">
+                            <a href="mailto:suchindra.formal@outlook.com" class="social-link">
+                                <img src="assets/images/outlook.png" alt="Outlook" class="social-icon">
                             </a>
                         </div>
                     </div>
@@ -231,13 +233,13 @@
           
     </main>
 
-    <footer class="footer section py-20" role="contentinfo">
+    <footer class="footer section py-20 bg-gray-800 text-white" role="contentinfo">
         <div class="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="footer-content text-center">
                 <p>Building my portfolio, one line at a time</p>
             </div>
             <div class="footer-bottom mt-8 text-center">
-                <p class="text-white-400 text-sm">&copy; 2024 Suchindra Koushik. All rights reserved.</p>
+                <p class="text-gray-400 text-sm">&copy; 2024 Suchindra Koushik. All rights reserved.</p>
             </div>
         </div>
     </footer>
