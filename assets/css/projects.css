@@ -1,11 +1,11 @@
-/* Portfolio Section Styles */
-/* portfolio-styles.css */
+/* Projects Section Styles */
+
 body {
-    font-family: 'Roboto', sans-serif;
-    line-height: 1.6;
+    font-family: 'Lato', sans-serif;
+    background-color: #f8fafc;
+    color: #333;
     margin: 0;
     padding: 0;
-    background-color: var(--background-color);
 }
 
 .text-primary { color: var(--primary-color); }
@@ -14,22 +14,7 @@ body {
 .bg-primary { background-color: var(--primary-color); }
 .bg-light { background-color: var(--background-color); }
 
-.header {
-    text-align: center;
-    padding: 2rem;
-    background: var(--primary-color);
-    color: var(--background-color);
-}
 
-.portfolio-header {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.portfolio-content {
-    text-align: left;
-    padding: 2rem;
-}
 .section {
     padding: 4rem 0;
     opacity: 0;
@@ -42,59 +27,14 @@ body {
     transform: translateY(0);
 }
 
-.experience-card {
+.projects-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.projects-content {
+    text-align: left;
     padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background: var(--card-background);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.experience-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
-}
-
-.mt-8 { margin-top: 8rem; }
-.mb-8 { margin-bottom: 8rem; }
-.mb-12 { margin-bottom: 3rem; }
-
-/* Hero Section Enhancements */
-.hero {
-    position: relative;
-    overflow: hidden;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(49, 130, 206, 0.1), rgba(49, 130, 206, 0));
-    z-index: 0;
-}
-
-/* Social Links */
-.social-links {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-}
-
-.social-link {
-    color: var(--secondary-color);
-    transition: all 0.3s ease;
-}
-
-.social-link:hover {
-    color: var(--accent-color);
-    transform: translateY(-2px);
-}
-
-.btn-primary:hover, .btn-secondary:hover {
-    opacity: 0.9;
 }
 
 /* Card Components */
@@ -128,6 +68,49 @@ body {
     width: 100%;
     height: 200px;
     object-fit: cover;
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.card img:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+.flex {
+    display: flex;
+    gap: 1rem;
+}
+
+.px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.py-1 {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+.bg-gray-100 {
+    background-color: #f7fafc;
+}
+
+.rounded-full {
+    border-radius: 9999px;
+}
+
+.text-sm {
+    font-size: 0.875rem;
+}
+
+.text-gray-600 {
+    color: #718096;
 }
 
 /* Footer */
@@ -211,4 +194,72 @@ body {
 
 .animate-fade-in {
     animation: fadeIn 0.5s ease forwards;
+}
+
+/* General Styles */
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #f8fafc;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+header {
+    background-color: #1a202c;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+/* Section */
+section {
+    padding: 4rem 0;
+}
+
+/* Project Cards */
+.project-card {
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-0.5rem);
+}
+
+.project-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a202c;
+    margin-bottom: 0.5rem;
+}
+
+.project-card p {
+    font-size: 1rem;
+    color: #4a5568;
+    margin-bottom: 1rem;
+}
+
+.project-card a {
+    font-size: 1rem;
+    color: #3182ce;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.project-card a:hover {
+    color: #2b6cb0;
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background-color: #1a202c;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
 }
