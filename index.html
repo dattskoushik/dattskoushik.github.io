@@ -3,128 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M S Suchindra Datta Koushik | Software Engineer - Backend, Data</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
+    <title>Suchindra Koushik | Senior Backend & Data Engineer</title>
+    <meta name="description" content="Portfolio of M S Suchindra Datta Koushik, a Senior Backend and Data Engineer focused on reliable systems, performance, and clarity.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <header>
-        <nav class="main-nav">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#learning">Learning</a></li>
-                <li><a href="#photography">Photography</a></li>
-                <li><a href="#poetry">Poetry</a></li>
-            </ul>
-        </nav>
+
+    <header class="site-header">
+        <div class="container">
+            <a href="/" class="logo">Suchindra Koushik</a>
+            <nav class="nav-links">
+                <a href="/" class="active">Home</a>
+                <a href="blog/index.html">Writing</a>
+                <a href="about.html">About</a>
+            </nav>
+        </div>
     </header>
+
     <main>
-        <!-- Your content sections here -->
-        <section id="home" class="section">
-            <div class="home-content">
-                <h1>Your Name</h1>
-                <p class="intro">Welcome to my personal space</p>
-                <div class="social-links">
-                    <a href="https://github.com/dattskoushik" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    <a href="https://linkedin.com/in/suchindrakoushik" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                    <a href="https://instagram.com/dattskoushik" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <section class="hero container">
+            <h1 class="fade-in">Senior Backend &<br>Data Engineer</h1>
+            <p class="hero-subtitle fade-in">
+                I build reliable systems and scalable data pipelines. <br>
+                Focused on correctness, performance, and engineering clarity.
+            </p>
+            <div class="hero-meta fade-in">
+                <span>Python</span>
+                <span>•</span>
+                <span>SQL</span>
+                <span>•</span>
+                <span>Distributed Systems</span>
+            </div>
+        </section>
+
+        <section class="container">
+            <h2>Philosophy</h2>
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                <div>
+                    <h3>Systems Thinking</h3>
+                    <p>Software doesn't exist in a vacuum. I design with the entire lifecycle in mind—from observability to maintenance and failure modes.</p>
+                </div>
+                <div>
+                    <h3>Data Reliability</h3>
+                    <p>In data engineering, correctness is paramount. I build pipelines that are idempotent, testable, and resilient to change.</p>
+                </div>
+                <div>
+                    <h3>Performance</h3>
+                    <p>Optimization isn't magic. It's understanding the machine, the database, and the network. I dig deep to find the bottlenecks.</p>
                 </div>
             </div>
         </section>
-        <section id="about" class="section">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <img src="path/to/your-profile-image.jpg" alt="Your Name" style="width:150px; border-radius:50%; margin-bottom:var(--spacing-md);">
-                <p>I'm an enthusiastic learner and coder. Currently, I'm diving deep into Data Engineering. Check out my <a href="your-resume-link.pdf" target="_blank">resume</a>!</p>
+
+        <section class="container" style="margin-top: var(--space-xl);">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--space-md);">
+                <h2>Selected Writing</h2>
+                <a href="blog/index.html" class="text-sm">View all &rarr;</a>
             </div>
-        </section>
-        <section id="learning" class="section">
-            <h2 class="section-title">Learning</h2>
-            <div class="learning-grid">
-                <article class="learning-post">
-                    <img src="/api/placeholder/400/300" alt="Learning Post 1" class="learning-image">
-                    <div class="learning-content">
-                        <h3>Learning Post Title</h3>
-                        <p>Brief description of your learning post...</p>
-                        <a href="#" class="read-more">Read More</a>
-                    </div>
+
+            <div class="card-grid">
+                <!-- Featured Post 1 -->
+                <article class="card">
+                    <div class="card-meta">Data Engineering</div>
+                    <h3><a href="blog/post.html">How PostgreSQL Query Planning Actually Works</a></h3>
+                    <p class="card-excerpt">Understanding the optimizer is the first step to writing high-performance SQL. Let's dive into cost models and access methods.</p>
+                    <a href="blog/post.html" class="card-link">Read article &rarr;</a>
+                </article>
+
+                <!-- Featured Post 2 -->
+                <article class="card">
+                    <div class="card-meta">Architecture</div>
+                    <h3><a href="#">Designing Reliable Batch Data Pipelines</a></h3>
+                    <p class="card-excerpt">Why "retry until success" isn't a strategy. Patterns for building robust ETL systems that sleep well at night.</p>
+                    <a href="#" class="card-link">Read article &rarr;</a>
+                </article>
+
+                <!-- Featured Post 3 -->
+                <article class="card">
+                    <div class="card-meta">Python</div>
+                    <h3><a href="#">Python Performance: Where It Breaks and Why</a></h3>
+                    <p class="card-excerpt">Python is slow, but your code doesn't have to be. Examining the GIL, memory management, and when to drop to C.</p>
+                    <a href="#" class="card-link">Read article &rarr;</a>
                 </article>
             </div>
         </section>
-        <section id="photography" class="section">
-            <h2 class="section-title">Photography</h2>
-            <div class="photo-gallery">
-                <div class="photo-item">
-                    <img src="/api/placeholder/300/300" alt="Photo 1">
-                </div>
-                <div class="photo-item">
-                    <img src="/api/placeholder/300/300" alt="Photo 2">
-                </div>
-                <div class="photo-item">
-                    <img src="/api/placeholder/300/300" alt="Photo 3">
-                </div>
-            </div>
-        </section>
-        <section id="poetry" class="section">
-            <h2 class="section-title">Poetry</h2>
-            <article class="poetry-item">
-                <h3>Poem Title</h3>
-                <p>Your poetry content here...</p>
-                <span class="date">Date written</span>
-            </article>
-        </section>
     </main>
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2024 Your Name. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Contact</a>
-            </div>
+
+    <footer class="site-footer container">
+        <div class="social-links">
+            <a href="https://github.com/dattskoushik" target="_blank">GitHub</a>
+            <a href="https://linkedin.com/in/suchindrakoushik" target="_blank">LinkedIn</a>
+            <a href="mailto:contact@example.com">Email</a> <!-- Placeholder email -->
         </div>
+        <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved.</p>
     </footer>
-    
-    <script>
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.main-nav a');
-    
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                } else {
-                    entry.target.classList.remove('visible');
-                }
-            });
-        });
-    
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-    
-        window.addEventListener('scroll', () => {
-            let current = '';
-    
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 60) {
-                    current = section.getAttribute('id');
-                }
-            });
-    
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').includes(current)) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    </script>
-    
+
 </body>
 </html>
