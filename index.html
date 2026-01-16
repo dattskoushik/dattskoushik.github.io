@@ -3,247 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Suchindra Koushik - Software Engineer - Data & Backend, Open Source Contributor, and Tech Enthusiast">
-    <title>Suchindra Koushik - Portfolio, Blog & Poetry</title>
-    
-    <!-- Preload critical assets -->
-    <link rel="preload" href="assets/css/styles.css" as="style">
-    <link rel="preload" href="assets/js/script.js" as="script">
-    
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
-    
-    <!-- Open Graph tags for better social sharing -->
-    <meta property="og:title" content="Suchindra Koushik">
-    <meta property="og:description" content="I create elegant data engineering solutions through code and words. Welcome to my digital garden where technology meets creativity.">
-    <meta property="og:url" content="https://dattskoushik.github.io">
+    <title>Suchindra Koushik | Senior Backend & Data Engineer</title>
+    <meta name="description" content="Portfolio of M S Suchindra Datta Koushik, a Senior Backend and Data Engineer focused on reliable systems, performance, and clarity.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
 </head>
-<body class="bg-gray-50 text-gray-800 font-Lato">
-    <!-- Accessibility Improvements -->
-    <nav class="fixed w-full bg-white shadow-sm z-50" aria-label="Main Navigation">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center">
-                    <a href="#home" class="text-xl font-semibold" aria-label="Home">Suchindra Koushik</a>
-                </div>
-                <div class="flex space-x-4">
-                    <a href="portfolio/index.html" class="nav-link" aria-label="Portfolio">Portfolio</a>
-                    <a href="projects/index.html" class="nav-link" aria-label="Projects">Projects</a>
-                    <a href="#blog" class="nav-link" aria-label="Blog">Blog</a>
-                    <a href="#poetry" class="nav-link" aria-label="Poetry">Poetry</a>
-                    <a href="#contact" class="nav-link" aria-label="Contact">Contact</a>
-                </div>
-            </div>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <a href="/" class="logo">Suchindra Koushik</a>
+            <nav class="nav-links">
+                <a href="/" class="active">Home</a>
+                <a href="blog/index.html">Writing</a>
+                <a href="about.html">About</a>
+            </nav>
         </div>
-    </nav>
-    
+    </header>
 
-    <main id="main-content" role="main">
-        <!-- Hero Section -->
-        <section id="home" class="hero section pt-32 pb-20" data-animate-children>
-            <div class="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="content-section text-center animate-child">
-                    <!-- Profile Image -->
-                    <div class="profile-image-container mb-6">
-                        <div class="profile-image-wrapper">
-                            <img src="assets/images/workspace_bw.jpeg" alt="Writer and Developer" 
-                                class="rounded-full w-32 h-32 object-cover border-4 border-accent-color animate-child">
-                        </div>
-                    </div>
+    <main>
+        <section class="hero container">
+            <h1 class="fade-in">Senior Backend &<br>Data Engineer</h1>
+            <p class="hero-subtitle fade-in">
+                I build reliable systems and scalable data pipelines. <br>
+                Focused on correctness, performance, and engineering clarity.
+            </p>
+            <div class="hero-meta fade-in">
+                <span>Python</span>
+                <span>•</span>
+                <span>SQL</span>
+                <span>•</span>
+                <span>Distributed Systems</span>
+            </div>
+        </section>
 
-                    <!-- Main Content -->
-                    <div class="text-content">
-                        <h1 class="text-4xl font-bold justify-center mb-4 animate-child">
-                            Hello, I'm <span class="text-accent">Suchindra Koushik</span>
-                        </h1>
-                        
-                        <div class="roles text-center mb-6 animate-child">
-                            <p class="text-lg text-gray-500">
-                                <span class="role-text">Developer</span>
-                                <span class="mx-2">•</span>
-                                <span class="role-text">Open Source Contributor</span>
-                                <span class="mx-2">•</span>
-                                <span class="role-text">Tech Enthusiast</span>
-                            </p>
-                        </div>
-
-                        <div class="description mb-8 text-center animate-child-center">
-                            <p class="text-lg leading-relaxed max-w-2xl mx-auto">
-                                I am a Backend Engineer crafting elegant data engineering solutions 
-                                through code and words. Welcome to my digital garden where technology 
-                                meets creativity.
-                            </p>
-                        </div>
-
-                        <!-- Call to Action Buttons -->
-                        <div class="hero-buttons animate-child">
-                            <a href="portfolio/index.html" class="btn btn-primary mr-4 inline-flex items-center bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition duration-300">
-                                <span>Work Experience</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </a>
-                            <a href="projects/index.html" class="btn btn-secondary inline-flex items-center bg-gray-500 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-600 transition duration-300">
-                                <span>Project Portfolio</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </a>
-                        </div>
-
-                        <!-- Social Links -->
-                        <!-- <div class="social-links mb-6 animate-child-center">
-                            <div class="flex justify-center space-x-6 mt-4">
-                                <a href="https://github.com/dattskoushik" class="text-gray-600 hover:text-gray-600">
-                                    <img src="assets/images/github-mark.png" alt="GitHub" class="h-8 w-8">
-                                </a>
-                                <a href="https://linkedin.com/in/suchindrakoushik" class="text-gray-600 hover:text-gray-600">
-                                    <img src="assets/images/LI-In-Bug.png" alt="LinkedIn" class="h-8 w-8">
-                                </a>
-                                <a href="https://x.com/myselfmsdk" class="text-gray-600 hover:text-gray-600">
-                                    <img src="assets/images/logo-black.png" alt="Twitter" class="h-8 w-8">
-                                </a>
-                                <a href="mailto:suchindra.formal@outlook.com" class="block text-gray-600 hover:underline">
-                                    <img src="assets/images/outlook.png" alt="Outlook" class="h-8 w-8">
-                                </a>
-                            </div>
-                        </div> -->
-                    </div>
+        <section class="container">
+            <h2>Philosophy</h2>
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+                <div>
+                    <h3>Systems Thinking</h3>
+                    <p>Software doesn't exist in a vacuum. I design with the entire lifecycle in mind—from observability to maintenance and failure modes.</p>
+                </div>
+                <div>
+                    <h3>Data Reliability</h3>
+                    <p>In data engineering, correctness is paramount. I build pipelines that are idempotent, testable, and resilient to change.</p>
+                </div>
+                <div>
+                    <h3>Performance</h3>
+                    <p>Optimization isn't magic. It's understanding the machine, the database, and the network. I dig deep to find the bottlenecks.</p>
                 </div>
             </div>
         </section>
 
-        <section id="portfolio" class="featured-work section py-20 bg-white">
-            <div class="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="content-section">
-                    <h2 class="text-3xl font-bold mb-12">Featured Work</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div class="card bg-white p-6 rounded-lg shadow-md">
-                            <img src="assets/images/DE.jpeg" 
-                                 alt="Project preview"
-                                 width="400"
-                                 height="250"
-                                 class="w-full h-48 object-cover rounded-lg mb-4">
-                            <h3 class="text-xl font-semibold mb-2">Intelligent Search and Analytics Platform</h3>
-                            <p class="text-gray-600 mb-4">Built an intelligent search and analytics platform using FastAPI and Elasticsearch to index and analyze data from sources like Databricks and Snowflake,
-                                featuring custom search APIs and AI-based relevance tuning for enhanced search accuracy.</p>
-                            <div class="flex space-x-2">
-                                <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Python</span>
-                                <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">FastAPI</span>
-                                <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Elasticsearch</span>
-                            </div>
-                        </div>
-                        <div class="card bg-white p-6 rounded-lg shadow-md">
-                            <img src="assets/images/DE.jpeg" 
-                                 alt="Project preview"
-                                 width="400"
-                                 height="250"
-                                 class="w-full h-48 object-cover rounded-lg mb-4">
-                            <h3 class="text-xl font-semibold mb-2">Distributed File Storage System</h3>
-                            <p class="text-gray-600 mb-4">Developed a robust distributed file storage system using Python and Ceph, 
-                                focusing on data replication, load balancing, file sharing, and security measures.</p>
-                            <div class="flex space-x-2">
-                                <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Python</span>
-                                <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Ceph</span>
-                                <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">MongoDB</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <section class="container" style="margin-top: var(--space-xl);">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--space-md);">
+                <h2>Selected Writing</h2>
+                <a href="blog/index.html" class="text-sm">View all &rarr;</a>
             </div>
-        </section>
 
-        <section id="blog" class="latest-posts section py-20">
-            <div class="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="content-section">
-                    <h2 class="text-3xl font-bold mb-12">Latest Blog Posts</h2>
-                    <div class="posts-grid space-y-12">
-                        <article class="cursor-pointer">
-                            <div class="mb-4">
-                                <span class="text-sm text-gray-500">Jan 15, 2024</span>
-                                <h3 class="text-2xl font-semibold mt-2">Article Title</h3>
-                            </div>
-                            <p class="text-gray-600 mb-4">Preview of the article content goes here. This should be engaging enough to make visitors want to read more.</p>
-                            <a href="#" class="text-gray-800 font-medium hover:underline">Read more →</a>
-                        </article>
-                        <!-- Add more blog posts as needed -->
-                    </div>
-                    <div class="section-footer text-center mt-12">
-                        <a href="blog.html" class="btn btn-secondary">View All Posts</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+            <div class="card-grid">
+                <!-- Featured Post 1 -->
+                <article class="card">
+                    <div class="card-meta">Data Engineering</div>
+                    <h3><a href="blog/post.html">How PostgreSQL Query Planning Actually Works</a></h3>
+                    <p class="card-excerpt">Understanding the optimizer is the first step to writing high-performance SQL. Let's dive into cost models and access methods.</p>
+                    <a href="blog/post.html" class="card-link">Read article &rarr;</a>
+                </article>
 
-        <!-- Poetry Section -->
-        <section id="poetry" class="py-20 bg-white">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="content-section">
-                    <h2 class="text-3xl font-bold mb-12">Poetry</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <!-- Poetry Card -->
-                        <div class="poetry-card p-6 rounded-lg border border-gray-200">
-                            <h3 class="text-xl font-semibold mb-4">Poem Title</h3>
-                            <p class="text-gray-600 italic">
-                                First few lines of the poem...<br>
-                                Continue with more lines...<br>
-                                End with an impactful line.
-                            </p>
-                            <span class="block mt-4 text-sm text-gray-500">Published: December 2023</span>
-                        </div>
-                        <!-- Add more poetry cards as needed -->
-                    </div>
-                </div>
-            </div>
-        </section>
+                <!-- Featured Post 2 -->
+                <article class="card">
+                    <div class="card-meta">Architecture</div>
+                    <h3><a href="#">Designing Reliable Batch Data Pipelines</a></h3>
+                    <p class="card-excerpt">Why "retry until success" isn't a strategy. Patterns for building robust ETL systems that sleep well at night.</p>
+                    <a href="#" class="card-link">Read article &rarr;</a>
+                </article>
 
-        <section id="contact" class="py-20">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="content-section text-center"> <!-- Add text-center class here -->
-                    <h2 class="text-2xl font-bold mb-12">Get in Touch</h2> <!-- Removed justify-center -->
-                    <div class="max-w-xl mx-auto"> <!-- Add mx-auto to center the container -->
-                        <p class="mb-8">
-                            Whether you're interested in collaboration, have questions about my work,
-                            or just want to say hello, I'd love to hear from you.
-                        </p>
-                        <div class="btn btn-primary mr-4 inline-flex items-center justify-center space-x-6 mt-6">
-                            <a href="https://github.com/dattskoushik" class="social-link">
-                                <img src="assets/images/github-mark.png" alt="GitHub" class="social-icon">
-                            </a>
-                            <a href="https://linkedin.com/in/suchindrakoushik" class="social-link">
-                                <img src="assets/images/LI-In-Bug.png" alt="LinkedIn" class="social-icon">
-                            </a>
-                            <a href="https://x.com/myselfmsdk" class="social-link">
-                                <img src="assets/images/logo-black.png" alt="Twitter" class="social-icon">
-                            </a>
-                            <a href="mailto:suchindra.formal@outlook.com" class="social-link">
-                                <img src="assets/images/outlook.png" alt="Outlook" class="social-icon">
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <!-- Featured Post 3 -->
+                <article class="card">
+                    <div class="card-meta">Python</div>
+                    <h3><a href="#">Python Performance: Where It Breaks and Why</a></h3>
+                    <p class="card-excerpt">Python is slow, but your code doesn't have to be. Examining the GIL, memory management, and when to drop to C.</p>
+                    <a href="#" class="card-link">Read article &rarr;</a>
+                </article>
             </div>
         </section>
-        
-          
     </main>
 
-    <footer class="footer section py-20 bg-gray-800 text-white" role="contentinfo">
-        <div class="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="footer-content text-center">
-                <p>Building my portfolio, one line at a time</p>
-            </div>
-            <div class="footer-bottom mt-8 text-center">
-                <p class="text-gray-400 text-sm">&copy; 2024 Suchindra Koushik. All rights reserved.</p>
-            </div>
+    <footer class="site-footer container">
+        <div class="social-links">
+            <a href="https://github.com/dattskoushik" target="_blank">GitHub</a>
+            <a href="https://linkedin.com/in/suchindrakoushik" target="_blank">LinkedIn</a>
+            <a href="mailto:contact@example.com">Email</a> <!-- Placeholder email -->
         </div>
+        <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved.</p>
     </footer>
 
-    <script src="assets/js/script.js" defer></script>
 </body>
 </html>
