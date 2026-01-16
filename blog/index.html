@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing | Suchindra Koushik</title>
+    <meta name="description" content="Technical articles and thoughts on backend engineering, data systems, and software architecture.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <a href="../" class="logo">Suchindra Koushik</a>
+            <nav class="nav-links">
+                <a href="../">Home</a>
+                <a href="index.html" class="active">Writing</a>
+                <a href="../about.html">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding-top: var(--space-xl);">
+        <h1>Writing</h1>
+        <p class="hero-subtitle" style="margin-bottom: var(--space-xl);">
+            Thoughts on backend architecture, data reliability, and engineering practices.
+        </p>
+
+        <div class="card-grid" style="grid-template-columns: 1fr; max-width: 800px;">
+
+            <article class="card" style="flex-direction: row; align-items: center; border: none; background: transparent; padding: var(--space-md) 0; border-bottom: 1px solid var(--border-color); border-radius: 0;">
+                <div style="flex: 1;">
+                    <div class="card-meta">Data Engineering • <time>Oct 2023</time></div>
+                    <h3><a href="post.html">How PostgreSQL Query Planning Actually Works</a></h3>
+                    <p class="card-excerpt">Understanding the optimizer is the first step to writing high-performance SQL.</p>
+                </div>
+            </article>
+
+            <article class="card" style="flex-direction: row; align-items: center; border: none; background: transparent; padding: var(--space-md) 0; border-bottom: 1px solid var(--border-color); border-radius: 0;">
+                <div style="flex: 1;">
+                    <div class="card-meta">Architecture • <time>Sep 2023</time></div>
+                    <h3><a href="#">Designing Reliable Batch Data Pipelines</a></h3>
+                    <p class="card-excerpt">Why "retry until success" isn't a strategy. Patterns for building robust ETL systems.</p>
+                </div>
+            </article>
+
+            <article class="card" style="flex-direction: row; align-items: center; border: none; background: transparent; padding: var(--space-md) 0; border-bottom: 1px solid var(--border-color); border-radius: 0;">
+                <div style="flex: 1;">
+                    <div class="card-meta">Python • <time>Aug 2023</time></div>
+                    <h3><a href="#">Python Performance: Where It Breaks and Why</a></h3>
+                    <p class="card-excerpt">Examining the GIL, memory management, and when to drop to C.</p>
+                </div>
+            </article>
+
+            <article class="card" style="flex-direction: row; align-items: center; border: none; background: transparent; padding: var(--space-md) 0; border-bottom: 1px solid var(--border-color); border-radius: 0;">
+                <div style="flex: 1;">
+                    <div class="card-meta">Data Engineering • <time>Jul 2023</time></div>
+                    <h3><a href="#">Idempotency in Data Engineering: Why It Matters</a></h3>
+                    <p class="card-excerpt">Ensuring your pipelines can run multiple times without corrupting state.</p>
+                </div>
+            </article>
+             <article class="card" style="flex-direction: row; align-items: center; border: none; background: transparent; padding: var(--space-md) 0; border-bottom: 1px solid var(--border-color); border-radius: 0;">
+                <div style="flex: 1;">
+                    <div class="card-meta">Architecture • <time>Jun 2023</time></div>
+                    <h3><a href="#">ETL vs ELT: Trade-offs in Real Systems</a></h3>
+                    <p class="card-excerpt">Analyzing when to transform your data and where the compute should live.</p>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="site-footer container">
+        <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
