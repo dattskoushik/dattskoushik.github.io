@@ -3,40 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post Title | Suchindra Koushik</title>
-    <meta name="description" content="Brief description of the post content.">
+    <title>Post | Suchindra Koushik</title>
+    <meta name="description" content="Technical article.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/main.css">
-    <style>
-        .post-content {
-            font-size: 1.125rem;
-            line-height: 1.8;
-            max-width: 680px; /* Optimal reading width */
-            margin: 0 auto;
-        }
-        .post-content p {
-            margin-bottom: var(--space-md);
-            color: var(--text-primary); /* Higher contrast for long form */
-        }
-        .post-content h2 {
-            margin-top: var(--space-lg);
-            margin-bottom: var(--space-sm);
-        }
-        .post-content pre {
-            background: var(--code-bg);
-            padding: var(--space-md);
-            border-radius: var(--radius-sm);
-            overflow-x: auto;
-            margin-bottom: var(--space-md);
-            border: 1px solid var(--border-color);
-        }
-        .post-content code {
-            font-family: var(--font-mono);
-            font-size: 0.9em;
-        }
-    </style>
+    <script src="../assets/js/marked.min.js"></script>
 </head>
 <body>
 
@@ -51,23 +24,10 @@
         </div>
     </header>
 
-    <main class="container">
-        <article class="hero" style="padding-bottom: var(--space-md); max-width: 800px; margin: 0 auto;">
-            <div class="hero-meta" style="margin-top: 0; margin-bottom: var(--space-sm);">
-                <time>October 2023</time> • Data Engineering
-            </div>
-            <h1>How PostgreSQL Query Planning Actually Works</h1>
-        </article>
-
-        <div class="post-content">
-            <p>This is a template for blog posts. Content goes here. It uses a slightly larger font size and optimal line length for readability.</p>
-
-            <h2>The Cost Model</h2>
-            <p>PostgreSQL uses a cost-based optimizer. This means it assigns a "cost" to each possible execution plan and chooses the one with the lowest total cost.</p>
-
-            <pre><code>EXPLAIN SELECT * FROM users WHERE id = 1;</code></pre>
-
-            <p>More text...</p>
+    <main class="container" id="main-content" style="min-height: 60vh;">
+        <!-- Dynamic content will be injected here -->
+        <div style="text-align: center; padding-top: 100px; color: var(--text-muted);">
+            Loading...
         </div>
     </main>
 
@@ -75,5 +35,65 @@
         <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved.</p>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const params = new URLSearchParams(window.location.search);
+            const slug = params.get('slug');
+            const mainContent = document.getElementById('main-content');
+
+            if (!slug) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            try {
+                const response = await fetch(`articles/${slug}.md`);
+
+                if (!response.ok) {
+                    throw new Error(`Article not found: ${response.status}`);
+                }
+
+                const markdown = await response.text();
+
+                // Parse markdown using marked.js
+                // We split the content to extract frontmatter-like metadata manually if needed,
+                // but for now we assume the first H1 is the title and use a standard layout.
+
+                const htmlContent = marked.parse(markdown);
+
+                // Simple extraction of Title for the <title> tag
+                const titleMatch = markdown.match(/^#\s+(.+)$/m);
+                const title = titleMatch ? titleMatch[1] : 'Article';
+                document.title = `${title} | Suchindra Koushik`;
+
+                // Render structure
+                // We wrap the content in the expected DOM structure
+                mainContent.innerHTML = `
+                    <article class="hero" style="padding-bottom: var(--space-md); max-width: 800px; margin: 0 auto;">
+                        <a href="index.html" style="font-size: 0.875rem; color: var(--text-muted); text-decoration: none; display: inline-block; margin-bottom: var(--space-sm);">&larr; Back to Writing</a>
+                        <div class="hero-meta" style="margin-top: 0; margin-bottom: var(--space-sm);">
+                            Technical Article
+                        </div>
+                         <!-- Title is usually in the markdown, but we can make it cleaner by hiding the first h1 from content if we wanted to render it separately.
+                              For simplicity, we let marked render the h1 and we style it. -->
+                    </article>
+
+                    <div class="post-content">
+                        ${htmlContent}
+                    </div>
+                `;
+
+            } catch (error) {
+                console.error(error);
+                mainContent.innerHTML = `
+                    <div style="text-align: center; padding-top: 50px;">
+                        <h1>404</h1>
+                        <p>Article not found.</p>
+                        <a href="index.html">Go back to Writing</a>
+                    </div>
+                `;
+            }
+        });
+    </script>
 </body>
 </html>
