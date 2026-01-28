@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume | Suchindra Koushik</title>
+    <meta name="description" content="Resume of M S Suchindra Datta Koushik, Software Engineer - Data and Backend.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="assets/js/theme.js"></script>
+    <style>
+        .resume-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-lg);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: var(--space-md);
+        }
+        .resume-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-xs);
+        }
+        .resume-role {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-sm);
+        }
+        .resume-contact {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+        }
+        .resume-section {
+            margin-bottom: var(--space-xl);
+        }
+        .resume-section h2 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: var(--space-md);
+            border-bottom: 1px solid var(--border-color); /* Optional separator */
+            padding-bottom: var(--space-xs);
+            display: inline-block;
+        }
+        .experience-item {
+            margin-bottom: var(--space-lg);
+        }
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-xs);
+            align-items: baseline;
+        }
+        .experience-header h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+        .company {
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        .date {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        .experience-details {
+            list-style-type: disc;
+            padding-left: var(--space-md);
+            color: var(--text-primary);
+        }
+        .experience-details li {
+            margin-bottom: 0.5rem;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+        .skill-category {
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        .skill-list {
+            color: var(--text-primary);
+        }
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            background: var(--text-primary);
+            color: var(--bg-body);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.2s ease;
+        }
+        .btn-download:hover {
+            opacity: 0.9;
+        }
+        @media (max-width: 768px) {
+            .resume-header {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+            .experience-header {
+                flex-direction: column;
+                gap: 0;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-xs);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <a href="/" class="logo">Suchindra Koushik</a>
+            <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">☰</button>
+            <nav class="nav-links">
+                <a href="/">Home</a>
+                <a href="blog/index.html">Writing</a>
+                <a href="projects.html">Projects</a>
+                <a href="about.html">About</a>
+                <a href="resume.html" class="active">Resume</a>
+                <button id="theme-toggle" aria-label="Toggle theme">☀️</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding-top: var(--space-xl);">
+
+        <div class="resume-header">
+            <div>
+                <h1>Suchindra Koushik</h1>
+                <div class="resume-role">Software Engineer - Data and Backend</div>
+                <div class="resume-contact">
+                    <span>contact@example.com</span>
+                    <span>•</span>
+                    <a href="https://linkedin.com/in/suchindrakoushik" target="_blank" style="color: inherit;">LinkedIn</a>
+                    <span>•</span>
+                    <a href="https://github.com/dattskoushik" target="_blank" style="color: inherit;">GitHub</a>
+                </div>
+            </div>
+            <div>
+                <a href="assets/resume/resume_.pdf" class="btn-download" target="_blank">
+                    Download PDF <span>↓</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h2>Experience</h2>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <h3>Software Engineer <span class="company">at Clarivate</span></h3>
+                    <span class="date">2021 — Present</span>
+                </div>
+                <ul class="experience-details">
+                    <li>Architected and maintained high-throughput data pipelines using Python and Spark, processing terabytes of data daily.</li>
+                    <li>Improved system reliability by implementing robust error handling and idempotent retry mechanisms.</li>
+                    <li>Collaborated with cross-functional teams to define data schemas and API contracts for backend services.</li>
+                    <li>Optimized SQL queries and database schemas, reducing query latency by 40%.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <h3>Software Engineer <span class="company">at Dell Technologies</span></h3>
+                    <span class="date">2018 — 2021</span>
+                </div>
+                <ul class="experience-details">
+                    <li>Developed backend microservices for enterprise storage management solutions.</li>
+                    <li>Automated deployment workflows using Jenkins and Docker, reducing release time by 50%.</li>
+                    <li>Conducted performance analysis and tuning for distributed systems components.</li>
+                    <li>Mentored junior engineers and led code reviews to ensure code quality and best practices.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h2>Skills</h2>
+
+            <div class="skills-grid">
+                <div class="skill-category">Languages</div>
+                <div class="skill-list">Python, SQL, Go, Java, Bash</div>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-category">Data & Storage</div>
+                <div class="skill-list">PostgreSQL, Apache Spark, Kafka, Redis, Elasticsearch</div>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-category">Infrastructure</div>
+                <div class="skill-list">Docker, Kubernetes, AWS, Terraform, CI/CD (GitHub Actions, Jenkins)</div>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-category">Concepts</div>
+                <div class="skill-list">Distributed Systems, Data Modeling, API Design, Performance Tuning</div>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h2>Education</h2>
+            <div class="experience-item">
+                <div class="experience-header">
+                    <h3>Bachelor of Engineering in Computer Science</h3>
+                    <span class="date">2014 — 2018</span>
+                </div>
+                <div class="company">University Name (Placeholder)</div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="site-footer container">
+        <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

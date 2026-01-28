@@ -1,4 +1,4 @@
-// Theme Toggle Logic
+// Theme Toggle Logic & Mobile Menu
 // Uses localStorage to persist preference
 // Defaults to 'dark'
 
@@ -27,14 +27,27 @@
         setTheme(next);
     };
 
-    // Add button logic when DOM is ready
+    // DOM Ready
     document.addEventListener('DOMContentLoaded', () => {
-        const btn = document.getElementById('theme-toggle');
-        if (btn) {
-            btn.onclick = window.toggleTheme;
-            // Set initial icon state
+        // Theme Toggle
+        const themeBtn = document.getElementById('theme-toggle');
+        if (themeBtn) {
+            themeBtn.onclick = window.toggleTheme;
             const current = document.documentElement.getAttribute('data-theme');
-            btn.textContent = current === 'dark' ? '☀️' : '🌙';
+            themeBtn.textContent = current === 'dark' ? '☀️' : '🌙';
+        }
+
+        // Mobile Menu
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (menuBtn && navLinks) {
+            menuBtn.addEventListener('click', () => {
+                const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+                menuBtn.setAttribute('aria-expanded', !isExpanded);
+                navLinks.classList.toggle('active');
+                menuBtn.textContent = isExpanded ? '☰' : '✕';
+            });
         }
     });
 })();

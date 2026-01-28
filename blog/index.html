@@ -16,10 +16,13 @@
     <header class="site-header">
         <div class="container">
             <a href="../" class="logo">Suchindra Koushik</a>
+            <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">☰</button>
             <nav class="nav-links">
                 <a href="../">Home</a>
                 <a href="index.html" class="active">Writing</a>
+                <a href="../projects.html">Projects</a>
                 <a href="../about.html">About</a>
+                <a href="../resume.html">Resume</a>
                 <button id="theme-toggle" aria-label="Toggle theme">☀️</button>
             </nav>
         </div>
@@ -31,31 +34,37 @@
             Thoughts on backend architecture, data reliability, and engineering practices.
         </p>
 
-        <div class="card-grid" style="grid-template-columns: 1fr; max-width: 800px;">
+        <!-- Search Bar -->
+        <div style="margin-bottom: var(--space-lg); max-width: 800px;">
+            <input type="text" id="search-input" placeholder="Search articles..."
+                style="width: 100%; padding: var(--space-sm); border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-primary); font-family: var(--font-sans); font-size: 1rem;">
+        </div>
 
-            <article class="card" style="flex-direction: row; align-items: center; border: none; background: transparent; padding: var(--space-md) 0; border-bottom: 1px solid var(--border-color); border-radius: 0;">
-                <div style="flex: 1;">
-                    <div class="card-meta">Data Engineering • <time>Oct 2023</time></div>
-                    <h3><a href="postgres-query-planning.html">How PostgreSQL Query Planning Actually Works</a></h3>
-                    <p class="card-excerpt">Understanding the optimizer is the first step to writing high-performance SQL. A deep dive into cost models and access methods.</p>
-                </div>
-            </article>
+        <div id="articles-list" class="card-grid" style="grid-template-columns: 1fr; max-width: 800px;">
 
-            <article class="card" style="flex-direction: row; align-items: center; border: none; background: transparent; padding: var(--space-md) 0; border-bottom: 1px solid var(--border-color); border-radius: 0;">
-                <div style="flex: 1;">
-                    <div class="card-meta">Architecture • <time>Sep 2023</time></div>
-                    <h3><a href="batch-data-pipelines.html">Designing Reliable Batch Data Pipelines</a></h3>
-                    <p class="card-excerpt">Why "retry until success" isn't a strategy. Patterns for building robust ETL systems including Idempotency and DLQs.</p>
-                </div>
-            </article>
+        <article class="card" style="flex-direction: row; align-items: center; border: none; background: transparent; padding: var(--space-md) 0; border-bottom: 1px solid var(--border-color); border-radius: 0;">
+            <div style="flex: 1;">
+                <div class="card-meta">Python • <time>August 2023</time></div>
+                <h3><a href="python-performance.html">Python Performance: Where It Breaks and Why</a></h3>
+                <p class="card-excerpt">"Python is slow." It's the most common criticism of the language. And generally, it's true. Python is an interpreted, dynamically typed language with a massi...</p>
+            </div>
+        </article>
 
-            <article class="card" style="flex-direction: row; align-items: center; border: none; background: transparent; padding: var(--space-md) 0; border-bottom: 1px solid var(--border-color); border-radius: 0;">
-                <div style="flex: 1;">
-                    <div class="card-meta">Python • <time>Aug 2023</time></div>
-                    <h3><a href="python-performance.html">Python Performance: Where It Breaks and Why</a></h3>
-                    <p class="card-excerpt">Examining the GIL, memory management, and when to drop to C. Real-world optimization strategies.</p>
-                </div>
-            </article>
+        <article class="card" style="flex-direction: row; align-items: center; border: none; background: transparent; padding: var(--space-md) 0; border-bottom: 1px solid var(--border-color); border-radius: 0;">
+            <div style="flex: 1;">
+                <div class="card-meta">Architecture • <time>September 2023</time></div>
+                <h3><a href="batch-data-pipelines.html">Designing Reliable Batch Data Pipelines</a></h3>
+                <p class="card-excerpt">Building a script to move data from A to B is easy. Building a system that moves data from A to B *reliably*, at scale, while handling network failures, bad ...</p>
+            </div>
+        </article>
+
+        <article class="card" style="flex-direction: row; align-items: center; border: none; background: transparent; padding: var(--space-md) 0; border-bottom: 1px solid var(--border-color); border-radius: 0;">
+            <div style="flex: 1;">
+                <div class="card-meta">Data Engineering • <time>October 2023</time></div>
+                <h3><a href="postgres-query-planning.html">How PostgreSQL Query Planning Actually Works</a></h3>
+                <p class="card-excerpt">If you have ever stared at a slow query, ran `EXPLAIN`, and nodded pretending to understand why Postgres chose a Sequential Scan over your perfectly good Ind...</p>
+            </div>
+        </article>
 
         </div>
     </main>
@@ -64,5 +73,47 @@
         <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved.</p>
     </footer>
 
+    <script>
+        // Simple client-side search
+        let articles = [];
+
+        fetch('search.json')
+            .then(response => response.json())
+            .then(data => {
+                articles = data;
+                // Normalize data for client-side use
+                articles.forEach(a => {
+                    a.searchStr = (a.title + " " + a.tags + " " + a.summary).toLowerCase();
+                });
+            })
+            .catch(err => console.error("Could not load search index", err));
+
+        const searchInput = document.getElementById('search-input');
+        const list = document.getElementById('articles-list');
+
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                const filtered = articles.filter(a => a.searchStr.includes(term));
+                render(filtered);
+            });
+        }
+
+        function render(items) {
+            if (items.length === 0) {
+                list.innerHTML = '<p style="color: var(--text-secondary);">No articles found.</p>';
+                return;
+            }
+            list.innerHTML = items.map(item => `
+                <article class="card" style="flex-direction: row; align-items: center; border: none; background: transparent; padding: var(--space-md) 0; border-bottom: 1px solid var(--border-color); border-radius: 0;">
+                    <div style="flex: 1;">
+                        <div class="card-meta">${item.tags} • <time>${item.date}</time></div>
+                        <h3><a href="${item.url}">${item.title}</a></h3>
+                        <p class="card-excerpt">${item.summary}</p>
+                    </div>
+                </article>
+            `).join('');
+        }
+    </script>
 </body>
 </html>

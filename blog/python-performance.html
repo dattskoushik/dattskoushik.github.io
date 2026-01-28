@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Python Performance: Where It Breaks and Why | Suchindra Koushik</title>
-    <meta name="description" content="Technical article by Suchindra Koushik.">
+    <meta name="description" content=""Python is slow." It's the most common criticism of the language. And generally, it's true. Python is an interpreted, dynamically typed language with a massi...">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
     <script src="../assets/js/theme.js"></script>
 </head>
 <body>
@@ -16,10 +17,13 @@
     <header class="site-header">
         <div class="container">
             <a href="../" class="logo">Suchindra Koushik</a>
+            <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">☰</button>
             <nav class="nav-links">
                 <a href="../">Home</a>
                 <a href="index.html" class="active">Writing</a>
+                <a href="../projects.html">Projects</a>
                 <a href="../about.html">About</a>
+                <a href="../resume.html">Resume</a>
                 <button id="theme-toggle" aria-label="Toggle theme">☀️</button>
             </nav>
         </div>
@@ -29,16 +33,13 @@
         <article class="hero" style="padding-bottom: var(--space-md); max-width: 800px; margin: 0 auto;">
             <a href="index.html" style="font-size: 0.875rem; color: var(--text-muted); text-decoration: none; display: inline-block; margin-bottom: var(--space-sm);">&larr; Back to Writing</a>
             <div class="hero-meta" style="margin-top: 0; margin-bottom: var(--space-sm);">
-                Technical Article
+                Python • August 2023
             </div>
+            <h1 style="margin-bottom: var(--space-md);">Python Performance: Where It Breaks and Why</h1>
         </article>
 
         <div class="post-content">
-            <h1>Python Performance: Where It Breaks and Why</h1>
-<p><strong>Date:</strong> August 2023<br />
-<strong>Category:</strong> Python</p>
-<hr />
-<p>"Python is slow." It's the most common criticism of the language. And generally, it's true. Python is an interpreted, dynamically typed language with a massive runtime overhead.</p>
+            <p>"Python is slow." It's the most common criticism of the language. And generally, it's true. Python is an interpreted, dynamically typed language with a massive runtime overhead.</p>
 <p>However, "slow" is relative. For most web services and data pipelines, Python is <em>fast enough</em>, provided you don't fight the language.</p>
 <p>The problem arises when we treat Python like C or Java. We write heavy loops, ignore memory allocation, and then wonder why our throughput is low. In this article, we'll dive into the internals of Python performance, the infamous GIL, and how to optimize when it actually matters.</p>
 <h2>1. The Global Interpreter Lock (GIL)</h2>
@@ -146,5 +147,12 @@ def serialize(data):
     <footer class="site-footer container">
         <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved.</p>
     </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"></script>
 </body>
 </html>
