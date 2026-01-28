@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Designing Reliable Batch Data Pipelines | Suchindra Koushik</title>
-    <meta name="description" content="Technical article by Suchindra Koushik.">
+    <meta name="description" content="Building a script to move data from A to B is easy. Building a system that moves data from A to B *reliably*, at scale, while handling network failures, bad ...">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
     <script src="../assets/js/theme.js"></script>
 </head>
 <body>
@@ -16,10 +17,13 @@
     <header class="site-header">
         <div class="container">
             <a href="../" class="logo">Suchindra Koushik</a>
+            <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">☰</button>
             <nav class="nav-links">
                 <a href="../">Home</a>
                 <a href="index.html" class="active">Writing</a>
+                <a href="../projects.html">Projects</a>
                 <a href="../about.html">About</a>
+                <a href="../resume.html">Resume</a>
                 <button id="theme-toggle" aria-label="Toggle theme">☀️</button>
             </nav>
         </div>
@@ -29,16 +33,13 @@
         <article class="hero" style="padding-bottom: var(--space-md); max-width: 800px; margin: 0 auto;">
             <a href="index.html" style="font-size: 0.875rem; color: var(--text-muted); text-decoration: none; display: inline-block; margin-bottom: var(--space-sm);">&larr; Back to Writing</a>
             <div class="hero-meta" style="margin-top: 0; margin-bottom: var(--space-sm);">
-                Technical Article
+                Architecture • September 2023
             </div>
+            <h1 style="margin-bottom: var(--space-md);">Designing Reliable Batch Data Pipelines</h1>
         </article>
 
         <div class="post-content">
-            <h1>Designing Reliable Batch Data Pipelines</h1>
-<p><strong>Date:</strong> September 2023<br />
-<strong>Category:</strong> Architecture</p>
-<hr />
-<p>Building a script to move data from A to B is easy. Building a system that moves data from A to B <em>reliably</em>, at scale, while handling network failures, bad data, and restarts without corruption? That is engineering.</p>
+            <p>Building a script to move data from A to B is easy. Building a system that moves data from A to B <em>reliably</em>, at scale, while handling network failures, bad data, and restarts without corruption? That is engineering.</p>
 <p>In the world of batch processing (ETL), "Reliability" usually boils down to two properties: <strong>Resilience</strong> (not crashing when things go wrong) and <strong>Correctness</strong> (not duplicating or losing data when things go wrong).</p>
 <p>This article explores the patterns required to sleep well at night while your pipelines run.</p>
 <h2>The Fallacy of "Retry Loop"</h2>
@@ -65,7 +66,7 @@ DO UPDATE SET value = EXCLUDED.value;
 <p>This "Upsert" ensures that if we re-run the job for '2023-10-27', we verify the state rather than blindly appending.</p>
 <h3>File Level Idempotency</h3>
 <p>When writing to object storage (S3), we cannot "update" files. We must rely on deterministic naming.</p>
-<p><strong>Bad:</strong> <code>s3://bucket/data/upload_timestamp.json</code> (Non-deterministic)<br />
+<p><strong>Bad:</strong> <code>s3://bucket/data/upload_timestamp.json</code> (Non-deterministic)
 <strong>Good:</strong> <code>s3://bucket/data/partition_date/batch_id.json</code> (Deterministic)</p>
 <h2>2. Checkpointing and State Management</h2>
 <p>For long-running batch jobs (e.g., processing a huge log file), you cannot afford to restart from line 1 if it fails at line 999,999. You need <strong>Checkpointing</strong>.</p>
@@ -156,5 +157,12 @@ def calculate_daily_revenue(target_date: date):
     <footer class="site-footer container">
         <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved.</p>
     </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"></script>
 </body>
 </html>

@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How PostgreSQL Query Planning Actually Works | Suchindra Koushik</title>
-    <meta name="description" content="Technical article by Suchindra Koushik.">
+    <meta name="description" content="If you have ever stared at a slow query, ran `EXPLAIN`, and nodded pretending to understand why Postgres chose a Sequential Scan over your perfectly good Ind...">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
     <script src="../assets/js/theme.js"></script>
 </head>
 <body>
@@ -16,10 +17,13 @@
     <header class="site-header">
         <div class="container">
             <a href="../" class="logo">Suchindra Koushik</a>
+            <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">☰</button>
             <nav class="nav-links">
                 <a href="../">Home</a>
                 <a href="index.html" class="active">Writing</a>
+                <a href="../projects.html">Projects</a>
                 <a href="../about.html">About</a>
+                <a href="../resume.html">Resume</a>
                 <button id="theme-toggle" aria-label="Toggle theme">☀️</button>
             </nav>
         </div>
@@ -29,16 +33,13 @@
         <article class="hero" style="padding-bottom: var(--space-md); max-width: 800px; margin: 0 auto;">
             <a href="index.html" style="font-size: 0.875rem; color: var(--text-muted); text-decoration: none; display: inline-block; margin-bottom: var(--space-sm);">&larr; Back to Writing</a>
             <div class="hero-meta" style="margin-top: 0; margin-bottom: var(--space-sm);">
-                Technical Article
+                Data Engineering • October 2023
             </div>
+            <h1 style="margin-bottom: var(--space-md);">How PostgreSQL Query Planning Actually Works</h1>
         </article>
 
         <div class="post-content">
-            <h1>How PostgreSQL Query Planning Actually Works</h1>
-<p><strong>Date:</strong> October 2023<br />
-<strong>Category:</strong> Data Engineering</p>
-<hr />
-<p>If you have ever stared at a slow query, ran <code>EXPLAIN</code>, and nodded pretending to understand why Postgres chose a Sequential Scan over your perfectly good Index, this article is for you.</p>
+            <p>If you have ever stared at a slow query, ran <code>EXPLAIN</code>, and nodded pretending to understand why Postgres chose a Sequential Scan over your perfectly good Index, this article is for you.</p>
 <p>Understanding the query optimizer is the single most important skill for high-performance database engineering. It is not magic; it is a cost-based algorithm that makes statistically driven decisions. When it fails, it usually isn't because the optimizer is "dumb", but because its cost model or statistics do not align with reality.</p>
 <p>In this deep dive, we will walk through the internal machinery of the Postgres planner, dissect the cost model, and analyze real execution plans.</p>
 <h2>The Life of a Query</h2>
@@ -195,5 +196,12 @@ Postgres maintains a histogram and most common values (MCV) list for every colum
     <footer class="site-footer container">
         <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved.</p>
     </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"></script>
 </body>
 </html>

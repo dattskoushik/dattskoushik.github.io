@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Suchindra Koushik</title>
+    <meta name="description" content="Software projects and open source contributions by Suchindra Koushik.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="assets/js/theme.js"></script>
+    <style>
+        .project-links {
+            margin-top: auto;
+            display: flex;
+            gap: var(--space-md);
+            font-size: 0.875rem;
+        }
+        .project-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .project-links a:hover {
+            border-bottom-color: var(--text-primary);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <a href="/" class="logo">Suchindra Koushik</a>
+            <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">☰</button>
+            <nav class="nav-links">
+                <a href="/">Home</a>
+                <a href="blog/index.html">Writing</a>
+                <a href="projects.html" class="active">Projects</a>
+                <a href="about.html">About</a>
+                <a href="resume.html">Resume</a>
+                <button id="theme-toggle" aria-label="Toggle theme">☀️</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding-top: var(--space-xl);">
+        <h1>Projects</h1>
+        <p class="hero-subtitle" style="margin-bottom: var(--space-xl);">
+            Open source tools, system experiments, and other things I've built.
+        </p>
+
+        <div class="card-grid">
+
+            <!-- Project 1 -->
+            <article class="card">
+                <div class="card-meta">Go • Distributed Systems</div>
+                <h3>Distributed KV Store</h3>
+                <p class="card-excerpt">
+                    A distributed key-value store implementing Raft for consensus. Features strong consistency, leader election, and log replication.
+                </p>
+                <div class="project-links">
+                    <a href="https://github.com/dattskoushik" target="_blank">View Code &rarr;</a>
+                </div>
+            </article>
+
+            <!-- Project 2 -->
+            <article class="card">
+                <div class="card-meta">Python • Data Engineering</div>
+                <h3>TinyETL</h3>
+                <p class="card-excerpt">
+                    A lightweight, configuration-driven ETL framework for small to medium scale data pipelines. Supports idempotent retries and pluggable backends.
+                </p>
+                <div class="project-links">
+                    <a href="https://github.com/dattskoushik" target="_blank">View Code &rarr;</a>
+                </div>
+            </article>
+
+            <!-- Project 3 -->
+            <article class="card">
+                <div class="card-meta">Rust • CLI</div>
+                <h3>LogParser CLI</h3>
+                <p class="card-excerpt">
+                    A blazing fast log analysis tool written in Rust. Parses gigabytes of logs in seconds and supports SQL-like querying capabilities.
+                </p>
+                <div class="project-links">
+                    <a href="https://github.com/dattskoushik" target="_blank">View Code &rarr;</a>
+                </div>
+            </article>
+
+            <!-- Project 4 -->
+            <article class="card">
+                <div class="card-meta">PostgreSQL • Performance</div>
+                <h3>PG-Stats-Monitor</h3>
+                <p class="card-excerpt">
+                    A dashboard for visualizing PostgreSQL internal statistics, lock contention, and query performance metrics in real-time.
+                </p>
+                <div class="project-links">
+                    <a href="https://github.com/dattskoushik" target="_blank">View Code &rarr;</a>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="site-footer container">
+        <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
