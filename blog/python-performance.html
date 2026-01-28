@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Performance: Where It Breaks and Why | Suchindra Koushik</title>
+    <meta name="description" content="Technical article by Suchindra Koushik.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../assets/js/theme.js"></script>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <a href="../" class="logo">Suchindra Koushik</a>
+            <nav class="nav-links">
+                <a href="../">Home</a>
+                <a href="index.html" class="active">Writing</a>
+                <a href="../about.html">About</a>
+                <button id="theme-toggle" aria-label="Toggle theme">☀️</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <article class="hero" style="padding-bottom: var(--space-md); max-width: 800px; margin: 0 auto;">
+            <a href="index.html" style="font-size: 0.875rem; color: var(--text-muted); text-decoration: none; display: inline-block; margin-bottom: var(--space-sm);">&larr; Back to Writing</a>
+            <div class="hero-meta" style="margin-top: 0; margin-bottom: var(--space-sm);">
+                Technical Article
+            </div>
+        </article>
+
+        <div class="post-content">
+            <h1>Python Performance: Where It Breaks and Why</h1>
+<p><strong>Date:</strong> August 2023<br />
+<strong>Category:</strong> Python</p>
+<hr />
+<p>"Python is slow." It's the most common criticism of the language. And generally, it's true. Python is an interpreted, dynamically typed language with a massive runtime overhead.</p>
+<p>However, "slow" is relative. For most web services and data pipelines, Python is <em>fast enough</em>, provided you don't fight the language.</p>
+<p>The problem arises when we treat Python like C or Java. We write heavy loops, ignore memory allocation, and then wonder why our throughput is low. In this article, we'll dive into the internals of Python performance, the infamous GIL, and how to optimize when it actually matters.</p>
+<h2>1. The Global Interpreter Lock (GIL)</h2>
+<p>You cannot talk about Python performance without addressing the Elephant in the room: the <strong>GIL</strong>.</p>
+<p>The GIL is a mutex that protects access to Python objects, preventing multiple threads from executing Python bytecodes at once. This means that even on a 64-core machine, a multi-threaded Python program is effectively <strong>single-core</strong> for CPU-bound tasks.</p>
+<h3>When it hurts</h3>
+<ul>
+<li>Image processing</li>
+<li>Mathematical heavy lifting (without NumPy)</li>
+<li>Complex serialization/deserialization loops</li>
+</ul>
+<h3>When it doesn't matter</h3>
+<ul>
+<li><strong>I/O Bound tasks:</strong> Network requests, Database queries, Disk I/O.<ul>
+<li>The GIL is <em>released</em> while waiting for I/O.</li>
+<li>This is why frameworks like FastAPI or Django can handle thousands of concurrent requests—they are mostly waiting on the DB.</li>
+</ul>
+</li>
+</ul>
+<h3>The Solution: Multiprocessing</h3>
+<p>If you are CPU bound, threads won't help. You need processes.</p>
+<pre><code class="language-python">from multiprocessing import Pool
+
+def heavy_computation(x):
+    return x * x  # Imagine complex math
+
+# Spawns separate processes, each with its own Python interpreter and GIL
+with Pool(processes=4) as pool:
+    results = pool.map(heavy_computation, range(1000000))
+</code></pre>
+<p>The trade-off is memory (each process loads the interpreter) and IPC (Inter-Process Communication) overhead.</p>
+<h2>2. Profiling: Don't Guess, Measure</h2>
+<p>Optimization without measurement is wasted effort. Before rewriting code, find the bottleneck.</p>
+<h3><code>cProfile</code></h3>
+<p>Python's built-in deterministic profiler. Good for function-call statistics.</p>
+<pre><code class="language-bash">python -m cProfile -s tottime myscript.py
+</code></pre>
+<h3><code>py-spy</code></h3>
+<p>A sampling profiler that runs <em>outside</em> your process. It has zero overhead and can profile running production services.</p>
+<pre><code class="language-bash">py-spy top --pid 12345
+</code></pre>
+<p>This generates a "top"-like view of which functions are consuming CPU.</p>
+<h2>3. Memory Optimization: <code>__slots__</code></h2>
+<p>Python objects are heavy. A simple class instance uses a <code>dict</code> to store attributes. This allows dynamic attribute addition but consumes significant RAM.</p>
+<p>If you are creating millions of small objects (e.g., ORM rows, graph nodes), this overhead adds up.</p>
+<p><strong>Enter <code>__slots__</code>.</strong></p>
+<pre><code class="language-python">class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+class PointSlots:
+    __slots__ = ['x', 'y']
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+</code></pre>
+<ul>
+<li><strong>Standard Class:</strong> ~152 bytes per instance.</li>
+<li><strong>Slotted Class:</strong> ~48 bytes per instance.</li>
+</ul>
+<p>For a cache of 10 million objects, that's the difference between 1.5GB and 500MB of RAM.</p>
+<h2>4. Algorithmic Complexity &gt; Constant Factors</h2>
+<p>No amount of Cython or optimizations will fix an O(N^2) algorithm.</p>
+<p>I recently reviewed a service that was timing out. It was doing a "contains" check on a list inside a loop.</p>
+<pre><code class="language-python"># O(N * M)
+users = [...] # List of 10k users
+blocked = [...] # List of 5k IDs
+
+for user in users:
+    if user.id in blocked:  # O(M) scan every time!
+        continue
+</code></pre>
+<p>Changing <code>blocked</code> to a <code>set</code> reduced the complexity to O(N).</p>
+<pre><code class="language-python"># O(N)
+blocked_set = set(blocked)  # O(M) one time cost
+for user in users:
+    if user.id in blocked_set: # O(1) lookup
+        continue
+</code></pre>
+<p>The runtime dropped from 30 seconds to 15 milliseconds. <strong>Data structures matter more than language speed.</strong></p>
+<h2>5. Dropping to C (when necessary)</h2>
+<p>Sometimes, Python is just too slow. If you are doing heavy number crunching, you delegate to C. This is what libraries like <strong>NumPy</strong> and <strong>Pandas</strong> do.</p>
+<p>If you need custom high-performance logic, you can write C extensions or use <strong>Rust</strong> (via PyO3).</p>
+<h3>Example: API Optimization</h3>
+<p>In a recent project (see <code>code_python/api-optimization</code>), we optimized a slow endpoint. The bottleneck wasn't the DB, but the JSON serialization of 50MB of data.</p>
+<p>Switching from the standard <code>json</code> library to <code>orjson</code> (written in Rust) gave a 10x speedup.</p>
+<pre><code class="language-python">import orjson
+
+def serialize(data):
+    # Returns bytes, extremely fast
+    return orjson.dumps(data)
+</code></pre>
+<h2>Conclusion</h2>
+<p>Python's performance limitations are real, but manageable.
+1.  Understand the I/O vs CPU bound distinction.
+2.  Use Sets and Maps (Dictionaries) effectively.
+3.  Profile before you optimize.
+4.  Use <code>__slots__</code> for memory density.
+5.  Leverage C/Rust extensions (like <code>orjson</code> or <code>pydantic-core</code>) for the heavy lifting.</p>
+<p>Write clear, correct Python first. Optimize only the 5% of code that runs 95% of the time.</p>
+        </div>
+    </main>
+
+    <footer class="site-footer container">
+        <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved.</p>
+    </footer>
+</body>
+</html>
