@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div style="padding-top: var(--space-xl);">
+        <h1>Writing</h1>
+        <p class="hero-subtitle" style="margin-bottom: var(--space-xl);">
+            Thoughts on backend architecture, data reliability, and engineering practices.
+        </p>
+
+        <!-- Search Bar -->
+        <div style="margin-bottom: var(--space-lg); max-width: 800px;">
+            <input type="text" id="search-input" placeholder="Search articles..."
+                style="width: 100%; padding: var(--space-sm); border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-primary); font-family: var(--font-sans); font-size: 1rem;">
+        </div>
+
+        <div id="articles-list" class="card-grid" style="grid-template-columns: 1fr; max-width: 800px;">
+            {% for article in articles %}
+            <article class="card" style="flex-direction: row; align-items: center; border: none; background: transparent; padding: var(--space-md) 0; border-bottom: 1px solid var(--border-color); border-radius: 0;">
+                <div style="flex: 1;">
+                    <div class="card-meta">{{ article.category }} • <time>{{ article.date }}</time> • {{ article.readTime }}</div>
+                    <h3><a href="{{ article.slug }}.html">{{ article.title }}</a></h3>
+                    <p class="card-excerpt">{{ article.excerpt }}</p>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer_scripts %}
+    <script>
+        // Simple client-side search
+        let articles = [];
+
+        fetch('search.json')
+            .then(response => response.json())
+            .then(data => {
+                articles = data;
+                articles.forEach(a => {
+                    a.searchStr = (a.title + " " + a.tags.join(" ") + " " + a.summary).toLowerCase();
+                });
+            })
+            .catch(err => console.error("Could not load search index", err));
+
+        const searchInput = document.getElementById('search-input');
+        const list = document.getElementById('articles-list');
+
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                const filtered = term ? articles.filter(a => a.searchStr.includes(term)) : articles;
+                render(filtered);
+            });
+        }
+
+        function render(items) {
+            if (items.length === 0) {
+                list.innerHTML = '<p style="color: var(--text-secondary);">No articles found.</p>';
+                return;
+            }
+            list.innerHTML = items.map(item => `
+                <article class="card" style="flex-direction: row; align-items: center; border: none; background: transparent; padding: var(--space-md) 0; border-bottom: 1px solid var(--border-color); border-radius: 0;">
+                    <div style="flex: 1;">
+                        <div class="card-meta">${item.category} • <time>${item.date}</time> • ${item.readTime}</div>
+                        <h3><a href="${item.url}">${item.title}</a></h3>
+                        <p class="card-excerpt">${item.summary}</p>
+                    </div>
+                </article>
+            `).join('');
+        }
+    </script>
+{% endblock %}

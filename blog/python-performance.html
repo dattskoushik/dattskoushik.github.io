@@ -3,43 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Python Performance: Where It Breaks and Why | Suchindra Koushik</title>
-    <meta name="description" content=""Python is slow." It's the most common criticism of the language. And generally, it's true. Python is an interpreted, dynamically typed language with a massi...">
+    <title>Python Performance Optimization Patterns | Suchindra Koushik</title>
+    <meta name="description" content="Practical techniques for making Python applications faster without premature optimization.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
     <script src="../assets/js/theme.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+
 </head>
 <body>
 
     <header class="site-header">
         <div class="container">
-            <a href="../" class="logo">Suchindra Koushik</a>
-            <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">☰</button>
+            <a href="../index.html" class="logo">Suchindra Koushik</a>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">☰</button>
             <nav class="nav-links">
-                <a href="../">Home</a>
-                <a href="index.html" class="active">Writing</a>
-                <a href="../projects.html">Projects</a>
-                <a href="../about.html">About</a>
-                <a href="../resume.html">Resume</a>
-                <button id="theme-toggle" aria-label="Toggle theme">☀️</button>
+                <a href="../index.html" class="">Home</a>
+                <a href="../blog/index.html" class="active">Writing</a>
+                <a href="../projects.html" class="">Projects</a>
+                <a href="../about.html" class="">About</a>
+                <a href="../resume.html" class="">Resume</a>
+                <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
             </nav>
         </div>
     </header>
 
-    <main class="container">
-        <article class="hero" style="padding-bottom: var(--space-md); max-width: 800px; margin: 0 auto;">
-            <a href="index.html" style="font-size: 0.875rem; color: var(--text-muted); text-decoration: none; display: inline-block; margin-bottom: var(--space-sm);">&larr; Back to Writing</a>
-            <div class="hero-meta" style="margin-top: 0; margin-bottom: var(--space-sm);">
-                Python • August 2023
-            </div>
-            <h1 style="margin-bottom: var(--space-md);">Python Performance: Where It Breaks and Why</h1>
-        </article>
+    <main class="container" >
 
-        <div class="post-content">
-            <p>"Python is slow." It's the most common criticism of the language. And generally, it's true. Python is an interpreted, dynamically typed language with a massive runtime overhead.</p>
+    <article class="hero" style="padding-bottom: var(--space-md); max-width: 800px; margin: 0 auto;">
+        <a href="index.html" style="font-size: 0.875rem; color: var(--text-muted); text-decoration: none; display: inline-block; margin-bottom: var(--space-sm);">&larr; Back to Writing</a>
+        <div class="hero-meta" style="margin-top: 0; margin-bottom: var(--space-sm);">
+            Backend Engineering • 2024-03-05 • 10 min
+        </div>
+        <h1 style="margin-bottom: var(--space-md);">Python Performance Optimization Patterns</h1>
+    </article>
+
+    <div class="post-content">
+        <p>"Python is slow." It's the most common criticism of the language. And generally, it's true. Python is an interpreted, dynamically typed language with a massive runtime overhead.</p>
 <p>However, "slow" is relative. For most web services and data pipelines, Python is <em>fast enough</em>, provided you don't fight the language.</p>
 <p>The problem arises when we treat Python like C or Java. We write heavy loops, ignore memory allocation, and then wonder why our throughput is low. In this article, we'll dive into the internals of Python performance, the infamous GIL, and how to optimize when it actually matters.</p>
 <h2>1. The Global Interpreter Lock (GIL)</h2>
@@ -134,19 +137,26 @@ def serialize(data):
     return orjson.dumps(data)
 </code></pre>
 <h2>Conclusion</h2>
-<p>Python's performance limitations are real, but manageable.
-1.  Understand the I/O vs CPU bound distinction.
-2.  Use Sets and Maps (Dictionaries) effectively.
-3.  Profile before you optimize.
-4.  Use <code>__slots__</code> for memory density.
+<p>Python's performance limitations are real, but manageable.<br />
+1.  Understand the I/O vs CPU bound distinction.<br />
+2.  Use Sets and Maps (Dictionaries) effectively.<br />
+3.  Profile before you optimize.<br />
+4.  Use <code>__slots__</code> for memory density.<br />
 5.  Leverage C/Rust extensions (like <code>orjson</code> or <code>pydantic-core</code>) for the heavy lifting.</p>
 <p>Write clear, correct Python first. Optimize only the 5% of code that runs 95% of the time.</p>
-        </div>
+    </div>
+
     </main>
 
     <footer class="site-footer container">
+        <div class="social-links">
+            <a href="https://github.com/dattskoushik" target="_blank">GitHub</a>
+            <a href="https://linkedin.com/in/suchindrakoushik" target="_blank">LinkedIn</a>
+            <a href="https://instagram.com/dattskoushik" target="_blank">Instagram</a>
+        </div>
         <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved.</p>
     </footer>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
@@ -154,5 +164,6 @@ def serialize(data):
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"></script>
+
 </body>
 </html>

@@ -1,0 +1,7 @@
+127.0.0.1 - - [29/Jan/2026 18:31:52] "GET /about.html HTTP/1.1" 200 -
+127.0.0.1 - - [29/Jan/2026 18:31:53] "GET /css/main.css HTTP/1.1" 200 -
+127.0.0.1 - - [29/Jan/2026 18:31:53] "GET /assets/js/theme.js HTTP/1.1" 200 -
+127.0.0.1 - - [29/Jan/2026 18:31:53] "GET /css/variables.css HTTP/1.1" 200 -
+127.0.0.1 - - [29/Jan/2026 18:31:54] "GET /blog/index.html HTTP/1.1" 200 -
+127.0.0.1 - - [29/Jan/2026 18:31:54] "GET /blog/search.json HTTP/1.1" 200 -
+127.0.0.1 - - [29/Jan/2026 18:31:54] "GET /blog/batch-data-pipelines.html HTTP/1.1" 200 -
