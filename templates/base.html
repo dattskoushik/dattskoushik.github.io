@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>{{ title }} | Suchindra Koushik</title>
+    <meta name="description" content="{{ description }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ root }}/css/main.css">
+    <script src="{{ root }}/assets/js/theme.js"></script>
+    {% block head_extra %}{% endblock %}
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <a href="{{ root }}/index.html" class="logo">Suchindra Koushik</a>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+            <nav class="nav-links">
+                <a href="{{ root }}/index.html" class="{% if active_page == 'home' %}active{% endif %}">Home</a>
+                <a href="{{ root }}/blog/index.html" class="{% if active_page == 'blog' %}active{% endif %}">Writing</a>
+                <a href="{{ root }}/projects.html" class="{% if active_page == 'projects' %}active{% endif %}">Projects</a>
+                <a href="{{ root }}/about.html" class="{% if active_page == 'about' %}active{% endif %}">About</a>
+                <a href="{{ root }}/resume.html" class="{% if active_page == 'resume' %}active{% endif %}">Resume</a>
+                <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" {% if main_style %}style="{{ main_style }}"{% endif %}>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer container">
+        <div class="social-links">
+            <a href="https://github.com/dattskoushik" target="_blank">GitHub</a>
+            <a href="https://linkedin.com/in/suchindrakoushik" target="_blank">LinkedIn</a>
+            <a href="https://instagram.com/dattskoushik" target="_blank">Instagram</a>
+        </div>
+        <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved.</p>
+    </footer>
+
+    {% block footer_scripts %}{% endblock %}
+</body>
+</html>

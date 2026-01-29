@@ -1,1 +1,41 @@
-[{"title": "Python Performance: Where It Breaks and Why", "date": "August 2023", "tags": "Python", "summary": "\"Python is slow.\" It's the most common criticism of the language. And generally, it's true. Python is an interpreted, dynamically typed language with a massi...", "url": "python-performance.html"}, {"title": "Designing Reliable Batch Data Pipelines", "date": "September 2023", "tags": "Architecture", "summary": "Building a script to move data from A to B is easy. Building a system that moves data from A to B *reliably*, at scale, while handling network failures, bad ...", "url": "batch-data-pipelines.html"}, {"title": "How PostgreSQL Query Planning Actually Works", "date": "October 2023", "tags": "Data Engineering", "summary": "If you have ever stared at a slow query, ran `EXPLAIN`, and nodded pretending to understand why Postgres chose a Sequential Scan over your perfectly good Ind...", "url": "postgres-query-planning.html"}]
+[
+  {
+    "title": "Python Performance Optimization Patterns",
+    "date": "2024-03-05",
+    "category": "Backend Engineering",
+    "summary": "Practical techniques for making Python applications faster without premature optimization.",
+    "tags": [
+      "python",
+      "performance",
+      "profiling"
+    ],
+    "readTime": "10 min",
+    "url": "python-performance.html"
+  },
+  {
+    "title": "PostgreSQL Query Planning Deep Dive",
+    "date": "2024-02-10",
+    "category": "Databases",
+    "summary": "Understanding how PostgreSQL's query planner works and how to optimize your queries.",
+    "tags": [
+      "postgresql",
+      "sql",
+      "performance"
+    ],
+    "readTime": "12 min",
+    "url": "postgres-query-planning.html"
+  },
+  {
+    "title": "Building Batch Data Pipelines",
+    "date": "2024-01-15",
+    "category": "Data Engineering",
+    "summary": "Designing maintainable batch processing systems with idempotency, error handling, and monitoring.",
+    "tags": [
+      "data-engineering",
+      "python",
+      "airflow"
+    ],
+    "readTime": "8 min",
+    "url": "batch-data-pipelines.html"
+  }
+]

@@ -3,43 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>How PostgreSQL Query Planning Actually Works | Suchindra Koushik</title>
-    <meta name="description" content="If you have ever stared at a slow query, ran `EXPLAIN`, and nodded pretending to understand why Postgres chose a Sequential Scan over your perfectly good Ind...">
+    <title>PostgreSQL Query Planning Deep Dive | Suchindra Koushik</title>
+    <meta name="description" content="Understanding how PostgreSQL's query planner works and how to optimize your queries.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
     <script src="../assets/js/theme.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+
 </head>
 <body>
 
     <header class="site-header">
         <div class="container">
-            <a href="../" class="logo">Suchindra Koushik</a>
-            <button class="mobile-menu-btn" aria-label="Menu" aria-expanded="false">☰</button>
+            <a href="../index.html" class="logo">Suchindra Koushik</a>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">☰</button>
             <nav class="nav-links">
-                <a href="../">Home</a>
-                <a href="index.html" class="active">Writing</a>
-                <a href="../projects.html">Projects</a>
-                <a href="../about.html">About</a>
-                <a href="../resume.html">Resume</a>
-                <button id="theme-toggle" aria-label="Toggle theme">☀️</button>
+                <a href="../index.html" class="">Home</a>
+                <a href="../blog/index.html" class="active">Writing</a>
+                <a href="../projects.html" class="">Projects</a>
+                <a href="../about.html" class="">About</a>
+                <a href="../resume.html" class="">Resume</a>
+                <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
             </nav>
         </div>
     </header>
 
-    <main class="container">
-        <article class="hero" style="padding-bottom: var(--space-md); max-width: 800px; margin: 0 auto;">
-            <a href="index.html" style="font-size: 0.875rem; color: var(--text-muted); text-decoration: none; display: inline-block; margin-bottom: var(--space-sm);">&larr; Back to Writing</a>
-            <div class="hero-meta" style="margin-top: 0; margin-bottom: var(--space-sm);">
-                Data Engineering • October 2023
-            </div>
-            <h1 style="margin-bottom: var(--space-md);">How PostgreSQL Query Planning Actually Works</h1>
-        </article>
+    <main class="container" >
 
-        <div class="post-content">
-            <p>If you have ever stared at a slow query, ran <code>EXPLAIN</code>, and nodded pretending to understand why Postgres chose a Sequential Scan over your perfectly good Index, this article is for you.</p>
+    <article class="hero" style="padding-bottom: var(--space-md); max-width: 800px; margin: 0 auto;">
+        <a href="index.html" style="font-size: 0.875rem; color: var(--text-muted); text-decoration: none; display: inline-block; margin-bottom: var(--space-sm);">&larr; Back to Writing</a>
+        <div class="hero-meta" style="margin-top: 0; margin-bottom: var(--space-sm);">
+            Databases • 2024-02-10 • 12 min
+        </div>
+        <h1 style="margin-bottom: var(--space-md);">PostgreSQL Query Planning Deep Dive</h1>
+    </article>
+
+    <div class="post-content">
+        <p>If you have ever stared at a slow query, ran <code>EXPLAIN</code>, and nodded pretending to understand why Postgres chose a Sequential Scan over your perfectly good Index, this article is for you.</p>
 <p>Understanding the query optimizer is the single most important skill for high-performance database engineering. It is not magic; it is a cost-based algorithm that makes statistically driven decisions. When it fails, it usually isn't because the optimizer is "dumb", but because its cost model or statistics do not align with reality.</p>
 <p>In this deep dive, we will walk through the internal machinery of the Postgres planner, dissect the cost model, and analyze real execution plans.</p>
 <h2>The Life of a Query</h2>
@@ -112,20 +115,20 @@ SHOW seq_page_cost;
 <h2>Access Methods: Getting the Data</h2>
 <p>The planner's first job is to figure out how to pull data from individual tables.</p>
 <h3>1. Sequential Scan (<code>Seq Scan</code>)</h3>
-<p>The brute force method. Read the table from beginning to end.
-*   <strong>When it's used:</strong> Small tables, or when fetching a large % of rows.
+<p>The brute force method. Read the table from beginning to end.<br />
+*   <strong>When it's used:</strong> Small tables, or when fetching a large % of rows.<br />
 *   <strong>Cost Formula:</strong> <code>(pages * seq_page_cost) + (rows * cpu_tuple_cost)</code></p>
 <h3>2. Index Scan (<code>Index Scan</code>)</h3>
-<p>Traverse the B-Tree to find Row IDs (CTIDs), then fetch the actual data pages.
-*   <strong>When it's used:</strong> High cardinality lookups (searching for a specific email or ID).
+<p>Traverse the B-Tree to find Row IDs (CTIDs), then fetch the actual data pages.<br />
+*   <strong>When it's used:</strong> High cardinality lookups (searching for a specific email or ID).<br />
 *   <strong>The Catch:</strong> It involves random I/O. If you need to fetch 50% of the table, jumping around randomly is slower than just reading the whole file sequentially.</p>
 <h3>3. Index Only Scan</h3>
-<p>A special case where <em>all</em> requested columns are in the index itself. Postgres doesn't need to visit the main table (Heap) at all... <em>mostly</em>.
+<p>A special case where <em>all</em> requested columns are in the index itself. Postgres doesn't need to visit the main table (Heap) at all... <em>mostly</em>.<br />
 *   <strong>The "Visibility Map" Caveat:</strong> Postgres uses MVCC. It must verify that the index entry is "visible" to your transaction. It checks the Visibility Map. If the page isn't marked "all visible", it <em>must</em> check the heap, degrading performance.</p>
 <h3>4. Bitmap Heap Scan</h3>
-<p>A hybrid approach.
-1.  <strong>Bitmap Index Scan:</strong> Scans the index and builds a bitmap of pages that need to be visited.
-2.  <strong>Bitmap Heap Scan:</strong> Reads those pages in sequential order.
+<p>A hybrid approach.<br />
+1.  <strong>Bitmap Index Scan:</strong> Scans the index and builds a bitmap of pages that need to be visited.<br />
+2.  <strong>Bitmap Heap Scan:</strong> Reads those pages in sequential order.<br />
 *   <strong>Benefit:</strong> Avoids random I/O thrashing while still using the index.</p>
 <h2>Join Strategies: Putting It Together</h2>
 <p>Once the planner knows how to get data, it must join it.</p>
@@ -141,13 +144,13 @@ SHOW seq_page_cost;
 <li><strong>Complexity:</strong> O(N * M) (worst case), or O(N * log M) with an index.</li>
 </ul>
 <h3>Hash Join</h3>
-<p>Builds a hash table in memory from the smaller table, then scans the larger table and probes the hash.
-*   <strong>Best for:</strong> Large, unsorted datasets. Equality joins only (<code>=</code>).
-*   <strong>Complexity:</strong> O(N + M).
+<p>Builds a hash table in memory from the smaller table, then scans the larger table and probes the hash.<br />
+*   <strong>Best for:</strong> Large, unsorted datasets. Equality joins only (<code>=</code>).<br />
+*   <strong>Complexity:</strong> O(N + M).<br />
 *   <strong>Memory Limit:</strong> Limited by <code>work_mem</code>. If the hash table doesn't fit in memory, it spills to disk, killing performance.</p>
 <h3>Merge Join</h3>
-<p>Sorts both tables on the join key, then zips them together.
-*   <strong>Best for:</strong> Very large tables that are already sorted (or cheap to sort).
+<p>Sorts both tables on the join key, then zips them together.<br />
+*   <strong>Best for:</strong> Very large tables that are already sorted (or cheap to sort).<br />
 *   <strong>Complexity:</strong> O(N log N + M log M) (for sorting).</p>
 <h2>Dissecting an EXPLAIN ANALYZE</h2>
 <p>Let's look at a realistic scenario. We have a <code>orders</code> table (1M rows) and a <code>users</code> table (100k rows).</p>
@@ -180,22 +183,29 @@ WHERE o.created_at &gt; NOW() - INTERVAL '1 day';
 <li><strong><code>Hash Join</code>:</strong> It probed the user hash table for each of the 5000 orders.</li>
 </ol>
 <h2>Statistics: The Planner's Map</h2>
-<p>How did the planner guess <code>rows=5000</code> for the orders scan? Statistics.
+<p>How did the planner guess <code>rows=5000</code> for the orders scan? Statistics.<br />
 Postgres maintains a histogram and most common values (MCV) list for every column in <code>pg_statistic</code>.</p>
 <p>The <strong>Auto-Vacuum</strong> daemon is responsible for updating these stats. If you disable autovacuum, statistics get stale, and the planner starts making terrible decisions (like Nested Looping two massive tables).</p>
 <h2>Conclusion</h2>
-<p>Query optimization is not about guessing. It's about:
-1.  <strong>Reading the Plan:</strong> Understand <code>EXPLAIN (ANALYZE, BUFFERS)</code>.
-2.  <strong>Understanding Costs:</strong> Know your <code>random_page_cost</code>.
-3.  <strong>Checking Stats:</strong> Ensure autovacuum is healthy.
+<p>Query optimization is not about guessing. It's about:<br />
+1.  <strong>Reading the Plan:</strong> Understand <code>EXPLAIN (ANALYZE, BUFFERS)</code>.<br />
+2.  <strong>Understanding Costs:</strong> Know your <code>random_page_cost</code>.<br />
+3.  <strong>Checking Stats:</strong> Ensure autovacuum is healthy.<br />
 4.  <strong>Indexing Wisely:</strong> Indexes speed up reads but slow down writes.</p>
 <p>Next time your query hangs, don't just add an index blindly. Ask the planner <em>why</em> it chose that path. The answer is usually in the costs.</p>
-        </div>
+    </div>
+
     </main>
 
     <footer class="site-footer container">
+        <div class="social-links">
+            <a href="https://github.com/dattskoushik" target="_blank">GitHub</a>
+            <a href="https://linkedin.com/in/suchindrakoushik" target="_blank">LinkedIn</a>
+            <a href="https://instagram.com/dattskoushik" target="_blank">Instagram</a>
+        </div>
         <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved.</p>
     </footer>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
@@ -203,5 +213,6 @@ Postgres maintains a histogram and most common values (MCV) list for every colum
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-rust.min.js"></script>
+
 </body>
 </html>
