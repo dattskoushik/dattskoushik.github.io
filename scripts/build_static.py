@@ -1,14 +1,20 @@
 import markdown
 import os
 import json
+from pathlib import Path
+from datetime import datetime
 
 # Configuration
 ARTICLES_DIR = "blog/articles"
+ARTICLES_JSON = "blog/articles.json"
 OUTPUT_DIR = "blog"
 SEARCH_INDEX_FILE = "blog/search.json"
+TEMPLATES_DIR = "templates"
 
-# Template for Article Pages
-# Using placeholders like {{TITLE}} to avoid collision with CSS/JS braces
+# Ensure templates directory exists
+Path(TEMPLATES_DIR).mkdir(exist_ok=True)
+
+# Article Template
 ARTICLE_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,7 +50,7 @@ ARTICLE_TEMPLATE = """<!DOCTYPE html>
         <article class="hero" style="padding-bottom: var(--space-md); max-width: 800px; margin: 0 auto;">
             <a href="index.html" style="font-size: 0.875rem; color: var(--text-muted); text-decoration: none; display: inline-block; margin-bottom: var(--space-sm);">&larr; Back to Writing</a>
             <div class="hero-meta" style="margin-top: 0; margin-bottom: var(--space-sm);">
-                {{CATEGORY}} • {{DATE}}
+                {{CATEGORY}} • {{DATE}} • {{READ_TIME}}
             </div>
             <h1 style="margin-bottom: var(--space-md);">{{TITLE}}</h1>
         </article>
@@ -55,6 +61,11 @@ ARTICLE_TEMPLATE = """<!DOCTYPE html>
     </main>
 
     <footer class="site-footer container">
+        <div class="social-links">
+            <a href="https://github.com/dattskoushik" target="_blank">GitHub</a>
+            <a href="https://linkedin.com/in/suchindrakoushik" target="_blank">LinkedIn</a>
+            <a href="https://instagram.com/dattskoushik" target="_blank">Instagram</a>
+        </div>
         <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved.</p>
     </footer>
 
@@ -68,7 +79,7 @@ ARTICLE_TEMPLATE = """<!DOCTYPE html>
 </html>
 """
 
-# Template for Blog Index
+# Blog Index Template
 INDEX_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -117,6 +128,11 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
     </main>
 
     <footer class="site-footer container">
+        <div class="social-links">
+            <a href="https://github.com/dattskoushik" target="_blank">GitHub</a>
+            <a href="https://linkedin.com/in/suchindrakoushik" target="_blank">LinkedIn</a>
+            <a href="https://instagram.com/dattskoushik" target="_blank">Instagram</a>
+        </div>
         <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved.</p>
     </footer>
 
@@ -128,9 +144,8 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
             .then(response => response.json())
             .then(data => {
                 articles = data;
-                // Normalize data for client-side use
                 articles.forEach(a => {
-                    a.searchStr = (a.title + " " + a.tags + " " + a.summary).toLowerCase();
+                    a.searchStr = (a.title + " " + a.tags.join(" ") + " " + a.summary).toLowerCase();
                 });
             })
             .catch(err => console.error("Could not load search index", err));
@@ -141,7 +156,7 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
         if (searchInput) {
             searchInput.addEventListener('input', (e) => {
                 const term = e.target.value.toLowerCase();
-                const filtered = articles.filter(a => a.searchStr.includes(term));
+                const filtered = term ? articles.filter(a => a.searchStr.includes(term)) : articles;
                 render(filtered);
             });
         }
@@ -154,7 +169,7 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
             list.innerHTML = items.map(item => `
                 <article class="card" style="flex-direction: row; align-items: center; border: none; background: transparent; padding: var(--space-md) 0; border-bottom: 1px solid var(--border-color); border-radius: 0;">
                     <div style="flex: 1;">
-                        <div class="card-meta">${item.tags} • <time>${item.date}</time></div>
+                        <div class="card-meta">${item.category} • <time>${item.date}</time> • ${item.readTime}</div>
                         <h3><a href="${item.url}">${item.title}</a></h3>
                         <p class="card-excerpt">${item.summary}</p>
                     </div>
@@ -166,17 +181,24 @@ INDEX_TEMPLATE = """<!DOCTYPE html>
 </html>
 """
 
-def parse_metadata(content):
+
+def parse_markdown_metadata(content):
+    """
+    Parse metadata from markdown files.
+    Supports frontmatter or inline metadata.
+    """
     lines = content.split('\n')
     title = "Untitled"
     date = "Unknown Date"
     category = "Uncategorized"
     body_start_idx = 0
 
+    # Try to extract title from first H1
     if len(lines) > 0 and lines[0].startswith("# "):
         title = lines[0][2:].strip()
         body_start_idx = 1
 
+    # Look for metadata section
     for i, line in enumerate(lines[1:], start=1):
         if line.strip() == "---":
             body_start_idx = i + 1
@@ -189,10 +211,12 @@ def parse_metadata(content):
 
     body = "\n".join(lines[body_start_idx:]).strip()
 
+    # Extract summary
     summary = ""
     for line in body.split('\n'):
-        if line.strip():
-            summary = line.strip()
+        stripped = line.strip()
+        if stripped and not stripped.startswith('#'):
+            summary = stripped
             if len(summary) > 160:
                 summary = summary[:157] + "..."
             break
@@ -205,72 +229,143 @@ def parse_metadata(content):
         "summary": summary
     }
 
-def build_blog():
-    if not os.path.exists(OUTPUT_DIR):
-        os.makedirs(OUTPUT_DIR)
 
-    search_index = []
-    articles_data = []
+def load_articles_metadata():
+    """Load articles.json if it exists, otherwise return empty dict."""
+    if os.path.exists(ARTICLES_JSON):
+        with open(ARTICLES_JSON, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return {"articles": []}
 
-    if os.path.exists(ARTICLES_DIR):
-        files = [f for f in os.listdir(ARTICLES_DIR) if f.endswith(".md")]
-    else:
-        files = []
-        print(f"Warning: {ARTICLES_DIR} does not exist.")
 
-    for filename in files:
-        filepath = os.path.join(ARTICLES_DIR, filename)
-        with open(filepath, "r") as f:
-            content = f.read()
+def generate_article_html(article_meta, markdown_content):
+    """Generate HTML for a single article."""
+    html_body = markdown.markdown(markdown_content, extensions=['fenced_code', 'tables', 'nl2br'])
+    
+    html = ARTICLE_TEMPLATE.replace("{{TITLE}}", article_meta['title'])
+    html = html.replace("{{DATE}}", article_meta['date'])
+    html = html.replace("{{CATEGORY}}", article_meta['category'])
+    html = html.replace("{{READ_TIME}}", article_meta.get('readTime', '5 min'))
+    html = html.replace("{{CONTENT}}", html_body)
+    html = html.replace("{{DESCRIPTION}}", article_meta['excerpt'])
+    
+    return html
 
-        meta = parse_metadata(content)
 
-        html_body = markdown.markdown(meta['body'], extensions=['fenced_code', 'tables'])
-
-        output_filename = filename.replace(".md", ".html")
-        output_path = os.path.join(OUTPUT_DIR, output_filename)
-
-        final_html = ARTICLE_TEMPLATE.replace("{{TITLE}}", meta['title'])
-        final_html = final_html.replace("{{DATE}}", meta['date'])
-        final_html = final_html.replace("{{CATEGORY}}", meta['category'])
-        final_html = final_html.replace("{{CONTENT}}", html_body)
-        final_html = final_html.replace("{{DESCRIPTION}}", meta['summary'])
-
-        with open(output_path, "w") as f:
-            f.write(final_html)
-
-        print(f"Generated {output_path}")
-
-        article_info = {
-            "title": meta['title'],
-            "date": meta['date'],
-            "tags": meta['category'],
-            "summary": meta['summary'],
-            "url": output_filename
-        }
-        search_index.append(article_info)
-        articles_data.append(article_info)
-
-    with open(SEARCH_INDEX_FILE, "w") as f:
-        json.dump(search_index, f)
-    print(f"Generated {SEARCH_INDEX_FILE}")
-
+def generate_blog_index(articles_data):
+    """Generate blog/index.html from articles data."""
     articles_html = ""
-    for item in articles_data:
+    
+    for article in articles_data:
         articles_html += f'''
         <article class="card" style="flex-direction: row; align-items: center; border: none; background: transparent; padding: var(--space-md) 0; border-bottom: 1px solid var(--border-color); border-radius: 0;">
             <div style="flex: 1;">
-                <div class="card-meta">{item['tags']} • <time>{item['date']}</time></div>
-                <h3><a href="{item['url']}">{item['title']}</a></h3>
-                <p class="card-excerpt">{item['summary']}</p>
+                <div class="card-meta">{article['category']} • <time>{article['date']}</time> • {article.get('readTime', '5 min')}</div>
+                <h3><a href="{article['slug']}.html">{article['title']}</a></h3>
+                <p class="card-excerpt">{article['excerpt']}</p>
             </div>
         </article>
         '''
+    
+    html = INDEX_TEMPLATE.replace("{{ARTICLES_LIST}}", articles_html)
+    
+    output_path = os.path.join(OUTPUT_DIR, "index.html")
+    with open(output_path, 'w', encoding='utf-8') as f:
+        f.write(html)
+    
+    print(f"✓ Generated {output_path}")
 
-    final_index_html = INDEX_TEMPLATE.replace("{{ARTICLES_LIST}}", articles_html)
-    with open(os.path.join(OUTPUT_DIR, "index.html"), "w") as f:
-        f.write(final_index_html)
-    print("Generated blog/index.html")
+
+def generate_search_index(articles_data):
+    """Generate search.json for client-side search."""
+    search_data = []
+    
+    for article in articles_data:
+        search_data.append({
+            "title": article['title'],
+            "date": article['date'],
+            "category": article['category'],
+            "summary": article['excerpt'],
+            "tags": article.get('tags', []),
+            "readTime": article.get('readTime', '5 min'),
+            "url": f"{article['slug']}.html"
+        })
+    
+    with open(SEARCH_INDEX_FILE, 'w', encoding='utf-8') as f:
+        json.dump(search_data, f, indent=2)
+    
+    print(f"✓ Generated {SEARCH_INDEX_FILE}")
+
+
+def build_blog():
+    """Main build function."""
+    print("=" * 60)
+    print("Building static blog...")
+    print("=" * 60)
+    
+    # Ensure output directory exists
+    Path(OUTPUT_DIR).mkdir(exist_ok=True)
+    
+    # Load articles metadata
+    metadata = load_articles_metadata()
+    articles = metadata.get('articles', [])
+    
+    if not articles:
+        print("⚠ No articles found in articles.json")
+        print("  Create blog/articles.json with article metadata")
+        return
+    
+    # Sort articles by date (newest first)
+    articles.sort(key=lambda x: x['date'], reverse=True)
+    
+    # Generate individual article pages
+    print(f"\nGenerating {len(articles)} article pages...")
+    for article in articles:
+        slug = article['slug']
+        md_file = os.path.join(ARTICLES_DIR, f"{slug}.md")
+        
+        if not os.path.exists(md_file):
+            print(f"⚠ Markdown file not found: {md_file}")
+            continue
+        
+        # Read markdown content
+        with open(md_file, 'r', encoding='utf-8') as f:
+            md_content = f.read()
+        
+        # Parse metadata from markdown (fallback if needed)
+        parsed = parse_markdown_metadata(md_content)
+        
+        # Merge metadata (JSON takes precedence)
+        article_data = {
+            'title': article.get('title', parsed['title']),
+            'date': article.get('date', parsed['date']),
+            'category': article.get('category', parsed['category']),
+            'excerpt': article.get('excerpt', parsed['summary']),
+            'readTime': article.get('readTime', '5 min')
+        }
+        
+        # Generate HTML
+        html = generate_article_html(article_data, parsed['body'])
+        
+        # Write to file
+        output_file = os.path.join(OUTPUT_DIR, f"{slug}.html")
+        with open(output_file, 'w', encoding='utf-8') as f:
+            f.write(html)
+        
+        print(f"  ✓ {slug}.html")
+    
+    # Generate blog index
+    print("\nGenerating blog index...")
+    generate_blog_index(articles)
+    
+    # Generate search index
+    print("Generating search index...")
+    generate_search_index(articles)
+    
+    print("\n" + "=" * 60)
+    print("✓ Build complete!")
+    print("=" * 60)
+
 
 if __name__ == "__main__":
     build_blog()

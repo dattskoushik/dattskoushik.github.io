@@ -1,0 +1,26 @@
+{
+  "poems": [
+    {
+      "id": "compiled-silence",
+      "title": "Compiled Silence",
+      "date": "2023-12-01",
+      "lines": [
+        "In the quiet of the compiled code,",
+        "silence speaks in binary load.",
+        "Each function, a verse so precise,",
+        "debugging thoughts at any price."
+      ]
+    },
+    {
+      "id": "data-streams",
+      "title": "Data Streams",
+      "date": "2024-01-15",
+      "lines": [
+        "Rivers of data flow through pipes,",
+        "transforming with each line of types.",
+        "From source to sink, the journey clear,",
+        "ETL processes drawing near."
+      ]
+    }
+  ]
+}

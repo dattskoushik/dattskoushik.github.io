@@ -1,0 +1,31 @@
+{
+  "photos": [
+    {
+      "id": "placeholder-1",
+      "path": "https://via.placeholder.com/800x600/222/555?text=Photo+1",
+      "thumbnail": "https://via.placeholder.com/300x300/222/555?text=Photo+1",
+      "caption": "Example photography - replace with actual images",
+      "date": "2024-01-01",
+      "location": "Sample Location",
+      "tags": ["placeholder"]
+    },
+    {
+      "id": "placeholder-2",
+      "path": "https://via.placeholder.com/800x600/222/555?text=Photo+2",
+      "thumbnail": "https://via.placeholder.com/300x300/222/555?text=Photo+2",
+      "caption": "Example photography - replace with actual images",
+      "date": "2024-01-02",
+      "location": "Sample Location",
+      "tags": ["placeholder"]
+    },
+    {
+      "id": "placeholder-3",
+      "path": "https://via.placeholder.com/800x600/222/555?text=Photo+3",
+      "thumbnail": "https://via.placeholder.com/300x300/222/555?text=Photo+3",
+      "caption": "Example photography - replace with actual images",
+      "date": "2024-01-03",
+      "location": "Sample Location",
+      "tags": ["placeholder"]
+    }
+  ]
+}
