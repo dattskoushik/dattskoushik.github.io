@@ -38,15 +38,33 @@
         }
 
         // Mobile Menu
-        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
 
-        if (menuBtn && navLinks) {
-            menuBtn.addEventListener('click', () => {
-                const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
-                menuBtn.setAttribute('aria-expanded', !isExpanded);
+        if (mobileMenuBtn && navLinks) {
+            mobileMenuBtn.addEventListener('click', () => {
                 navLinks.classList.toggle('active');
-                menuBtn.textContent = isExpanded ? '☰' : '✕';
+                const isExpanded = navLinks.classList.contains('active');
+                mobileMenuBtn.setAttribute('aria-expanded', isExpanded);
+                mobileMenuBtn.innerHTML = isExpanded ? '✕' : '☰';
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.site-header')) {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    mobileMenuBtn.innerHTML = '☰';
+                }
+            });
+
+            // Close menu on navigation link click
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    mobileMenuBtn.innerHTML = '☰';
+                });
             });
         }
     });
