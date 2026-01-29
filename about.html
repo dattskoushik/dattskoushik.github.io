@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
-    <script src="/assets/js/theme.js" defer></script>
+    <script src="assets/js/theme.js" defer></script>
     <style>
         .about-grid {
             display: grid;
@@ -34,6 +34,7 @@
             background: var(--bg-card);
             border-radius: var(--radius-sm);
             overflow: hidden;
+            cursor: pointer;
         }
         .gallery-item img {
             width: 100%;
@@ -44,20 +45,33 @@
         .gallery-item:hover img {
             transform: scale(1.05);
         }
+        .poem-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-sm);
+        }
+        .poem-lines {
+            font-style: italic;
+            white-space: pre-line;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
     </style>
 </head>
 <body>
 
     <header class="site-header">
         <div class="container">
-            <a href="/" class="logo">Datt Sai Koushik</a>
+            <a href="index.html" class="logo">Suchindra Koushik</a>
             <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">☰</button>
             <nav class="nav-links">
-                <a href="/">Home</a>
-                <a href="/blog/">Blog</a>
-                <a href="/projects.html">Projects</a>
-                <a href="/about.html" class="active">About</a>
-                <a href="/resume.html">Resume</a>
+                <a href="index.html">Home</a>
+                <a href="blog/index.html">Blog</a>
+                <a href="projects.html">Projects</a>
+                <a href="about.html" class="active">About</a>
+                <a href="resume.html">Resume</a>
                 <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
             </nav>
         </div>
@@ -125,23 +139,16 @@
                 <!-- Photography -->
                 <div>
                     <h3>Photography</h3>
-                    <div class="gallery-grid">
-                        <div class="gallery-item"><img src="https://via.placeholder.com/300x300/222/555?text=Photo+1" alt="Photography Sample"></div>
-                        <div class="gallery-item"><img src="https://via.placeholder.com/300x300/222/555?text=Photo+2" alt="Photography Sample"></div>
-                        <div class="gallery-item"><img src="https://via.placeholder.com/300x300/222/555?text=Photo+3" alt="Photography Sample"></div>
+                    <div id="gallery-container" class="gallery-grid">
+                        <!-- Loaded dynamically from photos.json -->
                     </div>
                 </div>
 
                 <!-- Poetry -->
                 <div>
                     <h3>Poetry</h3>
-                    <div class="card" style="margin-top: var(--space-sm);">
-                        <h4>Recent Verses</h4>
-                        <p class="card-excerpt" style="font-style: italic; white-space: pre-line;">
-                            "In the quiet of the compiled code,
-                            silence speaks in binary load..."
-                        </p>
-                        <span class="text-sm text-muted">— 2023</span>
+                    <div id="poetry-container">
+                        <!-- Loaded dynamically from poems.json -->
                     </div>
                 </div>
 
@@ -158,6 +165,50 @@
         </div>
         <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Load photography gallery
+        fetch('assets/images/gallery/photos.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('gallery-container');
+                if (data.photos && data.photos.length > 0) {
+                    container.innerHTML = data.photos.slice(0, 3).map(photo => `
+                        <div class="gallery-item" title="${photo.caption}">
+                            <img src="${photo.thumbnail || photo.path}" alt="${photo.caption}" loading="lazy">
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.875rem;">Photography coming soon...</p>';
+                }
+            })
+            .catch(err => {
+                console.log('Photos not yet available');
+                document.getElementById('gallery-container').innerHTML = '<p style="color: var(--text-muted); font-size: 0.875rem;">Photography coming soon...</p>';
+            });
+
+        // Load poetry
+        fetch('assets/poetry/poems.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('poetry-container');
+                if (data.poems && data.poems.length > 0) {
+                    container.innerHTML = data.poems.slice(0, 2).map(poem => `
+                        <div class="poem-card">
+                            <h4>${poem.title}</h4>
+                            <p class="poem-lines">${poem.lines.join('\n')}</p>
+                            <span style="font-size: 0.875rem; color: var(--text-muted);">— ${poem.date}</span>
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.875rem;">Poetry coming soon...</p>';
+                }
+            })
+            .catch(err => {
+                console.log('Poems not yet available');
+                document.getElementById('poetry-container').innerHTML = '<p style="color: var(--text-muted); font-size: 0.875rem;">Poetry coming soon...</p>';
+            });
+    </script>
 
 </body>
 </html>
