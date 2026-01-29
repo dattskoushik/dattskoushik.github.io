@@ -1,0 +1,11 @@
+# Generated content
+about.html
+blog/*.html
+blog/search.json
+
+# Logs
+*.log
+
+# Python
+__pycache__/
+*.pyc
