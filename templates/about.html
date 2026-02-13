@@ -22,7 +22,7 @@
         }
         .gallery-item {
             aspect-ratio: 1;
-            background: var(--bg-card);
+            background: var(--card);
             border-radius: var(--radius-sm);
             overflow: hidden;
             cursor: pointer;
@@ -37,8 +37,8 @@
             transform: scale(1.05);
         }
         .poem-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            background: var(--card);
+            border: 1px solid var(--border);
             padding: var(--space-md);
             border-radius: var(--radius-md);
             margin-bottom: var(--space-sm);
@@ -46,20 +46,20 @@
         .poem-lines {
             font-style: italic;
             white-space: pre-line;
-            color: var(--text-secondary);
+            color: var(--muted-foreground);
             line-height: 1.8;
         }
     </style>
 {% endblock %}
 
 {% block content %}
-    <section class="hero" style="padding-bottom: var(--space-md);">
+    <section style="padding-bottom: var(--space-md);">
         <h1>About Me</h1>
     </section>
 
     <div class="about-grid">
         <div class="bio">
-            <p class="hero-subtitle" style="color: var(--text-primary);">
+            <p class="text-muted" style="color: var(--foreground); font-size: 1.25rem; margin-bottom: var(--space-md);">
                 I am a Software Engineer focused on Backend and Data, driven by a passion for building systems, pipelines, and infrastructure that are maintenance-friendly, reliable, and performant.
             </p>
             <p>
@@ -86,32 +86,32 @@
             </p>
 
             <div style="margin-top: var(--space-md);">
-                <a href="assets/resume/resume_.pdf" target="_blank" class="btn">Download Resume</a>
+                <a href="assets/resume/resume_.pdf" target="_blank" class="button">Download Resume</a>
             </div>
         </div>
 
         <div class="skills">
             <h3>Tech Stack</h3>
-            <ul style="list-style: none; color: var(--text-secondary); line-height: 2;">
-                <li><strong style="color: var(--text-primary);">Languages:</strong> Python, SQL, Go</li>
-                <li><strong style="color: var(--text-primary);">Data:</strong> PostgreSQL, Spark, Kafka</li>
-                <li><strong style="color: var(--text-primary);">Infra:</strong> Docker, Kubernetes, Terraform</li>
-                <li><strong style="color: var(--text-primary);">Tools:</strong> Airflow, dbt, Grafana</li>
+            <ul style="list-style: none; color: var(--muted-foreground); line-height: 2; padding: 0;">
+                <li><strong style="color: var(--foreground);">Languages:</strong> Python, SQL, Go</li>
+                <li><strong style="color: var(--foreground);">Data:</strong> PostgreSQL, Spark, Kafka</li>
+                <li><strong style="color: var(--foreground);">Infra:</strong> Docker, Kubernetes, Terraform</li>
+                <li><strong style="color: var(--foreground);">Tools:</strong> Airflow, dbt, Grafana</li>
             </ul>
         </div>
     </div>
 
     <!-- Beyond Engineering Section -->
-    <section style="margin-top: var(--space-xl); border-top: 1px solid var(--border-color); padding-top: var(--space-lg);">
+    <section style="margin-top: var(--space-xl); border-top: 1px solid var(--border); padding-top: var(--space-lg);">
         <h2>Beyond Engineering</h2>
         <p style="max-width: 600px;">
             When I'm not designing systems, I explore the world through a lens and words. Photography and poetry allow me to capture moments that code cannot.
         </p>
 
-        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin-top: var(--space-md);">
+        <div class="row" style="margin-top: var(--space-md);">
 
             <!-- Photography -->
-            <div>
+            <div class="col-6">
                 <h3>Photography</h3>
                 <div class="gallery-grid">
                     {% if photos %}
@@ -121,13 +121,13 @@
                         </div>
                         {% endfor %}
                     {% else %}
-                        <p style="color: var(--text-muted); font-size: 0.875rem;">Photography coming soon...</p>
+                        <p style="color: var(--muted-foreground); font-size: 0.875rem;">Photography coming soon...</p>
                     {% endif %}
                 </div>
             </div>
 
             <!-- Poetry -->
-            <div>
+            <div class="col-6">
                 <h3>Poetry</h3>
                 <div id="poetry-container">
                     {% if poems %}
@@ -135,11 +135,11 @@
                         <div class="poem-card">
                             <h4>{{ poem.title }}</h4>
                             <p class="poem-lines">{{ poem.lines | join('\n') }}</p>
-                            <span style="font-size: 0.875rem; color: var(--text-muted);">— {{ poem.date }}</span>
+                            <span style="font-size: 0.875rem; color: var(--muted-foreground);">— {{ poem.date }}</span>
                         </div>
                         {% endfor %}
                     {% else %}
-                        <p style="color: var(--text-muted); font-size: 0.875rem;">Poetry coming soon...</p>
+                        <p style="color: var(--muted-foreground); font-size: 0.875rem;">Poetry coming soon...</p>
                     {% endif %}
                 </div>
             </div>

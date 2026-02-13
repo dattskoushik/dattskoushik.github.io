@@ -8,8 +8,197 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/main.css">
+
+    <!-- Oat UI -->
+    <link rel="stylesheet" href="./assets/vendor/oat.min.css">
+    <script src="./assets/vendor/oat.min.js" defer></script>
+
     <script src="./assets/js/theme.js"></script>
+
+    <style>
+        :root {
+            /* Fonts */
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            /* Spacing overrides if needed */
+            --space-xl: 4rem;
+            --space-lg: 2.5rem;
+            --space-md: 1.5rem;
+            --space-sm: 1rem;
+        }
+
+        /* Dark Theme (Default) */
+        [data-theme="dark"] {
+            --background: #0a0a0a;
+            --foreground: #ededed;
+            --card: #111111;
+            --card-foreground: #ededed;
+            --muted: #1f1f23;
+            --muted-foreground: #a1a1aa;
+            --border: #27272a;
+            --primary: #ffffff;
+            --primary-foreground: #000000;
+            --secondary: #1f1f23;
+            --secondary-foreground: #ededed;
+            --accent: #ffffff;
+            --accent-foreground: #000000;
+            --ring: #27272a;
+            --input: #1f1f23;
+            /* Custom */
+            --header-bg: rgba(10, 10, 10, 0.8);
+            --code-bg: #1f1f23;
+        }
+
+        /* Light Theme */
+        [data-theme="light"] {
+            --background: #f4f4f5;
+            --foreground: #18181b;
+            --card: #ffffff;
+            --card-foreground: #18181b;
+            --muted: #e4e4e7;
+            --muted-foreground: #52525b;
+            --border: #e4e4e7;
+            --primary: #000000;
+            --primary-foreground: #ffffff;
+            --secondary: #e4e4e7;
+            --secondary-foreground: #18181b;
+            --accent: #000000;
+            --accent-foreground: #ffffff;
+            --ring: #e4e4e7;
+            --input: #ffffff;
+            /* Custom */
+            --header-bg: rgba(244, 244, 245, 0.8);
+            --code-bg: #e4e4e7;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--foreground);
+            font-family: var(--font-sans);
+        }
+
+        /* Header Styling */
+        header.site-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: var(--header-bg);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: var(--space-sm) 0;
+        }
+
+        header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--foreground);
+        }
+
+        nav.nav-links {
+            display: flex;
+            gap: var(--space-md);
+            align-items: center;
+        }
+
+        nav.nav-links a {
+            text-decoration: none;
+            color: var(--muted-foreground);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        nav.nav-links a:hover, nav.nav-links a.active {
+            color: var(--foreground);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--foreground);
+            cursor: pointer;
+            padding: 0;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            nav.nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: var(--background);
+                border-bottom: 1px solid var(--border);
+                padding: var(--space-md);
+                gap: var(--space-sm);
+            }
+            nav.nav-links.active {
+                display: flex;
+            }
+        }
+
+        /* Footer */
+        .site-footer {
+            margin-top: var(--space-xl);
+            padding: var(--space-lg) 0;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--muted-foreground);
+            font-size: 0.875rem;
+        }
+        .social-links {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        .social-links a {
+            color: var(--muted-foreground);
+            text-decoration: none;
+        }
+        .social-links a:hover {
+            color: var(--foreground);
+        }
+
+        /* Theme Toggle */
+        #theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0;
+            margin-left: var(--space-sm);
+            color: var(--foreground);
+        }
+
+        /* Typography overrides */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-sans);
+            color: var(--foreground);
+        }
+
+        code, pre {
+            font-family: var(--font-mono);
+        }
+
+        /* Utility overrides */
+        .text-muted {
+            color: var(--muted-foreground);
+        }
+    </style>
 
     <style>
         .about-grid {
@@ -32,7 +221,7 @@
         }
         .gallery-item {
             aspect-ratio: 1;
-            background: var(--bg-card);
+            background: var(--card);
             border-radius: var(--radius-sm);
             overflow: hidden;
             cursor: pointer;
@@ -47,8 +236,8 @@
             transform: scale(1.05);
         }
         .poem-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
+            background: var(--card);
+            border: 1px solid var(--border);
             padding: var(--space-md);
             border-radius: var(--radius-md);
             margin-bottom: var(--space-sm);
@@ -56,13 +245,13 @@
         .poem-lines {
             font-style: italic;
             white-space: pre-line;
-            color: var(--text-secondary);
+            color: var(--muted-foreground);
             line-height: 1.8;
         }
     </style>
 
 </head>
-<body>
+<body data-theme="dark">
 
     <header class="site-header">
         <div class="container">
@@ -81,13 +270,13 @@
 
     <main class="container" >
 
-    <section class="hero" style="padding-bottom: var(--space-md);">
+    <section style="padding-bottom: var(--space-md);">
         <h1>About Me</h1>
     </section>
 
     <div class="about-grid">
         <div class="bio">
-            <p class="hero-subtitle" style="color: var(--text-primary);">
+            <p class="text-muted" style="color: var(--foreground); font-size: 1.25rem; margin-bottom: var(--space-md);">
                 I am a Software Engineer focused on Backend and Data, driven by a passion for building systems, pipelines, and infrastructure that are maintenance-friendly, reliable, and performant.
             </p>
             <p>
@@ -114,32 +303,32 @@
             </p>
 
             <div style="margin-top: var(--space-md);">
-                <a href="assets/resume/resume_.pdf" target="_blank" class="btn">Download Resume</a>
+                <a href="assets/resume/resume_.pdf" target="_blank" class="button">Download Resume</a>
             </div>
         </div>
 
         <div class="skills">
             <h3>Tech Stack</h3>
-            <ul style="list-style: none; color: var(--text-secondary); line-height: 2;">
-                <li><strong style="color: var(--text-primary);">Languages:</strong> Python, SQL, Go</li>
-                <li><strong style="color: var(--text-primary);">Data:</strong> PostgreSQL, Spark, Kafka</li>
-                <li><strong style="color: var(--text-primary);">Infra:</strong> Docker, Kubernetes, Terraform</li>
-                <li><strong style="color: var(--text-primary);">Tools:</strong> Airflow, dbt, Grafana</li>
+            <ul style="list-style: none; color: var(--muted-foreground); line-height: 2; padding: 0;">
+                <li><strong style="color: var(--foreground);">Languages:</strong> Python, SQL, Go</li>
+                <li><strong style="color: var(--foreground);">Data:</strong> PostgreSQL, Spark, Kafka</li>
+                <li><strong style="color: var(--foreground);">Infra:</strong> Docker, Kubernetes, Terraform</li>
+                <li><strong style="color: var(--foreground);">Tools:</strong> Airflow, dbt, Grafana</li>
             </ul>
         </div>
     </div>
 
     <!-- Beyond Engineering Section -->
-    <section style="margin-top: var(--space-xl); border-top: 1px solid var(--border-color); padding-top: var(--space-lg);">
+    <section style="margin-top: var(--space-xl); border-top: 1px solid var(--border); padding-top: var(--space-lg);">
         <h2>Beyond Engineering</h2>
         <p style="max-width: 600px;">
             When I'm not designing systems, I explore the world through a lens and words. Photography and poetry allow me to capture moments that code cannot.
         </p>
 
-        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin-top: var(--space-md);">
+        <div class="row" style="margin-top: var(--space-md);">
 
             <!-- Photography -->
-            <div>
+            <div class="col-6">
                 <h3>Photography</h3>
                 <div class="gallery-grid">
 
@@ -161,7 +350,7 @@
             </div>
 
             <!-- Poetry -->
-            <div>
+            <div class="col-6">
                 <h3>Poetry</h3>
                 <div id="poetry-container">
 
@@ -172,7 +361,7 @@
 silence speaks in binary load.
 Each function, a verse so precise,
 debugging thoughts at any price.</p>
-                            <span style="font-size: 0.875rem; color: var(--text-muted);">— 2023-12-01</span>
+                            <span style="font-size: 0.875rem; color: var(--muted-foreground);">— 2023-12-01</span>
                         </div>
 
                         <div class="poem-card">
@@ -181,7 +370,7 @@ debugging thoughts at any price.</p>
 transforming with each line of types.
 From source to sink, the journey clear,
 ETL processes drawing near.</p>
-                            <span style="font-size: 0.875rem; color: var(--text-muted);">— 2024-01-15</span>
+                            <span style="font-size: 0.875rem; color: var(--muted-foreground);">— 2024-01-15</span>
                         </div>
 
 
@@ -198,6 +387,7 @@ ETL processes drawing near.</p>
             <a href="https://github.com/dattskoushik" target="_blank">GitHub</a>
             <a href="https://linkedin.com/in/suchindrakoushik" target="_blank">LinkedIn</a>
             <a href="https://instagram.com/dattskoushik" target="_blank">Instagram</a>
+            <a href="mailto:suchindra.formal@outlook.com">Email</a>
         </div>
         <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved.</p>
     </footer>

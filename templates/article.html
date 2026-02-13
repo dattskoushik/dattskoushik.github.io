@@ -5,17 +5,19 @@
 {% endblock %}
 
 {% block content %}
-    <article class="hero" style="padding-bottom: var(--space-md); max-width: 800px; margin: 0 auto;">
-        <a href="index.html" style="font-size: 0.875rem; color: var(--text-muted); text-decoration: none; display: inline-block; margin-bottom: var(--space-sm);">&larr; Back to Writing</a>
-        <div class="hero-meta" style="margin-top: 0; margin-bottom: var(--space-sm);">
-            {{ category }} • {{ date }} • {{ read_time }}
-        </div>
-        <h1 style="margin-bottom: var(--space-md);">{{ title }}</h1>
-    </article>
+    <article style="max-width: 800px; margin: 0 auto; padding: var(--space-xl) 0;">
+        <header style="margin-bottom: var(--space-lg);">
+            <a href="index.html" class="text-muted" style="text-decoration: none; display: inline-block; margin-bottom: var(--space-sm);">&larr; Back to Writing</a>
+            <div class="text-muted" style="margin-bottom: var(--space-sm); font-size: 0.875rem;">
+                {{ category }} • {{ date }} • {{ read_time }}
+            </div>
+            <h1 style="margin-bottom: var(--space-md); font-size: 2.5rem; line-height: 1.2;">{{ title }}</h1>
+        </header>
 
-    <div class="post-content">
-        {{ content|safe }}
-    </div>
+        <div class="post-content" style="font-size: 1.125rem; line-height: 1.7;">
+            {{ content|safe }}
+        </div>
+    </article>
 {% endblock %}
 
 {% block footer_scripts %}

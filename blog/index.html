@@ -8,11 +8,200 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/main.css">
+
+    <!-- Oat UI -->
+    <link rel="stylesheet" href="../assets/vendor/oat.min.css">
+    <script src="../assets/vendor/oat.min.js" defer></script>
+
     <script src="../assets/js/theme.js"></script>
 
+    <style>
+        :root {
+            /* Fonts */
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            /* Spacing overrides if needed */
+            --space-xl: 4rem;
+            --space-lg: 2.5rem;
+            --space-md: 1.5rem;
+            --space-sm: 1rem;
+        }
+
+        /* Dark Theme (Default) */
+        [data-theme="dark"] {
+            --background: #0a0a0a;
+            --foreground: #ededed;
+            --card: #111111;
+            --card-foreground: #ededed;
+            --muted: #1f1f23;
+            --muted-foreground: #a1a1aa;
+            --border: #27272a;
+            --primary: #ffffff;
+            --primary-foreground: #000000;
+            --secondary: #1f1f23;
+            --secondary-foreground: #ededed;
+            --accent: #ffffff;
+            --accent-foreground: #000000;
+            --ring: #27272a;
+            --input: #1f1f23;
+            /* Custom */
+            --header-bg: rgba(10, 10, 10, 0.8);
+            --code-bg: #1f1f23;
+        }
+
+        /* Light Theme */
+        [data-theme="light"] {
+            --background: #f4f4f5;
+            --foreground: #18181b;
+            --card: #ffffff;
+            --card-foreground: #18181b;
+            --muted: #e4e4e7;
+            --muted-foreground: #52525b;
+            --border: #e4e4e7;
+            --primary: #000000;
+            --primary-foreground: #ffffff;
+            --secondary: #e4e4e7;
+            --secondary-foreground: #18181b;
+            --accent: #000000;
+            --accent-foreground: #ffffff;
+            --ring: #e4e4e7;
+            --input: #ffffff;
+            /* Custom */
+            --header-bg: rgba(244, 244, 245, 0.8);
+            --code-bg: #e4e4e7;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--foreground);
+            font-family: var(--font-sans);
+        }
+
+        /* Header Styling */
+        header.site-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: var(--header-bg);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: var(--space-sm) 0;
+        }
+
+        header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--foreground);
+        }
+
+        nav.nav-links {
+            display: flex;
+            gap: var(--space-md);
+            align-items: center;
+        }
+
+        nav.nav-links a {
+            text-decoration: none;
+            color: var(--muted-foreground);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        nav.nav-links a:hover, nav.nav-links a.active {
+            color: var(--foreground);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--foreground);
+            cursor: pointer;
+            padding: 0;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            nav.nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: var(--background);
+                border-bottom: 1px solid var(--border);
+                padding: var(--space-md);
+                gap: var(--space-sm);
+            }
+            nav.nav-links.active {
+                display: flex;
+            }
+        }
+
+        /* Footer */
+        .site-footer {
+            margin-top: var(--space-xl);
+            padding: var(--space-lg) 0;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--muted-foreground);
+            font-size: 0.875rem;
+        }
+        .social-links {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        .social-links a {
+            color: var(--muted-foreground);
+            text-decoration: none;
+        }
+        .social-links a:hover {
+            color: var(--foreground);
+        }
+
+        /* Theme Toggle */
+        #theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0;
+            margin-left: var(--space-sm);
+            color: var(--foreground);
+        }
+
+        /* Typography overrides */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-sans);
+            color: var(--foreground);
+        }
+
+        code, pre {
+            font-family: var(--font-mono);
+        }
+
+        /* Utility overrides */
+        .text-muted {
+            color: var(--muted-foreground);
+        }
+    </style>
+
 </head>
-<body>
+<body data-theme="dark">
 
     <header class="site-header">
         <div class="container">
@@ -31,42 +220,52 @@
 
     <main class="container" >
 
-    <div style="padding-top: var(--space-xl);">
+    <div style="padding-top: var(--space-xl); max-width: 800px; margin: 0 auto;">
         <h1>Writing</h1>
-        <p class="hero-subtitle" style="margin-bottom: var(--space-xl);">
+        <p class="text-muted" style="margin-bottom: var(--space-xl);">
             Thoughts on backend architecture, data reliability, and engineering practices.
         </p>
 
         <!-- Search Bar -->
-        <div style="margin-bottom: var(--space-lg); max-width: 800px;">
-            <input type="text" id="search-input" placeholder="Search articles..."
-                style="width: 100%; padding: var(--space-sm); border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-primary); font-family: var(--font-sans); font-size: 1rem;">
+        <div style="margin-bottom: var(--space-lg);">
+            <label data-field>
+                <input type="text" id="search-input" placeholder="Search articles..." style="width: 100%;" />
+            </label>
         </div>
 
-        <div id="articles-list" class="card-grid" style="grid-template-columns: 1fr; max-width: 800px;">
+        <div id="articles-list" style="display: flex; flex-direction: column; gap: var(--space-md);">
 
-            <article class="card" style="flex-direction: row; align-items: center; border: none; background: transparent; padding: var(--space-md) 0; border-bottom: 1px solid var(--border-color); border-radius: 0;">
-                <div style="flex: 1;">
-                    <div class="card-meta">Backend Engineering • <time>2024-03-05</time> • 10 min</div>
-                    <h3><a href="python-performance.html">Python Performance Optimization Patterns</a></h3>
-                    <p class="card-excerpt">Practical techniques for making Python applications faster without premature optimization.</p>
-                </div>
+            <article class="card">
+                <header>
+                    <div class="text-muted" style="font-size: 0.875rem;">Backend Engineering • <time>2024-03-05</time> • 10 min</div>
+                    <h3><a href="python-performance.html" style="text-decoration: none; color: inherit;">Python Performance Optimization Patterns</a></h3>
+                </header>
+                <p>Practical techniques for making Python applications faster without premature optimization.</p>
+                <footer>
+                    <a href="python-performance.html" class="button small outline">Read article</a>
+                </footer>
             </article>
 
-            <article class="card" style="flex-direction: row; align-items: center; border: none; background: transparent; padding: var(--space-md) 0; border-bottom: 1px solid var(--border-color); border-radius: 0;">
-                <div style="flex: 1;">
-                    <div class="card-meta">Databases • <time>2024-02-10</time> • 12 min</div>
-                    <h3><a href="postgres-query-planning.html">PostgreSQL Query Planning Deep Dive</a></h3>
-                    <p class="card-excerpt">Understanding how PostgreSQL's query planner works and how to optimize your queries.</p>
-                </div>
+            <article class="card">
+                <header>
+                    <div class="text-muted" style="font-size: 0.875rem;">Databases • <time>2024-02-10</time> • 12 min</div>
+                    <h3><a href="postgres-query-planning.html" style="text-decoration: none; color: inherit;">PostgreSQL Query Planning Deep Dive</a></h3>
+                </header>
+                <p>Understanding how PostgreSQL's query planner works and how to optimize your queries.</p>
+                <footer>
+                    <a href="postgres-query-planning.html" class="button small outline">Read article</a>
+                </footer>
             </article>
 
-            <article class="card" style="flex-direction: row; align-items: center; border: none; background: transparent; padding: var(--space-md) 0; border-bottom: 1px solid var(--border-color); border-radius: 0;">
-                <div style="flex: 1;">
-                    <div class="card-meta">Data Engineering • <time>2024-01-15</time> • 8 min</div>
-                    <h3><a href="batch-data-pipelines.html">Building Batch Data Pipelines</a></h3>
-                    <p class="card-excerpt">Designing maintainable batch processing systems with idempotency, error handling, and monitoring.</p>
-                </div>
+            <article class="card">
+                <header>
+                    <div class="text-muted" style="font-size: 0.875rem;">Data Engineering • <time>2024-01-15</time> • 8 min</div>
+                    <h3><a href="batch-data-pipelines.html" style="text-decoration: none; color: inherit;">Building Batch Data Pipelines</a></h3>
+                </header>
+                <p>Designing maintainable batch processing systems with idempotency, error handling, and monitoring.</p>
+                <footer>
+                    <a href="batch-data-pipelines.html" class="button small outline">Read article</a>
+                </footer>
             </article>
 
         </div>
@@ -79,6 +278,7 @@
             <a href="https://github.com/dattskoushik" target="_blank">GitHub</a>
             <a href="https://linkedin.com/in/suchindrakoushik" target="_blank">LinkedIn</a>
             <a href="https://instagram.com/dattskoushik" target="_blank">Instagram</a>
+            <a href="mailto:suchindra.formal@outlook.com">Email</a>
         </div>
         <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved.</p>
     </footer>
@@ -111,16 +311,19 @@
 
         function render(items) {
             if (items.length === 0) {
-                list.innerHTML = '<p style="color: var(--text-secondary);">No articles found.</p>';
+                list.innerHTML = '<p class="text-muted">No articles found.</p>';
                 return;
             }
             list.innerHTML = items.map(item => `
-                <article class="card" style="flex-direction: row; align-items: center; border: none; background: transparent; padding: var(--space-md) 0; border-bottom: 1px solid var(--border-color); border-radius: 0;">
-                    <div style="flex: 1;">
-                        <div class="card-meta">${item.category} • <time>${item.date}</time> • ${item.readTime}</div>
-                        <h3><a href="${item.url}">${item.title}</a></h3>
-                        <p class="card-excerpt">${item.summary}</p>
-                    </div>
+                <article class="card">
+                    <header>
+                        <div class="text-muted" style="font-size: 0.875rem;">${item.category} • <time>${item.date}</time> • ${item.readTime}</div>
+                        <h3><a href="${item.url}" style="text-decoration: none; color: inherit;">${item.title}</a></h3>
+                    </header>
+                    <p>${item.summary}</p>
+                    <footer>
+                        <a href="${item.url}" class="button small outline">Read article</a>
+                    </footer>
                 </article>
             `).join('');
         }

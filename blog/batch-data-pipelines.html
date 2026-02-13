@@ -8,13 +8,202 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/main.css">
+
+    <!-- Oat UI -->
+    <link rel="stylesheet" href="../assets/vendor/oat.min.css">
+    <script src="../assets/vendor/oat.min.js" defer></script>
+
     <script src="../assets/js/theme.js"></script>
+
+    <style>
+        :root {
+            /* Fonts */
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            /* Spacing overrides if needed */
+            --space-xl: 4rem;
+            --space-lg: 2.5rem;
+            --space-md: 1.5rem;
+            --space-sm: 1rem;
+        }
+
+        /* Dark Theme (Default) */
+        [data-theme="dark"] {
+            --background: #0a0a0a;
+            --foreground: #ededed;
+            --card: #111111;
+            --card-foreground: #ededed;
+            --muted: #1f1f23;
+            --muted-foreground: #a1a1aa;
+            --border: #27272a;
+            --primary: #ffffff;
+            --primary-foreground: #000000;
+            --secondary: #1f1f23;
+            --secondary-foreground: #ededed;
+            --accent: #ffffff;
+            --accent-foreground: #000000;
+            --ring: #27272a;
+            --input: #1f1f23;
+            /* Custom */
+            --header-bg: rgba(10, 10, 10, 0.8);
+            --code-bg: #1f1f23;
+        }
+
+        /* Light Theme */
+        [data-theme="light"] {
+            --background: #f4f4f5;
+            --foreground: #18181b;
+            --card: #ffffff;
+            --card-foreground: #18181b;
+            --muted: #e4e4e7;
+            --muted-foreground: #52525b;
+            --border: #e4e4e7;
+            --primary: #000000;
+            --primary-foreground: #ffffff;
+            --secondary: #e4e4e7;
+            --secondary-foreground: #18181b;
+            --accent: #000000;
+            --accent-foreground: #ffffff;
+            --ring: #e4e4e7;
+            --input: #ffffff;
+            /* Custom */
+            --header-bg: rgba(244, 244, 245, 0.8);
+            --code-bg: #e4e4e7;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--foreground);
+            font-family: var(--font-sans);
+        }
+
+        /* Header Styling */
+        header.site-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: var(--header-bg);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: var(--space-sm) 0;
+        }
+
+        header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--foreground);
+        }
+
+        nav.nav-links {
+            display: flex;
+            gap: var(--space-md);
+            align-items: center;
+        }
+
+        nav.nav-links a {
+            text-decoration: none;
+            color: var(--muted-foreground);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        nav.nav-links a:hover, nav.nav-links a.active {
+            color: var(--foreground);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--foreground);
+            cursor: pointer;
+            padding: 0;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            nav.nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: var(--background);
+                border-bottom: 1px solid var(--border);
+                padding: var(--space-md);
+                gap: var(--space-sm);
+            }
+            nav.nav-links.active {
+                display: flex;
+            }
+        }
+
+        /* Footer */
+        .site-footer {
+            margin-top: var(--space-xl);
+            padding: var(--space-lg) 0;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--muted-foreground);
+            font-size: 0.875rem;
+        }
+        .social-links {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        .social-links a {
+            color: var(--muted-foreground);
+            text-decoration: none;
+        }
+        .social-links a:hover {
+            color: var(--foreground);
+        }
+
+        /* Theme Toggle */
+        #theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0;
+            margin-left: var(--space-sm);
+            color: var(--foreground);
+        }
+
+        /* Typography overrides */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-sans);
+            color: var(--foreground);
+        }
+
+        code, pre {
+            font-family: var(--font-mono);
+        }
+
+        /* Utility overrides */
+        .text-muted {
+            color: var(--muted-foreground);
+        }
+    </style>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
 
 </head>
-<body>
+<body data-theme="dark">
 
     <header class="site-header">
         <div class="container">
@@ -33,16 +222,17 @@
 
     <main class="container" >
 
-    <article class="hero" style="padding-bottom: var(--space-md); max-width: 800px; margin: 0 auto;">
-        <a href="index.html" style="font-size: 0.875rem; color: var(--text-muted); text-decoration: none; display: inline-block; margin-bottom: var(--space-sm);">&larr; Back to Writing</a>
-        <div class="hero-meta" style="margin-top: 0; margin-bottom: var(--space-sm);">
-            Data Engineering • 2024-01-15 • 8 min
-        </div>
-        <h1 style="margin-bottom: var(--space-md);">Building Batch Data Pipelines</h1>
-    </article>
+    <article style="max-width: 800px; margin: 0 auto; padding: var(--space-xl) 0;">
+        <header style="margin-bottom: var(--space-lg);">
+            <a href="index.html" class="text-muted" style="text-decoration: none; display: inline-block; margin-bottom: var(--space-sm);">&larr; Back to Writing</a>
+            <div class="text-muted" style="margin-bottom: var(--space-sm); font-size: 0.875rem;">
+                Data Engineering • 2024-01-15 • 8 min
+            </div>
+            <h1 style="margin-bottom: var(--space-md); font-size: 2.5rem; line-height: 1.2;">Building Batch Data Pipelines</h1>
+        </header>
 
-    <div class="post-content">
-        <p>Building a script to move data from A to B is easy. Building a system that moves data from A to B <em>reliably</em>, at scale, while handling network failures, bad data, and restarts without corruption? That is engineering.</p>
+        <div class="post-content" style="font-size: 1.125rem; line-height: 1.7;">
+            <p>Building a script to move data from A to B is easy. Building a system that moves data from A to B <em>reliably</em>, at scale, while handling network failures, bad data, and restarts without corruption? That is engineering.</p>
 <p>In the world of batch processing (ETL), "Reliability" usually boils down to two properties: <strong>Resilience</strong> (not crashing when things go wrong) and <strong>Correctness</strong> (not duplicating or losing data when things go wrong).</p>
 <p>This article explores the patterns required to sleep well at night while your pipelines run.</p>
 <h2>The Fallacy of "Retry Loop"</h2>
@@ -154,7 +344,8 @@ def calculate_daily_revenue(target_date: date):
 <h2>Conclusion</h2>
 <p>Reliable pipelines are boring. They don't crash on bad input; they just sidebar it. They don't double-count data on retries; they upsert. They don't fear restarts; they checkpoint.</p>
 <p>As engineers, our job is to anticipate failure. By designing for idempotency and observability (DLQs), we build systems that recover automatically, allowing us to focus on the next interesting problem.</p>
-    </div>
+        </div>
+    </article>
 
     </main>
 
@@ -163,6 +354,7 @@ def calculate_daily_revenue(target_date: date):
             <a href="https://github.com/dattskoushik" target="_blank">GitHub</a>
             <a href="https://linkedin.com/in/suchindrakoushik" target="_blank">LinkedIn</a>
             <a href="https://instagram.com/dattskoushik" target="_blank">Instagram</a>
+            <a href="mailto:suchindra.formal@outlook.com">Email</a>
         </div>
         <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved.</p>
     </footer>

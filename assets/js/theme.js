@@ -4,7 +4,7 @@
 
 (function() {
     function setTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
+        document.body.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
 
         // Update icon if it exists
@@ -18,11 +18,42 @@
 
     // Initialize
     const savedTheme = localStorage.getItem('theme') || 'dark';
-    setTheme(savedTheme);
+    // We need to wait for body to be available if this script is in head?
+    // base.html puts it in head.
+    // So we should run this on DOMContentLoaded or after body is parsed.
+    // However, to prevent flash, it's better to run it immediately if body exists, or wait.
+
+    // Check if body exists (it won't if script is in head)
+    if (document.body) {
+        setTheme(savedTheme);
+    } else {
+        // If script is in head, wait for body
+        document.addEventListener('DOMContentLoaded', () => {
+             // Re-check theme in case it wasn't set (though we want it set asap)
+             // But usually, setting it on body in head doesn't work.
+             // We should probably move the script to end of body or use documentElement as fallback?
+             // Oat requires it on BODY.
+             // If I set it on documentElement, Oat won't see it?
+             // Oat uses: [data-theme="dark"] { ... }
+             // Wait, Oat's CSS usually targets root or body.
+             // If Oat's CSS is like: `[data-theme="dark"] { --bg: ... }`, then it works on html too if variables are inherited.
+             // But my styles in base.html target `[data-theme="dark"]`.
+             // If I put `[data-theme="dark"]` on `html`, `body` inherits variables.
+             // Oat documentation says: "data-theme="dark" on body automatically uses the bundled dark theme."
+             // If Oat's CSS targets `body[data-theme="dark"]`, then it MUST be on body.
+             // If it targets `[data-theme="dark"]`, then html is fine.
+             // Let's assume it must be on body.
+
+             // To avoid flash of unstyled content (FOUC) or wrong theme:
+             // I should probably move the script to just after <body> open in base.html?
+             // Or just use DOMContentLoaded and accept a tiny delay.
+             setTheme(savedTheme);
+        });
+    }
 
     // Expose toggle function
     window.toggleTheme = function() {
-        const current = document.documentElement.getAttribute('data-theme');
+        const current = document.body.getAttribute('data-theme') || 'dark';
         const next = current === 'dark' ? 'light' : 'dark';
         setTheme(next);
     };
@@ -33,7 +64,7 @@
         const themeBtn = document.getElementById('theme-toggle');
         if (themeBtn) {
             themeBtn.onclick = window.toggleTheme;
-            const current = document.documentElement.getAttribute('data-theme');
+            const current = document.body.getAttribute('data-theme') || savedTheme;
             themeBtn.textContent = current === 'dark' ? '☀️' : '🌙';
         }
 
