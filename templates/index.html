@@ -8,10 +8,9 @@
     -->
 
     <section style="padding: var(--space-xl) 0; max-width: 800px;">
-        <h1 style="font-size: 2.5rem; line-height: 1.2; margin-bottom: var(--space-md);">Software Engineer - Data and Backend</h1>
+        <h1 style="font-size: 2.5rem; line-height: 1.2; margin-bottom: var(--space-md);">Building boring systems that scale.</h1>
         <p style="font-size: 1.25rem; color: var(--muted-foreground); margin-bottom: var(--space-md);">
-            5+ years of experience building reliable systems. <br>
-            Previously at Dell Technologies, currently at Clarivate.
+            Specializing in idempotent pipelines, distributed consensus, and code that lets you sleep at night.
         </p>
         <div style="color: var(--muted-foreground); font-family: var(--font-mono); font-size: 0.875rem;">
             <span>Python</span>
@@ -23,7 +22,7 @@
     </section>
 
     <section style="padding: var(--space-xl) 0;">
-        <h2 style="margin-bottom: var(--space-md);">Philosophy</h2>
+        <h2 style="margin-bottom: var(--space-md);">Engineering Principles</h2>
         <div class="row">
             <div class="col-4">
                 <h3>Systems Thinking</h3>
@@ -46,48 +45,42 @@
             <a href="blog/index.html" class="text-muted" style="font-size: 0.875rem;">View all &rarr;</a>
         </div>
 
-        <div class="row">
+        <div class="grid-2-col">
             <!-- Featured Post 1 -->
-            <div class="col-4">
-                <article class="card">
-                    <header>
-                        <div class="text-muted" style="font-size: 0.75rem;">Data Engineering</div>
-                        <h3><a href="blog/postgres-query-planning.html" style="text-decoration: none; color: inherit;">How PostgreSQL Query Planning Actually Works</a></h3>
-                    </header>
-                    <p style="font-size: 0.875rem;">Understanding the optimizer is the first step to writing high-performance SQL. Let's dive into cost models and access methods.</p>
-                    <footer>
-                         <a href="blog/postgres-query-planning.html" class="button small outline">Read article</a>
-                    </footer>
-                </article>
-            </div>
+            <article class="card">
+                <header>
+                    <div class="text-muted" style="font-size: 0.75rem;">Data Engineering</div>
+                    <h3><a href="blog/postgres-query-planning.html" style="text-decoration: none; color: inherit;">How PostgreSQL Query Planning Actually Works</a></h3>
+                </header>
+                <p style="font-size: 0.875rem;">Understanding the optimizer is the first step to writing high-performance SQL. Let's dive into cost models and access methods.</p>
+                <footer>
+                        <a href="blog/postgres-query-planning.html" class="button small outline">Read article</a>
+                </footer>
+            </article>
 
             <!-- Featured Post 2 -->
-            <div class="col-4">
-                <article class="card">
-                    <header>
-                        <div class="text-muted" style="font-size: 0.75rem;">Architecture</div>
-                        <h3><a href="blog/batch-data-pipelines.html" style="text-decoration: none; color: inherit;">Designing Reliable Batch Data Pipelines</a></h3>
-                    </header>
-                    <p style="font-size: 0.875rem;">Why "retry until success" isn't a strategy. Patterns for building robust ETL systems that sleep well at night.</p>
-                    <footer>
-                         <a href="blog/batch-data-pipelines.html" class="button small outline">Read article</a>
-                    </footer>
-                </article>
-            </div>
+            <article class="card">
+                <header>
+                    <div class="text-muted" style="font-size: 0.75rem;">Architecture</div>
+                    <h3><a href="blog/batch-data-pipelines.html" style="text-decoration: none; color: inherit;">Designing Reliable Batch Data Pipelines</a></h3>
+                </header>
+                <p style="font-size: 0.875rem;">Why "retry until success" isn't a strategy. Patterns for building robust ETL systems that sleep well at night.</p>
+                <footer>
+                        <a href="blog/batch-data-pipelines.html" class="button small outline">Read article</a>
+                </footer>
+            </article>
 
             <!-- Featured Post 3 -->
-            <div class="col-4">
-                <article class="card">
-                     <header>
-                        <div class="text-muted" style="font-size: 0.75rem;">Python</div>
-                        <h3><a href="blog/python-performance.html" style="text-decoration: none; color: inherit;">Python Performance: Where It Breaks and Why</a></h3>
-                    </header>
-                    <p style="font-size: 0.875rem;">Python is slow, but your code doesn't have to be. Examining the GIL, memory management, and when to drop to C.</p>
-                    <footer>
-                         <a href="blog/python-performance.html" class="button small outline">Read article</a>
-                    </footer>
-                </article>
-            </div>
+            <article class="card">
+                    <header>
+                    <div class="text-muted" style="font-size: 0.75rem;">Python</div>
+                    <h3><a href="blog/python-performance.html" style="text-decoration: none; color: inherit;">Python Performance: Where It Breaks and Why</a></h3>
+                </header>
+                <p style="font-size: 0.875rem;">Python is slow, but your code doesn't have to be. Examining the GIL, memory management, and when to drop to C.</p>
+                <footer>
+                        <a href="blog/python-performance.html" class="button small outline">Read article</a>
+                </footer>
+            </article>
         </div>
     </section>
 {% endblock %}

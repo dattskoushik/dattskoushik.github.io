@@ -7,7 +7,7 @@
     <meta name="description" content="About M S Suchindra Datta Koushik, Software engineer - Backend and Data.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- Oat UI -->
     <link rel="stylesheet" href="./assets/vendor/oat.min.css">
@@ -18,8 +18,9 @@
     <style>
         :root {
             /* Fonts */
-            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
+            --font-serif: 'Roboto Slab', serif;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
 
             /* Spacing overrides if needed */
             --space-xl: 4rem;
@@ -186,12 +187,34 @@
 
         /* Typography overrides */
         h1, h2, h3, h4, h5, h6 {
-            font-family: var(--font-sans);
+            font-family: var(--font-serif);
             color: var(--foreground);
+        }
+
+        nav.nav-links a, .button, button {
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        body {
+            line-height: 1.7;
         }
 
         code, pre {
             font-family: var(--font-mono);
+        }
+
+        /* Grid Utility */
+        .grid-2-col {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-md);
+        }
+        @media (min-width: 768px) {
+            .grid-2-col {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         /* Utility overrides */
@@ -277,19 +300,16 @@
     <div class="about-grid">
         <div class="bio">
             <p class="text-muted" style="color: var(--foreground); font-size: 1.25rem; margin-bottom: var(--space-md);">
-                I am a Software Engineer focused on Backend and Data, driven by a passion for building systems, pipelines, and infrastructure that are maintenance-friendly, reliable, and performant.
+                I optimize for maintenance, not hype.
             </p>
             <p>
-                With around 5 years of experience in production environments, I specialize in designing data pipelines that handle complexity with grace. My work focuses on the intersection of data engineering and backend infrastructure, ensuring that data is not just moved, but understood and delivered reliably.
+                Software engineering is an exercise in managing complexity. I build systems that survive the initial commit—pipelines that are idempotent, APIs that are predictable, and infrastructure that fails gracefully. With 5 years of production experience, I’ve learned that the most impressive code is the kind you don't have to wake up at 3 AM to fix.
             </p>
             <p>
-                I value code clarity, good relatable design, and understandable documentation. I believe that great engineering is more on boring side, because it just works based on what you write.
+                My work sits at the intersection of data engineering and distributed backends. I don't just move data; I ensure its correctness, consistency, and availability. From tuning PostgreSQL query plans to architecting resilient Kafka streams, I focus on the "boring" engineering that keeps businesses running.
             </p>
             <p>
-                My journey has taken me through a variety of domains, from building ETL workflows and distributed systems to optimizing SQL queries and deploying scalable microservices. I enjoy collaborating with cross-functional teams, mentoring junior engineers, and continuously learning new technologies to stay ahead in a rapidly evolving field.
-            </p>
-            <p>
-                Outside of work, I am passionate about sharing knowledge through technical writing, open-source contributions, and speaking at meetups. I believe in the power of community and strive to make technology accessible and impactful for everyone.
+                I write to clarify my thinking and contribute to the community. When I'm not in a terminal, I'm usually behind a camera or reading poetry, finding patterns in the world just as I do in code.
             </p>
             <h3>My Philosophy</h3>
             <p>
@@ -325,10 +345,10 @@
             When I'm not designing systems, I explore the world through a lens and words. Photography and poetry allow me to capture moments that code cannot.
         </p>
 
-        <div class="row" style="margin-top: var(--space-md);">
+        <div class="grid-2-col" style="margin-top: var(--space-md);">
 
             <!-- Photography -->
-            <div class="col-6">
+            <div>
                 <h3>Photography</h3>
                 <div class="gallery-grid">
 
@@ -350,7 +370,7 @@
             </div>
 
             <!-- Poetry -->
-            <div class="col-6">
+            <div>
                 <h3>Poetry</h3>
                 <div id="poetry-container">
 

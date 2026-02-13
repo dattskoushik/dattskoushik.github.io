@@ -7,7 +7,7 @@
     <meta name="description" content="Software projects and open source contributions by Suchindra Koushik.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- Oat UI -->
     <link rel="stylesheet" href="assets/vendor/oat.min.css">
@@ -18,8 +18,9 @@
     <style>
         :root {
             /* Fonts */
-            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
+            --font-serif: 'Roboto Slab', serif;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
 
             /* Spacing overrides if needed */
             --space-xl: 4rem;
@@ -186,8 +187,18 @@
 
         /* Typography overrides */
         h1, h2, h3, h4, h5, h6 {
-            font-family: var(--font-sans);
+            font-family: var(--font-serif);
             color: var(--foreground);
+        }
+
+        nav.nav-links a, .button, button {
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        body {
+            line-height: 1.7;
         }
 
         /* Utility overrides */
