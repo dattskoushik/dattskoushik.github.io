@@ -7,7 +7,7 @@
     <meta name="description" content="Designing maintainable batch processing systems with idempotency, error handling, and monitoring.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Zilla+Slab:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
     <!-- Oat UI -->
     <link rel="stylesheet" href="../assets/vendor/oat.min.css">
@@ -18,9 +18,9 @@
     <style>
         :root {
             /* Fonts */
-            --font-serif: 'Roboto Slab', serif;
+            --font-serif: 'Zilla Slab', serif;
             --font-sans: 'Inter', sans-serif;
-            --font-mono: 'Roboto Mono', monospace;
+            --font-mono: 'Fira Code', monospace;
 
             /* Spacing overrides if needed */
             --space-xl: 4rem;
@@ -31,46 +31,48 @@
 
         /* Dark Theme (Default) */
         [data-theme="dark"] {
-            --background: #0a0a0a;
-            --foreground: #ededed;
-            --card: #111111;
-            --card-foreground: #ededed;
-            --muted: #1f1f23;
-            --muted-foreground: #a1a1aa;
-            --border: #27272a;
-            --primary: #ffffff;
-            --primary-foreground: #000000;
-            --secondary: #1f1f23;
-            --secondary-foreground: #ededed;
-            --accent: #ffffff;
-            --accent-foreground: #000000;
-            --ring: #27272a;
-            --input: #1f1f23;
+            --background: #0f172a;
+            --foreground: #d1d5db;
+            --card: #1e293b;
+            --card-foreground: #d1d5db;
+            --muted: #1e293b;
+            --muted-foreground: #9ca3af;
+            --border: #334155;
+            --primary: #4ade80;
+            --primary-foreground: #0f172a;
+            --secondary: #1e293b;
+            --secondary-foreground: #d1d5db;
+            --accent: #4ade80;
+            --accent-foreground: #0f172a;
+            --ring: #4ade80;
+            --input: #1e293b;
             /* Custom */
-            --header-bg: rgba(10, 10, 10, 0.8);
-            --code-bg: #1f1f23;
+            --header-bg: #0f172a;
+            --code-bg: #1e293b;
+            --terminal-green: #4ade80;
         }
 
         /* Light Theme */
         [data-theme="light"] {
-            --background: #f4f4f5;
-            --foreground: #18181b;
+            --background: #f8fafc;
+            --foreground: #334155;
             --card: #ffffff;
-            --card-foreground: #18181b;
-            --muted: #e4e4e7;
-            --muted-foreground: #52525b;
-            --border: #e4e4e7;
-            --primary: #000000;
+            --card-foreground: #334155;
+            --muted: #f1f5f9;
+            --muted-foreground: #64748b;
+            --border: #e2e8f0;
+            --primary: #10b981;
             --primary-foreground: #ffffff;
-            --secondary: #e4e4e7;
-            --secondary-foreground: #18181b;
-            --accent: #000000;
+            --secondary: #f1f5f9;
+            --secondary-foreground: #334155;
+            --accent: #10b981;
             --accent-foreground: #ffffff;
-            --ring: #e4e4e7;
+            --ring: #10b981;
             --input: #ffffff;
             /* Custom */
-            --header-bg: rgba(244, 244, 245, 0.8);
-            --code-bg: #e4e4e7;
+            --header-bg: #f8fafc;
+            --code-bg: #f1f5f9;
+            --terminal-green: #10b981;
         }
 
         body {
@@ -85,38 +87,69 @@
             top: 0;
             z-index: 50;
             background-color: var(--header-bg);
-            backdrop-filter: blur(8px);
             border-bottom: 1px solid var(--border);
-            padding: var(--space-sm) 0;
+            padding: 1rem 0;
         }
 
         header .container {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            max-width: 1152px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
         }
 
         .logo {
             font-weight: 700;
             text-decoration: none;
-            color: var(--foreground);
+            color: #ffffff;
+            font-family: var(--font-mono);
+            font-size: 1.125rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        [data-theme="light"] .logo {
+            color: #000000;
+        }
+
+        .logo-prefix {
+            color: var(--terminal-green);
         }
 
         nav.nav-links {
             display: flex;
             gap: var(--space-md);
             align-items: center;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            text-transform: none;
+            letter-spacing: normal;
         }
 
         nav.nav-links a {
             text-decoration: none;
-            color: var(--muted-foreground);
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        nav.nav-links a:hover, nav.nav-links a.active {
             color: var(--foreground);
+            transition: color 0.2s;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+
+        nav.nav-links a:hover {
+            color: var(--terminal-green);
+        }
+
+        nav.nav-links a.active {
+            background-color: rgba(74, 222, 128, 0.2);
+            color: var(--terminal-green);
+        }
+
+        [data-theme="light"] nav.nav-links a.active {
+            background-color: rgba(16, 185, 129, 0.2);
         }
 
         /* Mobile Menu */
@@ -153,22 +186,43 @@
 
         /* Footer */
         .site-footer {
-            margin-top: var(--space-xl);
-            padding: var(--space-lg) 0;
+            margin-top: auto;
+            padding: 2rem 0;
             border-top: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background-color: var(--background);
             color: var(--muted-foreground);
-            font-size: 0.875rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            width: 100%;
         }
-        .social-links {
+
+        .site-footer .container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
             display: flex;
-            gap: var(--space-sm);
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-success {
+            color: var(--terminal-green);
+        }
+
+        .social-links {
+            display: inline-flex;
+            gap: 0.5rem;
         }
         .social-links a {
             color: var(--muted-foreground);
             text-decoration: none;
+            transition: color 0.2s;
         }
         .social-links a:hover {
             color: var(--foreground);
@@ -191,10 +245,8 @@
             color: var(--foreground);
         }
 
-        nav.nav-links a, .button, button {
+        .button, button {
             font-family: var(--font-mono);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
         }
 
         body {
@@ -221,29 +273,161 @@
         .text-muted {
             color: var(--muted-foreground);
         }
+
+        .browser-top-bar {
+            background-color: #020617;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+            height: 2.5rem;
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+            color: #9ca3af;
+            user-select: none;
+        }
+
+        [data-theme="light"] .browser-top-bar {
+            background-color: #e2e8f0;
+            color: #64748b;
+        }
+
+        .browser-tab {
+            background-color: var(--card);
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem 0.375rem 0 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-top: 1px solid var(--border);
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid transparent;
+            position: relative;
+            top: 1px;
+        }
+
+        .browser-tab-close {
+            color: #6b7280;
+            cursor: pointer;
+        }
+        .browser-tab-close:hover {
+            color: #d1d5db;
+        }
+
+        .browser-add {
+            padding: 0 0.75rem;
+            cursor: pointer;
+        }
+        .browser-add:hover {
+            color: #d1d5db;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #020617;
+        }
+        [data-theme="light"] ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        [data-theme="light"] ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--terminal-green);
+        }
+
+        /* Terminal Window Global Utility */
+        .terminal-window {
+            border: 1px solid rgba(74, 222, 128, 0.4);
+            background: var(--card);
+            border-radius: 8px;
+            box-shadow: 0 0 15px 2px rgba(74, 222, 128, 0.2), inset 0 0 10px rgba(74, 222, 128, 0.1);
+            position: relative;
+        }
+        [data-theme="light"] .terminal-window {
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 0 15px 2px rgba(16, 185, 129, 0.1), inset 0 0 10px rgba(16, 185, 129, 0.05);
+        }
+
+        .terminal-window::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px; right: -1px; bottom: -1px;
+            border-radius: 9px;
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.4) 0%, rgba(74, 222, 128, 0) 100%);
+            z-index: -1;
+            opacity: 0.5;
+        }
+        [data-theme="light"] .terminal-window::before {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.4) 0%, rgba(16, 185, 129, 0) 100%);
+        }
+
+        .card-border-glow {
+            border: 1px solid rgba(74, 222, 128, 0.4);
+            box-shadow: 0 0 15px 2px rgba(74, 222, 128, 0.2), inset 0 0 10px rgba(74, 222, 128, 0.1);
+            transition: all 0.3s ease;
+            background: var(--card);
+        }
+        [data-theme="light"] .card-border-glow {
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 0 15px 2px rgba(16, 185, 129, 0.1), inset 0 0 10px rgba(16, 185, 129, 0.05);
+        }
+
+        .card-border-glow:hover {
+            border-color: rgba(74, 222, 128, 0.8);
+            box-shadow: 0 0 25px 4px rgba(74, 222, 128, 0.3), inset 0 0 15px rgba(74, 222, 128, 0.2);
+            transform: translateY(-2px);
+        }
+        [data-theme="light"] .card-border-glow:hover {
+            border-color: rgba(16, 185, 129, 0.8);
+            box-shadow: 0 0 25px 4px rgba(16, 185, 129, 0.2), inset 0 0 15px rgba(16, 185, 129, 0.1);
+        }
     </style>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
 
 </head>
-<body data-theme="dark">
+<body data-theme="dark" style="display: flex; flex-direction: column; min-height: 100vh;">
+
+    <!-- BEGIN: Browser Top Bar (Decorative) -->
+    <div class="browser-top-bar">
+        <div class="browser-tab">
+            <span>Suchindra Koushik</span>
+            <span class="browser-tab-close">×</span>
+        </div>
+        <div class="browser-add">+</div>
+    </div>
+    <!-- END: Browser Top Bar -->
 
     <header class="site-header">
         <div class="container">
-            <a href="../index.html" class="logo">Suchindra Koushik</a>
+            <a href="../index.html" class="logo">
+                <span class="logo-prefix">&gt;_</span>
+                <span>Suchindra Koushik</span>
+            </a>
             <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">☰</button>
             <nav class="nav-links">
-                <a href="../index.html" class="">Home</a>
-                <a href="../blog/index.html" class="active">Writing</a>
-                <a href="../projects.html" class="">Projects</a>
-                <a href="../about.html" class="">About</a>
-                <a href="../resume.html" class="">Resume</a>
-                <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+                <a href="../index.html" class="">~/home</a>
+                <a href="../projects.html" class="">~/projects</a>
+                <a href="../blog/index.html" class="active">~/thoughts</a>
+                <a href="../about.html" class="">~/about</a>
+                <a href="../resume.html" class="">~/resume</a>
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-left: 1rem; padding-left: 1rem; border-left: 1px solid var(--border);">
+                    <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+                </div>
             </nav>
         </div>
     </header>
 
-    <main class="container" >
+    <main class="container" style="flex-grow: 1; max-width: 1024px; margin: 0 auto; padding: 3rem 1.5rem; ">
 
     <article style="max-width: 800px; margin: 0 auto; padding: var(--space-xl) 0;">
         <header style="margin-bottom: var(--space-lg);">
@@ -372,14 +556,24 @@ def calculate_daily_revenue(target_date: date):
 
     </main>
 
-    <footer class="site-footer container">
-        <div class="social-links">
-            <a href="https://github.com/dattskoushik" target="_blank">GitHub</a>
-            <a href="https://linkedin.com/in/suchindrakoushik" target="_blank">LinkedIn</a>
-            <a href="https://instagram.com/dattskoushik" target="_blank">Instagram</a>
-            <a href="mailto:suchindra.formal@outlook.com">Email</a>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-status">
+                <span class="footer-success">[SUCCESS]</span>
+                <span>Build completed. Status: Deploying to production. | &gt; git commit -m "Update portfolio" |</span>
+            </div>
+            <div>
+                <span>Contact: 'mailto:suchindra.formal@outlook.com' | Links: </span>
+                <span class="social-links">
+                    <a href="https://github.com/dattskoushik" target="_blank">[GitHub]</a>,
+                    <a href="https://linkedin.com/in/suchindrakoushik" target="_blank">[LinkedIn]</a>,
+                    <a href="https://instagram.com/dattskoushik" target="_blank">[Instagram]</a>
+                </span> |
+            </div>
+            <div>
+                <span>&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved. [Build ID: 8a7f4e]</span>
+            </div>
         </div>
-        <p class="copyright">&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved.</p>
     </footer>
 
 
@@ -392,3 +586,12 @@ def calculate_daily_revenue(target_date: date):
 
 </body>
 </html>
+
+    <style data-purpose="cleanup-styles">
+        .hero-section {
+            margin-bottom: 6rem;
+            padding: 2rem 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+    </style>
