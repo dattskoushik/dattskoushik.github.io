@@ -1,86 +1,126 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <!--
-        NOTE: This template is prepared for future integration with build_static.py.
-        Currently, the homepage is a static file (index.html) because the build script
-        does not generate the root index. If you update the build script, you can use this template.
-    -->
-
-    <section style="padding: var(--space-xl) 0; max-width: 800px;">
-        <h1 style="font-size: 2.5rem; line-height: 1.2; margin-bottom: var(--space-md);">Building boring systems that scale.</h1>
-        <p style="font-size: 1.25rem; color: var(--muted-foreground); margin-bottom: var(--space-md);">
-            Specializing in idempotent pipelines, distributed consensus, and code that lets you sleep at night.
-        </p>
-        <div style="color: var(--muted-foreground); font-family: var(--font-mono); font-size: 0.875rem;">
-            <span>Python</span>
-            <span>•</span>
-            <span>SQL</span>
-            <span>•</span>
-            <span>Distributed Systems</span>
+    <!-- BEGIN: Hero Section -->
+    <section class="terminal-window hero-section" >
+        <!-- Traffic lights -->
+        <div style="display: flex; gap: 0.5rem; position: absolute; top: 1rem; left: 1rem;">
+            <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: #ef4444;"></div>
+            <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: #eab308;"></div>
+            <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: #22c55e;"></div>
         </div>
-    </section>
-
-    <section style="padding: var(--space-xl) 0;">
-        <h2 style="margin-bottom: var(--space-md);">Engineering Principles</h2>
-        <div class="row">
-            <div class="col-4">
-                <h3>Systems Thinking</h3>
-                <p>Software doesn't exist in a vacuum. I design with the entire lifecycle in mind—from observability to maintenance and failure modes.</p>
-            </div>
-            <div class="col-4">
-                <h3>Data Reliability</h3>
-                <p>In data engineering, correctness is paramount. I build pipelines that are idempotent, testable, and resilient to change.</p>
-            </div>
-            <div class="col-4">
-                <h3>Performance</h3>
-                <p>Optimization isn't magic. It's understanding the machine, the database, and the network. I dig deep to find the bottlenecks.</p>
+        <div style="margin-top: 2rem; position: relative; z-index: 10;">
+            <h1 style="font-family: var(--font-serif); font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.025em;">
+                Building boring systems<br/>that scale.
+            </h1>
+            <p style="font-size: 1.125rem; color: var(--muted-foreground); max-width: 48rem; margin-bottom: 2.5rem; line-height: 1.625;">
+                Senior Backend &amp; Data Engineer specializing in idempotent pipelines, distributed consensus, and high-reliability infrastructure that lets you sleep at night.
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; font-family: var(--font-mono); font-size: 0.875rem; color: #9ca3af;">
+                <span style="padding: 0.25rem 0.5rem; background-color: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 0.25rem;">[ Python ]</span>
+                <span style="padding: 0.25rem 0.5rem; background-color: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 0.25rem;">[ SQL ]</span>
+                <span style="padding: 0.25rem 0.5rem; background-color: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 0.25rem;">[ Go ]</span>
+                <span style="padding: 0.25rem 0.5rem; background-color: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 0.25rem;">[ Kubernetes ]</span>
+                <span style="padding: 0.25rem 0.5rem; background-color: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 0.25rem;">[ Apache Beam ]</span>
             </div>
         </div>
     </section>
+    <!-- END: Hero Section -->
 
-    <section style="padding: var(--space-xl) 0;">
-        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--space-md);">
-            <h2>Selected Writing</h2>
-            <a href="blog/index.html" class="text-muted" style="font-size: 0.875rem;">View all &rarr;</a>
+    <!-- BEGIN: Engineering Principles -->
+    <section style="margin-bottom: 6rem;">
+        <h2 style="font-family: var(--font-serif); font-size: 1.875rem; font-weight: 700; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">Engineering Principles</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative;">
+
+            <div style="padding: 2rem; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); box-sizing: border-box;" class="principle-cell">
+                <h3 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Systems Thinking</h3>
+                <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin: 0;">
+                    Every component is part of a larger ecosystem. Designing for observability, resilience, and graceful failure from day one, not as an afterthought.
+                </p>
+            </div>
+
+            <div style="padding: 2rem; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); box-sizing: border-box;" class="principle-cell">
+                <h3 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Data Reliability</h3>
+                <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin: 0;">
+                    Correctness is paramount. Building idempotent pipelines with strong consistency guarantees, ensuring data integrity across distributed systems.
+                </p>
+            </div>
+
+            <div style="padding: 2rem; border-bottom: 1px solid var(--border); box-sizing: border-box;" class="principle-cell-last">
+                <h3 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Performance</h3>
+                <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin: 0;">
+                    Optimization is a discipline, not magic. Understanding the full stack, from network protocols to database internals, to eliminate bottlenecks.
+                </p>
+            </div>
+
+            <style>
+                @media (min-width: 768px) {
+                    .principle-cell { border-bottom: none !important; }
+                    .principle-cell-last { border-bottom: none !important; }
+                }
+            </style>
         </div>
+    </section>
+    <!-- END: Engineering Principles -->
+
+    <!-- BEGIN: Featured Projects -->
+    <section style="margin-bottom: 6rem;">
+        <h2 style="font-family: var(--font-serif); font-size: 1.875rem; font-weight: 700; margin-bottom: 2rem;">Featured Projects</h2>
 
         <div class="grid-2-col">
-            <!-- Featured Post 1 -->
-            <article class="card">
-                <header>
-                    <div class="text-muted" style="font-size: 0.75rem;">Data Engineering</div>
-                    <h3><a href="blog/postgres-query-planning.html" style="text-decoration: none; color: inherit;">How PostgreSQL Query Planning Actually Works</a></h3>
-                </header>
-                <p style="font-size: 0.875rem;">Understanding the optimizer is the first step to writing high-performance SQL. Let's dive into cost models and access methods.</p>
-                <footer>
-                        <a href="blog/postgres-query-planning.html" class="button small outline">Read article</a>
-                </footer>
-            </article>
+            <!-- Project 1 -->
+            <div class="card-border-glow" style="padding: 2rem; border-radius: 0.5rem; display: flex; flex-direction: column; height: 100%;">
+                <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Idempotent Event Processor</h3>
+                <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin-bottom: 2rem; flex-grow: 1;">
+                    A high-throughput, distributed event processing system built with Go and Kafka, handling billions of events daily with guaranteed exactly-once semantics.
+                </p>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: #6b7280; margin-top: auto;">
+                    <span>[ Go ]</span>
+                    <span>[ Kafka ]</span>
+                    <span>[ Docker ]</span>
+                </div>
+            </div>
 
-            <!-- Featured Post 2 -->
-            <article class="card">
-                <header>
-                    <div class="text-muted" style="font-size: 0.75rem;">Architecture</div>
-                    <h3><a href="blog/batch-data-pipelines.html" style="text-decoration: none; color: inherit;">Designing Reliable Batch Data Pipelines</a></h3>
-                </header>
-                <p style="font-size: 0.875rem;">Why "retry until success" isn't a strategy. Patterns for building robust ETL systems that sleep well at night.</p>
-                <footer>
-                        <a href="blog/batch-data-pipelines.html" class="button small outline">Read article</a>
-                </footer>
-            </article>
-
-            <!-- Featured Post 3 -->
-            <article class="card">
-                    <header>
-                    <div class="text-muted" style="font-size: 0.75rem;">Python</div>
-                    <h3><a href="blog/python-performance.html" style="text-decoration: none; color: inherit;">Python Performance: Where It Breaks and Why</a></h3>
-                </header>
-                <p style="font-size: 0.875rem;">Python is slow, but your code doesn't have to be. Examining the GIL, memory management, and when to drop to C.</p>
-                <footer>
-                        <a href="blog/python-performance.html" class="button small outline">Read article</a>
-                </footer>
-            </article>
+            <!-- Project 2 -->
+            <div class="card-border-glow" style="padding: 2rem; border-radius: 0.5rem; display: flex; flex-direction: column; height: 100%;">
+                <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Distributed Consensus Engine</h3>
+                <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin-bottom: 2rem; flex-grow: 1;">
+                    Implemented a simplified Raft consensus algorithm in Python for a distributed key-value store, focusing on leader election and log replication.
+                </p>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: #6b7280; margin-top: auto;">
+                    <span>[ Python ]</span>
+                    <span>[ gRPC ]</span>
+                    <span>[ Redis ]</span>
+                </div>
+            </div>
         </div>
     </section>
+    <!-- END: Featured Projects -->
+
+    <!-- BEGIN: Latest Thoughts -->
+    <section style="margin-bottom: 6rem;">
+        <h2 style="font-family: var(--font-serif); font-size: 1.875rem; font-weight: 700; margin-bottom: 2rem;">Latest Thoughts</h2>
+
+        <div class="grid-2-col">
+            <!-- Article 1 -->
+            <a href="blog/postgres-query-planning.html" class="card-border-glow" style="display: block; padding: 2rem; border-radius: 0.5rem; text-decoration: none; display: flex; flex-direction: column; height: 100%;">
+                <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--foreground); transition: color 0.2s;" onmouseover="this.style.color='var(--terminal-green)'" onmouseout="this.style.color='var(--foreground)'">How Postgres Query Planning Actually Works</h3>
+                <div style="font-family: var(--font-mono); font-size: 0.75rem; color: #6b7280; margin-bottom: 1rem;">Oct 26, 2024</div>
+                <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin: 0;">
+                    Understanding the optimizer's cost models is critical for writing high-performance queries. We dive deep into access methods and index utilization.
+                </p>
+            </a>
+
+            <!-- Article 2 -->
+            <a href="blog/batch-data-pipelines.html" class="card-border-glow" style="display: block; padding: 2rem; border-radius: 0.5rem; text-decoration: none; display: flex; flex-direction: column; height: 100%;">
+                <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--foreground); transition: color 0.2s;" onmouseover="this.style.color='var(--terminal-green)'" onmouseout="this.style.color='var(--foreground)'">Designing Reliable Batch Data Pipelines</h3>
+                <div style="font-family: var(--font-mono); font-size: 0.75rem; color: #6b7280; margin-bottom: 1rem;">Sep 14, 2024</div>
+                <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin: 0;">
+                    Why "retry until success" is not a strategy. Exploring patterns for building robust, recoverable ETL workflows that don't wake you up at 3 AM.
+                </p>
+            </a>
+        </div>
+    </section>
+    <!-- END: Latest Thoughts -->
 {% endblock %}
