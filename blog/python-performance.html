@@ -416,10 +416,12 @@
             <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">☰</button>
             <nav class="nav-links">
                 <a href="../index.html" class="">~/home</a>
-                <a href="../projects.html" class="">~/projects</a>
-                <a href="../blog/index.html" class="active">~/thoughts</a>
                 <a href="../about.html" class="">~/about</a>
-                <a href="../resume.html" class="">~/resume</a>
+                <a href="../index.html#skills">~/skills</a>
+                <a href="../projects.html" class="">~/projects</a>
+                <a href="../resume.html" class="">~/experience</a>
+                <a href="../index.html#engineering">~/engineering</a>
+                <a href="../index.html#contact">~/contact</a>
                 <div style="display: flex; align-items: center; gap: 0.5rem; margin-left: 1rem; padding-left: 1rem; border-left: 1px solid var(--border);">
                     <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
                 </div>
@@ -548,20 +550,20 @@ def serialize(data):
 
     <footer class="site-footer">
         <div class="container">
-            <div class="footer-status">
+            <div class="footer-status" style="margin-bottom: 1rem;">
                 <span class="footer-success">[SUCCESS]</span>
-                <span>Build completed. Status: Deploying to production. | &gt; git commit -m "Update portfolio" |</span>
+                <span>System operational. | Contact established.</span>
             </div>
-            <div>
-                <span>Contact: 'mailto:suchindra.formal@outlook.com' | Links: </span>
-                <span class="social-links">
-                    <a href="https://github.com/dattskoushik" target="_blank">[GitHub]</a>,
-                    <a href="https://linkedin.com/in/suchindrakoushik" target="_blank">[LinkedIn]</a>,
-                    <a href="https://instagram.com/dattskoushik" target="_blank">[Instagram]</a>
-                </span> |
+            <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem;">
+                <span><strong>Email:</strong> <a href="mailto:suchindra.formal@outlook.com" style="color: var(--foreground); text-decoration: none;">suchindra.formal@outlook.com</a></span>
+                <span><strong>Links:</strong>
+                    <a href="https://github.com/dattskoushik" target="_blank" style="color: var(--terminal-green); text-decoration: none; margin-right: 0.5rem;">[GitHub]</a>
+                    <a href="https://linkedin.com/in/suchindrakoushik" target="_blank" style="color: var(--terminal-green); text-decoration: none; margin-right: 0.5rem;">[LinkedIn]</a>
+                    <a href="/assets/resume/resume_.pdf" target="_blank" style="color: var(--terminal-green); text-decoration: none;">[Resume]</a>
+                </span>
             </div>
-            <div>
-                <span>&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved. [Build ID: 8a7f4e]</span>
+            <div style="margin-top: 1rem; color: var(--muted-foreground);">
+                <span>&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. Built for Reliability.</span>
             </div>
         </div>
     </footer>
