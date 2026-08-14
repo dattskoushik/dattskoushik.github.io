@@ -10,45 +10,54 @@
             <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: #22c55e;"></div>
         </div>
         <div style="margin-top: 2rem; position: relative; z-index: 10;">
-            <h1 style="font-family: var(--font-serif); font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.025em;">
-                Building boring systems<br/>that scale.
+            <h1 style="font-family: var(--font-serif); font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 0.5rem; letter-spacing: -0.025em;">
+                Suchindra Koushik
             </h1>
-            <p style="font-size: 1.125rem; color: var(--muted-foreground); max-width: 48rem; margin-bottom: 2.5rem; line-height: 1.625;">
-                Senior Backend &amp; Data Engineer specializing in idempotent pipelines, distributed consensus, and high-reliability infrastructure that lets you sleep at night.
+            <h2 style="font-family: var(--font-mono); font-size: 1.25rem; font-weight: 500; color: var(--terminal-green); margin-bottom: 1.5rem;">
+                &gt; Data Engineer
+            </h2>
+            <p style="font-size: 1.125rem; color: var(--muted-foreground); max-width: 48rem; margin-bottom: 2rem; line-height: 1.625;">
+                Data Engineer building reliable, scalable data pipelines and analytics systems with SQL, Python, and modern data platforms. Specializing in idempotent pipelines, distributed consensus, and high-reliability infrastructure.
             </p>
-            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; font-family: var(--font-mono); font-size: 0.875rem; color: #9ca3af;">
+            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; font-family: var(--font-mono); font-size: 0.875rem; color: #9ca3af; margin-bottom: 2.5rem;">
                 <span style="padding: 0.25rem 0.5rem; background-color: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 0.25rem;">[ Python ]</span>
                 <span style="padding: 0.25rem 0.5rem; background-color: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 0.25rem;">[ SQL ]</span>
-                <span style="padding: 0.25rem 0.5rem; background-color: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 0.25rem;">[ Apache Beam ]</span>
+                <span style="padding: 0.25rem 0.5rem; background-color: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 0.25rem;">[ Apache Spark ]</span>
+                <span style="padding: 0.25rem 0.5rem; background-color: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 0.25rem;">[ Kafka ]</span>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <a href="/projects.html" style="background-color: var(--terminal-green); color: #0f172a; padding: 0.75rem 1.5rem; border-radius: 0.25rem; font-family: var(--font-mono); text-decoration: none; font-weight: bold; transition: opacity 0.2s;">View Projects</a>
+                <a href="/assets/resume/resume_.pdf" target="_blank" style="background-color: transparent; border: 1px solid var(--terminal-green); color: var(--terminal-green); padding: 0.75rem 1.5rem; border-radius: 0.25rem; font-family: var(--font-mono); text-decoration: none; transition: background-color 0.2s;">Download Resume</a>
             </div>
         </div>
     </section>
     <!-- END: Hero Section -->
 
-    <!-- BEGIN: Engineering Principles -->
-    <section style="margin-bottom: 6rem;">
-        <h2 style="font-family: var(--font-serif); font-size: 1.875rem; font-weight: 700; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">Engineering Principles</h2>
+
+    <!-- BEGIN: Engineering Thinking -->
+    <section id="engineering" style="margin-bottom: 6rem;">
+        <h2 style="font-family: var(--font-serif); font-size: 1.875rem; font-weight: 700; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">How I Think About Data Systems</h2>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative;">
 
             <div style="padding: 2rem; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); box-sizing: border-box;" class="principle-cell">
-                <h3 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Systems Thinking</h3>
+                <h3 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Reliability & Idempotency</h3>
                 <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin: 0;">
-                    Every component is part of a larger ecosystem. Designing for observability, resilience, and graceful failure from day one, not as an afterthought.
+                    Systems fail. I design pipelines where "retry until success" is safe because operations are idempotent. Data integrity must survive network drops and process crashes.
                 </p>
             </div>
 
             <div style="padding: 2rem; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); box-sizing: border-box;" class="principle-cell">
-                <h3 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Data Reliability</h3>
+                <h3 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Data Quality</h3>
                 <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin: 0;">
-                    Correctness is paramount. Building idempotent pipelines with strong consistency guarantees, ensuring data integrity across distributed systems.
+                    Bad data is worse than no data. I enforce strict schema validation, null checks, and referential integrity before data reaches the gold tier or analytical warehouse.
                 </p>
             </div>
 
             <div style="padding: 2rem; border-bottom: 1px solid var(--border); box-sizing: border-box;" class="principle-cell-last">
-                <h3 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Performance</h3>
+                <h3 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Simplicity & Maintainability</h3>
                 <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin: 0;">
-                    Optimization is a discipline, not magic. Understanding the full stack, from network protocols to database internals, to eliminate bottlenecks.
+                    I avoid unnecessary architectural complexity. Using the right tool often means using the simpler tool. Code and schemas must remain readable and understandable by the entire team.
                 </p>
             </div>
 
@@ -60,41 +69,162 @@
             </style>
         </div>
     </section>
-    <!-- END: Engineering Principles -->
+    <!-- END: Engineering Thinking -->
+
+
+    <!-- BEGIN: Technical Skills -->
+    <section id="skills" style="margin-bottom: 6rem; padding-top: 2rem;">
+        <h2 style="font-family: var(--font-serif); font-size: 1.875rem; font-weight: 700; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">Technical Skills</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+
+            <!-- Programming -->
+            <div class="card-border-glow" style="padding: 1.5rem; border-radius: 0.5rem;">
+                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--terminal-green); margin-bottom: 1rem;">> Programming</h3>
+                <ul style="list-style: none; padding: 0; margin: 0; color: var(--muted-foreground); line-height: 1.8;">
+                    <li>Python</li>
+                    <li>SQL</li>
+                    <li>Java</li>
+                    <li>Bash</li>
+                </ul>
+            </div>
+
+            <!-- Data Processing -->
+            <div class="card-border-glow" style="padding: 1.5rem; border-radius: 0.5rem;">
+                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--terminal-green); margin-bottom: 1rem;">> Data Processing</h3>
+                <ul style="list-style: none; padding: 0; margin: 0; color: var(--muted-foreground); line-height: 1.8;">
+                    <li>Apache Spark</li>
+                    <li>Kafka</li>
+                    <li>PostgreSQL</li>
+                    <li>Elasticsearch</li>
+                </ul>
+            </div>
+
+            <!-- Data Engineering -->
+            <div class="card-border-glow" style="padding: 1.5rem; border-radius: 0.5rem;">
+                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--terminal-green); margin-bottom: 1rem;">> Data Engineering</h3>
+                <ul style="list-style: none; padding: 0; margin: 0; color: var(--muted-foreground); line-height: 1.8;">
+                    <li>ETL / ELT</li>
+                    <li>Data Pipelines</li>
+                    <li>Batch Processing</li>
+                    <li>Data Quality / Validation</li>
+                </ul>
+            </div>
+
+            <!-- Development & Infra -->
+            <div class="card-border-glow" style="padding: 1.5rem; border-radius: 0.5rem;">
+                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--terminal-green); margin-bottom: 1rem;">> Development</h3>
+                <ul style="list-style: none; padding: 0; margin: 0; color: var(--muted-foreground); line-height: 1.8;">
+                    <li>Docker & AWS</li>
+                    <li>Terraform</li>
+                    <li>CI/CD (GitHub Actions)</li>
+                    <li>Git & GitHub</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+    <!-- END: Technical Skills -->
+
+
 
     <!-- BEGIN: Featured Projects -->
-    <section style="margin-bottom: 6rem;">
+    <section id="projects" style="margin-bottom: 6rem;">
         <h2 style="font-family: var(--font-serif); font-size: 1.875rem; font-weight: 700; margin-bottom: 2rem;">Featured Projects</h2>
 
         <div class="grid-2-col">
             <!-- Project 1 -->
             <div class="card-border-glow" style="padding: 2rem; border-radius: 0.5rem; display: flex; flex-direction: column; height: 100%;">
-                <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Idempotent Event Processor</h3>
-                <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin-bottom: 2rem; flex-grow: 1;">
-                    A high-throughput, distributed event processing system built with Kafka, handling billions of events daily with guaranteed exactly-once semantics.
+                <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">TinyETL Framework</h3>
+                <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin-bottom: 1rem; flex-grow: 1;">
+                    A configuration-driven Python ETL framework enforcing idempotency and data validation before targeting the data warehouse.
                 </p>
+                <a href="/projects.html" style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); text-decoration: none; margin-bottom: 2rem;">View Case Study &rarr;</a>
                 <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: #6b7280; margin-top: auto;">
-                    <span>[ Kafka ]</span>
-                    <span>[ Docker ]</span>
+                    <span>[ Python ]</span>
+                    <span>[ Data Pipelines ]</span>
                 </div>
             </div>
 
             <!-- Project 2 -->
             <div class="card-border-glow" style="padding: 2rem; border-radius: 0.5rem; display: flex; flex-direction: column; height: 100%;">
-                <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Distributed Consensus Engine</h3>
-                <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin-bottom: 2rem; flex-grow: 1;">
-                    Implemented a simplified Raft consensus algorithm in Python for a distributed key-value store, focusing on leader election and log replication.
+                <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Raft KV Store</h3>
+                <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin-bottom: 1rem; flex-grow: 1;">
+                    A distributed key-value store implementing the Raft consensus algorithm for fault-tolerant state machine replication.
                 </p>
+                <a href="/projects.html" style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); text-decoration: none; margin-bottom: 2rem;">View Case Study &rarr;</a>
                 <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: #6b7280; margin-top: auto;">
                     <span>[ Python ]</span>
                     <span>[ gRPC ]</span>
-                    <span>[ Redis ]</span>
+                    <span>[ Distributed Systems ]</span>
                 </div>
             </div>
         </div>
     </section>
     <!-- END: Featured Projects -->
 
+
+
+    <!-- BEGIN: Proof of Work -->
+    <section style="margin-bottom: 6rem;">
+        <h2 style="font-family: var(--font-serif); font-size: 1.875rem; font-weight: 700; margin-bottom: 2rem;">Code Snippets</h2>
+
+        <div class="grid-2-col">
+            <!-- SQL Example -->
+            <div class="card-border-glow" style="padding: 1.5rem; border-radius: 0.5rem; background: var(--code-bg);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                    <h3 style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); margin: 0;">> SQL: Rolling Averages (CTE)</h3>
+                    <a href="https://github.com/dattskoushik" target="_blank" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted-foreground); text-decoration: none;">View on GitHub &rarr;</a>
+                </div>
+                <pre style="margin: 0; padding: 0; font-size: 0.75rem; color: var(--foreground); overflow-x: auto;"><code>WITH daily_sales AS (
+    SELECT
+        date_trunc('day', created_at) AS sale_date,
+        SUM(amount) as total_amount
+    FROM sales_fact
+    WHERE created_at >= current_date - interval '30 days'
+    GROUP BY 1
+)
+SELECT
+    sale_date,
+    total_amount,
+    AVG(total_amount) OVER (
+        ORDER BY sale_date
+        ROWS BETWEEN 6 PRECEDING AND CURRENT ROW
+    ) as rolling_7d_avg
+FROM daily_sales;</code></pre>
+            </div>
+
+            <!-- Python Example -->
+            <div class="card-border-glow" style="padding: 1.5rem; border-radius: 0.5rem; background: var(--code-bg);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                    <h3 style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); margin: 0;">> Python: Idempotent Load</h3>
+                    <a href="https://github.com/dattskoushik" target="_blank" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted-foreground); text-decoration: none;">View on GitHub &rarr;</a>
+                </div>
+                <pre style="margin: 0; padding: 0; font-size: 0.75rem; color: var(--foreground); overflow-x: auto;"><code>def load_data_idempotent(df: pd.DataFrame,
+                         table_name: str,
+                         engine: Engine) -> None:
+    """Upserts data ensuring no duplicates on retry."""
+    try:
+        with engine.begin() as conn:
+            # Create temporary staging table
+            df.to_sql('temp_stage', conn, if_exists='replace', index=False)
+
+            # Perform upsert (PostgreSQL specific)
+            upsert_sql = f"""
+                INSERT INTO {table_name}
+                SELECT * FROM temp_stage
+                ON CONFLICT (id) DO UPDATE
+                SET updated_at = EXCLUDED.updated_at,
+                    value = EXCLUDED.value;
+            """
+            conn.execute(text(upsert_sql))
+    except Exception as e:
+        logger.error(f"Load failed: {e}")
+        raise</code></pre>
+            </div>
+        </div>
+    </section>
+    <!-- END: Proof of Work -->
     <!-- BEGIN: Latest Thoughts -->
     <section style="margin-bottom: 6rem;">
         <h2 style="font-family: var(--font-serif); font-size: 1.875rem; font-weight: 700; margin-bottom: 2rem;">Latest Thoughts</h2>

@@ -414,11 +414,13 @@
             </a>
             <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">☰</button>
             <nav class="nav-links">
-                <a href="./index.html" class="">~/home</a>
-                <a href="./projects.html" class="active">~/projects</a>
-                <a href="./blog/index.html" class="">~/thoughts</a>
-                <a href="./about.html" class="">~/about</a>
-                <a href="./resume.html" class="">~/resume</a>
+                <a href="/index.html">~/home</a>
+                <a href="/about.html">~/about</a>
+                <a href="/index.html#skills">~/skills</a>
+                <a href="/projects.html" class="active">~/projects</a>
+                <a href="/resume.html">~/experience</a>
+                <a href="/index.html#engineering">~/engineering</a>
+                <a href="/index.html#contact">~/contact</a>
                 <div style="display: flex; align-items: center; gap: 0.5rem; margin-left: 1rem; padding-left: 1rem; border-left: 1px solid var(--border);">
                     <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
                 </div>
@@ -432,97 +434,135 @@
             Open source tools, system experiments, and other things I've built.
         </p>
 
-        <div class="row" style="row-gap: var(--space-md); display: flex; flex-wrap: wrap;">
 
-            <!-- Project 1 -->
-            <div class="col-6" style="padding: 0 0.75rem; box-sizing: border-box; width: 50%;">
-                <article class="card-border-glow" style="height: 100%; padding: 2rem; border-radius: 0.5rem; display: flex; flex-direction: column;">
-                    <header style="margin-bottom: 1rem;">
-                        <div style="font-family: var(--font-mono); font-size: 0.75rem; color: #6b7280; margin-bottom: 0.5rem;">[ Distributed Systems ]</div>
-                        <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; color: var(--foreground);">Distributed KV Store</h3>
-                    </header>
-                    <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin-bottom: 2rem; flex-grow: 1;">
-                        A distributed key-value store implementing Raft for consensus. Features strong consistency, leader election, and log replication.
+        <div class="row" style="row-gap: 3rem; display: flex; flex-direction: column;">
+
+            <!-- Project 1: TinyETL -->
+            <article class="card-border-glow" style="padding: 2.5rem; border-radius: 0.5rem; width: 100%;">
+                <header style="margin-bottom: 2rem;">
+                    <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); margin-bottom: 0.5rem;">[ Python ] [ Data Engineering ] [ Pipeline ]</div>
+                    <h3 style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--foreground); margin-bottom: 1rem;">TinyETL: Idempotent Data Framework</h3>
+                    <p style="color: var(--muted-foreground); font-size: 1.125rem; line-height: 1.625;">
+                        A lightweight, configuration-driven ETL framework designed for robust data processing with built-in retry mechanics and data quality checks.
                     </p>
-                    <footer style="margin-top: auto;">
-                        <a href="https://github.com/dattskoushik" target="_blank" class="button small outline" style="font-family: var(--font-mono); text-decoration: none; padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 0.25rem; color: var(--foreground); display: inline-block;">View Code &rarr;</a>
-                    </footer>
-                </article>
-            </div>
+                </header>
 
-            <!-- Project 2 -->
-            <div class="col-6" style="padding: 0 0.75rem; box-sizing: border-box; width: 50%;">
-                <article class="card-border-glow" style="height: 100%; padding: 2rem; border-radius: 0.5rem; display: flex; flex-direction: column;">
-                    <header style="margin-bottom: 1rem;">
-                        <div style="font-family: var(--font-mono); font-size: 0.75rem; color: #6b7280; margin-bottom: 0.5rem;">[ Python ] [ Data Engineering ]</div>
-                        <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; color: var(--foreground);">TinyETL</h3>
-                    </header>
-                    <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin-bottom: 2rem; flex-grow: 1;">
-                        A lightweight, configuration-driven ETL framework for small to medium scale data pipelines. Supports idempotent retries and pluggable backends.
+                <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem;">
+                    <div>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.5rem;">Problem</h4>
+                        <p style="color: var(--muted-foreground); font-size: 0.875rem;">Small to medium pipelines often rely on ad-hoc scripts that fail silently, lack retry logic, and pollute target tables with partial data writes.</p>
+                    </div>
+                    <div>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.5rem;">Architecture & Data Flow</h4>
+                        <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto;">
+[Source API/CSV] -> (Ingestion Task) -> [Raw Storage]
+       -> (Transformation & Validation) -> [Staging Area]
+       -> (Atomic Upsert) -> [Target PostgreSQL Warehouse]
+                        </pre>
+                    </div>
+                    <div>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.5rem;">Engineering Decisions</h4>
+                        <ul style="color: var(--muted-foreground); font-size: 0.875rem; padding-left: 1.5rem; margin: 0;">
+                            <li><strong>Idempotency:</strong> Implemented transaction-based upserts so failed jobs can be safely re-run without duplicating data.</li>
+                            <li><strong>Data Quality:</strong> Enforced schema validation and null-checks before writing to the target warehouse.</li>
+                            <li><strong>Simplicity:</strong> Avoided heavy orchestration tools like Airflow for scale-appropriate workloads, favoring a cron-friendly execution model.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <footer>
+                    <a href="https://github.com/dattskoushik" target="_blank" class="button small outline" style="font-family: var(--font-mono); text-decoration: none; padding: 0.75rem 1.5rem; border: 1px solid var(--terminal-green); background: rgba(74, 222, 128, 0.1); border-radius: 0.25rem; color: var(--terminal-green); display: inline-block; transition: all 0.2s;">View on GitHub &rarr;</a>
+                </footer>
+            </article>
+
+            <!-- Project 2: Distributed KV Store -->
+            <article class="card-border-glow" style="padding: 2.5rem; border-radius: 0.5rem; width: 100%;">
+                <header style="margin-bottom: 2rem;">
+                    <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); margin-bottom: 0.5rem;">[ Python ] [ Distributed Systems ] [ Redis ]</div>
+                    <h3 style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--foreground); margin-bottom: 1rem;">Raft-Based Distributed KV Store</h3>
+                    <p style="color: var(--muted-foreground); font-size: 1.125rem; line-height: 1.625;">
+                        A highly available distributed key-value store implementing the Raft consensus algorithm for fault-tolerant state machine replication.
                     </p>
-                    <footer style="margin-top: auto;">
-                        <a href="https://github.com/dattskoushik" target="_blank" class="button small outline" style="font-family: var(--font-mono); text-decoration: none; padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 0.25rem; color: var(--foreground); display: inline-block;">View Code &rarr;</a>
-                    </footer>
-                </article>
-            </div>
+                </header>
 
-            <!-- Project 3 -->
-            <div class="col-6" style="padding: 0 0.75rem; box-sizing: border-box; width: 50%; margin-top: 1.5rem;">
-                <article class="card-border-glow" style="height: 100%; padding: 2rem; border-radius: 0.5rem; display: flex; flex-direction: column;">
-                    <header style="margin-bottom: 1rem;">
-                        <div style="font-family: var(--font-mono); font-size: 0.75rem; color: #6b7280; margin-bottom: 0.5rem;">[ Rust ] [ CLI ]</div>
-                        <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; color: var(--foreground);">LogParser CLI</h3>
-                    </header>
-                    <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin-bottom: 2rem; flex-grow: 1;">
-                        A blazing fast log analysis tool written in Rust. Parses gigabytes of logs in seconds and supports SQL-like querying capabilities.
+                <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem;">
+                    <div>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.5rem;">Problem</h4>
+                        <p style="color: var(--muted-foreground); font-size: 0.875rem;">Single-node databases represent single points of failure. Replicating state reliably across a cluster of nodes requires handling network partitions and node crashes.</p>
+                    </div>
+                    <div>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.5rem;">Architecture & Data Flow</h4>
+                        <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto;">
+Client -> [Leader Node (gRPC)] -> (AppendEntries RPC) -> [Follower 1]
+                               -> (AppendEntries RPC) -> [Follower 2]
+       <- (Quorum Acknowledgment) <-
+       -> [State Machine (Redis backing)]
+                        </pre>
+                    </div>
+                    <div>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.5rem;">Engineering Decisions</h4>
+                        <ul style="color: var(--muted-foreground); font-size: 0.875rem; padding-left: 1.5rem; margin: 0;">
+                            <li><strong>Consensus:</strong> Implemented Raft over Paxos due to its understandability and strong leader-based replication model.</li>
+                            <li><strong>Communication:</strong> Used gRPC for efficient, strongly-typed remote procedure calls between cluster nodes.</li>
+                            <li><strong>Reliability:</strong> Persistent log entries ensure nodes can recover state after a crash before rejoining the cluster.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <footer>
+                    <a href="https://github.com/dattskoushik" target="_blank" class="button small outline" style="font-family: var(--font-mono); text-decoration: none; padding: 0.75rem 1.5rem; border: 1px solid var(--terminal-green); background: rgba(74, 222, 128, 0.1); border-radius: 0.25rem; color: var(--terminal-green); display: inline-block; transition: all 0.2s;">View on GitHub &rarr;</a>
+                </footer>
+            </article>
+
+            <!-- Project 3: PG-Stats-Monitor -->
+            <article class="card-border-glow" style="padding: 2.5rem; border-radius: 0.5rem; width: 100%;">
+                <header style="margin-bottom: 2rem;">
+                    <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); margin-bottom: 0.5rem;">[ PostgreSQL ] [ Performance ] [ SQL ]</div>
+                    <h3 style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--foreground); margin-bottom: 1rem;">PG-Stats-Monitor</h3>
+                    <p style="color: var(--muted-foreground); font-size: 1.125rem; line-height: 1.625;">
+                        A performance analysis tool for visualizing PostgreSQL internal statistics, lock contention, and query metrics in real-time.
                     </p>
-                    <footer style="margin-top: auto;">
-                        <a href="https://github.com/dattskoushik" target="_blank" class="button small outline" style="font-family: var(--font-mono); text-decoration: none; padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 0.25rem; color: var(--foreground); display: inline-block;">View Code &rarr;</a>
-                    </footer>
-                </article>
-            </div>
+                </header>
 
-            <!-- Project 4 -->
-            <div class="col-6" style="padding: 0 0.75rem; box-sizing: border-box; width: 50%; margin-top: 1.5rem;">
-                <article class="card-border-glow" style="height: 100%; padding: 2rem; border-radius: 0.5rem; display: flex; flex-direction: column;">
-                    <header style="margin-bottom: 1rem;">
-                        <div style="font-family: var(--font-mono); font-size: 0.75rem; color: #6b7280; margin-bottom: 0.5rem;">[ PostgreSQL ] [ Performance ]</div>
-                        <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; color: var(--foreground);">PG-Stats-Monitor</h3>
-                    </header>
-                    <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin-bottom: 2rem; flex-grow: 1;">
-                        A dashboard for visualizing PostgreSQL internal statistics, lock contention, and query performance metrics in real-time.
-                    </p>
-                    <footer style="margin-top: auto;">
-                        <a href="https://github.com/dattskoushik" target="_blank" class="button small outline" style="font-family: var(--font-mono); text-decoration: none; padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 0.25rem; color: var(--foreground); display: inline-block;">View Code &rarr;</a>
-                    </footer>
-                </article>
-            </div>
+                <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem;">
+                    <div>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.5rem;">Problem</h4>
+                        <p style="color: var(--muted-foreground); font-size: 0.875rem;">Debugging database performance issues requires deep visibility into `pg_stat_activity`, table bloat, and cache hit ratios, which are cumbersome to query manually during incidents.</p>
+                    </div>
+                    <div>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.5rem;">Engineering Decisions</h4>
+                        <ul style="color: var(--muted-foreground); font-size: 0.875rem; padding-left: 1.5rem; margin: 0;">
+                            <li><strong>Data Extraction:</strong> Utilized PostgreSQL internal views (pg_stat_user_tables, pg_stat_statements) with custom CTEs to compute cache hit ratios and sequential scan volumes.</li>
+                            <li><strong>Performance:</strong> Ensured the monitoring queries themselves are lightweight and non-blocking to avoid exacerbating contention.</li>
+                        </ul>
+                    </div>
+                </div>
 
-            <style>
-                @media (max-width: 768px) {
-                    .col-6 { width: 100% !important; margin-top: 1.5rem !important; }
-                    .col-6:first-child { margin-top: 0 !important; }
-                }
-            </style>
+                <footer>
+                    <a href="https://github.com/dattskoushik" target="_blank" class="button small outline" style="font-family: var(--font-mono); text-decoration: none; padding: 0.75rem 1.5rem; border: 1px solid var(--terminal-green); background: rgba(74, 222, 128, 0.1); border-radius: 0.25rem; color: var(--terminal-green); display: inline-block; transition: all 0.2s;">View on GitHub &rarr;</a>
+                </footer>
+            </article>
+
         </div>
+
     </main>
 
 <footer class="site-footer">
         <div class="container">
-            <div class="footer-status">
+            <div class="footer-status" style="margin-bottom: 1rem;">
                 <span class="footer-success">[SUCCESS]</span>
-                <span>Build completed. Status: Deploying to production. | &gt; git commit -m "Update portfolio" |</span>
+                <span>System operational. | Contact established.</span>
             </div>
-            <div>
-                <span>Contact: 'mailto:suchindra.formal@outlook.com' | Links: </span>
-                <span class="social-links">
-                    <a href="https://github.com/dattskoushik" target="_blank">[GitHub]</a>,
-                    <a href="https://linkedin.com/in/suchindrakoushik" target="_blank">[LinkedIn]</a>,
-                    <a href="https://instagram.com/dattskoushik" target="_blank">[Instagram]</a>
-                </span> |
+            <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem;">
+                <span><strong>Email:</strong> <a href="mailto:suchindra.formal@outlook.com" style="color: var(--foreground); text-decoration: none;">suchindra.formal@outlook.com</a></span>
+                <span><strong>Links:</strong>
+                    <a href="https://github.com/dattskoushik" target="_blank" style="color: var(--terminal-green); text-decoration: none; margin-right: 0.5rem;">[GitHub]</a>
+                    <a href="https://linkedin.com/in/suchindrakoushik" target="_blank" style="color: var(--terminal-green); text-decoration: none; margin-right: 0.5rem;">[LinkedIn]</a>
+                    <a href="/assets/resume/resume_.pdf" target="_blank" style="color: var(--terminal-green); text-decoration: none;">[Resume]</a>
+                </span>
             </div>
-            <div>
-                <span>&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. All rights reserved. [Build ID: 8a7f4e]</span>
+            <div style="margin-top: 1rem; color: var(--muted-foreground);">
+                <span>&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. Built for Reliability.</span>
             </div>
         </div>
     </footer>
