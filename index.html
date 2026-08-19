@@ -121,7 +121,8 @@
 
         nav.nav-links {
             display: flex;
-            gap: var(--space-md);
+            gap: 2rem;
+            flex-wrap: wrap;
             align-items: center;
             font-family: var(--font-mono);
             font-size: 0.875rem;
@@ -390,6 +391,28 @@
             border-color: rgba(16, 185, 129, 0.8);
             box-shadow: 0 0 25px 4px rgba(16, 185, 129, 0.2), inset 0 0 15px rgba(16, 185, 129, 0.1);
         }
+
+        /* Standardized Button Hover States */
+        .btn-solid {
+            background-color: var(--terminal-green) !important;
+            color: #0f172a !important;
+            transition: all 0.2s ease !important;
+        }
+        .btn-solid:hover {
+            background-color: var(--terminal-green) !important;
+            color: #0f172a !important;
+            opacity: 0.8 !important;
+        }
+        .btn-outline {
+            background-color: transparent !important;
+            border: 1px solid var(--terminal-green) !important;
+            color: var(--terminal-green) !important;
+            transition: all 0.2s ease !important;
+        }
+        .btn-outline:hover {
+            background-color: rgba(74, 222, 128, 0.2) !important;
+            color: var(--terminal-green) !important;
+        }
     </style>
 
 </head>
@@ -454,8 +477,8 @@
                 <span style="padding: 0.25rem 0.5rem; background-color: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 0.25rem;">[ Kafka ]</span>
             </div>
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <a href="/projects.html" style="background-color: var(--terminal-green); color: #0f172a; padding: 0.75rem 1.5rem; border-radius: 0.25rem; font-family: var(--font-mono); text-decoration: none; font-weight: bold; transition: opacity 0.2s;">View Projects</a>
-                <a href="/assets/resume/resume_.pdf" target="_blank" style="background-color: transparent; border: 1px solid var(--terminal-green); color: var(--terminal-green); padding: 0.75rem 1.5rem; border-radius: 0.25rem; font-family: var(--font-mono); text-decoration: none; transition: background-color 0.2s;">Download Resume</a>
+                <a href="/projects.html" class="btn-solid" style="padding: 0.75rem 1.5rem; border-radius: 0.25rem; font-family: var(--font-mono); text-decoration: none; font-weight: bold;">View Projects</a>
+                <a href="/assets/resume/resume_.pdf" target="_blank" class="btn-outline" style="padding: 0.75rem 1.5rem; border-radius: 0.25rem; font-family: var(--font-mono); text-decoration: none;">Download Resume</a>
             </div>
         </div>
     </section>

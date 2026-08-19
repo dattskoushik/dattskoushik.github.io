@@ -121,7 +121,8 @@
 
         nav.nav-links {
             display: flex;
-            gap: var(--space-md);
+            gap: 2rem;
+            flex-wrap: wrap;
             align-items: center;
             font-family: var(--font-mono);
             font-size: 0.875rem;
@@ -439,6 +440,28 @@
             white-space: pre-line;
             color: var(--muted-foreground);
             line-height: 1.8;
+        }
+
+        /* Standardized Button Hover States */
+        .btn-solid {
+            background-color: var(--terminal-green) !important;
+            color: #0f172a !important;
+            transition: all 0.2s ease !important;
+        }
+        .btn-solid:hover {
+            background-color: var(--terminal-green) !important;
+            color: #0f172a !important;
+            opacity: 0.8 !important;
+        }
+        .btn-outline {
+            background-color: transparent !important;
+            border: 1px solid var(--terminal-green) !important;
+            color: var(--terminal-green) !important;
+            transition: all 0.2s ease !important;
+        }
+        .btn-outline:hover {
+            background-color: rgba(74, 222, 128, 0.2) !important;
+            color: var(--terminal-green) !important;
         }
     </style>
 
