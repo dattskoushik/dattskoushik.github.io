@@ -452,117 +452,131 @@
     </header>
 
     <main class="container" style="flex-grow: 1; max-width: 1024px; margin: 0 auto; padding: 3rem 1.5rem; padding-top: var(--space-xl);">
-        <h1 style="font-family: var(--font-serif); font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">Projects</h1>
+        <h1 style="font-family: var(--font-serif); font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">Failure Modes &amp; Post-Mortems</h1>
         <p class="text-muted" style="margin-bottom: var(--space-xl);">
-            Open source tools, system experiments, and other things I've built.
+            Real-world pipeline failure scenarios, forensic debugging, and the architectural fixes applied.
         </p>
 
 
         <div class="row" style="row-gap: 3rem; display: flex; flex-direction: column;">
 
-            <!-- Project 1: TinyETL -->
+            <!-- Project 1: CDC Silent Corruption -->
             <article class="card-border-glow" style="padding: 2.5rem; border-radius: 0.5rem; width: 100%;">
                 <header style="margin-bottom: 2rem;">
-                    <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); margin-bottom: 1rem;">[ Python ] [ Data Engineering ] [ Pipeline ]</div>
-                    <h3 style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--foreground); margin-bottom: 1rem;">TinyETL: Idempotent Data Framework</h3>
+                    <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); margin-bottom: 1rem;">[ Kafka ] [ Spark Streaming ] [ CDC ] [ Incident ]</div>
+                    <h3 style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--foreground); margin-bottom: 1rem;">Incident: Silent Data Corruption in CDC Stream</h3>
                     <p style="color: var(--muted-foreground); font-size: 1.125rem; line-height: 1.625;">
-                        A lightweight, configuration-driven ETL framework designed for robust data processing with built-in retry mechanics and data quality checks.
+                        Post-mortem detailing how mishandling Debezium tombstone messages in a streaming application caused silent data inconsistencies in downstream Delta tables, and the architectural fix applied.
                     </p>
                 </header>
 
                 <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem;">
                     <div>
-                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Problem</h4>
-                        <p style="color: var(--muted-foreground); font-size: 0.875rem;">Small to medium pipelines often rely on ad-hoc scripts that fail silently, lack retry logic, and pollute target tables with partial data writes.</p>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">The Failure Mode (Problem)</h4>
+                        <p style="color: var(--muted-foreground); font-size: 0.875rem;">A Debezium Change Data Capture (CDC) stream reading from PostgreSQL was pushing `null` values for deleted records (tombstones) to Kafka. Our Spark Structured Streaming application crashed silently when processing these null-value payloads during a stateful aggregation, causing the pipeline to skip micro-batches without firing alerts.</p>
                     </div>
                     <div>
-                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Architecture & Data Flow</h4>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Architecture & Point of Failure</h4>
                         <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto;">
-[Source API/CSV] -> (Ingestion Task) -> [Raw Storage]
-       -> (Transformation & Validation) -> [Staging Area]
-       -> (Atomic Upsert) -> [Target PostgreSQL Warehouse]
+[PostgreSQL] -> (Debezium CDC) -> [Kafka Topic]
+                                      |
+                                      v (Null Payload Crash)
+                           [Spark Streaming App]
+                                      |
+                           [Delta Lake (Stale Data)]
                         </pre>
                     </div>
                     <div>
-                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Engineering Decisions</h4>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Forensic Debugging & The Fix</h4>
                         <ul style="color: var(--muted-foreground); font-size: 0.875rem; padding-left: 1.5rem; margin: 0;">
-                            <li><strong>Idempotency:</strong> Implemented transaction-based upserts so failed jobs can be safely re-run without duplicating data.</li>
-                            <li><strong>Data Quality:</strong> Enforced schema validation and null-checks before writing to the target warehouse.</li>
-                            <li><strong>Simplicity:</strong> Avoided heavy orchestration tools like Airflow for scale-appropriate workloads, favoring a cron-friendly execution model.</li>
+                            <li><strong>Root Cause Analysis:</strong> Analyzed Spark executor logs to trace the `NullPointerException` back to the exact Kafka offsets containing the tombstone messages.</li>
+                            <li><strong>Architectural Fix:</strong> Refactored the Spark streaming job to use a robust schema wrapper that explicitly handles `null` values and routes tombstone records to a Dead Letter Queue (DLQ) for separate processing.</li>
+                            <li><strong>Recovery:</strong> Performed a targeted backfill using Delta Lake time travel to restore the corrupted partitions.</li>
                         </ul>
                     </div>
                 </div>
 
                 <footer>
-                    <a href="https://github.com/dattskoushik" target="_blank" class="btn-outline button small outline" style="font-family: var(--font-mono); text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 0.25rem; display: inline-block;">View on GitHub &rarr;</a>
+                    <a href="https://github.com/dattskoushik" target="_blank" class="btn-outline button small outline" style="font-family: var(--font-mono); text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 0.25rem; display: inline-block;">View Post-Mortem Details &rarr;</a>
                 </footer>
             </article>
 
-            <!-- Project 2: Distributed KV Store -->
+            <!-- Project 2: Cascading OOM Failures -->
             <article class="card-border-glow" style="padding: 2.5rem; border-radius: 0.5rem; width: 100%;">
                 <header style="margin-bottom: 2rem;">
-                    <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); margin-bottom: 1rem;">[ Python ] [ Distributed Systems ] [ Redis ]</div>
-                    <h3 style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--foreground); margin-bottom: 1rem;">Raft-Based Distributed KV Store</h3>
+                    <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); margin-bottom: 1rem;">[ PySpark ] [ Performance ] [ Optimization ] [ Incident ]</div>
+                    <h3 style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--foreground); margin-bottom: 1rem;">Incident: Cascading OOM Failures in Daily Aggregations</h3>
                     <p style="color: var(--muted-foreground); font-size: 1.125rem; line-height: 1.625;">
-                        A highly available distributed key-value store implementing the Raft consensus algorithm for fault-tolerant state machine replication.
+                        Post-mortem on debugging and resolving cascading Spark Executor Out-Of-Memory (OOM) errors caused by hidden data skew and inappropriate broadcast join strategies.
                     </p>
                 </header>
 
                 <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem;">
                     <div>
-                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Problem</h4>
-                        <p style="color: var(--muted-foreground); font-size: 0.875rem;">Single-node databases represent single points of failure. Replicating state reliably across a cluster of nodes requires handling network partitions and node crashes.</p>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">The Failure Mode (Problem)</h4>
+                        <p style="color: var(--muted-foreground); font-size: 0.875rem;">A critical daily aggregation pipeline began failing with `java.lang.OutOfMemoryError` on Spark executors. The pipeline joined a massive fact table (10B+ rows) with a dimension table. The dimension table had unknowingly grown past Spark's `autoBroadcastJoinThreshold`, causing a fallback to a SortMergeJoin, which then failed catastrophically due to severe data skew on a single partition key.</p>
                     </div>
                     <div>
-                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Architecture & Data Flow</h4>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Architecture & Point of Failure</h4>
                         <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto;">
-Client -> [Leader Node (gRPC)] -> (AppendEntries RPC) -> [Follower 1]
-                               -> (AppendEntries RPC) -> [Follower 2]
-       <- (Quorum Acknowledgment) <-
-       -> [State Machine (Redis backing)]
+[Fact Table (10B)]                     -> (SortMergeJoin) -> [Executor OOM Crash]
+[Dim Table (Skew)] /     ^
+                         | (Spill to Disk Failed)
                         </pre>
                     </div>
                     <div>
-                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Engineering Decisions</h4>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Forensic Debugging & The Fix</h4>
                         <ul style="color: var(--muted-foreground); font-size: 0.875rem; padding-left: 1.5rem; margin: 0;">
-                            <li><strong>Consensus:</strong> Implemented Raft over Paxos due to its understandability and strong leader-based replication model.</li>
-                            <li><strong>Communication:</strong> Used gRPC for efficient, strongly-typed remote procedure calls between cluster nodes.</li>
-                            <li><strong>Reliability:</strong> Persistent log entries ensure nodes can recover state after a crash before rejoining the cluster.</li>
+                            <li><strong>Root Cause Analysis:</strong> Extracted the Spark EXPLAIN plan which confirmed the fallback to SortMergeJoin. Checked the Spark UI and identified a single task taking 10x longer and consuming 90% of memory due to data skew on the 'null' ID.</li>
+                            <li><strong>Architectural Fix:</strong> Implemented key salting (adding random integers to the skewed key) to evenly distribute the skewed partition across multiple executors, preventing the OOM.</li>
+                            <li><strong>Optimization:</strong> Explicitly hinted a SortMergeJoin with the salted keys, favoring stability over raw speed for this specific pipeline.</li>
                         </ul>
                     </div>
                 </div>
 
                 <footer>
-                    <a href="https://github.com/dattskoushik" target="_blank" class="btn-outline button small outline" style="font-family: var(--font-mono); text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 0.25rem; display: inline-block;">View on GitHub &rarr;</a>
+                    <a href="https://github.com/dattskoushik" target="_blank" class="btn-outline button small outline" style="font-family: var(--font-mono); text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 0.25rem; display: inline-block;">View Post-Mortem Details &rarr;</a>
                 </footer>
             </article>
 
-            <!-- Project 3: PG-Stats-Monitor -->
+            <!-- Project 3: API Rate Limit Disaster -->
             <article class="card-border-glow" style="padding: 2.5rem; border-radius: 0.5rem; width: 100%;">
                 <header style="margin-bottom: 2rem;">
-                    <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); margin-bottom: 1rem;">[ PostgreSQL ] [ Performance ] [ SQL ]</div>
-                    <h3 style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--foreground); margin-bottom: 1rem;">PG-Stats-Monitor</h3>
+                    <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); margin-bottom: 1rem;">[ Airflow ] [ Python ] [ Orchestration ] [ Incident ]</div>
+                    <h3 style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--foreground); margin-bottom: 1rem;">Incident: The N+1 API Rate Limit Disaster</h3>
                     <p style="color: var(--muted-foreground); font-size: 1.125rem; line-height: 1.625;">
-                        A performance analysis tool for visualizing PostgreSQL internal statistics, lock contention, and query metrics in real-time.
+                        Post-mortem detailing how an orchestrator backfill triggered an unintentional denial-of-service attack on an upstream vendor, leading to an IP ban and a 24-hour pipeline outage.
                     </p>
                 </header>
 
                 <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem;">
                     <div>
-                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Problem</h4>
-                        <p style="color: var(--muted-foreground); font-size: 0.875rem;">Debugging database performance issues requires deep visibility into `pg_stat_activity`, table bloat, and cache hit ratios, which are cumbersome to query manually during incidents.</p>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">The Failure Mode (Problem)</h4>
+                        <p style="color: var(--muted-foreground); font-size: 0.875rem;">During a 3-month historical data backfill, an Airflow DAG was unpaused with `catchup=True`. The DAG dynamically mapped a task to fetch record details per user ID (an N+1 API pattern). Airflow spun up thousands of concurrent tasks, hitting the upstream vendor's API with a massive burst of traffic, instantly exceeding their rate limit and getting our NAT gateway IP permanently banned.</p>
                     </div>
                     <div>
-                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Engineering Decisions</h4>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Architecture & Point of Failure</h4>
+                        <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto;">
+[Airflow Scheduler] -> (Trigger 5000+ Tasks)
+                             |
+                      [Celery Workers]
+                             | (Spike in HTTP Requests)
+                             v
+                [Upstream Vendor API (IP Banned)]
+                        </pre>
+                    </div>
+                    <div>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Forensic Debugging & The Fix</h4>
                         <ul style="color: var(--muted-foreground); font-size: 0.875rem; padding-left: 1.5rem; margin: 0;">
-                            <li><strong>Data Extraction:</strong> Utilized PostgreSQL internal views (pg_stat_user_tables, pg_stat_statements) with custom CTEs to compute cache hit ratios and sequential scan volumes.</li>
-                            <li><strong>Performance:</strong> Ensured the monitoring queries themselves are lightweight and non-blocking to avoid exacerbating contention.</li>
+                            <li><strong>Root Cause Analysis:</strong> Audited Airflow task logs and identified the N+1 anti-pattern. The lack of concurrency controls meant the backfill executed all mapped tasks simultaneously instead of sequentially.</li>
+                            <li><strong>Architectural Fix:</strong> Implemented Airflow Pools to strictly limit the concurrency of API-bound tasks to 5 workers. Added a Python `tenacity` retry decorator with exponential backoff and jitter to gracefully handle `429 Too Many Requests` responses.</li>
+                            <li><strong>Optimization:</strong> Refactored the ingestion script to use a bulk-export endpoint instead of polling per-record.</li>
                         </ul>
                     </div>
                 </div>
 
                 <footer>
-                    <a href="https://github.com/dattskoushik" target="_blank" class="btn-outline button small outline" style="font-family: var(--font-mono); text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 0.25rem; display: inline-block;">View on GitHub &rarr;</a>
+                    <a href="https://github.com/dattskoushik" target="_blank" class="btn-outline button small outline" style="font-family: var(--font-mono); text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 0.25rem; display: inline-block;">View Post-Mortem Details &rarr;</a>
                 </footer>
             </article>
 
