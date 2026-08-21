@@ -457,52 +457,84 @@
             Real-world pipeline failure scenarios, forensic debugging, and the architectural fixes applied.
         </p>
 
+        <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--muted-foreground); margin-bottom: 2rem;">
+            > Press <kbd style="background: var(--code-bg); padding: 0.125rem 0.375rem; border-radius: 0.25rem; border: 1px solid var(--border);">Cmd+K</kbd> to search case studies by tag or keyword
+        </div>
+
+
 
         <div class="row" style="row-gap: 3rem; display: flex; flex-direction: column;">
 
-            <!-- Project 1: CDC Silent Corruption -->
-            <article class="card-border-glow" style="padding: 2.5rem; border-radius: 0.5rem; width: 100%;">
+                        <!-- Project 1: CDC Silent Corruption -->
+            <article class="card-border-glow project-card" data-tags="kafka spark datacorruption" style="padding: 2.5rem; border-radius: 0.5rem; width: 100%;">
                 <header style="margin-bottom: 2rem;">
-                    <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); margin-bottom: 1rem;">[ Kafka ] [ Spark Streaming ] [ CDC ] [ Incident ]</div>
-                    <h3 style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--foreground); margin-bottom: 1rem;">Incident: Silent Data Corruption in CDC Stream</h3>
+                    <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); margin-bottom: 1rem;">[ Kafka ] [ Spark ] [ Data Quality ] [ Incident ]</div>
+                    <h3 style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--foreground); margin-bottom: 1rem;">Incident: Silent Data Corruption in Delta Lake</h3>
                     <p style="color: var(--muted-foreground); font-size: 1.125rem; line-height: 1.625;">
-                        Post-mortem detailing how mishandling Debezium tombstone messages in a streaming application caused silent data inconsistencies in downstream Delta tables, and the architectural fix applied.
+                        Post-mortem on identifying and resolving silent data corruption caused by unhandled schema evolution and tombstone messages in a high-throughput Kafka-to-Delta pipeline.
                     </p>
                 </header>
 
-                <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem;">
-                    <div>
-                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">The Failure Mode (Problem)</h4>
-                        <p style="color: var(--muted-foreground); font-size: 0.875rem;">A Debezium Change Data Capture (CDC) stream reading from PostgreSQL was pushing `null` values for deleted records (tombstones) to Kafka. Our Spark Structured Streaming application crashed silently when processing these null-value payloads during a stateful aggregation, causing the pipeline to skip micro-batches without firing alerts.</p>
+                <ot-tabs>
+                    <div role="tablist" aria-label="Project Details" style="display: flex; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">
+                        <button role="tab" aria-selected="true" style="background: none; border: none; color: var(--muted-foreground); font-family: var(--font-mono); cursor: pointer; padding: 0.5rem 1rem;">[1. Architecture Spec]</button>
+                        <button role="tab" aria-selected="false" style="background: none; border: none; color: var(--muted-foreground); font-family: var(--font-mono); cursor: pointer; padding: 0.5rem 1rem;">[2. Production Diffs]</button>
+                        <button role="tab" aria-selected="false" style="background: none; border: none; color: var(--muted-foreground); font-family: var(--font-mono); cursor: pointer; padding: 0.5rem 1rem;">[3. Benchmarks & Chaos]</button>
                     </div>
-                    <div>
-                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Architecture & Point of Failure</h4>
-                        <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto;">
-[PostgreSQL] -> (Debezium CDC) -> [Kafka Topic]
-                                      |
-                                      v (Null Payload Crash)
-                           [Spark Streaming App]
-                                      |
-                           [Delta Lake (Stale Data)]
-                        </pre>
-                    </div>
-                    <div>
-                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Forensic Debugging & The Fix</h4>
-                        <ul style="color: var(--muted-foreground); font-size: 0.875rem; padding-left: 1.5rem; margin: 0;">
-                            <li><strong>Root Cause Analysis:</strong> Analyzed Spark executor logs to trace the `NullPointerException` back to the exact Kafka offsets containing the tombstone messages.</li>
-                            <li><strong>Architectural Fix:</strong> Refactored the Spark streaming job to use a robust schema wrapper that explicitly handles `null` values and routes tombstone records to a Dead Letter Queue (DLQ) for separate processing.</li>
-                            <li><strong>Recovery:</strong> Performed a targeted backfill using Delta Lake time travel to restore the corrupted partitions.</li>
-                        </ul>
-                    </div>
-                </div>
 
-                <footer>
+                    <div role="tabpanel">
+                        <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem;">
+                            <div>
+                                <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">The Failure Mode (Problem)</h4>
+                                <p style="color: var(--muted-foreground); font-size: 0.875rem;">A downstream reporting dashboard showed a sudden 15% drop in revenue for a specific region. No pipelines failed, and no alerts fired. The root cause was traced to an upstream engineering team deploying a backward-incompatible schema change to a Kafka topic. Null fields (tombstones) intended for GDPR deletes were being incorrectly parsed as valid updates, silently corrupting the Delta Silver layer.</p>
+                            </div>
+                            <div>
+                                <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Architecture & Point of Failure</h4>
+                                <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto;">
+[Upstream DB] -> [Debezium CDC] -> [Kafka Topic]
+                                        | (Schema Change + Tombstones)
+                                        v
+                               [Spark Streaming] -> [Silent Data Loss] -> [Delta Silver]
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div role="tabpanel" hidden>
+                         <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Forensic Debugging & The Fix</h4>
+                         <ul style="color: var(--muted-foreground); font-size: 0.875rem; padding-left: 1.5rem; margin: 0;">
+                            <li><strong>Root Cause Analysis:</strong> Queried the Delta Lake history log and identified large volumes of null-heavy updates. Inspected raw Kafka payloads to confirm the tombstone messages.</li>
+                            <li><strong>Architectural Fix:</strong> Refactored the Spark streaming job to use a robust schema wrapper that explicitly handles `null` values and routes tombstone records to a Dead Letter Queue (DLQ) for separate processing.</li>
+                         </ul>
+                         <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto; margin-top: 1rem;">
+// The Fix: Explicit Tombstone Handling
+val df = spark.readStream...
+val processedDf = df
+  .withColumn("is_tombstone", col("value").isNull)
+  .filter(!col("is_tombstone"))
+
+val dlqDf = df.filter(col("is_tombstone"))
+                         </pre>
+                    </div>
+
+                    <div role="tabpanel" hidden>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Recovery & Validation</h4>
+                        <ul style="color: var(--muted-foreground); font-size: 0.875rem; padding-left: 1.5rem; margin: 0;">
+                             <li><strong>Recovery:</strong> Performed a targeted backfill using Delta Lake time travel to restore the corrupted partitions.</li>
+                        </ul>
+                         <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto; margin-top: 1rem;">
+RESTORE TABLE my_table TO TIMESTAMP AS OF '2023-10-27T10:00:00Z';
+                         </pre>
+                    </div>
+                </ot-tabs>
+
+                <footer style="margin-top: 2rem;">
                     <a href="https://github.com/dattskoushik" target="_blank" class="btn-outline button small outline" style="font-family: var(--font-mono); text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 0.25rem; display: inline-block;">View Post-Mortem Details &rarr;</a>
                 </footer>
             </article>
 
-            <!-- Project 2: Cascading OOM Failures -->
-            <article class="card-border-glow" style="padding: 2.5rem; border-radius: 0.5rem; width: 100%;">
+                        <!-- Project 2: Cascading OOM Failures -->
+            <article class="card-border-glow project-card" data-tags="pyspark performance oom" style="padding: 2.5rem; border-radius: 0.5rem; width: 100%;">
                 <header style="margin-bottom: 2rem;">
                     <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); margin-bottom: 1rem;">[ PySpark ] [ Performance ] [ Optimization ] [ Incident ]</div>
                     <h3 style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--foreground); margin-bottom: 1rem;">Incident: Cascading OOM Failures in Daily Aggregations</h3>
@@ -511,36 +543,64 @@
                     </p>
                 </header>
 
-                <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem;">
-                    <div>
-                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">The Failure Mode (Problem)</h4>
-                        <p style="color: var(--muted-foreground); font-size: 0.875rem;">A critical daily aggregation pipeline began failing with `java.lang.OutOfMemoryError` on Spark executors. The pipeline joined a massive fact table (10B+ rows) with a dimension table. The dimension table had unknowingly grown past Spark's `autoBroadcastJoinThreshold`, causing a fallback to a SortMergeJoin, which then failed catastrophically due to severe data skew on a single partition key.</p>
+                <ot-tabs>
+                    <div role="tablist" aria-label="Project Details" style="display: flex; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">
+                        <button role="tab" aria-selected="true" style="background: none; border: none; color: var(--muted-foreground); font-family: var(--font-mono); cursor: pointer; padding: 0.5rem 1rem;">[1. Architecture Spec]</button>
+                        <button role="tab" aria-selected="false" style="background: none; border: none; color: var(--muted-foreground); font-family: var(--font-mono); cursor: pointer; padding: 0.5rem 1rem;">[2. Production Diffs]</button>
+                        <button role="tab" aria-selected="false" style="background: none; border: none; color: var(--muted-foreground); font-family: var(--font-mono); cursor: pointer; padding: 0.5rem 1rem;">[3. Benchmarks & Chaos]</button>
                     </div>
-                    <div>
-                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Architecture & Point of Failure</h4>
-                        <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto;">
+
+                    <div role="tabpanel">
+                         <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem;">
+                            <div>
+                                <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">The Failure Mode (Problem)</h4>
+                                <p style="color: var(--muted-foreground); font-size: 0.875rem;">A critical daily aggregation pipeline began failing with `java.lang.OutOfMemoryError` on Spark executors. The pipeline joined a massive fact table (10B+ rows) with a dimension table. The dimension table had unknowingly grown past Spark's `autoBroadcastJoinThreshold`, causing a fallback to a SortMergeJoin, which then failed catastrophically due to severe data skew on a single partition key.</p>
+                            </div>
+                            <div>
+                                <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Architecture & Point of Failure</h4>
+                                <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto;">
 [Fact Table (10B)]                     -> (SortMergeJoin) -> [Executor OOM Crash]
 [Dim Table (Skew)] /     ^
                          | (Spill to Disk Failed)
-                        </pre>
+                                </pre>
+                            </div>
+                        </div>
                     </div>
-                    <div>
+
+                    <div role="tabpanel" hidden>
                         <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Forensic Debugging & The Fix</h4>
                         <ul style="color: var(--muted-foreground); font-size: 0.875rem; padding-left: 1.5rem; margin: 0;">
                             <li><strong>Root Cause Analysis:</strong> Extracted the Spark EXPLAIN plan which confirmed the fallback to SortMergeJoin. Checked the Spark UI and identified a single task taking 10x longer and consuming 90% of memory due to data skew on the 'null' ID.</li>
                             <li><strong>Architectural Fix:</strong> Implemented key salting (adding random integers to the skewed key) to evenly distribute the skewed partition across multiple executors, preventing the OOM.</li>
-                            <li><strong>Optimization:</strong> Explicitly hinted a SortMergeJoin with the salted keys, favoring stability over raw speed for this specific pipeline.</li>
                         </ul>
+                         <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto; margin-top: 1rem;">
+# The Fix: Key Salting for Skew
+df = df.withColumn("salt", lit(rand() * 10).cast("int"))
+df = df.withColumn("salted_key", concat(col("key"), lit("_"), col("salt")))
+                         </pre>
                     </div>
-                </div>
 
-                <footer>
+                    <div role="tabpanel" hidden>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Performance Results</h4>
+                         <ul style="color: var(--muted-foreground); font-size: 0.875rem; padding-left: 1.5rem; margin: 0;">
+                             <li><strong>Optimization:</strong> Explicitly hinted a SortMergeJoin with the salted keys, favoring stability over raw speed for this specific pipeline.</li>
+                        </ul>
+                        <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto; margin-top: 1rem;">
+== Physical Plan ==
+*(5) SortMergeJoin [salted_key#123], [salted_key#456], Inner
+...
+// Executor memory stabilized, completion time reduced by 40%
+                         </pre>
+                    </div>
+                </ot-tabs>
+
+                <footer style="margin-top: 2rem;">
                     <a href="https://github.com/dattskoushik" target="_blank" class="btn-outline button small outline" style="font-family: var(--font-mono); text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 0.25rem; display: inline-block;">View Post-Mortem Details &rarr;</a>
                 </footer>
             </article>
 
-            <!-- Project 3: API Rate Limit Disaster -->
-            <article class="card-border-glow" style="padding: 2.5rem; border-radius: 0.5rem; width: 100%;">
+                        <!-- Project 3: API Rate Limit Disaster -->
+            <article class="card-border-glow project-card" data-tags="airflow python orchestration" style="padding: 2.5rem; border-radius: 0.5rem; width: 100%;">
                 <header style="margin-bottom: 2rem;">
                     <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); margin-bottom: 1rem;">[ Airflow ] [ Python ] [ Orchestration ] [ Incident ]</div>
                     <h3 style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--foreground); margin-bottom: 1rem;">Incident: The N+1 API Rate Limit Disaster</h3>
@@ -549,33 +609,67 @@
                     </p>
                 </header>
 
-                <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem;">
-                    <div>
-                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">The Failure Mode (Problem)</h4>
-                        <p style="color: var(--muted-foreground); font-size: 0.875rem;">During a 3-month historical data backfill, an Airflow DAG was unpaused with `catchup=True`. The DAG dynamically mapped a task to fetch record details per user ID (an N+1 API pattern). Airflow spun up thousands of concurrent tasks, hitting the upstream vendor's API with a massive burst of traffic, instantly exceeding their rate limit and getting our NAT gateway IP permanently banned.</p>
+                <ot-tabs>
+                    <div role="tablist" aria-label="Project Details" style="display: flex; gap: 1rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">
+                        <button role="tab" aria-selected="true" style="background: none; border: none; color: var(--muted-foreground); font-family: var(--font-mono); cursor: pointer; padding: 0.5rem 1rem;">[1. Architecture Spec]</button>
+                        <button role="tab" aria-selected="false" style="background: none; border: none; color: var(--muted-foreground); font-family: var(--font-mono); cursor: pointer; padding: 0.5rem 1rem;">[2. Production Diffs]</button>
+                        <button role="tab" aria-selected="false" style="background: none; border: none; color: var(--muted-foreground); font-family: var(--font-mono); cursor: pointer; padding: 0.5rem 1rem;">[3. Benchmarks & Chaos]</button>
                     </div>
-                    <div>
-                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Architecture & Point of Failure</h4>
-                        <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto;">
+
+                    <div role="tabpanel">
+                        <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem;">
+                            <div>
+                                <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">The Failure Mode (Problem)</h4>
+                                <p style="color: var(--muted-foreground); font-size: 0.875rem;">During a 3-month historical data backfill, an Airflow DAG was unpaused with `catchup=True`. The DAG dynamically mapped a task to fetch record details per user ID (an N+1 API pattern). Airflow spun up thousands of concurrent tasks, hitting the upstream vendor's API with a massive burst of traffic, instantly exceeding their rate limit and getting our NAT gateway IP permanently banned.</p>
+                            </div>
+                            <div>
+                                <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Architecture & Point of Failure</h4>
+                                <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto;">
 [Airflow Scheduler] -> (Trigger 5000+ Tasks)
                              |
                       [Celery Workers]
                              | (Spike in HTTP Requests)
                              v
                 [Upstream Vendor API (IP Banned)]
-                        </pre>
+                                </pre>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Forensic Debugging & The Fix</h4>
-                        <ul style="color: var(--muted-foreground); font-size: 0.875rem; padding-left: 1.5rem; margin: 0;">
+
+                    <div role="tabpanel" hidden>
+                         <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Forensic Debugging & The Fix</h4>
+                         <ul style="color: var(--muted-foreground); font-size: 0.875rem; padding-left: 1.5rem; margin: 0;">
                             <li><strong>Root Cause Analysis:</strong> Audited Airflow task logs and identified the N+1 anti-pattern. The lack of concurrency controls meant the backfill executed all mapped tasks simultaneously instead of sequentially.</li>
                             <li><strong>Architectural Fix:</strong> Implemented Airflow Pools to strictly limit the concurrency of API-bound tasks to 5 workers. Added a Python `tenacity` retry decorator with exponential backoff and jitter to gracefully handle `429 Too Many Requests` responses.</li>
-                            <li><strong>Optimization:</strong> Refactored the ingestion script to use a bulk-export endpoint instead of polling per-record.</li>
                         </ul>
+                         <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto; margin-top: 1rem;">
+@retry(
+    retry=retry_if_exception_type(RateLimitException),
+    wait=wait_exponential(multiplier=1, min=4, max=60),
+    stop=stop_after_attempt(5)
+)
+def fetch_data():
+    pass
+                         </pre>
                     </div>
-                </div>
 
-                <footer>
+                    <div role="tabpanel" hidden>
+                         <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Optimization Results</h4>
+                         <ul style="color: var(--muted-foreground); font-size: 0.875rem; padding-left: 1.5rem; margin: 0;">
+                             <li><strong>Optimization:</strong> Refactored the ingestion script to use a bulk-export endpoint instead of polling per-record.</li>
+                        </ul>
+                        <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto; margin-top: 1rem;">
+# Before: 5000 API Calls / Min
+# After:  1 Bulk API Call / Min
+
+# Airflow Pool Config
+# pool_name: vendor_api_pool
+# slots: 5
+                         </pre>
+                    </div>
+                </ot-tabs>
+
+                <footer style="margin-top: 2rem;">
                     <a href="https://github.com/dattskoushik" target="_blank" class="btn-outline button small outline" style="font-family: var(--font-mono); text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 0.25rem; display: inline-block;">View Post-Mortem Details &rarr;</a>
                 </footer>
             </article>
@@ -603,5 +697,102 @@
             </div>
         </div>
     </footer>
+
+    <!-- Cmd+K Command Palette Modal -->
+    <dialog id="cmd-k-modal" style="max-width: 40rem;">
+        <header style="padding-bottom: 0;">
+            <div style="display: flex; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 0;">
+                <span style="color: var(--muted-foreground); margin-right: 0.5rem; font-family: var(--font-mono);">&gt;</span>
+                <input type="text" id="cmd-k-input" placeholder="Search architecture, concepts, tags (e.g. #kafka, #oom)"
+                       style="width: 100%; background: transparent; border: none; color: var(--foreground); font-family: var(--font-mono); font-size: 1rem; outline: none;">
+            </div>
+        </header>
+        <div style="padding-top: 1rem;">
+            <p style="font-size: 0.75rem; color: var(--muted-foreground); font-family: var(--font-mono); margin-bottom: 0.5rem;">SUGGESTED TAGS</p>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;" id="cmd-k-tags">
+                <button class="cmd-tag" data-tag="kafka" style="background: var(--code-bg); border: 1px solid var(--border); color: var(--terminal-green); padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer;">#kafka</button>
+                <button class="cmd-tag" data-tag="spark" style="background: var(--code-bg); border: 1px solid var(--border); color: var(--terminal-green); padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer;">#spark</button>
+                <button class="cmd-tag" data-tag="oom" style="background: var(--code-bg); border: 1px solid var(--border); color: var(--terminal-green); padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer;">#oom</button>
+                <button class="cmd-tag" data-tag="performance" style="background: var(--code-bg); border: 1px solid var(--border); color: var(--terminal-green); padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer;">#performance</button>
+                <button class="cmd-tag" data-tag="airflow" style="background: var(--code-bg); border: 1px solid var(--border); color: var(--terminal-green); padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer;">#airflow</button>
+            </div>
+            <p id="cmd-k-results-msg" style="font-size: 0.875rem; color: var(--muted-foreground); display: none;"></p>
+        </div>
+        <footer style="border-top: 1px solid var(--border); padding-top: 1rem;">
+            <button onclick="document.getElementById('cmd-k-modal').close()" style="background: transparent; border: 1px solid var(--border); color: var(--foreground); padding: 0.5rem 1rem; border-radius: 0.25rem; cursor: pointer; font-family: var(--font-mono);">[Esc] Close</button>
+        </footer>
+    </dialog>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('cmd-k-modal');
+            const input = document.getElementById('cmd-k-input');
+            const projects = document.querySelectorAll('.project-card');
+            const tags = document.querySelectorAll('.cmd-tag');
+            const resultsMsg = document.getElementById('cmd-k-results-msg');
+
+            // Open modal on Cmd+K or Ctrl+K
+            document.addEventListener('keydown', (e) => {
+                if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                    e.preventDefault();
+                    if (!modal.open) {
+                        modal.showModal();
+                        input.focus();
+                    } else {
+                        modal.close();
+                    }
+                }
+            });
+
+            // Filter logic
+            function filterProjects(query) {
+                query = query.toLowerCase().replace('#', '');
+                let visibleCount = 0;
+
+                projects.forEach(card => {
+                    const content = card.textContent.toLowerCase();
+                    const cardTags = (card.getAttribute('data-tags') || "").toLowerCase();
+                    if (content.includes(query) || cardTags.includes(query)) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                if (query.trim() === '') {
+                    resultsMsg.style.display = 'none';
+                    // Reset all to visible when empty
+                    projects.forEach(c => c.style.display = 'block');
+                } else {
+                    resultsMsg.textContent = `Found ${visibleCount} project(s) matching "${query}"`;
+                    resultsMsg.style.display = 'block';
+                }
+            }
+
+            // Listen to input typing
+            input.addEventListener('input', (e) => {
+                filterProjects(e.target.value);
+            });
+
+            // Listen to tag clicks
+            tags.forEach(tagBtn => {
+                tagBtn.addEventListener('click', () => {
+                    const t = tagBtn.getAttribute('data-tag');
+                    input.value = `#${t}`;
+                    filterProjects(t);
+                    // Optional: auto-close or leave open
+                    // modal.close();
+                });
+            });
+
+            // Reset when modal closes
+            modal.addEventListener('close', () => {
+                input.value = '';
+                filterProjects('');
+            });
+        });
+    </script>
+
 </body>
 </html>
