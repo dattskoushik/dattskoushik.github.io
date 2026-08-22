@@ -1,136 +1,182 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block head_extra %}
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: var(--space-xl);
+    margin-top: var(--space-lg);
+  }
+  @media (max-width: 768px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+  }
+  .gallery-item {
+    aspect-ratio: 1;
+    background: var(--card);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+  .poem-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-sm);
+  }
+  .poem-lines {
+    font-style: italic;
+    white-space: pre-line;
+    color: var(--muted-foreground);
+    line-height: 1.8;
+  }
+</style>
+{% endblock %} {% block content %}
+<section style="padding-bottom: var(--space-md)">
+  <h1>About Me</h1>
+</section>
 
-{% block head_extra %}
-    <style>
-        .about-grid {
-            display: grid;
-            grid-template-columns: 3fr 2fr;
-            gap: var(--space-xl);
-            margin-top: var(--space-lg);
-        }
-        @media (max-width: 768px) {
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: var(--space-md);
-            }
-        }
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: var(--space-sm);
-            margin-top: var(--space-md);
-        }
-        .gallery-item {
-            aspect-ratio: 1;
-            background: var(--card);
-            border-radius: var(--radius-sm);
-            overflow: hidden;
-            cursor: pointer;
-        }
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-        .poem-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            padding: var(--space-md);
-            border-radius: var(--radius-md);
-            margin-bottom: var(--space-sm);
-        }
-        .poem-lines {
-            font-style: italic;
-            white-space: pre-line;
-            color: var(--muted-foreground);
-            line-height: 1.8;
-        }
-    </style>
-{% endblock %}
+<div class="about-grid">
+  <div class="bio">
+    <p
+      class="text-muted"
+      style="
+        color: var(--foreground);
+        font-size: 1.25rem;
+        margin-bottom: var(--space-md);
+      "
+    >
+      Data Engineer specializing in idempotent pipelines and high-reliability
+      infrastructure.
+    </p>
+    <p>
+      My professional focus is on architecting and maintaining high-throughput
+      data pipelines using Python and Spark. I build systems that survive the
+      initial commit—pipelines that are idempotent, robust, and designed to fail
+      gracefully rather than silently dropping data.
+    </p>
+    <p>
+      I thrive on solving data engineering problems that require deep technical
+      understanding. Whether it's optimizing PostgreSQL queries to reduce
+      latency, managing schema evolution in distributed environments, or
+      building real-time streaming architectures with Kafka, I prioritize
+      correctness and data quality above all else.
+    </p>
+    <p>
+      Currently, I am targeting Data Engineering roles where I can leverage my
+      expertise in ETL/ELT, dimensional modeling, and distributed systems to
+      build scalable analytics platforms. I enjoy environments that value
+      maintainability and simplicity over unnecessary complexity.
+    </p>
 
-{% block content %}
-    <section style="padding-bottom: var(--space-md);">
-        <h1>About Me</h1>
-    </section>
+    <div style="margin-top: var(--space-md)">
+      <a href="assets/resume/resume_.pdf" target="_blank" class="button"
+        >Download Resume</a
+      >
+    </div>
+  </div>
 
-    <div class="about-grid">
-        <div class="bio">
-            <p class="text-muted" style="color: var(--foreground); font-size: 1.25rem; margin-bottom: var(--space-md);">
-                Data Engineer specializing in idempotent pipelines and high-reliability infrastructure.
-            </p>
-            <p>
-                My professional focus is on architecting and maintaining high-throughput data pipelines using Python and Spark. I build systems that survive the initial commit—pipelines that are idempotent, robust, and designed to fail gracefully rather than silently dropping data.
-            </p>
-            <p>
-                I thrive on solving data engineering problems that require deep technical understanding. Whether it's optimizing PostgreSQL queries to reduce latency, managing schema evolution in distributed environments, or building real-time streaming architectures with Kafka, I prioritize correctness and data quality above all else.
-            </p>
-            <p>
-                Currently, I am targeting Data Engineering roles where I can leverage my expertise in ETL/ELT, dimensional modeling, and distributed systems to build scalable analytics platforms. I enjoy environments that value maintainability and simplicity over unnecessary complexity.
-            </p>
+  <div class="skills">
+    <h3>Core Expertise</h3>
+    <ul
+      style="
+        list-style: none;
+        color: var(--muted-foreground);
+        line-height: 2;
+        padding: 0;
+      "
+    >
+      <li>
+        <strong style="color: var(--foreground)">Data Engineering:</strong>
+        ETL/ELT, Data Pipelines
+      </li>
+      <li>
+        <strong style="color: var(--foreground)">Programming:</strong> Python,
+        SQL
+      </li>
+      <li>
+        <strong style="color: var(--foreground)">Data Processing:</strong>
+        PostgreSQL, Spark, Kafka
+      </li>
+      <li>
+        <strong style="color: var(--foreground)">Infrastructure:</strong>
+        Docker, CI/CD, AWS
+      </li>
+    </ul>
+  </div>
+</div>
 
-            <div style="margin-top: var(--space-md);">
-                <a href="assets/resume/resume_.pdf" target="_blank" class="button">Download Resume</a>
-            </div>
+<!-- Beyond Engineering Section -->
+<section
+  style="
+    margin-top: var(--space-xl);
+    border-top: 1px solid var(--border);
+    padding-top: var(--space-lg);
+  "
+>
+  <h2>Beyond Engineering</h2>
+  <p style="max-width: 600px">
+    When I'm not designing systems, I explore the world through a lens and
+    words. Photography and poetry allow me to capture moments that code cannot.
+  </p>
+
+  <div class="grid-2-col" style="margin-top: var(--space-md)">
+    <!-- Photography -->
+    <div>
+      <h3>Photography</h3>
+      <div class="gallery-grid">
+        {% if photos %} {% for photo in photos[:3] %}
+        <div class="gallery-item" title="{{ photo.caption }}">
+          <img
+            src="{{ photo.thumbnail or photo.path }}"
+            alt="{{ photo.caption }}"
+            loading="lazy"
+          />
         </div>
-
-        <div class="skills">
-            <h3>Core Expertise</h3>
-            <ul style="list-style: none; color: var(--muted-foreground); line-height: 2; padding: 0;">
-                <li><strong style="color: var(--foreground);">Data Engineering:</strong> ETL/ELT, Data Pipelines</li>
-                <li><strong style="color: var(--foreground);">Programming:</strong> Python, SQL</li>
-                <li><strong style="color: var(--foreground);">Data Processing:</strong> PostgreSQL, Spark, Kafka</li>
-                <li><strong style="color: var(--foreground);">Infrastructure:</strong> Docker, CI/CD, AWS</li>
-            </ul>
-        </div>
+        {% endfor %} {% else %}
+        <p style="color: var(--muted-foreground); font-size: 0.875rem">
+          Photography coming soon...
+        </p>
+        {% endif %}
+      </div>
     </div>
 
-    <!-- Beyond Engineering Section -->
-    <section style="margin-top: var(--space-xl); border-top: 1px solid var(--border); padding-top: var(--space-lg);">
-        <h2>Beyond Engineering</h2>
-        <p style="max-width: 600px;">
-            When I'm not designing systems, I explore the world through a lens and words. Photography and poetry allow me to capture moments that code cannot.
-        </p>
-
-        <div class="grid-2-col" style="margin-top: var(--space-md);">
-
-            <!-- Photography -->
-            <div>
-                <h3>Photography</h3>
-                <div class="gallery-grid">
-                    {% if photos %}
-                        {% for photo in photos[:3] %}
-                        <div class="gallery-item" title="{{ photo.caption }}">
-                            <img src="{{ photo.thumbnail or photo.path }}" alt="{{ photo.caption }}" loading="lazy">
-                        </div>
-                        {% endfor %}
-                    {% else %}
-                        <p style="color: var(--muted-foreground); font-size: 0.875rem;">Photography coming soon...</p>
-                    {% endif %}
-                </div>
-            </div>
-
-            <!-- Poetry -->
-            <div>
-                <h3>Poetry</h3>
-                <div id="poetry-container">
-                    {% if poems %}
-                        {% for poem in poems[:2] %}
-                        <div class="poem-card">
-                            <h4>{{ poem.title }}</h4>
-                            <p class="poem-lines">{{ poem.lines | join('\n') }}</p>
-                            <span style="font-size: 0.875rem; color: var(--muted-foreground);">— {{ poem.date }}</span>
-                        </div>
-                        {% endfor %}
-                    {% else %}
-                        <p style="color: var(--muted-foreground); font-size: 0.875rem;">Poetry coming soon...</p>
-                    {% endif %}
-                </div>
-            </div>
-
+    <!-- Poetry -->
+    <div>
+      <h3>Poetry</h3>
+      <div id="poetry-container">
+        {% if poems %} {% for poem in poems[:2] %}
+        <div class="poem-card">
+          <h4>{{ poem.title }}</h4>
+          <p class="poem-lines">{{ poem.lines | join('\n') }}</p>
+          <span style="font-size: 0.875rem; color: var(--muted-foreground)"
+            >— {{ poem.date }}</span
+          >
         </div>
-    </section>
+        {% endfor %} {% else %}
+        <p style="color: var(--muted-foreground); font-size: 0.875rem">
+          Poetry coming soon...
+        </p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}

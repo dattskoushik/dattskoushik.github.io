@@ -1,572 +1,818 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title> | Suchindra Koushik</title>
-    <meta name="description" content="">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Zilla+Slab:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+    />
+    <title>| Suchindra Koushik</title>
+    <meta name="description" content="" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Zilla+Slab:wght@600;700&family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Oat UI -->
-    <link rel="stylesheet" href="/assets/vendor/oat.min.css">
+    <link rel="stylesheet" href="/assets/vendor/oat.min.css" />
     <script src="/assets/vendor/oat.min.js" defer></script>
 
     <script src="/assets/js/theme.js"></script>
 
     <style>
-        :root {
-            /* Fonts */
-            --font-serif: 'Zilla Slab', serif;
-            --font-sans: 'Inter', sans-serif;
-            --font-mono: 'Fira Code', monospace;
+      :root {
+        /* Fonts */
+        --font-serif: "Zilla Slab", serif;
+        --font-sans: "Inter", sans-serif;
+        --font-mono: "Fira Code", monospace;
 
-            /* Spacing overrides if needed */
-            --space-xl: 4rem;
-            --space-lg: 2.5rem;
-            --space-md: 1.5rem;
-            --space-sm: 1rem;
-        }
+        /* Spacing overrides if needed */
+        --space-xl: 4rem;
+        --space-lg: 2.5rem;
+        --space-md: 1.5rem;
+        --space-sm: 1rem;
+      }
 
-        /* Dark Theme (Default) */
-        [data-theme="dark"] {
-            --background: #0f172a;
-            --foreground: #cbd5e1;
-            --card: #1e293b;
-            --card-foreground: #cbd5e1;
-            --muted: #1e293b;
-            --muted-foreground: #94a3b8;
-            --border: #334155;
-            --primary: #3b82f6;
-            --primary-foreground: #ffffff;
-            --secondary: #1e293b;
-            --secondary-foreground: #cbd5e1;
-            --accent: #3b82f6;
-            --accent-foreground: #ffffff;
-            --ring: #3b82f6;
-            --input: #1e293b;
-            /* Custom */
-            --header-bg: rgba(15, 23, 42, 0.8);
-            --code-bg: #1e293b;
-        }
+      /* Dark Theme (Default) */
+      [data-theme="dark"] {
+        --background: #0f172a;
+        --foreground: #cbd5e1;
+        --card: #1e293b;
+        --card-foreground: #cbd5e1;
+        --muted: #1e293b;
+        --muted-foreground: #94a3b8;
+        --border: #334155;
+        --primary: #3b82f6;
+        --primary-foreground: #ffffff;
+        --secondary: #1e293b;
+        --secondary-foreground: #cbd5e1;
+        --accent: #3b82f6;
+        --accent-foreground: #ffffff;
+        --ring: #3b82f6;
+        --input: #1e293b;
+        /* Custom */
+        --header-bg: rgba(15, 23, 42, 0.8);
+        --code-bg: #1e293b;
+      }
 
-        /* Light Theme */
-        [data-theme="light"] {
-            --background: #ffffff;
-            --foreground: #334155;
-            --card: #f8fafc;
-            --card-foreground: #334155;
-            --muted: #f1f5f9;
-            --muted-foreground: #64748b;
-            --border: #e2e8f0;
-            --primary: #2563eb;
-            --primary-foreground: #ffffff;
-            --secondary: #f1f5f9;
-            --secondary-foreground: #334155;
-            --accent: #2563eb;
-            --accent-foreground: #ffffff;
-            --ring: #2563eb;
-            --input: #ffffff;
-            /* Custom */
-            --header-bg: rgba(255, 255, 255, 0.8);
-            --code-bg: #f1f5f9;
-        }
+      /* Light Theme */
+      [data-theme="light"] {
+        --background: #ffffff;
+        --foreground: #334155;
+        --card: #f8fafc;
+        --card-foreground: #334155;
+        --muted: #f1f5f9;
+        --muted-foreground: #64748b;
+        --border: #e2e8f0;
+        --primary: #2563eb;
+        --primary-foreground: #ffffff;
+        --secondary: #f1f5f9;
+        --secondary-foreground: #334155;
+        --accent: #2563eb;
+        --accent-foreground: #ffffff;
+        --ring: #2563eb;
+        --input: #ffffff;
+        /* Custom */
+        --header-bg: rgba(255, 255, 255, 0.8);
+        --code-bg: #f1f5f9;
+      }
 
-        body {
-            background-color: var(--background);
-            color: var(--foreground);
-            font-family: var(--font-sans);
-        }
+      body {
+        background-color: var(--background);
+        color: var(--foreground);
+        font-family: var(--font-sans);
+      }
 
-        /* Header Styling */
-        header.site-header {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            background-color: var(--header-bg);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 0;
-        }
+      /* Header Styling */
+      header.site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background-color: var(--header-bg);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 0;
+      }
 
-        header .container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            max-width: 1152px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
+      header .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1152px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
 
-        .logo {
-            font-weight: 700;
-            text-decoration: none;
-            color: #ffffff;
-            font-family: var(--font-mono);
-            font-size: 1.125rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+      .logo {
+        font-weight: 700;
+        text-decoration: none;
+        color: #ffffff;
+        font-family: var(--font-mono);
+        font-size: 1.125rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
 
-        [data-theme="light"] .logo {
-            color: #000000;
-        }
+      [data-theme="light"] .logo {
+        color: #000000;
+      }
 
-        .logo-prefix {
-            color: var(--primary);
-        }
+      .logo-prefix {
+        color: var(--primary);
+      }
 
-        nav.nav-links {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            align-items: center;
-            font-family: var(--font-mono);
-            font-size: 0.875rem;
-            text-transform: none;
-            letter-spacing: normal;
-        }
+      nav.nav-links {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        align-items: center;
+        font-family: var(--font-mono);
+        font-size: 0.875rem;
+        text-transform: none;
+        letter-spacing: normal;
+      }
 
-        nav.nav-links a {
-            text-decoration: none;
-            color: var(--foreground);
-            transition: color 0.2s;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-            text-transform: none;
-            letter-spacing: normal;
-        }
+      nav.nav-links a {
+        text-decoration: none;
+        color: var(--foreground);
+        transition: color 0.2s;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        text-transform: none;
+        letter-spacing: normal;
+      }
 
-        nav.nav-links a:hover {
-            color: var(--primary);
-        }
+      nav.nav-links a:hover {
+        color: var(--primary);
+      }
 
-        nav.nav-links a.active {
-            background-color: rgba(74, 222, 128, 0.2);
-            color: var(--primary);
-        }
+      nav.nav-links a.active {
+        background-color: rgba(74, 222, 128, 0.2);
+        color: var(--primary);
+      }
 
-        [data-theme="light"] nav.nav-links a.active {
-            background-color: rgba(16, 185, 129, 0.2);
-        }
+      [data-theme="light"] nav.nav-links a.active {
+        background-color: rgba(16, 185, 129, 0.2);
+      }
 
-        /* Mobile Menu */
+      /* Mobile Menu */
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--foreground);
+        cursor: pointer;
+        padding: 0;
+      }
+
+      @media (max-width: 768px) {
         .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--foreground);
-            cursor: pointer;
-            padding: 0;
+          display: block;
         }
+        nav.nav-links {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          flex-direction: column;
+          background: var(--background);
+          border-bottom: 1px solid var(--border);
+          padding: var(--space-md);
+          gap: var(--space-sm);
+        }
+        nav.nav-links.active {
+          display: flex;
+        }
+      }
 
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
-            }
-            nav.nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                flex-direction: column;
-                background: var(--background);
-                border-bottom: 1px solid var(--border);
-                padding: var(--space-md);
-                gap: var(--space-sm);
-            }
-            nav.nav-links.active {
-                display: flex;
-            }
-        }
+      /* Footer */
+      .site-footer {
+        margin-top: auto;
+        padding: 2rem 0;
+        border-top: 1px solid var(--border);
+        background-color: var(--background);
+        color: var(--muted-foreground);
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        width: 100%;
+      }
 
-        /* Footer */
-        .site-footer {
-            margin-top: auto;
-            padding: 2rem 0;
-            border-top: 1px solid var(--border);
-            background-color: var(--background);
-            color: var(--muted-foreground);
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            width: 100%;
-        }
+      .site-footer .container {
+        max-width: 1024px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
 
-        .site-footer .container {
-            max-width: 1024px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
+      .footer-status {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
 
-        .footer-status {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+      .footer-success {
+        color: var(--primary);
+      }
 
-        .footer-success {
-            color: var(--primary);
-        }
+      .social-links {
+        display: inline-flex;
+        gap: 0.5rem;
+      }
+      .social-links a {
+        color: var(--muted-foreground);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .social-links a:hover {
+        color: var(--foreground);
+      }
 
-        .social-links {
-            display: inline-flex;
-            gap: 0.5rem;
-        }
-        .social-links a {
-            color: var(--muted-foreground);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .social-links a:hover {
-            color: var(--foreground);
-        }
+      /* Theme Toggle */
+      #theme-toggle {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.2rem;
+        padding: 0;
+        margin-left: var(--space-sm);
+        color: var(--foreground);
+      }
 
-        /* Theme Toggle */
-        #theme-toggle {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.2rem;
-            padding: 0;
-            margin-left: var(--space-sm);
-            color: var(--foreground);
-        }
+      /* Typography overrides */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: var(--font-serif);
+        color: var(--foreground);
+      }
 
-        /* Typography overrides */
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--font-serif);
-            color: var(--foreground);
-        }
+      .button,
+      button {
+        font-family: var(--font-mono);
+      }
 
-        .button, button {
-            font-family: var(--font-mono);
-        }
+      body {
+        line-height: 1.7;
+      }
 
-        body {
-            line-height: 1.7;
-        }
+      code,
+      pre {
+        font-family: var(--font-mono);
+      }
 
-        code, pre {
-            font-family: var(--font-mono);
-        }
-
-        /* Grid Utility */
+      /* Grid Utility */
+      .grid-2-col {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+      }
+      @media (min-width: 768px) {
         .grid-2-col {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: var(--space-md);
+          grid-template-columns: 1fr 1fr;
         }
-        @media (min-width: 768px) {
-            .grid-2-col {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
+      }
 
-        /* Utility overrides */
-        .text-muted {
-            color: var(--muted-foreground);
-        }
+      /* Utility overrides */
+      .text-muted {
+        color: var(--muted-foreground);
+      }
 
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #020617;
-        }
-        [data-theme="light"] ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
-        }
-        [data-theme="light"] ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary);
-        }
+      .section-spacing {
+        margin-bottom: var(--space-xl);
+      }
 
-        /* Clean Card Global Utility */
-        .clean-card {
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: var(--card);
-            transition: all 0.2s ease;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
+      .section-heading {
+        font-family: var(--font-serif);
+        font-size: 1.875rem;
+        font-weight: 700;
+      }
 
-        .clean-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transform: translateY(-2px);
-        }
+      .tech-heading {
+        font-family: var(--font-mono);
+        font-size: 1.125rem;
+        color: var(--primary);
+      }
 
-        /* Standardized Button Hover States */
-        .btn-solid {
-            background-color: var(--primary) !important;
-            color: var(--primary-foreground) !important;
-            transition: all 0.2s ease !important;
-            border: none;
-        }
-        .btn-solid:hover {
-            background-color: var(--primary) !important;
-            opacity: 0.9 !important;
-        }
-        .btn-outline {
-            background-color: transparent !important;
-            border: 1px solid var(--primary) !important;
-            color: var(--primary) !important;
-            transition: all 0.2s ease !important;
-        }
-        .btn-outline:hover {
-            background-color: rgba(59, 130, 246, 0.1) !important;
-            color: var(--primary) !important;
-        }
+      .code-heading {
+        font-family: var(--font-mono);
+        font-size: 0.875rem;
+        color: var(--primary);
+        margin: 0;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #020617;
+      }
+      [data-theme="light"] ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #334155;
+        border-radius: 4px;
+      }
+      [data-theme="light"] ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--primary);
+      }
+
+      /* Clean Card Global Utility */
+      .clean-card {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--card);
+        transition: all 0.2s ease;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        padding: var(--space-md);
+      }
+
+      .clean-card:hover {
+        border-color: var(--primary);
+        box-shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        transform: translateY(-2px);
+      }
+
+      /* Standardized Button Hover States */
+      .btn-solid {
+        background-color: var(--primary) !important;
+        color: var(--primary-foreground) !important;
+        transition: all 0.2s ease !important;
+        border: none;
+      }
+      .btn-solid:hover {
+        background-color: var(--primary) !important;
+        opacity: 0.9 !important;
+      }
+      .btn-outline {
+        background-color: transparent !important;
+        border: 1px solid var(--primary) !important;
+        color: var(--primary) !important;
+        transition: all 0.2s ease !important;
+      }
+      .btn-outline:hover {
+        background-color: rgba(59, 130, 246, 0.1) !important;
+        color: var(--primary) !important;
+      }
     </style>
-
-</head>
-<body data-theme="dark" style="display: flex; flex-direction: column; min-height: 100vh;">
-
-
+  </head>
+  <body
+    data-theme="dark"
+    style="display: flex; flex-direction: column; min-height: 100vh"
+  >
     <header class="site-header">
-        <div class="container">
-            <a href="/index.html" class="logo">
-
-                <span>Suchindra Koushik</span>
-            </a>
-            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">☰</button>
-            <nav class="nav-links">
-                <a href="/index.html" class="active">Home</a>
-                <a href="/about.html">About</a>
-                <a href="/index.html#skills">Skills</a>
-                <a href="/projects.html">Projects</a>
-                <a href="/resume.html">Experience</a>
-                <a href="/index.html#engineering">Engineering</a>
-                <a href="/index.html#contact">Contact</a>
-                <div style="display: flex; align-items: center; gap: 0.5rem; margin-left: 1rem; padding-left: 1rem; border-left: 1px solid var(--border);">
-                    <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
-                </div>
-            </nav>
-        </div>
+      <div class="container">
+        <a href="/index.html" class="logo">
+          <span>Suchindra Koushik</span>
+        </a>
+        <button
+          class="mobile-menu-btn"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+        <nav class="nav-links">
+          <a href="/index.html" class="active">Home</a>
+          <a href="/about.html">About</a>
+          <a href="/index.html#skills">Skills</a>
+          <a href="/projects.html">Projects</a>
+          <a href="/resume.html">Experience</a>
+          <a href="/index.html#engineering">Engineering</a>
+          <a href="/index.html#contact">Contact</a>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+              margin-left: 1rem;
+              padding-left: 1rem;
+              border-left: 1px solid var(--border);
+            "
+          >
+            <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+          </div>
+        </nav>
+      </div>
     </header>
 
-    <main class="container" style="flex-grow: 1; max-width: 1024px; margin: 0 auto; padding: 3rem 1.5rem; ">
-
-    <!-- BEGIN: Hero Section -->
-        <div style="margin-top: 2rem; position: relative; z-index: 10;">
-            <h1 style="font-family: var(--font-serif); font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 0.5rem; letter-spacing: -0.025em;">
-                Suchindra Koushik
-            </h1>
-            <h2 style="font-family: var(--font-mono); font-size: 1.25rem; font-weight: 500; color: var(--primary); margin-bottom: 1.5rem;">
-                Data Engineer
-            </h2>
-            <p style="font-size: 1.125rem; color: var(--muted-foreground); max-width: 48rem; margin-bottom: 2rem; line-height: 1.625;">
-                Data Engineer building reliable, scalable data pipelines and analytics systems with SQL, Python, and modern data platforms. Specializing in idempotent pipelines, distributed consensus, and high-reliability infrastructure.
-            </p>
-            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; font-family: var(--font-mono); font-size: 0.875rem; color: #9ca3af; margin-bottom: 2.5rem;">
-                <span style="padding: 0.25rem 0.5rem; background-color: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 0.25rem;">[ Python ]</span>
-                <span style="padding: 0.25rem 0.5rem; background-color: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 0.25rem;">[ SQL ]</span>
-                <span style="padding: 0.25rem 0.5rem; background-color: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 0.25rem;">[ Apache Spark ]</span>
-                <span style="padding: 0.25rem 0.5rem; background-color: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 0.25rem;">[ Kafka ]</span>
-            </div>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <a href="/projects.html" class="btn-solid" style="padding: 0.75rem 1.5rem; border-radius: 0.25rem; font-family: var(--font-mono); text-decoration: none; font-weight: bold;">View Projects</a>
-                <a href="/assets/resume/resume_.pdf" target="_blank" class="btn-outline" style="padding: 0.75rem 1.5rem; border-radius: 0.25rem; font-family: var(--font-mono); text-decoration: none;">Download Resume</a>
-            </div>
+    <main
+      class="container"
+      style="
+        flex-grow: 1;
+        max-width: 1024px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+      "
+    >
+      <!-- BEGIN: Hero Section -->
+      <section class="hero-section">
+        <div style="margin-top: 2rem; position: relative; z-index: 10">
+          <h1
+            style="
+              font-family: var(--font-serif);
+              font-size: 3.5rem;
+              font-weight: 700;
+              line-height: 1.1;
+              margin-bottom: 0.5rem;
+              letter-spacing: -0.025em;
+            "
+          >
+            Suchindra Koushik
+          </h1>
+          <h2
+            style="
+              font-family: var(--font-mono);
+              font-size: 1.25rem;
+              font-weight: 500;
+              color: var(--primary);
+              margin-bottom: 1.5rem;
+            "
+          >
+            Data Engineer
+          </h2>
+          <p
+            style="
+              font-size: 1.125rem;
+              color: var(--muted-foreground);
+              max-width: 48rem;
+              margin-bottom: 2rem;
+              line-height: 1.625;
+            "
+          >
+            Data Engineer building reliable, scalable data pipelines and
+            analytics systems with SQL, Python, and modern data platforms.
+            Specializing in idempotent pipelines, distributed consensus, and
+            high-reliability infrastructure.
+          </p>
+          <div
+            style="
+              display: flex;
+              flex-wrap: wrap;
+              gap: 0.75rem;
+              font-family: var(--font-mono);
+              font-size: 0.875rem;
+              color: #9ca3af;
+              margin-bottom: 2.5rem;
+            "
+          >
+            <span
+              style="
+                padding: 0.25rem 0.5rem;
+                background-color: rgba(0, 0, 0, 0.2);
+                border: 1px solid var(--border);
+                border-radius: 0.25rem;
+              "
+              >[ Python ]</span
+            >
+            <span
+              style="
+                padding: 0.25rem 0.5rem;
+                background-color: rgba(0, 0, 0, 0.2);
+                border: 1px solid var(--border);
+                border-radius: 0.25rem;
+              "
+              >[ SQL ]</span
+            >
+            <span
+              style="
+                padding: 0.25rem 0.5rem;
+                background-color: rgba(0, 0, 0, 0.2);
+                border: 1px solid var(--border);
+                border-radius: 0.25rem;
+              "
+              >[ Apache Spark ]</span
+            >
+            <span
+              style="
+                padding: 0.25rem 0.5rem;
+                background-color: rgba(0, 0, 0, 0.2);
+                border: 1px solid var(--border);
+                border-radius: 0.25rem;
+              "
+              >[ Kafka ]</span
+            >
+          </div>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap">
+            <a
+              href="/projects.html"
+              class="btn-solid"
+              style="
+                padding: 0.75rem 1.5rem;
+                border-radius: 0.25rem;
+                font-family: var(--font-mono);
+                text-decoration: none;
+                font-weight: bold;
+              "
+              >View Projects</a
+            >
+            <a
+              href="/assets/resume/resume_.pdf"
+              target="_blank"
+              class="btn-outline"
+              style="
+                padding: 0.75rem 1.5rem;
+                border-radius: 0.25rem;
+                font-family: var(--font-mono);
+                text-decoration: none;
+              "
+              >Download Resume</a
+            >
+          </div>
         </div>
-    </section>
-    <!-- END: Hero Section -->
+      </section>
+      <!-- END: Hero Section -->
 
-
-    <!-- BEGIN: Engineering Thinking -->
-    <section id="engineering" style="margin-bottom: 6rem;">
-        <h2 style="font-family: var(--font-serif); font-size: 1.875rem; font-weight: 700; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">How I Think About Data Systems</h2>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative;">
-
-            <div style="padding: 2rem; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); box-sizing: border-box;" class="principle-cell">
-                <h3 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Reliability & Idempotency</h3>
-                <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin: 0;">
-                    Systems fail. I design pipelines where "retry until success" is safe because operations are idempotent. Data integrity must survive network drops and process crashes.
-                </p>
-            </div>
-
-            <div style="padding: 2rem; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); box-sizing: border-box;" class="principle-cell">
-                <h3 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Data Quality</h3>
-                <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin: 0;">
-                    Bad data is worse than no data. I enforce strict schema validation, null checks, and referential integrity before data reaches the gold tier or analytical warehouse.
-                </p>
-            </div>
-
-            <div style="padding: 2rem; border-bottom: 1px solid var(--border); box-sizing: border-box;" class="principle-cell-last">
-                <h3 style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Simplicity & Maintainability</h3>
-                <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin: 0;">
-                    I avoid unnecessary architectural complexity. Using the right tool often means using the simpler tool. Code and schemas must remain readable and understandable by the entire team.
-                </p>
-            </div>
-
-            <style>
-        :root {
-            /* Fonts */
-            --font-serif: 'Zilla Slab', serif;
-            --font-sans: 'Inter', sans-serif;
-            --font-mono: 'Fira Code', monospace;
-
-            /* Spacing overrides if needed */
-            --space-xl: 4rem;
-            --space-lg: 2.5rem;
-            --space-md: 1.5rem;
-            --space-sm: 1rem;
-        }
-
-        /* Dark Theme (Default) */
-        [data-theme="dark"] {
-            --background: #0f172a;
-            --foreground: #cbd5e1;
-            --card: #1e293b;
-            --card-foreground: #cbd5e1;
-            --muted: #1e293b;
-            --muted-foreground: #94a3b8;
-            --border: #334155;
-            --primary: #3b82f6;
-            --primary-foreground: #ffffff;
-            --secondary: #1e293b;
-            --secondary-foreground: #cbd5e1;
-            --accent: #3b82f6;
-            --accent-foreground: #ffffff;
-            --ring: #3b82f6;
-            --input: #1e293b;
-            /* Custom */
-            --header-bg: rgba(15, 23, 42, 0.8);
-            --code-bg: #1e293b;
-        }
-
-        /* Light Theme */
-        [data-theme="light"] {
-            --background: #ffffff;
-            --foreground: #334155;
-            --card: #f8fafc;
-            --card-foreground: #334155;
-            --muted: #f1f5f9;
-            --muted-foreground: #64748b;
-            --border: #e2e8f0;
-            --primary: #2563eb;
-            --primary-foreground: #ffffff;
-            --secondary: #f1f5f9;
-            --secondary-foreground: #334155;
-            --accent: #2563eb;
-            --accent-foreground: #ffffff;
-            --ring: #2563eb;
-            --input: #ffffff;
-            /* Custom */
-            --header-bg: rgba(255, 255, 255, 0.8);
-            --code-bg: #f1f5f9;
-        }
-
-        body {
-            background-color: var(--background);
-            color: var(--foreground);
-            font-family: var(--font-sans);
-        }
-
-        /* Header Styling */
-        header.site-header {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            background-color: var(--header-bg);
-            backdrop-filter: blur(8px);
+      <!-- BEGIN: Engineering Thinking -->
+      <section id="engineering" class="section-spacing">
+        <h2
+          class="section-heading"
+          style="
+            margin-bottom: 2rem;
             border-bottom: 1px solid var(--border);
-            padding: 1rem 0;
-        }
+            padding-bottom: 1rem;
+          "
+        >
+          How I Think About Data Systems
+        </h2>
 
-        header .container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            max-width: 1152px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            position: relative;
+          "
+        >
+          <div
+            style="
+              padding: 2rem;
+              border-bottom: 1px solid var(--border);
+              border-right: 1px solid var(--border);
+              box-sizing: border-box;
+            "
+            class="principle-cell"
+          >
+            <h3
+              style="
+                font-family: var(--font-serif);
+                font-size: 1.25rem;
+                font-weight: 700;
+                margin-bottom: 1rem;
+              "
+            >
+              Reliability & Idempotency
+            </h3>
+            <p
+              style="
+                color: var(--muted-foreground);
+                font-size: 0.875rem;
+                line-height: 1.625;
+                margin: 0;
+              "
+            >
+              Systems fail. I design pipelines where "retry until success" is
+              safe because operations are idempotent. Data integrity must
+              survive network drops and process crashes.
+            </p>
+          </div>
 
-        .logo {
-            font-weight: 700;
-            text-decoration: none;
-            color: #ffffff;
-            font-family: var(--font-mono);
-            font-size: 1.125rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+          <div
+            style="
+              padding: 2rem;
+              border-bottom: 1px solid var(--border);
+              border-right: 1px solid var(--border);
+              box-sizing: border-box;
+            "
+            class="principle-cell"
+          >
+            <h3
+              style="
+                font-family: var(--font-serif);
+                font-size: 1.25rem;
+                font-weight: 700;
+                margin-bottom: 1rem;
+              "
+            >
+              Data Quality
+            </h3>
+            <p
+              style="
+                color: var(--muted-foreground);
+                font-size: 0.875rem;
+                line-height: 1.625;
+                margin: 0;
+              "
+            >
+              Bad data is worse than no data. I enforce strict schema
+              validation, null checks, and referential integrity before data
+              reaches the gold tier or analytical warehouse.
+            </p>
+          </div>
 
-        [data-theme="light"] .logo {
-            color: #000000;
-        }
+          <div
+            style="
+              padding: 2rem;
+              border-bottom: 1px solid var(--border);
+              box-sizing: border-box;
+            "
+            class="principle-cell-last"
+          >
+            <h3
+              style="
+                font-family: var(--font-serif);
+                font-size: 1.25rem;
+                font-weight: 700;
+                margin-bottom: 1rem;
+              "
+            >
+              Simplicity & Maintainability
+            </h3>
+            <p
+              style="
+                color: var(--muted-foreground);
+                font-size: 0.875rem;
+                line-height: 1.625;
+                margin: 0;
+              "
+            >
+              I avoid unnecessary architectural complexity. Using the right tool
+              often means using the simpler tool. Code and schemas must remain
+              readable and understandable by the entire team.
+            </p>
+          </div>
 
-        .logo-prefix {
-            color: var(--primary);
-        }
+          <style>
+            :root {
+              /* Fonts */
+              --font-serif: "Zilla Slab", serif;
+              --font-sans: "Inter", sans-serif;
+              --font-mono: "Fira Code", monospace;
 
-        nav.nav-links {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            align-items: center;
-            font-family: var(--font-mono);
-            font-size: 0.875rem;
-            text-transform: none;
-            letter-spacing: normal;
-        }
-
-        nav.nav-links a {
-            text-decoration: none;
-            color: var(--foreground);
-            transition: color 0.2s;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-            text-transform: none;
-            letter-spacing: normal;
-        }
-
-        nav.nav-links a:hover {
-            color: var(--primary);
-        }
-
-        nav.nav-links a.active {
-            background-color: rgba(74, 222, 128, 0.2);
-            color: var(--primary);
-        }
-
-        [data-theme="light"] nav.nav-links a.active {
-            background-color: rgba(16, 185, 129, 0.2);
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--foreground);
-            cursor: pointer;
-            padding: 0;
-        }
-
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
+              /* Spacing overrides if needed */
+              --space-xl: 4rem;
+              --space-lg: 2.5rem;
+              --space-md: 1.5rem;
+              --space-sm: 1rem;
             }
+
+            /* Dark Theme (Default) */
+            [data-theme="dark"] {
+              --background: #0f172a;
+              --foreground: #cbd5e1;
+              --card: #1e293b;
+              --card-foreground: #cbd5e1;
+              --muted: #1e293b;
+              --muted-foreground: #94a3b8;
+              --border: #334155;
+              --primary: #3b82f6;
+              --primary-foreground: #ffffff;
+              --secondary: #1e293b;
+              --secondary-foreground: #cbd5e1;
+              --accent: #3b82f6;
+              --accent-foreground: #ffffff;
+              --ring: #3b82f6;
+              --input: #1e293b;
+              /* Custom */
+              --header-bg: rgba(15, 23, 42, 0.8);
+              --code-bg: #1e293b;
+            }
+
+            /* Light Theme */
+            [data-theme="light"] {
+              --background: #ffffff;
+              --foreground: #334155;
+              --card: #f8fafc;
+              --card-foreground: #334155;
+              --muted: #f1f5f9;
+              --muted-foreground: #64748b;
+              --border: #e2e8f0;
+              --primary: #2563eb;
+              --primary-foreground: #ffffff;
+              --secondary: #f1f5f9;
+              --secondary-foreground: #334155;
+              --accent: #2563eb;
+              --accent-foreground: #ffffff;
+              --ring: #2563eb;
+              --input: #ffffff;
+              /* Custom */
+              --header-bg: rgba(255, 255, 255, 0.8);
+              --code-bg: #f1f5f9;
+            }
+
+            body {
+              background-color: var(--background);
+              color: var(--foreground);
+              font-family: var(--font-sans);
+            }
+
+            /* Header Styling */
+            header.site-header {
+              position: sticky;
+              top: 0;
+              z-index: 50;
+              background-color: var(--header-bg);
+              backdrop-filter: blur(8px);
+              border-bottom: 1px solid var(--border);
+              padding: 1rem 0;
+            }
+
+            header .container {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              max-width: 1152px;
+              margin: 0 auto;
+              padding: 0 1.5rem;
+            }
+
+            .logo {
+              font-weight: 700;
+              text-decoration: none;
+              color: #ffffff;
+              font-family: var(--font-mono);
+              font-size: 1.125rem;
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+            }
+
+            [data-theme="light"] .logo {
+              color: #000000;
+            }
+
+            .logo-prefix {
+              color: var(--primary);
+            }
+
             nav.nav-links {
+              display: flex;
+              gap: 2rem;
+              flex-wrap: wrap;
+              align-items: center;
+              font-family: var(--font-mono);
+              font-size: 0.875rem;
+              text-transform: none;
+              letter-spacing: normal;
+            }
+
+            nav.nav-links a {
+              text-decoration: none;
+              color: var(--foreground);
+              transition: color 0.2s;
+              padding: 0.25rem 0.5rem;
+              border-radius: 0.25rem;
+              text-transform: none;
+              letter-spacing: normal;
+            }
+
+            nav.nav-links a:hover {
+              color: var(--primary);
+            }
+
+            nav.nav-links a.active {
+              background-color: rgba(74, 222, 128, 0.2);
+              color: var(--primary);
+            }
+
+            [data-theme="light"] nav.nav-links a.active {
+              background-color: rgba(16, 185, 129, 0.2);
+            }
+
+            /* Mobile Menu */
+            .mobile-menu-btn {
+              display: none;
+              background: none;
+              border: none;
+              font-size: 1.5rem;
+              color: var(--foreground);
+              cursor: pointer;
+              padding: 0;
+            }
+
+            @media (max-width: 768px) {
+              .mobile-menu-btn {
+                display: block;
+              }
+              nav.nav-links {
                 display: none;
                 position: absolute;
                 top: 100%;
@@ -577,270 +823,474 @@
                 border-bottom: 1px solid var(--border);
                 padding: var(--space-md);
                 gap: var(--space-sm);
-            }
-            nav.nav-links.active {
+              }
+              nav.nav-links.active {
                 display: flex;
+              }
             }
-        }
 
-        /* Footer */
-        .site-footer {
-            margin-top: auto;
-            padding: 2rem 0;
-            border-top: 1px solid var(--border);
-            background-color: var(--background);
-            color: var(--muted-foreground);
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            width: 100%;
-        }
+            /* Footer */
+            .site-footer {
+              margin-top: auto;
+              padding: 2rem 0;
+              border-top: 1px solid var(--border);
+              background-color: var(--background);
+              color: var(--muted-foreground);
+              font-family: var(--font-mono);
+              font-size: 0.75rem;
+              width: 100%;
+            }
 
-        .site-footer .container {
-            max-width: 1024px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
+            .site-footer .container {
+              max-width: 1024px;
+              margin: 0 auto;
+              padding: 0 1.5rem;
+              display: flex;
+              flex-direction: column;
+              gap: 0.5rem;
+            }
 
-        .footer-status {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+            .footer-status {
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+            }
 
-        .footer-success {
-            color: var(--primary);
-        }
+            .footer-success {
+              color: var(--primary);
+            }
 
-        .social-links {
-            display: inline-flex;
-            gap: 0.5rem;
-        }
-        .social-links a {
-            color: var(--muted-foreground);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .social-links a:hover {
-            color: var(--foreground);
-        }
+            .social-links {
+              display: inline-flex;
+              gap: 0.5rem;
+            }
+            .social-links a {
+              color: var(--muted-foreground);
+              text-decoration: none;
+              transition: color 0.2s;
+            }
+            .social-links a:hover {
+              color: var(--foreground);
+            }
 
-        /* Theme Toggle */
-        #theme-toggle {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.2rem;
-            padding: 0;
-            margin-left: var(--space-sm);
-            color: var(--foreground);
-        }
+            /* Theme Toggle */
+            #theme-toggle {
+              background: none;
+              border: none;
+              cursor: pointer;
+              font-size: 1.2rem;
+              padding: 0;
+              margin-left: var(--space-sm);
+              color: var(--foreground);
+            }
 
-        /* Typography overrides */
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--font-serif);
-            color: var(--foreground);
-        }
+            /* Typography overrides */
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+              font-family: var(--font-serif);
+              color: var(--foreground);
+            }
 
-        .button, button {
-            font-family: var(--font-mono);
-        }
+            .button,
+            button {
+              font-family: var(--font-mono);
+            }
 
-        body {
-            line-height: 1.7;
-        }
+            body {
+              line-height: 1.7;
+            }
 
-        code, pre {
-            font-family: var(--font-mono);
-        }
+            code,
+            pre {
+              font-family: var(--font-mono);
+            }
 
-        /* Grid Utility */
-        .grid-2-col {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: var(--space-md);
-        }
-        @media (min-width: 768px) {
+            /* Grid Utility */
             .grid-2-col {
-                grid-template-columns: 1fr 1fr;
+              display: grid;
+              grid-template-columns: 1fr;
+              gap: var(--space-md);
             }
-        }
+            @media (min-width: 768px) {
+              .grid-2-col {
+                grid-template-columns: 1fr 1fr;
+              }
+            }
 
-        /* Utility overrides */
-        .text-muted {
-            color: var(--muted-foreground);
-        }
+            /* Utility overrides */
+            .text-muted {
+              color: var(--muted-foreground);
+            }
 
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #020617;
-        }
-        [data-theme="light"] ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
-        }
-        [data-theme="light"] ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary);
-        }
+      .section-spacing {
+        margin-bottom: var(--space-xl);
+      }
 
-        /* Clean Card Global Utility */
-        .clean-card {
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background: var(--card);
-            transition: all 0.2s ease;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
+      .section-heading {
+        font-family: var(--font-serif);
+        font-size: 1.875rem;
+        font-weight: 700;
+      }
 
-        .clean-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transform: translateY(-2px);
-        }
+      .tech-heading {
+        font-family: var(--font-mono);
+        font-size: 1.125rem;
+        color: var(--primary);
+      }
 
-        /* Standardized Button Hover States */
-        .btn-solid {
-            background-color: var(--primary) !important;
-            color: var(--primary-foreground) !important;
-            transition: all 0.2s ease !important;
-            border: none;
-        }
-        .btn-solid:hover {
-            background-color: var(--primary) !important;
-            opacity: 0.9 !important;
-        }
-        .btn-outline {
-            background-color: transparent !important;
-            border: 1px solid var(--primary) !important;
-            color: var(--primary) !important;
-            transition: all 0.2s ease !important;
-        }
-        .btn-outline:hover {
-            background-color: rgba(59, 130, 246, 0.1) !important;
-            color: var(--primary) !important;
-        }
-    </style>
+      .code-heading {
+        font-family: var(--font-mono);
+        font-size: 0.875rem;
+        color: var(--primary);
+        margin: 0;
+      }
+
+            /* Custom scrollbar */
+            ::-webkit-scrollbar {
+              width: 8px;
+            }
+            ::-webkit-scrollbar-track {
+              background: #020617;
+            }
+            [data-theme="light"] ::-webkit-scrollbar-track {
+              background: #f1f5f9;
+            }
+            ::-webkit-scrollbar-thumb {
+              background: #334155;
+              border-radius: 4px;
+            }
+            [data-theme="light"] ::-webkit-scrollbar-thumb {
+              background: #cbd5e1;
+            }
+            ::-webkit-scrollbar-thumb:hover {
+              background: var(--primary);
+            }
+
+            /* Clean Card Global Utility */
+            .clean-card {
+              border: 1px solid var(--border);
+              border-radius: 8px;
+              background: var(--card);
+              transition: all 0.2s ease;
+              box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        padding: var(--space-md);
+            }
+
+            .clean-card:hover {
+              border-color: var(--primary);
+              box-shadow:
+                0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+              transform: translateY(-2px);
+            }
+
+            /* Standardized Button Hover States */
+            .btn-solid {
+              background-color: var(--primary) !important;
+              color: var(--primary-foreground) !important;
+              transition: all 0.2s ease !important;
+              border: none;
+            }
+            .btn-solid:hover {
+              background-color: var(--primary) !important;
+              opacity: 0.9 !important;
+            }
+            .btn-outline {
+              background-color: transparent !important;
+              border: 1px solid var(--primary) !important;
+              color: var(--primary) !important;
+              transition: all 0.2s ease !important;
+            }
+            .btn-outline:hover {
+              background-color: rgba(59, 130, 246, 0.1) !important;
+              color: var(--primary) !important;
+            }
+          </style>
         </div>
-    </section>
-    <!-- END: Engineering Thinking -->
+      </section>
+      <!-- END: Engineering Thinking -->
 
+      <!-- BEGIN: Technical Skills -->
+      <section id="skills" class="section-spacing" style="padding-top: 2rem">
+        <h2
+          class="section-heading"
+          style="
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+          "
+        >
+          Technical Skills
+        </h2>
 
-    <!-- BEGIN: Technical Skills -->
-    <section id="skills" style="margin-bottom: 6rem; padding-top: 2rem;">
-        <h2 style="font-family: var(--font-serif); font-size: 1.875rem; font-weight: 700; margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">Technical Skills</h2>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+          "
+        >
+          <!-- Programming -->
+          <div class="clean-card" style="border-radius: 0.5rem">
+            <h3 class="tech-heading" style="margin-bottom: 1rem">
+              > Programming
+            </h3>
+            <ul
+              style="
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                color: var(--muted-foreground);
+                line-height: 1.8;
+              "
+            >
+              <li>Python</li>
+              <li>SQL</li>
+              <li>Java</li>
+              <li>Bash</li>
+            </ul>
+          </div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+          <!-- Data Processing -->
+          <div class="clean-card" style="border-radius: 0.5rem">
+            <h3 class="tech-heading" style="margin-bottom: 1rem">
+              > Data Processing
+            </h3>
+            <ul
+              style="
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                color: var(--muted-foreground);
+                line-height: 1.8;
+              "
+            >
+              <li>Apache Spark</li>
+              <li>Kafka</li>
+              <li>PostgreSQL</li>
+              <li>Elasticsearch</li>
+            </ul>
+          </div>
 
-            <!-- Programming -->
-            <div class="clean-card" style="padding: 1.5rem; border-radius: 0.5rem;">
-                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--primary); margin-bottom: 1rem;">> Programming</h3>
-                <ul style="list-style: none; padding: 0; margin: 0; color: var(--muted-foreground); line-height: 1.8;">
-                    <li>Python</li>
-                    <li>SQL</li>
-                    <li>Java</li>
-                    <li>Bash</li>
-                </ul>
-            </div>
+          <!-- Data Engineering -->
+          <div class="clean-card" style="border-radius: 0.5rem">
+            <h3 class="tech-heading" style="margin-bottom: 1rem">
+              Data Engineering
+            </h3>
+            <ul
+              style="
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                color: var(--muted-foreground);
+                line-height: 1.8;
+              "
+            >
+              <li>ETL / ELT</li>
+              <li>Data Pipelines</li>
+              <li>Batch Processing</li>
+              <li>Data Quality / Validation</li>
+            </ul>
+          </div>
 
-            <!-- Data Processing -->
-            <div class="clean-card" style="padding: 1.5rem; border-radius: 0.5rem;">
-                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--primary); margin-bottom: 1rem;">> Data Processing</h3>
-                <ul style="list-style: none; padding: 0; margin: 0; color: var(--muted-foreground); line-height: 1.8;">
-                    <li>Apache Spark</li>
-                    <li>Kafka</li>
-                    <li>PostgreSQL</li>
-                    <li>Elasticsearch</li>
-                </ul>
-            </div>
-
-            <!-- Data Engineering -->
-            <div class="clean-card" style="padding: 1.5rem; border-radius: 0.5rem;">
-                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--primary); margin-bottom: 1rem;">Data Engineering</h3>
-                <ul style="list-style: none; padding: 0; margin: 0; color: var(--muted-foreground); line-height: 1.8;">
-                    <li>ETL / ELT</li>
-                    <li>Data Pipelines</li>
-                    <li>Batch Processing</li>
-                    <li>Data Quality / Validation</li>
-                </ul>
-            </div>
-
-            <!-- Development & Infra -->
-            <div class="clean-card" style="padding: 1.5rem; border-radius: 0.5rem;">
-                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--primary); margin-bottom: 1rem;">> Development</h3>
-                <ul style="list-style: none; padding: 0; margin: 0; color: var(--muted-foreground); line-height: 1.8;">
-                    <li>Docker & AWS</li>
-                    <li>Terraform</li>
-                    <li>CI/CD (GitHub Actions)</li>
-                    <li>Git & GitHub</li>
-                </ul>
-            </div>
-
+          <!-- Development & Infra -->
+          <div class="clean-card" style="border-radius: 0.5rem">
+            <h3 class="tech-heading" style="margin-bottom: 1rem">
+              > Development
+            </h3>
+            <ul
+              style="
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                color: var(--muted-foreground);
+                line-height: 1.8;
+              "
+            >
+              <li>Docker & AWS</li>
+              <li>Terraform</li>
+              <li>CI/CD (GitHub Actions)</li>
+              <li>Git & GitHub</li>
+            </ul>
+          </div>
         </div>
-    </section>
-    <!-- END: Technical Skills -->
+      </section>
+      <!-- END: Technical Skills -->
 
-
-
-    <!-- BEGIN: Featured Projects -->
-    <section id="projects" style="margin-bottom: 6rem;">
-        <h2 style="font-family: var(--font-serif); font-size: 1.875rem; font-weight: 700; margin-bottom: 2rem;">Featured Projects</h2>
+      <!-- BEGIN: Featured Projects -->
+      <section id="projects" class="section-spacing">
+        <h2 class="section-heading" style="margin-bottom: 2rem">
+          Featured Projects
+        </h2>
 
         <div class="grid-2-col">
-            <!-- Project 1 -->
-            <div class="clean-card" style="padding: 2rem; border-radius: 0.5rem; display: flex; flex-direction: column; height: 100%;">
-                <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">TinyETL Framework</h3>
-                <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin-bottom: 1rem; flex-grow: 1;">
-                    A configuration-driven Python ETL framework enforcing idempotency and data validation before targeting the data warehouse.
-                </p>
-                <a href="/projects.html" style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--primary); text-decoration: none; margin-bottom: 2rem;">View Case Study &rarr;</a>
-                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: #6b7280; margin-top: auto;">
-                    <span>[ Python ]</span>
-                    <span>[ Data Pipelines ]</span>
-                </div>
+          <!-- Project 1 -->
+          <div
+            class="clean-card"
+            style="
+              border-radius: 0.5rem;
+              display: flex;
+              flex-direction: column;
+              height: 100%;
+            "
+          >
+            <h3
+              style="
+                font-family: var(--font-serif);
+                font-size: 1.5rem;
+                font-weight: 700;
+                margin-bottom: 1rem;
+              "
+            >
+              TinyETL Framework
+            </h3>
+            <p
+              style="
+                color: var(--muted-foreground);
+                font-size: 0.875rem;
+                line-height: 1.625;
+                margin-bottom: 1rem;
+                flex-grow: 1;
+              "
+            >
+              A configuration-driven Python ETL framework enforcing idempotency
+              and data validation before targeting the data warehouse.
+            </p>
+            <a
+              href="/projects.html"
+              style="
+                font-family: var(--font-mono);
+                font-size: 0.875rem;
+                color: var(--primary);
+                text-decoration: none;
+                margin-bottom: 2rem;
+              "
+              >View Case Study &rarr;</a
+            >
+            <div
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                font-family: var(--font-mono);
+                font-size: 0.75rem;
+                color: #6b7280;
+                margin-top: auto;
+              "
+            >
+              <span>[ Python ]</span>
+              <span>[ Data Pipelines ]</span>
             </div>
+          </div>
 
-            <!-- Project 2 -->
-            <div class="clean-card" style="padding: 2rem; border-radius: 0.5rem; display: flex; flex-direction: column; height: 100%;">
-                <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Raft KV Store</h3>
-                <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin-bottom: 1rem; flex-grow: 1;">
-                    A distributed key-value store implementing the Raft consensus algorithm for fault-tolerant state machine replication.
-                </p>
-                <a href="/projects.html" style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--primary); text-decoration: none; margin-bottom: 2rem;">View Case Study &rarr;</a>
-                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: #6b7280; margin-top: auto;">
-                    <span>[ Python ]</span>
-                    <span>[ gRPC ]</span>
-                    <span>[ Distributed Systems ]</span>
-                </div>
+          <!-- Project 2 -->
+          <div
+            class="clean-card"
+            style="
+              border-radius: 0.5rem;
+              display: flex;
+              flex-direction: column;
+              height: 100%;
+            "
+          >
+            <h3
+              style="
+                font-family: var(--font-serif);
+                font-size: 1.5rem;
+                font-weight: 700;
+                margin-bottom: 1rem;
+              "
+            >
+              Raft KV Store
+            </h3>
+            <p
+              style="
+                color: var(--muted-foreground);
+                font-size: 0.875rem;
+                line-height: 1.625;
+                margin-bottom: 1rem;
+                flex-grow: 1;
+              "
+            >
+              A distributed key-value store implementing the Raft consensus
+              algorithm for fault-tolerant state machine replication.
+            </p>
+            <a
+              href="/projects.html"
+              style="
+                font-family: var(--font-mono);
+                font-size: 0.875rem;
+                color: var(--primary);
+                text-decoration: none;
+                margin-bottom: 2rem;
+              "
+              >View Case Study &rarr;</a
+            >
+            <div
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                font-family: var(--font-mono);
+                font-size: 0.75rem;
+                color: #6b7280;
+                margin-top: auto;
+              "
+            >
+              <span>[ Python ]</span>
+              <span>[ gRPC ]</span>
+              <span>[ Distributed Systems ]</span>
             </div>
+          </div>
         </div>
-    </section>
-    <!-- END: Featured Projects -->
+      </section>
+      <!-- END: Featured Projects -->
 
-
-
-    <!-- BEGIN: Proof of Work -->
-    <section style="margin-bottom: 6rem;">
-        <h2 style="font-family: var(--font-serif); font-size: 1.875rem; font-weight: 700; margin-bottom: 2rem;">Code Snippets</h2>
+      <!-- BEGIN: Proof of Work -->
+      <section class="section-spacing">
+        <h2 class="section-heading" style="margin-bottom: 2rem">
+          Code Snippets
+        </h2>
 
         <div class="grid-2-col">
-            <!-- SQL Example -->
-            <div class="clean-card" style="padding: 1.5rem; border-radius: 0.5rem; background: var(--code-bg);">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-                    <h3 style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--primary); margin: 0;">> SQL: Rolling Averages (CTE)</h3>
-                    <a href="https://github.com/dattskoushik" target="_blank" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted-foreground); text-decoration: none;">View on GitHub &rarr;</a>
-                </div>
-                <pre style="margin: 0; padding: 0; font-size: 0.75rem; color: var(--foreground); overflow-x: auto;"><code>WITH daily_sales AS (
+          <!-- SQL Example -->
+          <div
+            class="clean-card"
+            style="border-radius: 0.5rem; background: var(--code-bg)"
+          >
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 1rem;
+              "
+            >
+              <h3 class="code-heading">> SQL: Rolling Averages (CTE)</h3>
+              <a
+                href="https://github.com/dattskoushik"
+                target="_blank"
+                style="
+                  font-family: var(--font-mono);
+                  font-size: 0.75rem;
+                  color: var(--muted-foreground);
+                  text-decoration: none;
+                "
+                >View on GitHub &rarr;</a
+              >
+            </div>
+            <pre
+              style="
+                margin: 0;
+                padding: 0;
+                font-size: 0.75rem;
+                color: var(--foreground);
+                overflow-x: auto;
+              "
+            ><code>WITH daily_sales AS (
     SELECT
         date_trunc('day', created_at) AS sale_date,
         SUM(amount) as total_amount
@@ -856,15 +1306,42 @@ SELECT
         ROWS BETWEEN 6 PRECEDING AND CURRENT ROW
     ) as rolling_7d_avg
 FROM daily_sales;</code></pre>
-            </div>
+          </div>
 
-            <!-- Python Example -->
-            <div class="clean-card" style="padding: 1.5rem; border-radius: 0.5rem; background: var(--code-bg);">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-                    <h3 style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--primary); margin: 0;">> Python: Idempotent Load</h3>
-                    <a href="https://github.com/dattskoushik" target="_blank" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted-foreground); text-decoration: none;">View on GitHub &rarr;</a>
-                </div>
-                <pre style="margin: 0; padding: 0; font-size: 0.75rem; color: var(--foreground); overflow-x: auto;"><code>def load_data_idempotent(df: pd.DataFrame,
+          <!-- Python Example -->
+          <div
+            class="clean-card"
+            style="border-radius: 0.5rem; background: var(--code-bg)"
+          >
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 1rem;
+              "
+            >
+              <h3 class="code-heading">> Python: Idempotent Load</h3>
+              <a
+                href="https://github.com/dattskoushik"
+                target="_blank"
+                style="
+                  font-family: var(--font-mono);
+                  font-size: 0.75rem;
+                  color: var(--muted-foreground);
+                  text-decoration: none;
+                "
+                >View on GitHub &rarr;</a
+              >
+            </div>
+            <pre
+              style="
+                margin: 0;
+                padding: 0;
+                font-size: 0.75rem;
+                color: var(--foreground);
+                overflow-x: auto;
+              "
+            ><code>def load_data_idempotent(df: pd.DataFrame,
                          table_name: str,
                          engine: Engine) -> None:
     """Upserts data ensuring no duplicates on retry."""
@@ -885,81 +1362,271 @@ FROM daily_sales;</code></pre>
     except Exception as e:
         logger.error(f"Load failed: {e}")
         raise</code></pre>
-            </div>
+          </div>
         </div>
-    </section>
-    <!-- END: Proof of Work -->
-    <!-- BEGIN: Latest Thoughts -->
-    <section style="margin-bottom: 6rem;">
-        <h2 style="font-family: var(--font-serif); font-size: 1.875rem; font-weight: 700; margin-bottom: 2rem;">Latest Thoughts</h2>
+      </section>
+      <!-- END: Proof of Work -->
+      <!-- BEGIN: Latest Thoughts -->
+      <section class="section-spacing">
+        <h2 class="section-heading" style="margin-bottom: 2rem">
+          Latest Thoughts
+        </h2>
 
         <div class="grid-2-col">
-            <!-- Article 1 -->
-            <a href="blog/postgres-query-planning.html" class="clean-card" style="display: block; padding: 2rem; border-radius: 0.5rem; text-decoration: none; display: flex; flex-direction: column; height: 100%;">
-                <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--foreground); transition: color 0.2s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--foreground)'">How Postgres Query Planning Actually Works</h3>
-                <div style="font-family: var(--font-mono); font-size: 0.75rem; color: #6b7280; margin-bottom: 1rem;">Oct 26, 2024</div>
-                <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin: 0;">
-                    Understanding the optimizer's cost models is critical for writing high-performance queries. We dive deep into access methods and index utilization.
-                </p>
-            </a>
+          <!-- Article 1 -->
+          <a
+            href="blog/postgres-query-planning.html"
+            class="clean-card"
+            style="
+              display: block;
+              border-radius: 0.5rem;
+              text-decoration: none;
+              display: flex;
+              flex-direction: column;
+              height: 100%;
+            "
+          >
+            <h3
+              style="
+                font-family: var(--font-serif);
+                font-size: 1.5rem;
+                font-weight: 700;
+                margin-bottom: 0.5rem;
+                color: var(--foreground);
+                transition: color 0.2s;
+              "
+              onmouseover="this.style.color = 'var(--primary)'"
+              onmouseout="this.style.color = 'var(--foreground)'"
+            >
+              How Postgres Query Planning Actually Works
+            </h3>
+            <div
+              style="
+                font-family: var(--font-mono);
+                font-size: 0.75rem;
+                color: #6b7280;
+                margin-bottom: 1rem;
+              "
+            >
+              Oct 26, 2024
+            </div>
+            <p
+              style="
+                color: var(--muted-foreground);
+                font-size: 0.875rem;
+                line-height: 1.625;
+                margin: 0;
+              "
+            >
+              Understanding the optimizer's cost models is critical for writing
+              high-performance queries. We dive deep into access methods and
+              index utilization.
+            </p>
+          </a>
 
-            <!-- Article 2 -->
-            <a href="blog/batch-data-pipelines.html" class="clean-card" style="display: block; padding: 2rem; border-radius: 0.5rem; text-decoration: none; display: flex; flex-direction: column; height: 100%;">
-                <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--foreground); transition: color 0.2s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--foreground)'">Designing Reliable Batch Data Pipelines</h3>
-                <div style="font-family: var(--font-mono); font-size: 0.75rem; color: #6b7280; margin-bottom: 1rem;">Sep 14, 2024</div>
-                <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin: 0;">
-                    Why "retry until success" is not a strategy. Exploring patterns for building robust, recoverable ETL workflows that don't wake you up at 3 AM.
-                </p>
-            </a>
+          <!-- Article 2 -->
+          <a
+            href="blog/batch-data-pipelines.html"
+            class="clean-card"
+            style="
+              display: block;
+              border-radius: 0.5rem;
+              text-decoration: none;
+              display: flex;
+              flex-direction: column;
+              height: 100%;
+            "
+          >
+            <h3
+              style="
+                font-family: var(--font-serif);
+                font-size: 1.5rem;
+                font-weight: 700;
+                margin-bottom: 0.5rem;
+                color: var(--foreground);
+                transition: color 0.2s;
+              "
+              onmouseover="this.style.color = 'var(--primary)'"
+              onmouseout="this.style.color = 'var(--foreground)'"
+            >
+              Designing Reliable Batch Data Pipelines
+            </h3>
+            <div
+              style="
+                font-family: var(--font-mono);
+                font-size: 0.75rem;
+                color: #6b7280;
+                margin-bottom: 1rem;
+              "
+            >
+              Sep 14, 2024
+            </div>
+            <p
+              style="
+                color: var(--muted-foreground);
+                font-size: 0.875rem;
+                line-height: 1.625;
+                margin: 0;
+              "
+            >
+              Why "retry until success" is not a strategy. Exploring patterns
+              for building robust, recoverable ETL workflows that don't wake you
+              up at 3 AM.
+            </p>
+          </a>
         </div>
-    </section>
-    <!-- END: Latest Thoughts -->
+      </section>
+      <!-- END: Latest Thoughts -->
 
-
-    <!-- BEGIN: Contact -->
-    <section id="contact" style="margin-bottom: 6rem; text-align: center; padding: 4rem 2rem; background: var(--card); border: 1px solid var(--border); border-radius: 0.5rem;">
-        <h2 style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">Let's talk about Data Engineering.</h2>
-        <p style="color: var(--muted-foreground); font-size: 1.125rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-            Whether you're looking to build reliable pipelines, scale your analytics infrastructure, or just talk shop about PostgreSQL query planners, I'm always open to a conversation.
+      <!-- BEGIN: Contact -->
+      <section
+        id="contact"
+        class="section-spacing"
+        style="
+          text-align: center;
+          padding: 4rem 2rem;
+          background: var(--card);
+          border: 1px solid var(--border);
+          border-radius: 0.5rem;
+        "
+      >
+        <h2
+          style="
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+          "
+        >
+          Let's talk about Data Engineering.
+        </h2>
+        <p
+          style="
+            color: var(--muted-foreground);
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+          "
+        >
+          Whether you're looking to build reliable pipelines, scale your
+          analytics infrastructure, or just talk shop about PostgreSQL query
+          planners, I'm always open to a conversation.
         </p>
-        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-            <a href="mailto:suchindra.formal@outlook.com" style="background-color: var(--primary); color: #0f172a; padding: 0.75rem 1.5rem; border-radius: 0.25rem; font-family: var(--font-mono); text-decoration: none; font-weight: bold; transition: opacity 0.2s;">Send an Email</a>
-            <a href="https://linkedin.com/in/suchindrakoushik" target="_blank" style="background-color: transparent; border: 1px solid var(--border); color: var(--foreground); padding: 0.75rem 1.5rem; border-radius: 0.25rem; font-family: var(--font-mono); text-decoration: none; transition: background-color 0.2s;">LinkedIn Profile</a>
+        <div
+          style="
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+          "
+        >
+          <a
+            href="mailto:suchindra.formal@outlook.com"
+            style="
+              background-color: var(--primary);
+              color: #0f172a;
+              padding: 0.75rem 1.5rem;
+              border-radius: 0.25rem;
+              font-family: var(--font-mono);
+              text-decoration: none;
+              font-weight: bold;
+              transition: opacity 0.2s;
+            "
+            >Send an Email</a
+          >
+          <a
+            href="https://linkedin.com/in/suchindrakoushik"
+            target="_blank"
+            style="
+              background-color: transparent;
+              border: 1px solid var(--border);
+              color: var(--foreground);
+              padding: 0.75rem 1.5rem;
+              border-radius: 0.25rem;
+              font-family: var(--font-mono);
+              text-decoration: none;
+              transition: background-color 0.2s;
+            "
+            >LinkedIn Profile</a
+          >
         </div>
-    </section>
-    <!-- END: Contact -->
-
-</main>
+      </section>
+      <!-- END: Contact -->
+    </main>
 
     <footer class="site-footer">
-        <div class="container">
-            <div class="footer-status" style="margin-bottom: 1rem;">
-                <span class="footer-success">[SUCCESS]</span>
-                <span>System operational. | Contact established.</span>
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem;">
-                <span><strong>Email:</strong> <a href="mailto:suchindra.formal@outlook.com" style="color: var(--foreground); text-decoration: none;">suchindra.formal@outlook.com</a></span>
-                <span><strong>Links:</strong>
-                    <a href="https://github.com/dattskoushik" target="_blank" style="color: var(--primary); text-decoration: none; margin-right: 0.5rem;">[GitHub]</a>
-                    <a href="https://linkedin.com/in/suchindrakoushik" target="_blank" style="color: var(--primary); text-decoration: none; margin-right: 0.5rem;">[LinkedIn]</a>
-                    <a href="/assets/resume/resume_.pdf" target="_blank" style="color: var(--primary); text-decoration: none;">[Resume]</a>
-                </span>
-            </div>
-            <div style="margin-top: 1rem; color: var(--muted-foreground);">
-                <span>&copy; <script>document.write(new Date().getFullYear())</script> Suchindra Koushik. Built for Reliability.</span>
-            </div>
+      <div class="container">
+        <div class="footer-status" style="margin-bottom: 1rem">
+          <span class="footer-success">[SUCCESS]</span>
+          <span>System operational. | Contact established.</span>
         </div>
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+          "
+        >
+          <span
+            ><strong>Email:</strong>
+            <a
+              href="mailto:suchindra.formal@outlook.com"
+              style="color: var(--foreground); text-decoration: none"
+              >suchindra.formal@outlook.com</a
+            ></span
+          >
+          <span
+            ><strong>Links:</strong>
+            <a
+              href="https://github.com/dattskoushik"
+              target="_blank"
+              style="
+                color: var(--primary);
+                text-decoration: none;
+                margin-right: 0.5rem;
+              "
+              >[GitHub]</a
+            >
+            <a
+              href="https://linkedin.com/in/suchindrakoushik"
+              target="_blank"
+              style="
+                color: var(--primary);
+                text-decoration: none;
+                margin-right: 0.5rem;
+              "
+              >[LinkedIn]</a
+            >
+            <a
+              href="/assets/resume/resume_.pdf"
+              target="_blank"
+              style="color: var(--primary); text-decoration: none"
+              >[Resume]</a
+            >
+          </span>
+        </div>
+        <div style="margin-top: 1rem; color: var(--muted-foreground)">
+          <span
+            >&copy;
+            <script>
+              document.write(new Date().getFullYear());
+            </script>
+            Suchindra Koushik. Built for Reliability.</span
+          >
+        </div>
+      </div>
     </footer>
-
-
-</body>
+  </body>
 </html>
 
-    <style data-purpose="cleanup-styles">
-        .hero-section {
-            margin-bottom: 6rem;
-            padding: 2rem 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-    </style>
+<style data-purpose="cleanup-styles">
+  .hero-section {
+    margin-bottom: var(--space-xl);
+    padding: var(--space-lg) var(--space-xl);
+    position: relative;
+    overflow: hidden;
+  }
+</style>
