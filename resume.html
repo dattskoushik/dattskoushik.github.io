@@ -32,47 +32,45 @@
         /* Dark Theme (Default) */
         [data-theme="dark"] {
             --background: #0f172a;
-            --foreground: #d1d5db;
+            --foreground: #cbd5e1;
             --card: #1e293b;
-            --card-foreground: #d1d5db;
+            --card-foreground: #cbd5e1;
             --muted: #1e293b;
-            --muted-foreground: #9ca3af;
+            --muted-foreground: #94a3b8;
             --border: #334155;
-            --primary: #4ade80;
-            --primary-foreground: #0f172a;
+            --primary: #3b82f6;
+            --primary-foreground: #ffffff;
             --secondary: #1e293b;
-            --secondary-foreground: #d1d5db;
-            --accent: #4ade80;
-            --accent-foreground: #0f172a;
-            --ring: #4ade80;
+            --secondary-foreground: #cbd5e1;
+            --accent: #3b82f6;
+            --accent-foreground: #ffffff;
+            --ring: #3b82f6;
             --input: #1e293b;
             /* Custom */
-            --header-bg: #0f172a;
+            --header-bg: rgba(15, 23, 42, 0.8);
             --code-bg: #1e293b;
-            --terminal-green: #4ade80;
         }
 
         /* Light Theme */
         [data-theme="light"] {
-            --background: #f8fafc;
+            --background: #ffffff;
             --foreground: #334155;
-            --card: #ffffff;
+            --card: #f8fafc;
             --card-foreground: #334155;
             --muted: #f1f5f9;
             --muted-foreground: #64748b;
             --border: #e2e8f0;
-            --primary: #10b981;
+            --primary: #2563eb;
             --primary-foreground: #ffffff;
             --secondary: #f1f5f9;
             --secondary-foreground: #334155;
-            --accent: #10b981;
+            --accent: #2563eb;
             --accent-foreground: #ffffff;
-            --ring: #10b981;
+            --ring: #2563eb;
             --input: #ffffff;
             /* Custom */
-            --header-bg: #f8fafc;
+            --header-bg: rgba(255, 255, 255, 0.8);
             --code-bg: #f1f5f9;
-            --terminal-green: #10b981;
         }
 
         body {
@@ -87,6 +85,7 @@
             top: 0;
             z-index: 50;
             background-color: var(--header-bg);
+            backdrop-filter: blur(8px);
             border-bottom: 1px solid var(--border);
             padding: 1rem 0;
         }
@@ -116,7 +115,7 @@
         }
 
         .logo-prefix {
-            color: var(--terminal-green);
+            color: var(--primary);
         }
 
         nav.nav-links {
@@ -141,12 +140,12 @@
         }
 
         nav.nav-links a:hover {
-            color: var(--terminal-green);
+            color: var(--primary);
         }
 
         nav.nav-links a.active {
             background-color: rgba(74, 222, 128, 0.2);
-            color: var(--terminal-green);
+            color: var(--primary);
         }
 
         [data-theme="light"] nav.nav-links a.active {
@@ -213,7 +212,7 @@
         }
 
         .footer-success {
-            color: var(--terminal-green);
+            color: var(--primary);
         }
 
         .social-links {
@@ -275,55 +274,6 @@
             color: var(--muted-foreground);
         }
 
-        .browser-top-bar {
-            background-color: #020617;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            padding: 0 1rem;
-            height: 2.5rem;
-            font-size: 0.75rem;
-            font-family: var(--font-mono);
-            color: #9ca3af;
-            user-select: none;
-        }
-
-        [data-theme="light"] .browser-top-bar {
-            background-color: #e2e8f0;
-            color: #64748b;
-        }
-
-        .browser-tab {
-            background-color: var(--card);
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem 0.375rem 0 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            border-top: 1px solid var(--border);
-            border-left: 1px solid var(--border);
-            border-right: 1px solid var(--border);
-            border-bottom: 1px solid transparent;
-            position: relative;
-            top: 1px;
-        }
-
-        .browser-tab-close {
-            color: #6b7280;
-            cursor: pointer;
-        }
-        .browser-tab-close:hover {
-            color: #d1d5db;
-        }
-
-        .browser-add {
-            padding: 0 0.75rem;
-            cursor: pointer;
-        }
-        .browser-add:hover {
-            color: #d1d5db;
-        }
-
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
@@ -342,76 +292,44 @@
             background: #cbd5e1;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--terminal-green);
+            background: var(--primary);
         }
 
-        /* Terminal Window Global Utility */
-        .terminal-window {
-            border: 1px solid rgba(74, 222, 128, 0.4);
-            background: var(--card);
+        /* Clean Card Global Utility */
+        .clean-card {
+            border: 1px solid var(--border);
             border-radius: 8px;
-            box-shadow: 0 0 15px 2px rgba(74, 222, 128, 0.2), inset 0 0 10px rgba(74, 222, 128, 0.1);
-            position: relative;
-        }
-        [data-theme="light"] .terminal-window {
-            border-color: rgba(16, 185, 129, 0.4);
-            box-shadow: 0 0 15px 2px rgba(16, 185, 129, 0.1), inset 0 0 10px rgba(16, 185, 129, 0.05);
-        }
-
-        .terminal-window::before {
-            content: '';
-            position: absolute;
-            top: -1px; left: -1px; right: -1px; bottom: -1px;
-            border-radius: 9px;
-            background: linear-gradient(135deg, rgba(74, 222, 128, 0.4) 0%, rgba(74, 222, 128, 0) 100%);
-            z-index: -1;
-            opacity: 0.5;
-        }
-        [data-theme="light"] .terminal-window::before {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.4) 0%, rgba(16, 185, 129, 0) 100%);
-        }
-
-        .card-border-glow {
-            border: 1px solid rgba(74, 222, 128, 0.4);
-            box-shadow: 0 0 15px 2px rgba(74, 222, 128, 0.2), inset 0 0 10px rgba(74, 222, 128, 0.1);
-            transition: all 0.3s ease;
             background: var(--card);
-        }
-        [data-theme="light"] .card-border-glow {
-            border-color: rgba(16, 185, 129, 0.4);
-            box-shadow: 0 0 15px 2px rgba(16, 185, 129, 0.1), inset 0 0 10px rgba(16, 185, 129, 0.05);
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
-        .card-border-glow:hover {
-            border-color: rgba(74, 222, 128, 0.8);
-            box-shadow: 0 0 25px 4px rgba(74, 222, 128, 0.3), inset 0 0 15px rgba(74, 222, 128, 0.2);
+        .clean-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             transform: translateY(-2px);
-        }
-        [data-theme="light"] .card-border-glow:hover {
-            border-color: rgba(16, 185, 129, 0.8);
-            box-shadow: 0 0 25px 4px rgba(16, 185, 129, 0.2), inset 0 0 15px rgba(16, 185, 129, 0.1);
         }
 
         /* Standardized Button Hover States */
         .btn-solid {
-            background-color: var(--terminal-green) !important;
-            color: #0f172a !important;
+            background-color: var(--primary) !important;
+            color: var(--primary-foreground) !important;
             transition: all 0.2s ease !important;
+            border: none;
         }
         .btn-solid:hover {
-            background-color: var(--terminal-green) !important;
-            color: #0f172a !important;
-            opacity: 0.8 !important;
+            background-color: var(--primary) !important;
+            opacity: 0.9 !important;
         }
         .btn-outline {
             background-color: transparent !important;
-            border: 1px solid var(--terminal-green) !important;
-            color: var(--terminal-green) !important;
+            border: 1px solid var(--primary) !important;
+            color: var(--primary) !important;
             transition: all 0.2s ease !important;
         }
         .btn-outline:hover {
-            background-color: rgba(74, 222, 128, 0.2) !important;
-            color: var(--terminal-green) !important;
+            background-color: rgba(59, 130, 246, 0.1) !important;
+            color: var(--primary) !important;
         }
     </style>
 
@@ -419,31 +337,22 @@
 <body data-theme="dark" style="display: flex; flex-direction: column; min-height: 100vh;">
 
 
-    <!-- BEGIN: Browser Top Bar (Decorative) -->
-    <div class="browser-top-bar">
-        <div class="browser-tab">
-            <span>Suchindra Koushik</span>
-            <span class="browser-tab-close">×</span>
-        </div>
-        <div class="browser-add">+</div>
-    </div>
-    <!-- END: Browser Top Bar -->
 
     <header class="site-header">
         <div class="container">
             <a href="./index.html" class="logo">
-                <span class="logo-prefix">&gt;_</span>
+
                 <span>Suchindra Koushik</span>
             </a>
             <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">☰</button>
             <nav class="nav-links">
-                <a href="/index.html">~/home</a>
-                <a href="/about.html">~/about</a>
-                <a href="/index.html#skills">~/skills</a>
-                <a href="/projects.html">~/projects</a>
-                <a href="/resume.html" class="active">~/experience</a>
-                <a href="/index.html#engineering">~/engineering</a>
-                <a href="/index.html#contact">~/contact</a>
+                <a href="/index.html">Home</a>
+                <a href="/about.html">About</a>
+                <a href="/index.html#skills">Skills</a>
+                <a href="/projects.html">Projects</a>
+                <a href="/resume.html" class="active">Experience</a>
+                <a href="/index.html#engineering">Engineering</a>
+                <a href="/index.html#contact">Contact</a>
                 <div style="display: flex; align-items: center; gap: 0.5rem; margin-left: 1rem; padding-left: 1rem; border-left: 1px solid var(--border);">
                     <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
                 </div>
@@ -478,7 +387,7 @@
 
             <div class="experience-item" style="margin-bottom: 2rem;">
                 <div class="experience-header" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem;">
-                    <h3 style="margin: 0; font-family: var(--font-serif); font-size: 1.5rem;">Data Engineer <span class="company" style="color: var(--terminal-green);">@ Clarivate</span></h3>
+                    <h3 style="margin: 0; font-family: var(--font-serif); font-size: 1.5rem;">Data Engineer <span class="company" style="color: var(--primary);">@ Clarivate</span></h3>
                     <span class="date" style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--muted-foreground);">2021 — Present</span>
                 </div>
                 <ul class="experience-details" style="color: var(--muted-foreground); line-height: 1.625; padding-left: 1.5rem;">
@@ -491,7 +400,7 @@
 
             <div class="experience-item" style="margin-bottom: 2rem;">
                 <div class="experience-header" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem;">
-                    <h3 style="margin: 0; font-family: var(--font-serif); font-size: 1.5rem;">Software Engineer <span class="company" style="color: var(--terminal-green);">@ Dell Technologies</span></h3>
+                    <h3 style="margin: 0; font-family: var(--font-serif); font-size: 1.5rem;">Software Engineer <span class="company" style="color: var(--primary);">@ Dell Technologies</span></h3>
                     <span class="date" style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--muted-foreground);">2018 — 2021</span>
                 </div>
                 <ul class="experience-details" style="color: var(--muted-foreground); line-height: 1.625; padding-left: 1.5rem;">
@@ -549,9 +458,9 @@
             <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem;">
                 <span><strong>Email:</strong> <a href="mailto:suchindra.formal@outlook.com" style="color: var(--foreground); text-decoration: none;">suchindra.formal@outlook.com</a></span>
                 <span><strong>Links:</strong>
-                    <a href="https://github.com/dattskoushik" target="_blank" style="color: var(--terminal-green); text-decoration: none; margin-right: 0.5rem;">[GitHub]</a>
-                    <a href="https://linkedin.com/in/suchindrakoushik" target="_blank" style="color: var(--terminal-green); text-decoration: none; margin-right: 0.5rem;">[LinkedIn]</a>
-                    <a href="/assets/resume/resume_.pdf" target="_blank" style="color: var(--terminal-green); text-decoration: none;">[Resume]</a>
+                    <a href="https://github.com/dattskoushik" target="_blank" style="color: var(--primary); text-decoration: none; margin-right: 0.5rem;">[GitHub]</a>
+                    <a href="https://linkedin.com/in/suchindrakoushik" target="_blank" style="color: var(--primary); text-decoration: none; margin-right: 0.5rem;">[LinkedIn]</a>
+                    <a href="/assets/resume/resume_.pdf" target="_blank" style="color: var(--primary); text-decoration: none;">[Resume]</a>
                 </span>
             </div>
             <div style="margin-top: 1rem; color: var(--muted-foreground);">

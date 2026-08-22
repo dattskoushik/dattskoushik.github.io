@@ -2,19 +2,13 @@
 
 {% block content %}
     <!-- BEGIN: Hero Section -->
-    <section class="terminal-window hero-section" >
-        <!-- Traffic lights -->
-        <div style="display: flex; gap: 0.5rem; position: absolute; top: 1rem; left: 1rem;">
-            <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: #ef4444;"></div>
-            <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: #eab308;"></div>
-            <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: #22c55e;"></div>
-        </div>
-        <div style="margin-top: 2rem; position: relative; z-index: 10;">
+    <section class="hero-section" >
+        <div style="position: relative; z-index: 10;">
             <h1 style="font-family: var(--font-serif); font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 0.5rem; letter-spacing: -0.025em;">
                 Suchindra Koushik
             </h1>
-            <h2 style="font-family: var(--font-mono); font-size: 1.25rem; font-weight: 500; color: var(--terminal-green); margin-bottom: 1.5rem;">
-                &gt; Data Engineer
+            <h2 style="font-family: var(--font-mono); font-size: 1.25rem; font-weight: 500; color: var(--primary); margin-bottom: 1.5rem;">
+                Data Engineer
             </h2>
             <p style="font-size: 1.125rem; color: var(--muted-foreground); max-width: 48rem; margin-bottom: 2rem; line-height: 1.625;">
                 Data Engineer building reliable, scalable data pipelines and analytics systems with SQL, Python, and modern data platforms. Specializing in idempotent pipelines, distributed consensus, and high-reliability infrastructure.
@@ -26,8 +20,8 @@
                 <span style="padding: 0.25rem 0.5rem; background-color: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 0.25rem;">[ Kafka ]</span>
             </div>
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <a href="/projects.html" style="background-color: var(--terminal-green); color: #0f172a; padding: 0.75rem 1.5rem; border-radius: 0.25rem; font-family: var(--font-mono); text-decoration: none; font-weight: bold; transition: opacity 0.2s;">View Projects</a>
-                <a href="/assets/resume/resume_.pdf" target="_blank" style="background-color: transparent; border: 1px solid var(--terminal-green); color: var(--terminal-green); padding: 0.75rem 1.5rem; border-radius: 0.25rem; font-family: var(--font-mono); text-decoration: none; transition: background-color 0.2s;">Download Resume</a>
+                <a href="/projects.html" class="btn-solid" style="padding: 0.75rem 1.5rem; border-radius: 0.25rem; font-family: var(--font-mono); text-decoration: none; font-weight: bold; transition: opacity 0.2s;">View Projects</a>
+                <a href="/assets/resume/resume_.pdf" target="_blank" class="btn-outline" style="padding: 0.75rem 1.5rem; border-radius: 0.25rem; font-family: var(--font-mono); text-decoration: none; transition: background-color 0.2s;">Download Resume</a>
             </div>
         </div>
     </section>
@@ -79,8 +73,8 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
 
             <!-- Programming -->
-            <div class="card-border-glow" style="padding: 1.5rem; border-radius: 0.5rem;">
-                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--terminal-green); margin-bottom: 1rem;">> Programming</h3>
+            <div class="clean-card" style="padding: 1.5rem; border-radius: 0.5rem;">
+                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--primary); margin-bottom: 1rem;">> Programming</h3>
                 <ul style="list-style: none; padding: 0; margin: 0; color: var(--muted-foreground); line-height: 1.8;">
                     <li>Python</li>
                     <li>SQL</li>
@@ -90,8 +84,8 @@
             </div>
 
             <!-- Data Processing -->
-            <div class="card-border-glow" style="padding: 1.5rem; border-radius: 0.5rem;">
-                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--terminal-green); margin-bottom: 1rem;">> Data Processing</h3>
+            <div class="clean-card" style="padding: 1.5rem; border-radius: 0.5rem;">
+                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--primary); margin-bottom: 1rem;">> Data Processing</h3>
                 <ul style="list-style: none; padding: 0; margin: 0; color: var(--muted-foreground); line-height: 1.8;">
                     <li>Apache Spark</li>
                     <li>Kafka</li>
@@ -101,8 +95,8 @@
             </div>
 
             <!-- Data Engineering -->
-            <div class="card-border-glow" style="padding: 1.5rem; border-radius: 0.5rem;">
-                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--terminal-green); margin-bottom: 1rem;">> Data Engineering</h3>
+            <div class="clean-card" style="padding: 1.5rem; border-radius: 0.5rem;">
+                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--primary); margin-bottom: 1rem;">Data Engineering</h3>
                 <ul style="list-style: none; padding: 0; margin: 0; color: var(--muted-foreground); line-height: 1.8;">
                     <li>ETL / ELT</li>
                     <li>Data Pipelines</li>
@@ -112,8 +106,8 @@
             </div>
 
             <!-- Development & Infra -->
-            <div class="card-border-glow" style="padding: 1.5rem; border-radius: 0.5rem;">
-                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--terminal-green); margin-bottom: 1rem;">> Development</h3>
+            <div class="clean-card" style="padding: 1.5rem; border-radius: 0.5rem;">
+                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--primary); margin-bottom: 1rem;">> Development</h3>
                 <ul style="list-style: none; padding: 0; margin: 0; color: var(--muted-foreground); line-height: 1.8;">
                     <li>Docker & AWS</li>
                     <li>Terraform</li>
@@ -134,7 +128,7 @@
 
         <div class="grid-2-col">
             <!-- Project 1 -->
-            <div class="card-border-glow" style="padding: 2rem; border-radius: 0.5rem; display: flex; flex-direction: column; height: 100%;">
+            <div class="clean-card" style="padding: 2rem; border-radius: 0.5rem; display: flex; flex-direction: column; height: 100%;">
                 <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Cloud-Native Streaming Data Platform</h3>
                 <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin-bottom: 1rem; flex-grow: 1;">
                     Designed a cloud-native streaming platform processing over 10K events/second using Apache Kafka and Flink with sub-second analytical latency.
@@ -150,7 +144,7 @@
             </div>
 
             <!-- Project 2 -->
-            <div class="card-border-glow" style="padding: 2rem; border-radius: 0.5rem; display: flex; flex-direction: column; height: 100%;">
+            <div class="clean-card" style="padding: 2rem; border-radius: 0.5rem; display: flex; flex-direction: column; height: 100%;">
                 <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Healthcare Lakehouse Platform</h3>
                 <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin-bottom: 1rem; flex-grow: 1;">
                     Built an end-to-end healthcare data platform ingesting JSON, HL7, and EDI datasets into curated analytical models using PySpark, dbt, and Snowflake.
@@ -175,9 +169,9 @@
 
         <div class="grid-2-col">
             <!-- SQL Example -->
-            <div class="card-border-glow" style="padding: 1.5rem; border-radius: 0.5rem; background: var(--code-bg);">
+            <div class="clean-card" style="padding: 1.5rem; border-radius: 0.5rem; background: var(--code-bg);">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-                    <h3 style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); margin: 0;">> SQL: Rolling Averages (CTE)</h3>
+                    <h3 style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--primary); margin: 0;">> SQL: Rolling Averages (CTE)</h3>
                     <a href="https://github.com/dattskoushik" target="_blank" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted-foreground); text-decoration: none;">View on GitHub &rarr;</a>
                 </div>
                 <pre style="margin: 0; padding: 0; font-size: 0.75rem; color: var(--foreground); overflow-x: auto;"><code>WITH daily_sales AS (
@@ -199,9 +193,9 @@ FROM daily_sales;</code></pre>
             </div>
 
             <!-- Python Example -->
-            <div class="card-border-glow" style="padding: 1.5rem; border-radius: 0.5rem; background: var(--code-bg);">
+            <div class="clean-card" style="padding: 1.5rem; border-radius: 0.5rem; background: var(--code-bg);">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-                    <h3 style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); margin: 0;">> Python: Idempotent Load</h3>
+                    <h3 style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--primary); margin: 0;">> Python: Idempotent Load</h3>
                     <a href="https://github.com/dattskoushik" target="_blank" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted-foreground); text-decoration: none;">View on GitHub &rarr;</a>
                 </div>
                 <pre style="margin: 0; padding: 0; font-size: 0.75rem; color: var(--foreground); overflow-x: auto;"><code>def load_data_idempotent(df: pd.DataFrame,
@@ -235,8 +229,8 @@ FROM daily_sales;</code></pre>
 
         <div class="grid-2-col">
             <!-- Article 1 -->
-            <a href="blog/postgres-query-planning.html" class="card-border-glow" style="display: block; padding: 2rem; border-radius: 0.5rem; text-decoration: none; display: flex; flex-direction: column; height: 100%;">
-                <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--foreground); transition: color 0.2s;" onmouseover="this.style.color='var(--terminal-green)'" onmouseout="this.style.color='var(--foreground)'">How Postgres Query Planning Actually Works</h3>
+            <a href="blog/postgres-query-planning.html" class="clean-card" style="display: block; padding: 2rem; border-radius: 0.5rem; text-decoration: none; display: flex; flex-direction: column; height: 100%;">
+                <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--foreground); transition: color 0.2s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--foreground)'">How Postgres Query Planning Actually Works</h3>
                 <div style="font-family: var(--font-mono); font-size: 0.75rem; color: #6b7280; margin-bottom: 1rem;">Oct 26, 2024</div>
                 <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin: 0;">
                     Understanding the optimizer's cost models is critical for writing high-performance queries. We dive deep into access methods and index utilization.
@@ -244,8 +238,8 @@ FROM daily_sales;</code></pre>
             </a>
 
             <!-- Article 2 -->
-            <a href="blog/batch-data-pipelines.html" class="card-border-glow" style="display: block; padding: 2rem; border-radius: 0.5rem; text-decoration: none; display: flex; flex-direction: column; height: 100%;">
-                <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--foreground); transition: color 0.2s;" onmouseover="this.style.color='var(--terminal-green)'" onmouseout="this.style.color='var(--foreground)'">Designing Reliable Batch Data Pipelines</h3>
+            <a href="blog/batch-data-pipelines.html" class="clean-card" style="display: block; padding: 2rem; border-radius: 0.5rem; text-decoration: none; display: flex; flex-direction: column; height: 100%;">
+                <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--foreground); transition: color 0.2s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--foreground)'">Designing Reliable Batch Data Pipelines</h3>
                 <div style="font-family: var(--font-mono); font-size: 0.75rem; color: #6b7280; margin-bottom: 1rem;">Sep 14, 2024</div>
                 <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin: 0;">
                     Why "retry until success" is not a strategy. Exploring patterns for building robust, recoverable ETL workflows that don't wake you up at 3 AM.
