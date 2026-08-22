@@ -32,47 +32,45 @@
         /* Dark Theme (Default) */
         [data-theme="dark"] {
             --background: #0f172a;
-            --foreground: #d1d5db;
+            --foreground: #cbd5e1;
             --card: #1e293b;
-            --card-foreground: #d1d5db;
+            --card-foreground: #cbd5e1;
             --muted: #1e293b;
-            --muted-foreground: #9ca3af;
+            --muted-foreground: #94a3b8;
             --border: #334155;
-            --primary: #4ade80;
-            --primary-foreground: #0f172a;
+            --primary: #3b82f6;
+            --primary-foreground: #ffffff;
             --secondary: #1e293b;
-            --secondary-foreground: #d1d5db;
-            --accent: #4ade80;
-            --accent-foreground: #0f172a;
-            --ring: #4ade80;
+            --secondary-foreground: #cbd5e1;
+            --accent: #3b82f6;
+            --accent-foreground: #ffffff;
+            --ring: #3b82f6;
             --input: #1e293b;
             /* Custom */
-            --header-bg: #0f172a;
+            --header-bg: rgba(15, 23, 42, 0.8);
             --code-bg: #1e293b;
-            --terminal-green: #4ade80;
         }
 
         /* Light Theme */
         [data-theme="light"] {
-            --background: #f8fafc;
+            --background: #ffffff;
             --foreground: #334155;
-            --card: #ffffff;
+            --card: #f8fafc;
             --card-foreground: #334155;
             --muted: #f1f5f9;
             --muted-foreground: #64748b;
             --border: #e2e8f0;
-            --primary: #10b981;
+            --primary: #2563eb;
             --primary-foreground: #ffffff;
             --secondary: #f1f5f9;
             --secondary-foreground: #334155;
-            --accent: #10b981;
+            --accent: #2563eb;
             --accent-foreground: #ffffff;
-            --ring: #10b981;
+            --ring: #2563eb;
             --input: #ffffff;
             /* Custom */
-            --header-bg: #f8fafc;
+            --header-bg: rgba(255, 255, 255, 0.8);
             --code-bg: #f1f5f9;
-            --terminal-green: #10b981;
         }
 
         body {
@@ -87,6 +85,7 @@
             top: 0;
             z-index: 50;
             background-color: var(--header-bg);
+            backdrop-filter: blur(8px);
             border-bottom: 1px solid var(--border);
             padding: 1rem 0;
         }
@@ -116,7 +115,7 @@
         }
 
         .logo-prefix {
-            color: var(--terminal-green);
+            color: var(--primary);
         }
 
         nav.nav-links {
@@ -141,12 +140,12 @@
         }
 
         nav.nav-links a:hover {
-            color: var(--terminal-green);
+            color: var(--primary);
         }
 
         nav.nav-links a.active {
             background-color: rgba(74, 222, 128, 0.2);
-            color: var(--terminal-green);
+            color: var(--primary);
         }
 
         [data-theme="light"] nav.nav-links a.active {
@@ -213,7 +212,7 @@
         }
 
         .footer-success {
-            color: var(--terminal-green);
+            color: var(--primary);
         }
 
         .social-links {
@@ -275,55 +274,6 @@
             color: var(--muted-foreground);
         }
 
-        .browser-top-bar {
-            background-color: #020617;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            padding: 0 1rem;
-            height: 2.5rem;
-            font-size: 0.75rem;
-            font-family: var(--font-mono);
-            color: #9ca3af;
-            user-select: none;
-        }
-
-        [data-theme="light"] .browser-top-bar {
-            background-color: #e2e8f0;
-            color: #64748b;
-        }
-
-        .browser-tab {
-            background-color: var(--card);
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem 0.375rem 0 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            border-top: 1px solid var(--border);
-            border-left: 1px solid var(--border);
-            border-right: 1px solid var(--border);
-            border-bottom: 1px solid transparent;
-            position: relative;
-            top: 1px;
-        }
-
-        .browser-tab-close {
-            color: #6b7280;
-            cursor: pointer;
-        }
-        .browser-tab-close:hover {
-            color: #d1d5db;
-        }
-
-        .browser-add {
-            padding: 0 0.75rem;
-            cursor: pointer;
-        }
-        .browser-add:hover {
-            color: #d1d5db;
-        }
-
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
@@ -342,107 +292,66 @@
             background: #cbd5e1;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--terminal-green);
+            background: var(--primary);
         }
 
-        /* Terminal Window Global Utility */
-        .terminal-window {
-            border: 1px solid rgba(74, 222, 128, 0.4);
-            background: var(--card);
+        /* Clean Card Global Utility */
+        .clean-card {
+            border: 1px solid var(--border);
             border-radius: 8px;
-            box-shadow: 0 0 15px 2px rgba(74, 222, 128, 0.2), inset 0 0 10px rgba(74, 222, 128, 0.1);
-            position: relative;
-        }
-        [data-theme="light"] .terminal-window {
-            border-color: rgba(16, 185, 129, 0.4);
-            box-shadow: 0 0 15px 2px rgba(16, 185, 129, 0.1), inset 0 0 10px rgba(16, 185, 129, 0.05);
-        }
-
-        .terminal-window::before {
-            content: '';
-            position: absolute;
-            top: -1px; left: -1px; right: -1px; bottom: -1px;
-            border-radius: 9px;
-            background: linear-gradient(135deg, rgba(74, 222, 128, 0.4) 0%, rgba(74, 222, 128, 0) 100%);
-            z-index: -1;
-            opacity: 0.5;
-        }
-        [data-theme="light"] .terminal-window::before {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.4) 0%, rgba(16, 185, 129, 0) 100%);
-        }
-
-        .card-border-glow {
-            border: 1px solid rgba(74, 222, 128, 0.4);
-            box-shadow: 0 0 15px 2px rgba(74, 222, 128, 0.2), inset 0 0 10px rgba(74, 222, 128, 0.1);
-            transition: all 0.3s ease;
             background: var(--card);
-        }
-        [data-theme="light"] .card-border-glow {
-            border-color: rgba(16, 185, 129, 0.4);
-            box-shadow: 0 0 15px 2px rgba(16, 185, 129, 0.1), inset 0 0 10px rgba(16, 185, 129, 0.05);
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
-        .card-border-glow:hover {
-            border-color: rgba(74, 222, 128, 0.8);
-            box-shadow: 0 0 25px 4px rgba(74, 222, 128, 0.3), inset 0 0 15px rgba(74, 222, 128, 0.2);
+        .clean-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             transform: translateY(-2px);
-        }
-        [data-theme="light"] .card-border-glow:hover {
-            border-color: rgba(16, 185, 129, 0.8);
-            box-shadow: 0 0 25px 4px rgba(16, 185, 129, 0.2), inset 0 0 15px rgba(16, 185, 129, 0.1);
         }
 
         /* Standardized Button Hover States */
         .btn-solid {
-            background-color: var(--terminal-green) !important;
-            color: #0f172a !important;
+            background-color: var(--primary) !important;
+            color: var(--primary-foreground) !important;
             transition: all 0.2s ease !important;
+            border: none;
         }
         .btn-solid:hover {
-            background-color: var(--terminal-green) !important;
-            color: #0f172a !important;
-            opacity: 0.8 !important;
+            background-color: var(--primary) !important;
+            opacity: 0.9 !important;
         }
         .btn-outline {
             background-color: transparent !important;
-            border: 1px solid var(--terminal-green) !important;
-            color: var(--terminal-green) !important;
+            border: 1px solid var(--primary) !important;
+            color: var(--primary) !important;
             transition: all 0.2s ease !important;
         }
         .btn-outline:hover {
-            background-color: rgba(74, 222, 128, 0.2) !important;
-            color: var(--terminal-green) !important;
+            background-color: rgba(59, 130, 246, 0.1) !important;
+            color: var(--primary) !important;
         }
     </style>
 
 </head>
 <body data-theme="dark" style="display: flex; flex-direction: column; min-height: 100vh;">
 
-    <!-- BEGIN: Browser Top Bar (Decorative) -->
-    <div class="browser-top-bar">
-        <div class="browser-tab">
-            <span>Suchindra Koushik</span>
-            <span class="browser-tab-close">×</span>
-        </div>
-        <div class="browser-add">+</div>
-    </div>
-    <!-- END: Browser Top Bar -->
 
     <header class="site-header">
         <div class="container">
             <a href="/index.html" class="logo">
-                <span class="logo-prefix">&gt;_</span>
+
                 <span>Suchindra Koushik</span>
             </a>
             <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">☰</button>
             <nav class="nav-links">
-                <a href="/index.html" class="active">~/home</a>
-                <a href="/about.html">~/about</a>
-                <a href="/index.html#skills">~/skills</a>
-                <a href="/projects.html">~/projects</a>
-                <a href="/resume.html">~/experience</a>
-                <a href="/index.html#engineering">~/engineering</a>
-                <a href="/index.html#contact">~/contact</a>
+                <a href="/index.html" class="active">Home</a>
+                <a href="/about.html">About</a>
+                <a href="/index.html#skills">Skills</a>
+                <a href="/projects.html">Projects</a>
+                <a href="/resume.html">Experience</a>
+                <a href="/index.html#engineering">Engineering</a>
+                <a href="/index.html#contact">Contact</a>
                 <div style="display: flex; align-items: center; gap: 0.5rem; margin-left: 1rem; padding-left: 1rem; border-left: 1px solid var(--border);">
                     <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
                 </div>
@@ -453,19 +362,12 @@
     <main class="container" style="flex-grow: 1; max-width: 1024px; margin: 0 auto; padding: 3rem 1.5rem; ">
 
     <!-- BEGIN: Hero Section -->
-    <section class="terminal-window hero-section" >
-        <!-- Traffic lights -->
-        <div style="display: flex; gap: 0.5rem; position: absolute; top: 1rem; left: 1rem;">
-            <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: #ef4444;"></div>
-            <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: #eab308;"></div>
-            <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background-color: #22c55e;"></div>
-        </div>
         <div style="margin-top: 2rem; position: relative; z-index: 10;">
             <h1 style="font-family: var(--font-serif); font-size: 3.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 0.5rem; letter-spacing: -0.025em;">
                 Suchindra Koushik
             </h1>
-            <h2 style="font-family: var(--font-mono); font-size: 1.25rem; font-weight: 500; color: var(--terminal-green); margin-bottom: 1.5rem;">
-                &gt; Data Engineer
+            <h2 style="font-family: var(--font-mono); font-size: 1.25rem; font-weight: 500; color: var(--primary); margin-bottom: 1.5rem;">
+                Data Engineer
             </h2>
             <p style="font-size: 1.125rem; color: var(--muted-foreground); max-width: 48rem; margin-bottom: 2rem; line-height: 1.625;">
                 Data Engineer building reliable, scalable data pipelines and analytics systems with SQL, Python, and modern data platforms. Specializing in idempotent pipelines, distributed consensus, and high-reliability infrastructure.
@@ -513,11 +415,322 @@
             </div>
 
             <style>
-                @media (min-width: 768px) {
-                    .principle-cell { border-bottom: none !important; }
-                    .principle-cell-last { border-bottom: none !important; }
-                }
-            </style>
+        :root {
+            /* Fonts */
+            --font-serif: 'Zilla Slab', serif;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+
+            /* Spacing overrides if needed */
+            --space-xl: 4rem;
+            --space-lg: 2.5rem;
+            --space-md: 1.5rem;
+            --space-sm: 1rem;
+        }
+
+        /* Dark Theme (Default) */
+        [data-theme="dark"] {
+            --background: #0f172a;
+            --foreground: #cbd5e1;
+            --card: #1e293b;
+            --card-foreground: #cbd5e1;
+            --muted: #1e293b;
+            --muted-foreground: #94a3b8;
+            --border: #334155;
+            --primary: #3b82f6;
+            --primary-foreground: #ffffff;
+            --secondary: #1e293b;
+            --secondary-foreground: #cbd5e1;
+            --accent: #3b82f6;
+            --accent-foreground: #ffffff;
+            --ring: #3b82f6;
+            --input: #1e293b;
+            /* Custom */
+            --header-bg: rgba(15, 23, 42, 0.8);
+            --code-bg: #1e293b;
+        }
+
+        /* Light Theme */
+        [data-theme="light"] {
+            --background: #ffffff;
+            --foreground: #334155;
+            --card: #f8fafc;
+            --card-foreground: #334155;
+            --muted: #f1f5f9;
+            --muted-foreground: #64748b;
+            --border: #e2e8f0;
+            --primary: #2563eb;
+            --primary-foreground: #ffffff;
+            --secondary: #f1f5f9;
+            --secondary-foreground: #334155;
+            --accent: #2563eb;
+            --accent-foreground: #ffffff;
+            --ring: #2563eb;
+            --input: #ffffff;
+            /* Custom */
+            --header-bg: rgba(255, 255, 255, 0.8);
+            --code-bg: #f1f5f9;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--foreground);
+            font-family: var(--font-sans);
+        }
+
+        /* Header Styling */
+        header.site-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: var(--header-bg);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+        }
+
+        header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1152px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .logo {
+            font-weight: 700;
+            text-decoration: none;
+            color: #ffffff;
+            font-family: var(--font-mono);
+            font-size: 1.125rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        [data-theme="light"] .logo {
+            color: #000000;
+        }
+
+        .logo-prefix {
+            color: var(--primary);
+        }
+
+        nav.nav-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+
+        nav.nav-links a {
+            text-decoration: none;
+            color: var(--foreground);
+            transition: color 0.2s;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+
+        nav.nav-links a:hover {
+            color: var(--primary);
+        }
+
+        nav.nav-links a.active {
+            background-color: rgba(74, 222, 128, 0.2);
+            color: var(--primary);
+        }
+
+        [data-theme="light"] nav.nav-links a.active {
+            background-color: rgba(16, 185, 129, 0.2);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--foreground);
+            cursor: pointer;
+            padding: 0;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            nav.nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: var(--background);
+                border-bottom: 1px solid var(--border);
+                padding: var(--space-md);
+                gap: var(--space-sm);
+            }
+            nav.nav-links.active {
+                display: flex;
+            }
+        }
+
+        /* Footer */
+        .site-footer {
+            margin-top: auto;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border);
+            background-color: var(--background);
+            color: var(--muted-foreground);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            width: 100%;
+        }
+
+        .site-footer .container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-success {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: inline-flex;
+            gap: 0.5rem;
+        }
+        .social-links a {
+            color: var(--muted-foreground);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .social-links a:hover {
+            color: var(--foreground);
+        }
+
+        /* Theme Toggle */
+        #theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0;
+            margin-left: var(--space-sm);
+            color: var(--foreground);
+        }
+
+        /* Typography overrides */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif);
+            color: var(--foreground);
+        }
+
+        .button, button {
+            font-family: var(--font-mono);
+        }
+
+        body {
+            line-height: 1.7;
+        }
+
+        code, pre {
+            font-family: var(--font-mono);
+        }
+
+        /* Grid Utility */
+        .grid-2-col {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-md);
+        }
+        @media (min-width: 768px) {
+            .grid-2-col {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Utility overrides */
+        .text-muted {
+            color: var(--muted-foreground);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #020617;
+        }
+        [data-theme="light"] ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        [data-theme="light"] ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* Clean Card Global Utility */
+        .clean-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--card);
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .clean-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transform: translateY(-2px);
+        }
+
+        /* Standardized Button Hover States */
+        .btn-solid {
+            background-color: var(--primary) !important;
+            color: var(--primary-foreground) !important;
+            transition: all 0.2s ease !important;
+            border: none;
+        }
+        .btn-solid:hover {
+            background-color: var(--primary) !important;
+            opacity: 0.9 !important;
+        }
+        .btn-outline {
+            background-color: transparent !important;
+            border: 1px solid var(--primary) !important;
+            color: var(--primary) !important;
+            transition: all 0.2s ease !important;
+        }
+        .btn-outline:hover {
+            background-color: rgba(59, 130, 246, 0.1) !important;
+            color: var(--primary) !important;
+        }
+    </style>
         </div>
     </section>
     <!-- END: Engineering Thinking -->
@@ -530,8 +743,8 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
 
             <!-- Programming -->
-            <div class="card-border-glow" style="padding: 1.5rem; border-radius: 0.5rem;">
-                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--terminal-green); margin-bottom: 1rem;">> Programming</h3>
+            <div class="clean-card" style="padding: 1.5rem; border-radius: 0.5rem;">
+                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--primary); margin-bottom: 1rem;">> Programming</h3>
                 <ul style="list-style: none; padding: 0; margin: 0; color: var(--muted-foreground); line-height: 1.8;">
                     <li>Python</li>
                     <li>SQL</li>
@@ -541,8 +754,8 @@
             </div>
 
             <!-- Data Processing -->
-            <div class="card-border-glow" style="padding: 1.5rem; border-radius: 0.5rem;">
-                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--terminal-green); margin-bottom: 1rem;">> Data Processing</h3>
+            <div class="clean-card" style="padding: 1.5rem; border-radius: 0.5rem;">
+                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--primary); margin-bottom: 1rem;">> Data Processing</h3>
                 <ul style="list-style: none; padding: 0; margin: 0; color: var(--muted-foreground); line-height: 1.8;">
                     <li>Apache Spark</li>
                     <li>Kafka</li>
@@ -552,8 +765,8 @@
             </div>
 
             <!-- Data Engineering -->
-            <div class="card-border-glow" style="padding: 1.5rem; border-radius: 0.5rem;">
-                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--terminal-green); margin-bottom: 1rem;">> Data Engineering</h3>
+            <div class="clean-card" style="padding: 1.5rem; border-radius: 0.5rem;">
+                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--primary); margin-bottom: 1rem;">Data Engineering</h3>
                 <ul style="list-style: none; padding: 0; margin: 0; color: var(--muted-foreground); line-height: 1.8;">
                     <li>ETL / ELT</li>
                     <li>Data Pipelines</li>
@@ -563,8 +776,8 @@
             </div>
 
             <!-- Development & Infra -->
-            <div class="card-border-glow" style="padding: 1.5rem; border-radius: 0.5rem;">
-                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--terminal-green); margin-bottom: 1rem;">> Development</h3>
+            <div class="clean-card" style="padding: 1.5rem; border-radius: 0.5rem;">
+                <h3 style="font-family: var(--font-mono); font-size: 1.125rem; color: var(--primary); margin-bottom: 1rem;">> Development</h3>
                 <ul style="list-style: none; padding: 0; margin: 0; color: var(--muted-foreground); line-height: 1.8;">
                     <li>Docker & AWS</li>
                     <li>Terraform</li>
@@ -585,12 +798,12 @@
 
         <div class="grid-2-col">
             <!-- Project 1 -->
-            <div class="card-border-glow" style="padding: 2rem; border-radius: 0.5rem; display: flex; flex-direction: column; height: 100%;">
+            <div class="clean-card" style="padding: 2rem; border-radius: 0.5rem; display: flex; flex-direction: column; height: 100%;">
                 <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">TinyETL Framework</h3>
                 <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin-bottom: 1rem; flex-grow: 1;">
                     A configuration-driven Python ETL framework enforcing idempotency and data validation before targeting the data warehouse.
                 </p>
-                <a href="/projects.html" style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); text-decoration: none; margin-bottom: 2rem;">View Case Study &rarr;</a>
+                <a href="/projects.html" style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--primary); text-decoration: none; margin-bottom: 2rem;">View Case Study &rarr;</a>
                 <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: #6b7280; margin-top: auto;">
                     <span>[ Python ]</span>
                     <span>[ Data Pipelines ]</span>
@@ -598,12 +811,12 @@
             </div>
 
             <!-- Project 2 -->
-            <div class="card-border-glow" style="padding: 2rem; border-radius: 0.5rem; display: flex; flex-direction: column; height: 100%;">
+            <div class="clean-card" style="padding: 2rem; border-radius: 0.5rem; display: flex; flex-direction: column; height: 100%;">
                 <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Raft KV Store</h3>
                 <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin-bottom: 1rem; flex-grow: 1;">
                     A distributed key-value store implementing the Raft consensus algorithm for fault-tolerant state machine replication.
                 </p>
-                <a href="/projects.html" style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); text-decoration: none; margin-bottom: 2rem;">View Case Study &rarr;</a>
+                <a href="/projects.html" style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--primary); text-decoration: none; margin-bottom: 2rem;">View Case Study &rarr;</a>
                 <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: #6b7280; margin-top: auto;">
                     <span>[ Python ]</span>
                     <span>[ gRPC ]</span>
@@ -622,9 +835,9 @@
 
         <div class="grid-2-col">
             <!-- SQL Example -->
-            <div class="card-border-glow" style="padding: 1.5rem; border-radius: 0.5rem; background: var(--code-bg);">
+            <div class="clean-card" style="padding: 1.5rem; border-radius: 0.5rem; background: var(--code-bg);">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-                    <h3 style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); margin: 0;">> SQL: Rolling Averages (CTE)</h3>
+                    <h3 style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--primary); margin: 0;">> SQL: Rolling Averages (CTE)</h3>
                     <a href="https://github.com/dattskoushik" target="_blank" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted-foreground); text-decoration: none;">View on GitHub &rarr;</a>
                 </div>
                 <pre style="margin: 0; padding: 0; font-size: 0.75rem; color: var(--foreground); overflow-x: auto;"><code>WITH daily_sales AS (
@@ -646,9 +859,9 @@ FROM daily_sales;</code></pre>
             </div>
 
             <!-- Python Example -->
-            <div class="card-border-glow" style="padding: 1.5rem; border-radius: 0.5rem; background: var(--code-bg);">
+            <div class="clean-card" style="padding: 1.5rem; border-radius: 0.5rem; background: var(--code-bg);">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
-                    <h3 style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); margin: 0;">> Python: Idempotent Load</h3>
+                    <h3 style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--primary); margin: 0;">> Python: Idempotent Load</h3>
                     <a href="https://github.com/dattskoushik" target="_blank" style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted-foreground); text-decoration: none;">View on GitHub &rarr;</a>
                 </div>
                 <pre style="margin: 0; padding: 0; font-size: 0.75rem; color: var(--foreground); overflow-x: auto;"><code>def load_data_idempotent(df: pd.DataFrame,
@@ -682,8 +895,8 @@ FROM daily_sales;</code></pre>
 
         <div class="grid-2-col">
             <!-- Article 1 -->
-            <a href="blog/postgres-query-planning.html" class="card-border-glow" style="display: block; padding: 2rem; border-radius: 0.5rem; text-decoration: none; display: flex; flex-direction: column; height: 100%;">
-                <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--foreground); transition: color 0.2s;" onmouseover="this.style.color='var(--terminal-green)'" onmouseout="this.style.color='var(--foreground)'">How Postgres Query Planning Actually Works</h3>
+            <a href="blog/postgres-query-planning.html" class="clean-card" style="display: block; padding: 2rem; border-radius: 0.5rem; text-decoration: none; display: flex; flex-direction: column; height: 100%;">
+                <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--foreground); transition: color 0.2s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--foreground)'">How Postgres Query Planning Actually Works</h3>
                 <div style="font-family: var(--font-mono); font-size: 0.75rem; color: #6b7280; margin-bottom: 1rem;">Oct 26, 2024</div>
                 <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin: 0;">
                     Understanding the optimizer's cost models is critical for writing high-performance queries. We dive deep into access methods and index utilization.
@@ -691,8 +904,8 @@ FROM daily_sales;</code></pre>
             </a>
 
             <!-- Article 2 -->
-            <a href="blog/batch-data-pipelines.html" class="card-border-glow" style="display: block; padding: 2rem; border-radius: 0.5rem; text-decoration: none; display: flex; flex-direction: column; height: 100%;">
-                <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--foreground); transition: color 0.2s;" onmouseover="this.style.color='var(--terminal-green)'" onmouseout="this.style.color='var(--foreground)'">Designing Reliable Batch Data Pipelines</h3>
+            <a href="blog/batch-data-pipelines.html" class="clean-card" style="display: block; padding: 2rem; border-radius: 0.5rem; text-decoration: none; display: flex; flex-direction: column; height: 100%;">
+                <h3 style="font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--foreground); transition: color 0.2s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--foreground)'">Designing Reliable Batch Data Pipelines</h3>
                 <div style="font-family: var(--font-mono); font-size: 0.75rem; color: #6b7280; margin-bottom: 1rem;">Sep 14, 2024</div>
                 <p style="color: var(--muted-foreground); font-size: 0.875rem; line-height: 1.625; margin: 0;">
                     Why "retry until success" is not a strategy. Exploring patterns for building robust, recoverable ETL workflows that don't wake you up at 3 AM.
@@ -710,7 +923,7 @@ FROM daily_sales;</code></pre>
             Whether you're looking to build reliable pipelines, scale your analytics infrastructure, or just talk shop about PostgreSQL query planners, I'm always open to a conversation.
         </p>
         <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-            <a href="mailto:suchindra.formal@outlook.com" style="background-color: var(--terminal-green); color: #0f172a; padding: 0.75rem 1.5rem; border-radius: 0.25rem; font-family: var(--font-mono); text-decoration: none; font-weight: bold; transition: opacity 0.2s;">Send an Email</a>
+            <a href="mailto:suchindra.formal@outlook.com" style="background-color: var(--primary); color: #0f172a; padding: 0.75rem 1.5rem; border-radius: 0.25rem; font-family: var(--font-mono); text-decoration: none; font-weight: bold; transition: opacity 0.2s;">Send an Email</a>
             <a href="https://linkedin.com/in/suchindrakoushik" target="_blank" style="background-color: transparent; border: 1px solid var(--border); color: var(--foreground); padding: 0.75rem 1.5rem; border-radius: 0.25rem; font-family: var(--font-mono); text-decoration: none; transition: background-color 0.2s;">LinkedIn Profile</a>
         </div>
     </section>
@@ -727,9 +940,9 @@ FROM daily_sales;</code></pre>
             <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem;">
                 <span><strong>Email:</strong> <a href="mailto:suchindra.formal@outlook.com" style="color: var(--foreground); text-decoration: none;">suchindra.formal@outlook.com</a></span>
                 <span><strong>Links:</strong>
-                    <a href="https://github.com/dattskoushik" target="_blank" style="color: var(--terminal-green); text-decoration: none; margin-right: 0.5rem;">[GitHub]</a>
-                    <a href="https://linkedin.com/in/suchindrakoushik" target="_blank" style="color: var(--terminal-green); text-decoration: none; margin-right: 0.5rem;">[LinkedIn]</a>
-                    <a href="/assets/resume/resume_.pdf" target="_blank" style="color: var(--terminal-green); text-decoration: none;">[Resume]</a>
+                    <a href="https://github.com/dattskoushik" target="_blank" style="color: var(--primary); text-decoration: none; margin-right: 0.5rem;">[GitHub]</a>
+                    <a href="https://linkedin.com/in/suchindrakoushik" target="_blank" style="color: var(--primary); text-decoration: none; margin-right: 0.5rem;">[LinkedIn]</a>
+                    <a href="/assets/resume/resume_.pdf" target="_blank" style="color: var(--primary); text-decoration: none;">[Resume]</a>
                 </span>
             </div>
             <div style="margin-top: 1rem; color: var(--muted-foreground);">

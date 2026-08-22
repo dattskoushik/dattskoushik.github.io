@@ -32,47 +32,45 @@
         /* Dark Theme (Default) */
         [data-theme="dark"] {
             --background: #0f172a;
-            --foreground: #d1d5db;
+            --foreground: #cbd5e1;
             --card: #1e293b;
-            --card-foreground: #d1d5db;
+            --card-foreground: #cbd5e1;
             --muted: #1e293b;
-            --muted-foreground: #9ca3af;
+            --muted-foreground: #94a3b8;
             --border: #334155;
-            --primary: #4ade80;
-            --primary-foreground: #0f172a;
+            --primary: #3b82f6;
+            --primary-foreground: #ffffff;
             --secondary: #1e293b;
-            --secondary-foreground: #d1d5db;
-            --accent: #4ade80;
-            --accent-foreground: #0f172a;
-            --ring: #4ade80;
+            --secondary-foreground: #cbd5e1;
+            --accent: #3b82f6;
+            --accent-foreground: #ffffff;
+            --ring: #3b82f6;
             --input: #1e293b;
             /* Custom */
-            --header-bg: #0f172a;
+            --header-bg: rgba(15, 23, 42, 0.8);
             --code-bg: #1e293b;
-            --terminal-green: #4ade80;
         }
 
         /* Light Theme */
         [data-theme="light"] {
-            --background: #f8fafc;
+            --background: #ffffff;
             --foreground: #334155;
-            --card: #ffffff;
+            --card: #f8fafc;
             --card-foreground: #334155;
             --muted: #f1f5f9;
             --muted-foreground: #64748b;
             --border: #e2e8f0;
-            --primary: #10b981;
+            --primary: #2563eb;
             --primary-foreground: #ffffff;
             --secondary: #f1f5f9;
             --secondary-foreground: #334155;
-            --accent: #10b981;
+            --accent: #2563eb;
             --accent-foreground: #ffffff;
-            --ring: #10b981;
+            --ring: #2563eb;
             --input: #ffffff;
             /* Custom */
-            --header-bg: #f8fafc;
+            --header-bg: rgba(255, 255, 255, 0.8);
             --code-bg: #f1f5f9;
-            --terminal-green: #10b981;
         }
 
         body {
@@ -87,6 +85,7 @@
             top: 0;
             z-index: 50;
             background-color: var(--header-bg);
+            backdrop-filter: blur(8px);
             border-bottom: 1px solid var(--border);
             padding: 1rem 0;
         }
@@ -116,7 +115,7 @@
         }
 
         .logo-prefix {
-            color: var(--terminal-green);
+            color: var(--primary);
         }
 
         nav.nav-links {
@@ -141,12 +140,12 @@
         }
 
         nav.nav-links a:hover {
-            color: var(--terminal-green);
+            color: var(--primary);
         }
 
         nav.nav-links a.active {
             background-color: rgba(74, 222, 128, 0.2);
-            color: var(--terminal-green);
+            color: var(--primary);
         }
 
         [data-theme="light"] nav.nav-links a.active {
@@ -213,7 +212,7 @@
         }
 
         .footer-success {
-            color: var(--terminal-green);
+            color: var(--primary);
         }
 
         .social-links {
@@ -275,55 +274,6 @@
             color: var(--muted-foreground);
         }
 
-        .browser-top-bar {
-            background-color: #020617;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            padding: 0 1rem;
-            height: 2.5rem;
-            font-size: 0.75rem;
-            font-family: var(--font-mono);
-            color: #9ca3af;
-            user-select: none;
-        }
-
-        [data-theme="light"] .browser-top-bar {
-            background-color: #e2e8f0;
-            color: #64748b;
-        }
-
-        .browser-tab {
-            background-color: var(--card);
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem 0.375rem 0 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            border-top: 1px solid var(--border);
-            border-left: 1px solid var(--border);
-            border-right: 1px solid var(--border);
-            border-bottom: 1px solid transparent;
-            position: relative;
-            top: 1px;
-        }
-
-        .browser-tab-close {
-            color: #6b7280;
-            cursor: pointer;
-        }
-        .browser-tab-close:hover {
-            color: #d1d5db;
-        }
-
-        .browser-add {
-            padding: 0 0.75rem;
-            cursor: pointer;
-        }
-        .browser-add:hover {
-            color: #d1d5db;
-        }
-
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
@@ -342,76 +292,44 @@
             background: #cbd5e1;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--terminal-green);
+            background: var(--primary);
         }
 
-        /* Terminal Window Global Utility */
-        .terminal-window {
-            border: 1px solid rgba(74, 222, 128, 0.4);
-            background: var(--card);
+        /* Clean Card Global Utility */
+        .clean-card {
+            border: 1px solid var(--border);
             border-radius: 8px;
-            box-shadow: 0 0 15px 2px rgba(74, 222, 128, 0.2), inset 0 0 10px rgba(74, 222, 128, 0.1);
-            position: relative;
-        }
-        [data-theme="light"] .terminal-window {
-            border-color: rgba(16, 185, 129, 0.4);
-            box-shadow: 0 0 15px 2px rgba(16, 185, 129, 0.1), inset 0 0 10px rgba(16, 185, 129, 0.05);
-        }
-
-        .terminal-window::before {
-            content: '';
-            position: absolute;
-            top: -1px; left: -1px; right: -1px; bottom: -1px;
-            border-radius: 9px;
-            background: linear-gradient(135deg, rgba(74, 222, 128, 0.4) 0%, rgba(74, 222, 128, 0) 100%);
-            z-index: -1;
-            opacity: 0.5;
-        }
-        [data-theme="light"] .terminal-window::before {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.4) 0%, rgba(16, 185, 129, 0) 100%);
-        }
-
-        .card-border-glow {
-            border: 1px solid rgba(74, 222, 128, 0.4);
-            box-shadow: 0 0 15px 2px rgba(74, 222, 128, 0.2), inset 0 0 10px rgba(74, 222, 128, 0.1);
-            transition: all 0.3s ease;
             background: var(--card);
-        }
-        [data-theme="light"] .card-border-glow {
-            border-color: rgba(16, 185, 129, 0.4);
-            box-shadow: 0 0 15px 2px rgba(16, 185, 129, 0.1), inset 0 0 10px rgba(16, 185, 129, 0.05);
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
-        .card-border-glow:hover {
-            border-color: rgba(74, 222, 128, 0.8);
-            box-shadow: 0 0 25px 4px rgba(74, 222, 128, 0.3), inset 0 0 15px rgba(74, 222, 128, 0.2);
+        .clean-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             transform: translateY(-2px);
-        }
-        [data-theme="light"] .card-border-glow:hover {
-            border-color: rgba(16, 185, 129, 0.8);
-            box-shadow: 0 0 25px 4px rgba(16, 185, 129, 0.2), inset 0 0 15px rgba(16, 185, 129, 0.1);
         }
 
         /* Standardized Button Hover States */
         .btn-solid {
-            background-color: var(--terminal-green) !important;
-            color: #0f172a !important;
+            background-color: var(--primary) !important;
+            color: var(--primary-foreground) !important;
             transition: all 0.2s ease !important;
+            border: none;
         }
         .btn-solid:hover {
-            background-color: var(--terminal-green) !important;
-            color: #0f172a !important;
-            opacity: 0.8 !important;
+            background-color: var(--primary) !important;
+            opacity: 0.9 !important;
         }
         .btn-outline {
             background-color: transparent !important;
-            border: 1px solid var(--terminal-green) !important;
-            color: var(--terminal-green) !important;
+            border: 1px solid var(--primary) !important;
+            color: var(--primary) !important;
             transition: all 0.2s ease !important;
         }
         .btn-outline:hover {
-            background-color: rgba(74, 222, 128, 0.2) !important;
-            color: var(--terminal-green) !important;
+            background-color: rgba(59, 130, 246, 0.1) !important;
+            color: var(--primary) !important;
         }
     </style>
 
@@ -419,31 +337,22 @@
 <body data-theme="dark" style="display: flex; flex-direction: column; min-height: 100vh;">
 
 
-    <!-- BEGIN: Browser Top Bar (Decorative) -->
-    <div class="browser-top-bar">
-        <div class="browser-tab">
-            <span>Suchindra Koushik</span>
-            <span class="browser-tab-close">×</span>
-        </div>
-        <div class="browser-add">+</div>
-    </div>
-    <!-- END: Browser Top Bar -->
 
     <header class="site-header">
         <div class="container">
             <a href="./index.html" class="logo">
-                <span class="logo-prefix">&gt;_</span>
+
                 <span>Suchindra Koushik</span>
             </a>
             <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">☰</button>
             <nav class="nav-links">
-                <a href="/index.html">~/home</a>
-                <a href="/about.html">~/about</a>
-                <a href="/index.html#skills">~/skills</a>
-                <a href="/projects.html" class="active">~/projects</a>
-                <a href="/resume.html">~/experience</a>
-                <a href="/index.html#engineering">~/engineering</a>
-                <a href="/index.html#contact">~/contact</a>
+                <a href="/index.html">Home</a>
+                <a href="/about.html">About</a>
+                <a href="/index.html#skills">Skills</a>
+                <a href="/projects.html" class="active">Projects</a>
+                <a href="/resume.html">Experience</a>
+                <a href="/index.html#engineering">Engineering</a>
+                <a href="/index.html#contact">Contact</a>
                 <div style="display: flex; align-items: center; gap: 0.5rem; margin-left: 1rem; padding-left: 1rem; border-left: 1px solid var(--border);">
                     <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
                 </div>
@@ -466,9 +375,9 @@
         <div class="row" style="row-gap: 3rem; display: flex; flex-direction: column;">
 
                         <!-- Project 1: CDC Silent Corruption -->
-            <article class="card-border-glow project-card" data-tags="kafka spark datacorruption" style="padding: 2.5rem; border-radius: 0.5rem; width: 100%;">
+            <article class="clean-card project-card" data-tags="kafka spark datacorruption" style="padding: 2.5rem; border-radius: 0.5rem; width: 100%;">
                 <header style="margin-bottom: 2rem;">
-                    <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); margin-bottom: 1rem;">[ Kafka ] [ Spark ] [ Data Quality ] [ Incident ]</div>
+                    <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--primary); margin-bottom: 1rem;">[ Kafka ] [ Spark ] [ Data Quality ] [ Incident ]</div>
                     <h3 style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--foreground); margin-bottom: 1rem;">Incident: Silent Data Corruption in Delta Lake</h3>
                     <p style="color: var(--muted-foreground); font-size: 1.125rem; line-height: 1.625;">
                         Post-mortem on identifying and resolving silent data corruption caused by unhandled schema evolution and tombstone messages in a high-throughput Kafka-to-Delta pipeline.
@@ -490,7 +399,7 @@
                             </div>
                             <div>
                                 <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Architecture & Point of Failure</h4>
-                                <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto;">
+                                <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--primary); overflow-x: auto;">
 [Upstream DB] -> [Debezium CDC] -> [Kafka Topic]
                                         | (Schema Change + Tombstones)
                                         v
@@ -506,7 +415,7 @@
                             <li><strong>Root Cause Analysis:</strong> Queried the Delta Lake history log and identified large volumes of null-heavy updates. Inspected raw Kafka payloads to confirm the tombstone messages.</li>
                             <li><strong>Architectural Fix:</strong> Refactored the Spark streaming job to use a robust schema wrapper that explicitly handles `null` values and routes tombstone records to a Dead Letter Queue (DLQ) for separate processing.</li>
                          </ul>
-                         <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto; margin-top: 1rem;">
+                         <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--primary); overflow-x: auto; margin-top: 1rem;">
 // The Fix: Explicit Tombstone Handling
 val df = spark.readStream...
 val processedDf = df
@@ -522,7 +431,7 @@ val dlqDf = df.filter(col("is_tombstone"))
                         <ul style="color: var(--muted-foreground); font-size: 0.875rem; padding-left: 1.5rem; margin: 0;">
                              <li><strong>Recovery:</strong> Performed a targeted backfill using Delta Lake time travel to restore the corrupted partitions.</li>
                         </ul>
-                         <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto; margin-top: 1rem;">
+                         <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--primary); overflow-x: auto; margin-top: 1rem;">
 RESTORE TABLE my_table TO TIMESTAMP AS OF '2023-10-27T10:00:00Z';
                          </pre>
                     </div>
@@ -534,9 +443,9 @@ RESTORE TABLE my_table TO TIMESTAMP AS OF '2023-10-27T10:00:00Z';
             </article>
 
                         <!-- Project 2: Cascading OOM Failures -->
-            <article class="card-border-glow project-card" data-tags="pyspark performance oom" style="padding: 2.5rem; border-radius: 0.5rem; width: 100%;">
+            <article class="clean-card project-card" data-tags="pyspark performance oom" style="padding: 2.5rem; border-radius: 0.5rem; width: 100%;">
                 <header style="margin-bottom: 2rem;">
-                    <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); margin-bottom: 1rem;">[ PySpark ] [ Performance ] [ Optimization ] [ Incident ]</div>
+                    <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--primary); margin-bottom: 1rem;">[ PySpark ] [ Performance ] [ Optimization ] [ Incident ]</div>
                     <h3 style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--foreground); margin-bottom: 1rem;">Incident: Cascading OOM Failures in Daily Aggregations</h3>
                     <p style="color: var(--muted-foreground); font-size: 1.125rem; line-height: 1.625;">
                         Post-mortem on debugging and resolving cascading Spark Executor Out-Of-Memory (OOM) errors caused by hidden data skew and inappropriate broadcast join strategies.
@@ -558,7 +467,7 @@ RESTORE TABLE my_table TO TIMESTAMP AS OF '2023-10-27T10:00:00Z';
                             </div>
                             <div>
                                 <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Architecture & Point of Failure</h4>
-                                <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto;">
+                                <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--primary); overflow-x: auto;">
 [Fact Table (10B)]                     -> (SortMergeJoin) -> [Executor OOM Crash]
 [Dim Table (Skew)] /     ^
                          | (Spill to Disk Failed)
@@ -573,7 +482,7 @@ RESTORE TABLE my_table TO TIMESTAMP AS OF '2023-10-27T10:00:00Z';
                             <li><strong>Root Cause Analysis:</strong> Extracted the Spark EXPLAIN plan which confirmed the fallback to SortMergeJoin. Checked the Spark UI and identified a single task taking 10x longer and consuming 90% of memory due to data skew on the 'null' ID.</li>
                             <li><strong>Architectural Fix:</strong> Implemented key salting (adding random integers to the skewed key) to evenly distribute the skewed partition across multiple executors, preventing the OOM.</li>
                         </ul>
-                         <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto; margin-top: 1rem;">
+                         <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--primary); overflow-x: auto; margin-top: 1rem;">
 # The Fix: Key Salting for Skew
 df = df.withColumn("salt", lit(rand() * 10).cast("int"))
 df = df.withColumn("salted_key", concat(col("key"), lit("_"), col("salt")))
@@ -585,7 +494,7 @@ df = df.withColumn("salted_key", concat(col("key"), lit("_"), col("salt")))
                          <ul style="color: var(--muted-foreground); font-size: 0.875rem; padding-left: 1.5rem; margin: 0;">
                              <li><strong>Optimization:</strong> Explicitly hinted a SortMergeJoin with the salted keys, favoring stability over raw speed for this specific pipeline.</li>
                         </ul>
-                        <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto; margin-top: 1rem;">
+                        <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--primary); overflow-x: auto; margin-top: 1rem;">
 == Physical Plan ==
 *(5) SortMergeJoin [salted_key#123], [salted_key#456], Inner
 ...
@@ -600,9 +509,9 @@ df = df.withColumn("salted_key", concat(col("key"), lit("_"), col("salt")))
             </article>
 
                         <!-- Project 3: API Rate Limit Disaster -->
-            <article class="card-border-glow project-card" data-tags="airflow python orchestration" style="padding: 2.5rem; border-radius: 0.5rem; width: 100%;">
+            <article class="clean-card project-card" data-tags="airflow python orchestration" style="padding: 2.5rem; border-radius: 0.5rem; width: 100%;">
                 <header style="margin-bottom: 2rem;">
-                    <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--terminal-green); margin-bottom: 1rem;">[ Airflow ] [ Python ] [ Orchestration ] [ Incident ]</div>
+                    <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--primary); margin-bottom: 1rem;">[ Airflow ] [ Python ] [ Orchestration ] [ Incident ]</div>
                     <h3 style="font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--foreground); margin-bottom: 1rem;">Incident: The N+1 API Rate Limit Disaster</h3>
                     <p style="color: var(--muted-foreground); font-size: 1.125rem; line-height: 1.625;">
                         Post-mortem detailing how an orchestrator backfill triggered an unintentional denial-of-service attack on an upstream vendor, leading to an IP ban and a 24-hour pipeline outage.
@@ -624,7 +533,7 @@ df = df.withColumn("salted_key", concat(col("key"), lit("_"), col("salt")))
                             </div>
                             <div>
                                 <h4 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem;">Architecture & Point of Failure</h4>
-                                <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto;">
+                                <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--primary); overflow-x: auto;">
 [Airflow Scheduler] -> (Trigger 5000+ Tasks)
                              |
                       [Celery Workers]
@@ -642,7 +551,7 @@ df = df.withColumn("salted_key", concat(col("key"), lit("_"), col("salt")))
                             <li><strong>Root Cause Analysis:</strong> Audited Airflow task logs and identified the N+1 anti-pattern. The lack of concurrency controls meant the backfill executed all mapped tasks simultaneously instead of sequentially.</li>
                             <li><strong>Architectural Fix:</strong> Implemented Airflow Pools to strictly limit the concurrency of API-bound tasks to 5 workers. Added a Python `tenacity` retry decorator with exponential backoff and jitter to gracefully handle `429 Too Many Requests` responses.</li>
                         </ul>
-                         <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto; margin-top: 1rem;">
+                         <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--primary); overflow-x: auto; margin-top: 1rem;">
 @retry(
     retry=retry_if_exception_type(RateLimitException),
     wait=wait_exponential(multiplier=1, min=4, max=60),
@@ -658,7 +567,7 @@ def fetch_data():
                          <ul style="color: var(--muted-foreground); font-size: 0.875rem; padding-left: 1.5rem; margin: 0;">
                              <li><strong>Optimization:</strong> Refactored the ingestion script to use a bulk-export endpoint instead of polling per-record.</li>
                         </ul>
-                        <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--terminal-green); overflow-x: auto; margin-top: 1rem;">
+                        <pre style="background: var(--code-bg); padding: 1rem; border-radius: 0.25rem; font-size: 0.75rem; color: var(--primary); overflow-x: auto; margin-top: 1rem;">
 # Before: 5000 API Calls / Min
 # After:  1 Bulk API Call / Min
 
@@ -687,9 +596,9 @@ def fetch_data():
             <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem;">
                 <span><strong>Email:</strong> <a href="mailto:suchindra.formal@outlook.com" style="color: var(--foreground); text-decoration: none;">suchindra.formal@outlook.com</a></span>
                 <span><strong>Links:</strong>
-                    <a href="https://github.com/dattskoushik" target="_blank" style="color: var(--terminal-green); text-decoration: none; margin-right: 0.5rem;">[GitHub]</a>
-                    <a href="https://linkedin.com/in/suchindrakoushik" target="_blank" style="color: var(--terminal-green); text-decoration: none; margin-right: 0.5rem;">[LinkedIn]</a>
-                    <a href="/assets/resume/resume_.pdf" target="_blank" style="color: var(--terminal-green); text-decoration: none;">[Resume]</a>
+                    <a href="https://github.com/dattskoushik" target="_blank" style="color: var(--primary); text-decoration: none; margin-right: 0.5rem;">[GitHub]</a>
+                    <a href="https://linkedin.com/in/suchindrakoushik" target="_blank" style="color: var(--primary); text-decoration: none; margin-right: 0.5rem;">[LinkedIn]</a>
+                    <a href="/assets/resume/resume_.pdf" target="_blank" style="color: var(--primary); text-decoration: none;">[Resume]</a>
                 </span>
             </div>
             <div style="margin-top: 1rem; color: var(--muted-foreground);">
@@ -710,11 +619,11 @@ def fetch_data():
         <div style="padding-top: 1rem;">
             <p style="font-size: 0.75rem; color: var(--muted-foreground); font-family: var(--font-mono); margin-bottom: 0.5rem;">SUGGESTED TAGS</p>
             <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;" id="cmd-k-tags">
-                <button class="cmd-tag" data-tag="kafka" style="background: var(--code-bg); border: 1px solid var(--border); color: var(--terminal-green); padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer;">#kafka</button>
-                <button class="cmd-tag" data-tag="spark" style="background: var(--code-bg); border: 1px solid var(--border); color: var(--terminal-green); padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer;">#spark</button>
-                <button class="cmd-tag" data-tag="oom" style="background: var(--code-bg); border: 1px solid var(--border); color: var(--terminal-green); padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer;">#oom</button>
-                <button class="cmd-tag" data-tag="performance" style="background: var(--code-bg); border: 1px solid var(--border); color: var(--terminal-green); padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer;">#performance</button>
-                <button class="cmd-tag" data-tag="airflow" style="background: var(--code-bg); border: 1px solid var(--border); color: var(--terminal-green); padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer;">#airflow</button>
+                <button class="cmd-tag" data-tag="kafka" style="background: var(--code-bg); border: 1px solid var(--border); color: var(--primary); padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer;">#kafka</button>
+                <button class="cmd-tag" data-tag="spark" style="background: var(--code-bg); border: 1px solid var(--border); color: var(--primary); padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer;">#spark</button>
+                <button class="cmd-tag" data-tag="oom" style="background: var(--code-bg); border: 1px solid var(--border); color: var(--primary); padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer;">#oom</button>
+                <button class="cmd-tag" data-tag="performance" style="background: var(--code-bg); border: 1px solid var(--border); color: var(--primary); padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer;">#performance</button>
+                <button class="cmd-tag" data-tag="airflow" style="background: var(--code-bg); border: 1px solid var(--border); color: var(--primary); padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-family: var(--font-mono); font-size: 0.75rem; cursor: pointer;">#airflow</button>
             </div>
             <p id="cmd-k-results-msg" style="font-size: 0.875rem; color: var(--muted-foreground); display: none;"></p>
         </div>
