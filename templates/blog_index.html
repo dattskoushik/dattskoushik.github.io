@@ -1,68 +1,94 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
+<div style="padding-top: var(--space-xl); max-width: 800px; margin: 0 auto">
+  <h1>Writing</h1>
+  <p class="text-muted" style="margin-bottom: var(--space-xl)">
+    Thoughts on backend architecture, data reliability, and engineering
+    practices.
+  </p>
 
-{% block content %}
-    <div style="padding-top: var(--space-xl); max-width: 800px; margin: 0 auto;">
-        <h1>Writing</h1>
-        <p class="text-muted" style="margin-bottom: var(--space-xl);">
-            Thoughts on backend architecture, data reliability, and engineering practices.
-        </p>
+  <!-- Search Bar -->
+  <div style="margin-bottom: var(--space-lg)">
+    <label data-field>
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Search articles..."
+        style="width: 100%"
+      />
+    </label>
+  </div>
 
-        <!-- Search Bar -->
-        <div style="margin-bottom: var(--space-lg);">
-            <label data-field>
-                <input type="text" id="search-input" placeholder="Search articles..." style="width: 100%;" />
-            </label>
+  <div
+    id="articles-list"
+    style="display: flex; flex-direction: column; gap: var(--space-md)"
+  >
+    {% for article in articles %}
+    <article class="card">
+      <header>
+        <div class="text-muted" style="font-size: 0.875rem">
+          {{ article.category }} • <time>{{ article.date }}</time> • {{
+          article.readTime }}
         </div>
+        <h3>
+          <a
+            href="{{ article.slug }}.html"
+            style="text-decoration: none; color: inherit"
+            >{{ article.title }}</a
+          >
+        </h3>
+      </header>
+      <p>{{ article.excerpt }}</p>
+      <footer>
+        <a href="{{ article.slug }}.html" class="button small outline"
+          >Read article</a
+        >
+      </footer>
+    </article>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %} {% block footer_scripts %}
+<script>
+  // Simple client-side search
+  let articles = [];
 
-        <div id="articles-list" style="display: flex; flex-direction: column; gap: var(--space-md);">
-            {% for article in articles %}
-            <article class="card">
-                <header>
-                    <div class="text-muted" style="font-size: 0.875rem;">{{ article.category }} • <time>{{ article.date }}</time> • {{ article.readTime }}</div>
-                    <h3><a href="{{ article.slug }}.html" style="text-decoration: none; color: inherit;">{{ article.title }}</a></h3>
-                </header>
-                <p>{{ article.excerpt }}</p>
-                <footer>
-                    <a href="{{ article.slug }}.html" class="button small outline">Read article</a>
-                </footer>
-            </article>
-            {% endfor %}
-        </div>
-    </div>
-{% endblock %}
+  fetch("search.json")
+    .then((response) => response.json())
+    .then((data) => {
+      articles = data;
+      articles.forEach((a) => {
+        a.searchStr = (
+          a.title +
+          " " +
+          a.tags.join(" ") +
+          " " +
+          a.summary
+        ).toLowerCase();
+      });
+    })
+    .catch((err) => console.error("Could not load search index", err));
 
-{% block footer_scripts %}
-    <script>
-        // Simple client-side search
-        let articles = [];
+  const searchInput = document.getElementById("search-input");
+  const list = document.getElementById("articles-list");
 
-        fetch('search.json')
-            .then(response => response.json())
-            .then(data => {
-                articles = data;
-                articles.forEach(a => {
-                    a.searchStr = (a.title + " " + a.tags.join(" ") + " " + a.summary).toLowerCase();
-                });
-            })
-            .catch(err => console.error("Could not load search index", err));
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      const term = e.target.value.toLowerCase();
+      const filtered = term
+        ? articles.filter((a) => a.searchStr.includes(term))
+        : articles;
+      render(filtered);
+    });
+  }
 
-        const searchInput = document.getElementById('search-input');
-        const list = document.getElementById('articles-list');
-
-        if (searchInput) {
-            searchInput.addEventListener('input', (e) => {
-                const term = e.target.value.toLowerCase();
-                const filtered = term ? articles.filter(a => a.searchStr.includes(term)) : articles;
-                render(filtered);
-            });
-        }
-
-        function render(items) {
-            if (items.length === 0) {
-                list.innerHTML = '<p class="text-muted">No articles found.</p>';
-                return;
-            }
-            list.innerHTML = items.map(item => `
+  function render(items) {
+    if (items.length === 0) {
+      list.innerHTML = '<p class="text-muted">No articles found.</p>';
+      return;
+    }
+    list.innerHTML = items
+      .map(
+        (item) => `
                 <article class="card">
                     <header>
                         <div class="text-muted" style="font-size: 0.875rem;">${item.category} • <time>${item.date}</time> • ${item.readTime}</div>
@@ -73,7 +99,9 @@
                         <a href="${item.url}" class="button small outline">Read article</a>
                     </footer>
                 </article>
-            `).join('');
-        }
-    </script>
+            `,
+      )
+      .join("");
+  }
+</script>
 {% endblock %}
