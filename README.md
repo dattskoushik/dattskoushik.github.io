@@ -22,9 +22,10 @@ This site uses a **data-driven static site** approach:
 │   └── search.json            # Generated search index
 ├── assets/
 │   ├── images/gallery/
-│   │   └── photos.json        # Photography metadata
 │   ├── poetry/
-│   │   └── poems.json         # Poetry collection
+├── data/
+│   ├── photos.json        # Photography metadata
+│   └── poems.json         # Poetry collection
 │   └── js/theme.js            # Theme switcher
 ├── css/
 │   ├── main.css               # Main styles
@@ -87,7 +88,7 @@ This site uses a **data-driven static site** approach:
 
 1. **Add images to `assets/images/gallery/`**
 
-2. **Update `assets/images/gallery/photos.json`:**
+2. **Update `data/photos.json`:**
    ```json
    {
      "id": "sunset-2024",
@@ -103,7 +104,7 @@ This site uses a **data-driven static site** approach:
 
 ### Adding Poetry
 
-Update `assets/poetry/poems.json`:
+Update `data/poems.json`:
 ```json
 {
   "title": "New Poem",

@@ -9,8 +9,8 @@ from jinja2 import Environment, FileSystemLoader
 # Configuration
 ARTICLES_DIR = "blog/articles"
 ARTICLES_JSON = "blog/articles.json"
-PHOTOS_JSON = "assets/images/gallery/photos.json"
-POEMS_JSON = "assets/poetry/poems.json"
+PHOTOS_JSON = "data/photos.json"
+POEMS_JSON = "data/poems.json"
 BLOG_OUTPUT_DIR = "blog"
 SEARCH_INDEX_FILE = "blog/search.json"
 TEMPLATES_DIR = "templates"

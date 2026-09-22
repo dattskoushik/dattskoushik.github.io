@@ -7,10 +7,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
     />
     <title>Writing | Suchindra Koushik</title>
-    <meta
-      name="description"
-      content="Technical articles and thoughts on backend engineering."
-    />
+    <meta name="description" content="Technical articles and thoughts on backend engineering." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -378,6 +375,7 @@
         color: var(--primary) !important;
       }
     </style>
+
   </head>
   <body
     data-theme="dark"
@@ -396,11 +394,27 @@
           ☰
         </button>
         <nav class="nav-links">
-          <a href="../index.html" class="">Home</a>
-          <a href="../about.html" class="">About</a>
+          <a
+            href="../index.html"
+            class=""
+            >Home</a
+          >
+          <a
+            href="../about.html"
+            class=""
+            >About</a
+          >
           <a href="../index.html#skills">Skills</a>
-          <a href="../projects.html" class="">Projects</a>
-          <a href="../resume.html" class="">Experience</a>
+          <a
+            href="../projects.html"
+            class=""
+            >Projects</a
+          >
+          <a
+            href="../resume.html"
+            class=""
+            >Experience</a
+          >
           <a href="../index.html#engineering">Engineering</a>
           <a href="../index.html#contact">Contact</a>
           <div
@@ -421,113 +435,99 @@
 
     <main
       class="container"
-      style="
-        flex-grow: 1;
-        max-width: 1152px;
-        margin: 0 auto;
-        padding: 3rem 1.5rem;
-      "
+      style="flex-grow: 1; max-width: 1152px; margin: 0 auto; padding: 3rem 1.5rem; "
     >
-      <div
-        style="padding-top: var(--space-xl); max-width: 800px; margin: 0 auto"
-      >
-        <h1>Writing</h1>
-        <p class="text-muted" style="margin-bottom: var(--space-xl)">
-          Thoughts on backend architecture, data reliability, and engineering
-          practices.
-        </p>
 
-        <!-- Search Bar -->
-        <div style="margin-bottom: var(--space-lg)">
-          <label data-field>
-            <input
-              type="text"
-              id="search-input"
-              placeholder="Search articles..."
-              style="width: 100%"
-            />
-          </label>
+<div style="padding-top: var(--space-xl); max-width: 800px; margin: 0 auto">
+  <h1>Writing</h1>
+  <p class="text-muted" style="margin-bottom: var(--space-xl)">
+    Thoughts on backend architecture, data reliability, and engineering
+    practices.
+  </p>
+
+  <!-- Search Bar -->
+  <div style="margin-bottom: var(--space-lg)">
+    <label data-field>
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Search articles..."
+        style="width: 100%"
+      />
+    </label>
+  </div>
+
+  <div
+    id="articles-list"
+    style="display: flex; flex-direction: column; gap: var(--space-md)"
+  >
+
+    <article class="card">
+      <header>
+        <div class="text-muted" style="font-size: 0.875rem">
+          Backend Engineering • <time>2024-03-05</time> • 10 min
         </div>
-
-        <div
-          id="articles-list"
-          style="display: flex; flex-direction: column; gap: var(--space-md)"
+        <h3>
+          <a
+            href="python-performance.html"
+            style="text-decoration: none; color: inherit"
+            >Python Performance Optimization Patterns</a
+          >
+        </h3>
+      </header>
+      <p>Practical techniques for making Python applications faster without premature optimization.</p>
+      <footer>
+        <a href="python-performance.html" class="button small outline"
+          >Read article</a
         >
-          <article class="card">
-            <header>
-              <div class="text-muted" style="font-size: 0.875rem">
-                Backend Engineering • <time>2024-03-05</time> • 10 min
-              </div>
-              <h3>
-                <a
-                  href="python-performance.html"
-                  style="text-decoration: none; color: inherit"
-                  >Python Performance Optimization Patterns</a
-                >
-              </h3>
-            </header>
-            <p>
-              Practical techniques for making Python applications faster without
-              premature optimization.
-            </p>
-            <footer>
-              <a href="python-performance.html" class="button small outline"
-                >Read article</a
-              >
-            </footer>
-          </article>
+      </footer>
+    </article>
 
-          <article class="card">
-            <header>
-              <div class="text-muted" style="font-size: 0.875rem">
-                Databases • <time>2024-02-10</time> • 12 min
-              </div>
-              <h3>
-                <a
-                  href="postgres-query-planning.html"
-                  style="text-decoration: none; color: inherit"
-                  >PostgreSQL Query Planning Deep Dive</a
-                >
-              </h3>
-            </header>
-            <p>
-              Understanding how PostgreSQL's query planner works and how to
-              optimize your queries.
-            </p>
-            <footer>
-              <a
-                href="postgres-query-planning.html"
-                class="button small outline"
-                >Read article</a
-              >
-            </footer>
-          </article>
-
-          <article class="card">
-            <header>
-              <div class="text-muted" style="font-size: 0.875rem">
-                Data Engineering • <time>2024-01-15</time> • 8 min
-              </div>
-              <h3>
-                <a
-                  href="batch-data-pipelines.html"
-                  style="text-decoration: none; color: inherit"
-                  >Building Batch Data Pipelines</a
-                >
-              </h3>
-            </header>
-            <p>
-              Designing maintainable batch processing systems with idempotency,
-              error handling, and monitoring.
-            </p>
-            <footer>
-              <a href="batch-data-pipelines.html" class="button small outline"
-                >Read article</a
-              >
-            </footer>
-          </article>
+    <article class="card">
+      <header>
+        <div class="text-muted" style="font-size: 0.875rem">
+          Databases • <time>2024-02-10</time> • 12 min
         </div>
-      </div>
+        <h3>
+          <a
+            href="postgres-query-planning.html"
+            style="text-decoration: none; color: inherit"
+            >PostgreSQL Query Planning Deep Dive</a
+          >
+        </h3>
+      </header>
+      <p>Understanding how PostgreSQL's query planner works and how to optimize your queries.</p>
+      <footer>
+        <a href="postgres-query-planning.html" class="button small outline"
+          >Read article</a
+        >
+      </footer>
+    </article>
+
+    <article class="card">
+      <header>
+        <div class="text-muted" style="font-size: 0.875rem">
+          Data Engineering • <time>2024-01-15</time> • 8 min
+        </div>
+        <h3>
+          <a
+            href="batch-data-pipelines.html"
+            style="text-decoration: none; color: inherit"
+            >Building Batch Data Pipelines</a
+          >
+        </h3>
+      </header>
+      <p>Designing maintainable batch processing systems with idempotency, error handling, and monitoring.</p>
+      <footer>
+        <a href="batch-data-pipelines.html" class="button small outline"
+          >Read article</a
+        >
+      </footer>
+    </article>
+
+  </div>
+</div>
+
     </main>
 
     <footer class="site-footer">
@@ -594,47 +594,48 @@
       </div>
     </footer>
 
-    <script>
-      // Simple client-side search
-      let articles = [];
 
-      fetch("search.json")
-        .then((response) => response.json())
-        .then((data) => {
-          articles = data;
-          articles.forEach((a) => {
-            a.searchStr = (
-              a.title +
-              " " +
-              a.tags.join(" ") +
-              " " +
-              a.summary
-            ).toLowerCase();
-          });
-        })
-        .catch((err) => console.error("Could not load search index", err));
+<script>
+  // Simple client-side search
+  let articles = [];
 
-      const searchInput = document.getElementById("search-input");
-      const list = document.getElementById("articles-list");
+  fetch("search.json")
+    .then((response) => response.json())
+    .then((data) => {
+      articles = data;
+      articles.forEach((a) => {
+        a.searchStr = (
+          a.title +
+          " " +
+          a.tags.join(" ") +
+          " " +
+          a.summary
+        ).toLowerCase();
+      });
+    })
+    .catch((err) => console.error("Could not load search index", err));
 
-      if (searchInput) {
-        searchInput.addEventListener("input", (e) => {
-          const term = e.target.value.toLowerCase();
-          const filtered = term
-            ? articles.filter((a) => a.searchStr.includes(term))
-            : articles;
-          render(filtered);
-        });
-      }
+  const searchInput = document.getElementById("search-input");
+  const list = document.getElementById("articles-list");
 
-      function render(items) {
-        if (items.length === 0) {
-          list.innerHTML = '<p class="text-muted">No articles found.</p>';
-          return;
-        }
-        list.innerHTML = items
-          .map(
-            (item) => `
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      const term = e.target.value.toLowerCase();
+      const filtered = term
+        ? articles.filter((a) => a.searchStr.includes(term))
+        : articles;
+      render(filtered);
+    });
+  }
+
+  function render(items) {
+    if (items.length === 0) {
+      list.innerHTML = '<p class="text-muted">No articles found.</p>';
+      return;
+    }
+    list.innerHTML = items
+      .map(
+        (item) => `
                 <article class="card">
                     <header>
                         <div class="text-muted" style="font-size: 0.875rem;">${item.category} • <time>${item.date}</time> • ${item.readTime}</div>
@@ -646,10 +647,11 @@
                     </footer>
                 </article>
             `,
-          )
-          .join("");
-      }
-    </script>
+      )
+      .join("");
+  }
+</script>
+
   </body>
 </html>
 

@@ -97,7 +97,7 @@ The DLQ (Dead Letter Queue) can be an S3 bucket or a separate queue. It allows t
 
 ## Code Example: Robust Log Ingestion
 
-Let's look at a snippet inspired by a log ingestion system I built (see full code in `assets/code_reference/log-parser`).
+Let's look at a snippet inspired by a log ingestion system I built (see full code in [log-parser](https://github.com/dattskoushik/log-parser)).
 
 We use **Pydantic** for strict validation at the edge. This ensures that "poison pills" are caught early, before they enter the database.
 
