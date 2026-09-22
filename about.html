@@ -7,11 +7,14 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
     />
     <title>About | Suchindra Koushik</title>
-    <meta name="description" content="About M S Suchindra Datta Koushik, Software engineer - Backend and Data." />
+    <meta
+      name="description"
+      content="About M S Suchindra Datta Koushik, Software engineer - Backend and Data."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Zilla+Slab:wght@600;700&family=Inter:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
@@ -24,7 +27,7 @@
     <style>
       :root {
         /* Fonts */
-        --font-serif: "Zilla Slab", serif;
+        --font-serif: "Inter", sans-serif;
         --font-sans: "Inter", sans-serif;
         --font-mono: "Fira Code", monospace;
 
@@ -37,45 +40,45 @@
 
       /* Dark Theme (Default) */
       [data-theme="dark"] {
-        --background: #0f172a;
-        --foreground: #cbd5e1;
-        --card: #1e293b;
-        --card-foreground: #cbd5e1;
-        --muted: #1e293b;
+        --background: #0b1120;
+        --foreground: #f8fafc;
+        --card: #111827;
+        --card-foreground: #f8fafc;
+        --muted: #111827;
         --muted-foreground: #94a3b8;
-        --border: #334155;
-        --primary: #3b82f6;
-        --primary-foreground: #ffffff;
-        --secondary: #1e293b;
-        --secondary-foreground: #cbd5e1;
-        --accent: #3b82f6;
-        --accent-foreground: #ffffff;
-        --ring: #3b82f6;
-        --input: #1e293b;
+        --border: #1e293b;
+        --primary: #60a5fa;
+        --primary-foreground: #0b1120;
+        --secondary: #111827;
+        --secondary-foreground: #f8fafc;
+        --accent: #60a5fa;
+        --accent-foreground: #0b1120;
+        --ring: #60a5fa;
+        --input: #111827;
         /* Custom */
-        --header-bg: rgba(15, 23, 42, 0.8);
-        --code-bg: #1e293b;
+        --header-bg: rgba(11, 17, 32, 0.8);
+        --code-bg: #111827;
       }
 
       /* Light Theme */
       [data-theme="light"] {
-        --background: #ffffff;
-        --foreground: #334155;
-        --card: #f8fafc;
-        --card-foreground: #334155;
+        --background: #f8fafc;
+        --foreground: #0f172a;
+        --card: #ffffff;
+        --card-foreground: #0f172a;
         --muted: #f1f5f9;
-        --muted-foreground: #64748b;
+        --muted-foreground: #475569;
         --border: #e2e8f0;
         --primary: #2563eb;
         --primary-foreground: #ffffff;
         --secondary: #f1f5f9;
-        --secondary-foreground: #334155;
+        --secondary-foreground: #0f172a;
         --accent: #2563eb;
         --accent-foreground: #ffffff;
         --ring: #2563eb;
         --input: #ffffff;
         /* Custom */
-        --header-bg: rgba(255, 255, 255, 0.8);
+        --header-bg: rgba(248, 250, 252, 0.8);
         --code-bg: #f1f5f9;
       }
 
@@ -108,16 +111,12 @@
       .logo {
         font-weight: 700;
         text-decoration: none;
-        color: #ffffff;
+        color: var(--foreground);
         font-family: var(--font-mono);
         font-size: 1.125rem;
         display: flex;
         align-items: center;
         gap: 0.5rem;
-      }
-
-      [data-theme="light"] .logo {
-        color: #000000;
       }
 
       .logo-prefix {
@@ -203,7 +202,7 @@
       }
 
       .site-footer .container {
-        max-width: 1024px;
+        max-width: 1152px;
         margin: 0 auto;
         padding: 0 1.5rem;
         display: flex;
@@ -252,8 +251,10 @@
       h4,
       h5,
       h6 {
-        font-family: var(--font-serif);
+        font-family: var(--font-sans);
         color: var(--foreground);
+        font-weight: 600;
+        letter-spacing: -0.025em;
       }
 
       .button,
@@ -318,9 +319,10 @@
       }
 
       .section-heading {
-        font-family: var(--font-serif);
+        font-family: var(--font-sans);
         font-size: 1.875rem;
         font-weight: 700;
+        letter-spacing: -0.025em;
       }
 
       .tech-heading {
@@ -342,15 +344,15 @@
         border-radius: 8px;
         background: var(--card);
         transition: all 0.2s ease;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         padding: var(--space-md);
       }
 
       .clean-card:hover {
         border-color: var(--primary);
         box-shadow:
-          0 4px 6px -1px rgba(0, 0, 0, 0.1),
-          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+          0 4px 6px -1px rgba(0, 0, 0, 0.05),
+          0 2px 4px -1px rgba(0, 0, 0, 0.03);
         transform: translateY(-2px);
       }
 
@@ -377,56 +379,55 @@
       }
     </style>
 
-<style>
-  .about-grid {
-    display: grid;
-    grid-template-columns: 3fr 2fr;
-    gap: var(--space-xl);
-    margin-top: var(--space-lg);
-  }
-  @media (max-width: 768px) {
-    .about-grid {
-      grid-template-columns: 1fr;
-      gap: var(--space-md);
-    }
-  }
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: var(--space-sm);
-    margin-top: var(--space-md);
-  }
-  .gallery-item {
-    aspect-ratio: 1;
-    background: var(--card);
-    border-radius: var(--radius-sm);
-    overflow: hidden;
-    cursor: pointer;
-  }
-  .gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-  .gallery-item:hover img {
-    transform: scale(1.05);
-  }
-  .poem-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    padding: var(--space-md);
-    border-radius: var(--radius-md);
-    margin-bottom: var(--space-sm);
-  }
-  .poem-lines {
-    font-style: italic;
-    white-space: pre-line;
-    color: var(--muted-foreground);
-    line-height: 1.8;
-  }
-</style>
-
+    <style>
+      .about-grid {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: var(--space-xl);
+        margin-top: var(--space-lg);
+      }
+      @media (max-width: 768px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: var(--space-md);
+        }
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: var(--space-sm);
+        margin-top: var(--space-md);
+      }
+      .gallery-item {
+        aspect-ratio: 1;
+        background: var(--card);
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        cursor: pointer;
+      }
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+      .gallery-item:hover img {
+        transform: scale(1.05);
+      }
+      .poem-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        padding: var(--space-md);
+        border-radius: var(--radius-md);
+        margin-bottom: var(--space-sm);
+      }
+      .poem-lines {
+        font-style: italic;
+        white-space: pre-line;
+        color: var(--muted-foreground);
+        line-height: 1.8;
+      }
+    </style>
   </head>
   <body
     data-theme="dark"
@@ -445,27 +446,11 @@
           ☰
         </button>
         <nav class="nav-links">
-          <a
-            href="./index.html"
-            class=""
-            >Home</a
-          >
-          <a
-            href="./about.html"
-            class="active"
-            >About</a
-          >
+          <a href="./index.html" class="">Home</a>
+          <a href="./about.html" class="active">About</a>
           <a href="./index.html#skills">Skills</a>
-          <a
-            href="./projects.html"
-            class=""
-            >Projects</a
-          >
-          <a
-            href="./resume.html"
-            class=""
-            >Experience</a
-          >
+          <a href="./projects.html" class="">Projects</a>
+          <a href="./resume.html" class="">Experience</a>
           <a href="./index.html#engineering">Engineering</a>
           <a href="./index.html#contact">Contact</a>
           <div
@@ -486,162 +471,179 @@
 
     <main
       class="container"
-      style="flex-grow: 1; max-width: 1024px; margin: 0 auto; padding: 3rem 1.5rem; "
-    >
-
-<section style="padding-bottom: var(--space-md)">
-  <h1>About Me</h1>
-</section>
-
-<div class="about-grid">
-  <div class="bio">
-    <p
-      class="text-muted"
       style="
-        color: var(--foreground);
-        font-size: 1.25rem;
-        margin-bottom: var(--space-md);
+        flex-grow: 1;
+        max-width: 1152px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
       "
     >
-      Data Engineer specializing in idempotent pipelines and high-reliability
-      infrastructure.
-    </p>
-    <p>
-      My professional focus is on architecting and maintaining high-throughput
-      data pipelines using Python and Spark. I build systems that survive the
-      initial commit—pipelines that are idempotent, robust, and designed to fail
-      gracefully rather than silently dropping data.
-    </p>
-    <p>
-      I thrive on solving data engineering problems that require deep technical
-      understanding. Whether it's optimizing PostgreSQL queries to reduce
-      latency, managing schema evolution in distributed environments, or
-      building real-time streaming architectures with Kafka, I prioritize
-      correctness and data quality above all else.
-    </p>
-    <p>
-      Currently, I am targeting Data Engineering roles where I can leverage my
-      expertise in ETL/ELT, dimensional modeling, and distributed systems to
-      build scalable analytics platforms. I enjoy environments that value
-      maintainability and simplicity over unnecessary complexity.
-    </p>
+      <section style="padding-bottom: var(--space-md)">
+        <h1>About Me</h1>
+      </section>
 
-    <div style="margin-top: var(--space-md)">
-      <a href="assets/resume/resume_.pdf" target="_blank" class="button"
-        >Download Resume</a
+      <div class="about-grid">
+        <div class="bio">
+          <p
+            class="text-muted"
+            style="
+              color: var(--foreground);
+              font-size: 1.25rem;
+              margin-bottom: var(--space-md);
+            "
+          >
+            Data Engineer specializing in idempotent pipelines and
+            high-reliability infrastructure.
+          </p>
+          <p>
+            My professional focus is on architecting and maintaining
+            high-throughput data pipelines using Python and Spark. I build
+            systems that survive the initial commit—pipelines that are
+            idempotent, robust, and designed to fail gracefully rather than
+            silently dropping data.
+          </p>
+          <p>
+            I thrive on solving data engineering problems that require deep
+            technical understanding. Whether it's optimizing PostgreSQL queries
+            to reduce latency, managing schema evolution in distributed
+            environments, or building real-time streaming architectures with
+            Kafka, I prioritize correctness and data quality above all else.
+          </p>
+          <p>
+            Currently, I am targeting Data Engineering roles where I can
+            leverage my expertise in ETL/ELT, dimensional modeling, and
+            distributed systems to build scalable analytics platforms. I enjoy
+            environments that value maintainability and simplicity over
+            unnecessary complexity.
+          </p>
+
+          <div style="margin-top: var(--space-md)">
+            <a href="assets/resume/resume_.pdf" target="_blank" class="button"
+              >Download Resume</a
+            >
+          </div>
+        </div>
+
+        <div class="skills">
+          <h3>Core Expertise</h3>
+          <ul
+            style="
+              list-style: none;
+              color: var(--muted-foreground);
+              line-height: 2;
+              padding: 0;
+            "
+          >
+            <li>
+              <strong style="color: var(--foreground)"
+                >Data Engineering:</strong
+              >
+              ETL/ELT, Data Pipelines
+            </li>
+            <li>
+              <strong style="color: var(--foreground)">Programming:</strong>
+              Python, SQL
+            </li>
+            <li>
+              <strong style="color: var(--foreground)">Data Processing:</strong>
+              PostgreSQL, Spark, Kafka
+            </li>
+            <li>
+              <strong style="color: var(--foreground)">Infrastructure:</strong>
+              Docker, CI/CD, AWS
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Beyond Engineering Section -->
+      <section
+        style="
+          margin-top: var(--space-xl);
+          border-top: 1px solid var(--border);
+          padding-top: var(--space-lg);
+        "
       >
-    </div>
-  </div>
+        <h2>Beyond Engineering</h2>
+        <p style="max-width: 600px">
+          When I'm not designing systems, I explore the world through a lens and
+          words. Photography and poetry allow me to capture moments that code
+          cannot.
+        </p>
 
-  <div class="skills">
-    <h3>Core Expertise</h3>
-    <ul
-      style="
-        list-style: none;
-        color: var(--muted-foreground);
-        line-height: 2;
-        padding: 0;
-      "
-    >
-      <li>
-        <strong style="color: var(--foreground)">Data Engineering:</strong>
-        ETL/ELT, Data Pipelines
-      </li>
-      <li>
-        <strong style="color: var(--foreground)">Programming:</strong> Python,
-        SQL
-      </li>
-      <li>
-        <strong style="color: var(--foreground)">Data Processing:</strong>
-        PostgreSQL, Spark, Kafka
-      </li>
-      <li>
-        <strong style="color: var(--foreground)">Infrastructure:</strong>
-        Docker, CI/CD, AWS
-      </li>
-    </ul>
-  </div>
-</div>
+        <div class="grid-2-col" style="margin-top: var(--space-md)">
+          <!-- Photography -->
+          <div>
+            <h3>Photography</h3>
+            <div class="gallery-grid">
+              <div
+                class="gallery-item"
+                title="Photography - replace with actual images"
+              >
+                <img
+                  src="https://via.placeholder.com/300x300/222/555?text=Photo+1"
+                  alt="Photography - replace with actual images"
+                  loading="lazy"
+                />
+              </div>
 
-<!-- Beyond Engineering Section -->
-<section
-  style="
-    margin-top: var(--space-xl);
-    border-top: 1px solid var(--border);
-    padding-top: var(--space-lg);
-  "
->
-  <h2>Beyond Engineering</h2>
-  <p style="max-width: 600px">
-    When I'm not designing systems, I explore the world through a lens and
-    words. Photography and poetry allow me to capture moments that code cannot.
-  </p>
+              <div
+                class="gallery-item"
+                title="Photography - replace with actual images"
+              >
+                <img
+                  src="https://via.placeholder.com/300x300/222/555?text=Photo+2"
+                  alt="Photography - replace with actual images"
+                  loading="lazy"
+                />
+              </div>
 
-  <div class="grid-2-col" style="margin-top: var(--space-md)">
-    <!-- Photography -->
-    <div>
-      <h3>Photography</h3>
-      <div class="gallery-grid">
+              <div
+                class="gallery-item"
+                title="Photography - replace with actual images"
+              >
+                <img
+                  src="https://via.placeholder.com/300x300/222/555?text=Photo+3"
+                  alt="Photography - replace with actual images"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
 
-        <div class="gallery-item" title="Photography - replace with actual images">
-          <img
-            src="https://via.placeholder.com/300x300/222/555?text=Photo+1"
-            alt="Photography - replace with actual images"
-            loading="lazy"
-          />
+          <!-- Poetry -->
+          <div>
+            <h3>Poetry</h3>
+            <div id="poetry-container">
+              <div class="poem-card">
+                <h4>Compiled Silence</h4>
+                <p class="poem-lines">
+                  In the quiet of the compiled code, silence speaks in binary
+                  load. Each function, a verse so precise, debugging thoughts at
+                  any price.
+                </p>
+                <span
+                  style="font-size: 0.875rem; color: var(--muted-foreground)"
+                  >— 2023-12-01</span
+                >
+              </div>
+
+              <div class="poem-card">
+                <h4>Data Streams</h4>
+                <p class="poem-lines">
+                  Rivers of data flow through pipes, transforming with each line
+                  of types. From source to sink, the journey clear, ETL
+                  processes drawing near.
+                </p>
+                <span
+                  style="font-size: 0.875rem; color: var(--muted-foreground)"
+                  >— 2024-01-15</span
+                >
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div class="gallery-item" title="Photography - replace with actual images">
-          <img
-            src="https://via.placeholder.com/300x300/222/555?text=Photo+2"
-            alt="Photography - replace with actual images"
-            loading="lazy"
-          />
-        </div>
-
-        <div class="gallery-item" title="Photography - replace with actual images">
-          <img
-            src="https://via.placeholder.com/300x300/222/555?text=Photo+3"
-            alt="Photography - replace with actual images"
-            loading="lazy"
-          />
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Poetry -->
-    <div>
-      <h3>Poetry</h3>
-      <div id="poetry-container">
-
-        <div class="poem-card">
-          <h4>Compiled Silence</h4>
-          <p class="poem-lines">In the quiet of the compiled code,
-silence speaks in binary load.
-Each function, a verse so precise,
-debugging thoughts at any price.</p>
-          <span style="font-size: 0.875rem; color: var(--muted-foreground)"
-            >— 2023-12-01</span
-          >
-        </div>
-
-        <div class="poem-card">
-          <h4>Data Streams</h4>
-          <p class="poem-lines">Rivers of data flow through pipes,
-transforming with each line of types.
-From source to sink, the journey clear,
-ETL processes drawing near.</p>
-          <span style="font-size: 0.875rem; color: var(--muted-foreground)"
-            >— 2024-01-15</span
-          >
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
-
+      </section>
     </main>
 
     <footer class="site-footer">
@@ -707,8 +709,6 @@ ETL processes drawing near.</p>
         </div>
       </div>
     </footer>
-
-
   </body>
 </html>
 
