@@ -7,11 +7,14 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
     />
     <title>Writing | Suchindra Koushik</title>
-    <meta name="description" content="Technical articles and thoughts on backend engineering." />
+    <meta
+      name="description"
+      content="Technical articles and thoughts on backend engineering."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Zilla+Slab:wght@600;700&family=Inter:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
@@ -24,7 +27,7 @@
     <style>
       :root {
         /* Fonts */
-        --font-serif: "Zilla Slab", serif;
+        --font-serif: "Inter", sans-serif;
         --font-sans: "Inter", sans-serif;
         --font-mono: "Fira Code", monospace;
 
@@ -37,45 +40,45 @@
 
       /* Dark Theme (Default) */
       [data-theme="dark"] {
-        --background: #0f172a;
-        --foreground: #cbd5e1;
-        --card: #1e293b;
-        --card-foreground: #cbd5e1;
-        --muted: #1e293b;
+        --background: #0b1120;
+        --foreground: #f8fafc;
+        --card: #111827;
+        --card-foreground: #f8fafc;
+        --muted: #111827;
         --muted-foreground: #94a3b8;
-        --border: #334155;
-        --primary: #3b82f6;
-        --primary-foreground: #ffffff;
-        --secondary: #1e293b;
-        --secondary-foreground: #cbd5e1;
-        --accent: #3b82f6;
-        --accent-foreground: #ffffff;
-        --ring: #3b82f6;
-        --input: #1e293b;
+        --border: #1e293b;
+        --primary: #60a5fa;
+        --primary-foreground: #0b1120;
+        --secondary: #111827;
+        --secondary-foreground: #f8fafc;
+        --accent: #60a5fa;
+        --accent-foreground: #0b1120;
+        --ring: #60a5fa;
+        --input: #111827;
         /* Custom */
-        --header-bg: rgba(15, 23, 42, 0.8);
-        --code-bg: #1e293b;
+        --header-bg: rgba(11, 17, 32, 0.8);
+        --code-bg: #111827;
       }
 
       /* Light Theme */
       [data-theme="light"] {
-        --background: #ffffff;
-        --foreground: #334155;
-        --card: #f8fafc;
-        --card-foreground: #334155;
+        --background: #f8fafc;
+        --foreground: #0f172a;
+        --card: #ffffff;
+        --card-foreground: #0f172a;
         --muted: #f1f5f9;
-        --muted-foreground: #64748b;
+        --muted-foreground: #475569;
         --border: #e2e8f0;
         --primary: #2563eb;
         --primary-foreground: #ffffff;
         --secondary: #f1f5f9;
-        --secondary-foreground: #334155;
+        --secondary-foreground: #0f172a;
         --accent: #2563eb;
         --accent-foreground: #ffffff;
         --ring: #2563eb;
         --input: #ffffff;
         /* Custom */
-        --header-bg: rgba(255, 255, 255, 0.8);
+        --header-bg: rgba(248, 250, 252, 0.8);
         --code-bg: #f1f5f9;
       }
 
@@ -108,16 +111,12 @@
       .logo {
         font-weight: 700;
         text-decoration: none;
-        color: #ffffff;
+        color: var(--foreground);
         font-family: var(--font-mono);
         font-size: 1.125rem;
         display: flex;
         align-items: center;
         gap: 0.5rem;
-      }
-
-      [data-theme="light"] .logo {
-        color: #000000;
       }
 
       .logo-prefix {
@@ -203,7 +202,7 @@
       }
 
       .site-footer .container {
-        max-width: 1024px;
+        max-width: 1152px;
         margin: 0 auto;
         padding: 0 1.5rem;
         display: flex;
@@ -252,8 +251,10 @@
       h4,
       h5,
       h6 {
-        font-family: var(--font-serif);
+        font-family: var(--font-sans);
         color: var(--foreground);
+        font-weight: 600;
+        letter-spacing: -0.025em;
       }
 
       .button,
@@ -318,9 +319,10 @@
       }
 
       .section-heading {
-        font-family: var(--font-serif);
+        font-family: var(--font-sans);
         font-size: 1.875rem;
         font-weight: 700;
+        letter-spacing: -0.025em;
       }
 
       .tech-heading {
@@ -342,15 +344,15 @@
         border-radius: 8px;
         background: var(--card);
         transition: all 0.2s ease;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         padding: var(--space-md);
       }
 
       .clean-card:hover {
         border-color: var(--primary);
         box-shadow:
-          0 4px 6px -1px rgba(0, 0, 0, 0.1),
-          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+          0 4px 6px -1px rgba(0, 0, 0, 0.05),
+          0 2px 4px -1px rgba(0, 0, 0, 0.03);
         transform: translateY(-2px);
       }
 
@@ -376,7 +378,6 @@
         color: var(--primary) !important;
       }
     </style>
-
   </head>
   <body
     data-theme="dark"
@@ -395,27 +396,11 @@
           ☰
         </button>
         <nav class="nav-links">
-          <a
-            href="../index.html"
-            class=""
-            >Home</a
-          >
-          <a
-            href="../about.html"
-            class=""
-            >About</a
-          >
+          <a href="../index.html" class="">Home</a>
+          <a href="../about.html" class="">About</a>
           <a href="../index.html#skills">Skills</a>
-          <a
-            href="../projects.html"
-            class=""
-            >Projects</a
-          >
-          <a
-            href="../resume.html"
-            class=""
-            >Experience</a
-          >
+          <a href="../projects.html" class="">Projects</a>
+          <a href="../resume.html" class="">Experience</a>
           <a href="../index.html#engineering">Engineering</a>
           <a href="../index.html#contact">Contact</a>
           <div
@@ -436,99 +421,113 @@
 
     <main
       class="container"
-      style="flex-grow: 1; max-width: 1024px; margin: 0 auto; padding: 3rem 1.5rem; "
+      style="
+        flex-grow: 1;
+        max-width: 1152px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+      "
     >
+      <div
+        style="padding-top: var(--space-xl); max-width: 800px; margin: 0 auto"
+      >
+        <h1>Writing</h1>
+        <p class="text-muted" style="margin-bottom: var(--space-xl)">
+          Thoughts on backend architecture, data reliability, and engineering
+          practices.
+        </p>
 
-<div style="padding-top: var(--space-xl); max-width: 800px; margin: 0 auto">
-  <h1>Writing</h1>
-  <p class="text-muted" style="margin-bottom: var(--space-xl)">
-    Thoughts on backend architecture, data reliability, and engineering
-    practices.
-  </p>
-
-  <!-- Search Bar -->
-  <div style="margin-bottom: var(--space-lg)">
-    <label data-field>
-      <input
-        type="text"
-        id="search-input"
-        placeholder="Search articles..."
-        style="width: 100%"
-      />
-    </label>
-  </div>
-
-  <div
-    id="articles-list"
-    style="display: flex; flex-direction: column; gap: var(--space-md)"
-  >
-
-    <article class="card">
-      <header>
-        <div class="text-muted" style="font-size: 0.875rem">
-          Backend Engineering • <time>2024-03-05</time> • 10 min
+        <!-- Search Bar -->
+        <div style="margin-bottom: var(--space-lg)">
+          <label data-field>
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search articles..."
+              style="width: 100%"
+            />
+          </label>
         </div>
-        <h3>
-          <a
-            href="python-performance.html"
-            style="text-decoration: none; color: inherit"
-            >Python Performance Optimization Patterns</a
-          >
-        </h3>
-      </header>
-      <p>Practical techniques for making Python applications faster without premature optimization.</p>
-      <footer>
-        <a href="python-performance.html" class="button small outline"
-          >Read article</a
-        >
-      </footer>
-    </article>
 
-    <article class="card">
-      <header>
-        <div class="text-muted" style="font-size: 0.875rem">
-          Databases • <time>2024-02-10</time> • 12 min
+        <div
+          id="articles-list"
+          style="display: flex; flex-direction: column; gap: var(--space-md)"
+        >
+          <article class="card">
+            <header>
+              <div class="text-muted" style="font-size: 0.875rem">
+                Backend Engineering • <time>2024-03-05</time> • 10 min
+              </div>
+              <h3>
+                <a
+                  href="python-performance.html"
+                  style="text-decoration: none; color: inherit"
+                  >Python Performance Optimization Patterns</a
+                >
+              </h3>
+            </header>
+            <p>
+              Practical techniques for making Python applications faster without
+              premature optimization.
+            </p>
+            <footer>
+              <a href="python-performance.html" class="button small outline"
+                >Read article</a
+              >
+            </footer>
+          </article>
+
+          <article class="card">
+            <header>
+              <div class="text-muted" style="font-size: 0.875rem">
+                Databases • <time>2024-02-10</time> • 12 min
+              </div>
+              <h3>
+                <a
+                  href="postgres-query-planning.html"
+                  style="text-decoration: none; color: inherit"
+                  >PostgreSQL Query Planning Deep Dive</a
+                >
+              </h3>
+            </header>
+            <p>
+              Understanding how PostgreSQL's query planner works and how to
+              optimize your queries.
+            </p>
+            <footer>
+              <a
+                href="postgres-query-planning.html"
+                class="button small outline"
+                >Read article</a
+              >
+            </footer>
+          </article>
+
+          <article class="card">
+            <header>
+              <div class="text-muted" style="font-size: 0.875rem">
+                Data Engineering • <time>2024-01-15</time> • 8 min
+              </div>
+              <h3>
+                <a
+                  href="batch-data-pipelines.html"
+                  style="text-decoration: none; color: inherit"
+                  >Building Batch Data Pipelines</a
+                >
+              </h3>
+            </header>
+            <p>
+              Designing maintainable batch processing systems with idempotency,
+              error handling, and monitoring.
+            </p>
+            <footer>
+              <a href="batch-data-pipelines.html" class="button small outline"
+                >Read article</a
+              >
+            </footer>
+          </article>
         </div>
-        <h3>
-          <a
-            href="postgres-query-planning.html"
-            style="text-decoration: none; color: inherit"
-            >PostgreSQL Query Planning Deep Dive</a
-          >
-        </h3>
-      </header>
-      <p>Understanding how PostgreSQL's query planner works and how to optimize your queries.</p>
-      <footer>
-        <a href="postgres-query-planning.html" class="button small outline"
-          >Read article</a
-        >
-      </footer>
-    </article>
-
-    <article class="card">
-      <header>
-        <div class="text-muted" style="font-size: 0.875rem">
-          Data Engineering • <time>2024-01-15</time> • 8 min
-        </div>
-        <h3>
-          <a
-            href="batch-data-pipelines.html"
-            style="text-decoration: none; color: inherit"
-            >Building Batch Data Pipelines</a
-          >
-        </h3>
-      </header>
-      <p>Designing maintainable batch processing systems with idempotency, error handling, and monitoring.</p>
-      <footer>
-        <a href="batch-data-pipelines.html" class="button small outline"
-          >Read article</a
-        >
-      </footer>
-    </article>
-
-  </div>
-</div>
-
+      </div>
     </main>
 
     <footer class="site-footer">
@@ -595,48 +594,47 @@
       </div>
     </footer>
 
+    <script>
+      // Simple client-side search
+      let articles = [];
 
-<script>
-  // Simple client-side search
-  let articles = [];
+      fetch("search.json")
+        .then((response) => response.json())
+        .then((data) => {
+          articles = data;
+          articles.forEach((a) => {
+            a.searchStr = (
+              a.title +
+              " " +
+              a.tags.join(" ") +
+              " " +
+              a.summary
+            ).toLowerCase();
+          });
+        })
+        .catch((err) => console.error("Could not load search index", err));
 
-  fetch("search.json")
-    .then((response) => response.json())
-    .then((data) => {
-      articles = data;
-      articles.forEach((a) => {
-        a.searchStr = (
-          a.title +
-          " " +
-          a.tags.join(" ") +
-          " " +
-          a.summary
-        ).toLowerCase();
-      });
-    })
-    .catch((err) => console.error("Could not load search index", err));
+      const searchInput = document.getElementById("search-input");
+      const list = document.getElementById("articles-list");
 
-  const searchInput = document.getElementById("search-input");
-  const list = document.getElementById("articles-list");
+      if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+          const term = e.target.value.toLowerCase();
+          const filtered = term
+            ? articles.filter((a) => a.searchStr.includes(term))
+            : articles;
+          render(filtered);
+        });
+      }
 
-  if (searchInput) {
-    searchInput.addEventListener("input", (e) => {
-      const term = e.target.value.toLowerCase();
-      const filtered = term
-        ? articles.filter((a) => a.searchStr.includes(term))
-        : articles;
-      render(filtered);
-    });
-  }
-
-  function render(items) {
-    if (items.length === 0) {
-      list.innerHTML = '<p class="text-muted">No articles found.</p>';
-      return;
-    }
-    list.innerHTML = items
-      .map(
-        (item) => `
+      function render(items) {
+        if (items.length === 0) {
+          list.innerHTML = '<p class="text-muted">No articles found.</p>';
+          return;
+        }
+        list.innerHTML = items
+          .map(
+            (item) => `
                 <article class="card">
                     <header>
                         <div class="text-muted" style="font-size: 0.875rem;">${item.category} • <time>${item.date}</time> • ${item.readTime}</div>
@@ -648,11 +646,10 @@
                     </footer>
                 </article>
             `,
-      )
-      .join("");
-  }
-</script>
-
+          )
+          .join("");
+      }
+    </script>
   </body>
 </html>
 
